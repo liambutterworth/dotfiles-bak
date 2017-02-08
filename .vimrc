@@ -13,7 +13,6 @@
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
 
 " Language
@@ -102,33 +101,27 @@ set cursorline
 set splitright
 set splitbelow
 set laststatus=2
-
 set smarttab
 set autoindent
 set smartindent
 set tabstop=4
 set shiftwidth=4
 set indentkeys=o,O,<Return>,<>>,!^F
-
 set incsearch
 set hlsearch
 set smartcase
 set ignorecase
-
 set showcmd
 set wildmenu
 set wildmode=list:longest
 set wildignore=log/**/node_modules/**,tmp/**
-
 set nofoldenable
 set foldmethod=indent
 set foldlevel=0
 set foldnestmax=1
-
 set nowrap
 set backspace=eol,start,indent
 set listchars=tab:‣\ ,eol:¬
-
 set nocompatible
 set noerrorbells
 set novisualbell
