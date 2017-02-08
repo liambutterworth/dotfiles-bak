@@ -24,8 +24,8 @@ Plugin 'mxw/vim-jsx'
 " Completion
 Plugin 'raimondi/delimitmate'
 Plugin 'ervandew/supertab'
-Plugin 'mattn/emmet-vim'
 Plugin 'sirver/ultisnips'
+Plugin 'mattn/emmet-vim'
 
 " Interface
 Plugin 'altercation/vim-colors-solarized'
@@ -39,7 +39,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 
 " Commands
-Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
