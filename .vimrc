@@ -24,7 +24,7 @@ Plugin 'mxw/vim-jsx'
 " Completion
 Plugin 'raimondi/delimitmate'
 Plugin 'ervandew/supertab'
-Plugin 'sirver/ultisnips'
+"Plugin 'sirver/ultisnips'
 Plugin 'mattn/emmet-vim'
 
 " Interface
@@ -129,6 +129,8 @@ set noswapfile
 set nobackup
 set autoread
 set nowb
+
+au BufNewFile,BufRead *.ejs set filetype=html
 
 "
 " Functions
