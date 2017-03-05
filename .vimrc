@@ -26,8 +26,9 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-markdown'
-Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-haml'
 Plugin 'hail2u/vim-css3-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 
 call vundle#end()
@@ -98,6 +99,8 @@ let g:airline#extensions#tabline#left_alt_sep=''
 let g:airline#extensions#tabline#right_sep=''
 let g:airline#extensions#tabline#right_alt_sep=''
 
+autocmd BufNewFile,BufRead *.css set syntax=scss
+
 autocmd FileType * if &omnifunc != '' | call SuperTabChain(&omnifunc, '<C-p>') | endif
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType php,html,haml setlocal omnifunc=htmlcomplete#CompleteTags
@@ -110,9 +113,8 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 let mapleader=','
 
+nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>l :set list!<CR>
 nnoremap <leader>h :set hlsearch!<CR>
 nnoremap <leader>; :s/\v(.)$/\=submatch(1)==';' ? '' : submatch(1).';'<CR>
 nnoremap <leader>, :s/\v(.)$/\=submatch(1)==',' ? '' : submatch(1).','<CR>
-
-nnoremap <C-n> :NERDTreeToggle<CR>
