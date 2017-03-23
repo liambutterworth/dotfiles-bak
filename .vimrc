@@ -13,20 +13,21 @@ call plug#begin()
 
 " Language
 Plug 'mxw/vim-jsx'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-rails'
+Plug 'elzr/vim-json'
 Plug 'tpope/vim-markdown'
+Plug 'hail2u/vim-css3-syntax'
 
 " Completion
 Plug 'mattn/emmet-vim'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'raimondi/delimitmate'
+Plug 'marijnh/tern_for_vim'
 
 " Code Display
+Plug 'ap/vim-css-color'
 Plug 'ervandew/supertab'
-Plug 'flazz/vim-colorschemes'
-Plug 'hail2u/vim-css3-syntax'
+Plug 'gregsexton/matchtag'
 Plug 'pangloss/vim-javascript'
 
 " Integrations
@@ -106,12 +107,15 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:SuperTabDefaultCompletionType='context'
-let g:ctrlp_custom_ignore='node_modules\|bower_components\|DS_Store\|git'
+let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
 
 autocmd BufNewFile,BufRead *.css set syntax=scss
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 "
 " Mappings
