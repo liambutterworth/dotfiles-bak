@@ -26,7 +26,7 @@ Plug 'marijnh/tern_for_vim'
 " Code Display
 Plug 'ap/vim-css-color'
 Plug 'ervandew/supertab'
-Plug 'gregsexton/matchtag'
+Plug 'valloric/matchtag'
 Plug 'pangloss/vim-javascript'
 
 " Integrations
@@ -42,8 +42,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 
 " Commands
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " Other
 Plug 'craigemery/vim-autotag'
@@ -58,6 +60,7 @@ call plug#end()
 syntax enable
 colorscheme solarized
 filetype plugin indent on
+
 set background=dark
 set ruler
 set number
@@ -99,6 +102,7 @@ set laststatus=2
 
 let g:netrw_liststyle=3
 let g:jsx_ext_required=0
+let g:xmledit_enable_html=1
 let g:airline_powerline_fonts=1
 let g:delimitMate_expand_cr=2
 let g:delimitMate_expand_space=1
@@ -111,12 +115,11 @@ let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
-let g:xmledit_enable_html=1
 
-autocmd BufNewFile,BufRead *.css set syntax=scss
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags noci
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+au BufNewFile,BufRead *.css set syntax=scss
+au FileType css set omnifunc=csscomplete#CompleteCSS
+au FileType html set omnifunc=htmlcomplete#CompleteTags noci
+au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 "
 " Mappings
