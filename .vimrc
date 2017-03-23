@@ -13,12 +13,11 @@ call plug#begin()
 
 " Language
 Plug 'mxw/vim-jsx'
-Plug 'elzr/vim-json'
+Plug 'sukima/xmledit'
 Plug 'tpope/vim-markdown'
 Plug 'hail2u/vim-css3-syntax'
 
 " Completion
-Plug 'mattn/emmet-vim'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'raimondi/delimitmate'
@@ -107,14 +106,16 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabContextDefaultCompletionType='<c-n>'
 let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
+let g:xmledit_enable_html=1
 
 autocmd BufNewFile,BufRead *.css set syntax=scss
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags noci
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
 "
