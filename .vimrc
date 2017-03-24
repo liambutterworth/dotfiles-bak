@@ -115,11 +115,13 @@ let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
+let g:autotagTagsFile='.tags'
 
 au BufNewFile,BufRead *.css set syntax=scss
 au FileType css set omnifunc=csscomplete#CompleteCSS
 au FileType html set omnifunc=htmlcomplete#CompleteTags noci
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType * if &omnifunc != '' | call SuperTabChain(&omnifunc, '<c-p>') | endif
 
 "
 " Mappings
