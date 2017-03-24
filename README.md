@@ -6,5 +6,5 @@
 - vim +PlugInstall +qall
 - cp ./.ctags ~/.ctags (run inside this root folder)
 - cd ~/.vim/plugged/tern_for_vim && npm install
-- cd ~/.vim/plugged/matchtag/ftplugin && cp xml.vim javascript.vim && cp xml.vim jsx.vim (run this for each filetype to include matchtag in)
-- Download Powerline [fonts](https://github.com/powerline/fonts) (don't forget add under iterm>preferences>profile>[PROFILE]>text)
+- cd ~/.vim/plugged/matchtag/ftplugin && cp xml.vim javascript.vim && cp xml.vim jsx.vim (copy for each filetype matchtag should highlight in)
+- Download Powerline [fonts](https://github.com/powerline/fonts) (don't forget change font in iterm; preferences>profile>Default>text)
