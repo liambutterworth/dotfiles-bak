@@ -1,7 +1,8 @@
 # Installation
 - Install [Homebrew](https://github.com/Homebrew/brew)
 - Install [vim-plug](https://github.com/junegunn/vim-plug)
-- brew install git vim node ctags
+- Install [Universal Ctags](https://github.com/universal-ctags/ctags)
+- brew install git vim node
 - brew cask install iterm2 macvim
 - vim +PlugInstall +qall
 - cp ./.ctags ~/.ctags (run inside this root folder)
