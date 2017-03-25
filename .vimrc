@@ -62,6 +62,7 @@ colorscheme solarized
 filetype plugin indent on
 
 set background=dark
+set laststatus=2
 set ruler
 set number
 set relativenumber
@@ -98,23 +99,23 @@ set nocompatible
 set noerrorbells
 set novisualbell
 set noswapfile
-set laststatus=2
 
-let g:netrw_liststyle=3
 let g:jsx_ext_required=0
 let g:xmledit_enable_html=1
-let g:airline_powerline_fonts=1
-let g:delimitMate_expand_cr=2
-let g:delimitMate_expand_space=1
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+let g:delimitMate_expand_cr=2
+let g:delimitMate_expand_space=1
+let g:airline_powerline_fonts=1
 let g:SuperTabDefaultCompletionType='context'
 let g:SuperTabContextDefaultCompletionType='<c-n>'
+let g:netrw_liststyle=3
 let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'
 let g:ctrlp_match_window='bottom,order:ttb'
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_switch_buffer=0
+let g:ctrlp_show_hidden=1
 let g:autotagTagsFile='.tags'
 let g:autotagCtagsCmd='ctags .'
 
@@ -122,7 +123,7 @@ au BufNewFile,BufRead *.css set syntax=scss
 au FileType css set omnifunc=csscomplete#CompleteCSS
 au FileType html set omnifunc=htmlcomplete#CompleteTags noci
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType * if &omnifunc != '' | call SuperTabChain(&omnifunc, '<c-p>') | endif
+au FileType * if &omnifunc != '' | call SuperTabChain(&omnifunc, '<c-p>') | endif
 
 "
 " Mappings
