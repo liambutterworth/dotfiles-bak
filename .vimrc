@@ -21,10 +21,10 @@ Plug 'hail2u/vim-css3-syntax'
 
 " Completion
 
+Plug 'mattn/emmet-vim'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'raimondi/delimitmate'
-Plug 'marijnh/tern_for_vim'
 
 " Code Display
 
@@ -36,9 +36,9 @@ Plug 'pangloss/vim-javascript'
 " Integrations
 
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/syntastic'
+Plug 'marijnh/tern_for_vim'
 
 " Interface
 
@@ -50,14 +50,16 @@ Plug 'altercation/vim-colors-solarized'
 " Commands
 
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-speeddating'
 
 " Other
 
-Plug 'craigemery/vim-autotag'
 Plug 'godlygeek/tabular'
+Plug 'sickill/vim-pasta'
+Plug 'freitass/todo.txt-vim'
+Plug 'craigemery/vim-autotag'
 
 call plug#end()
 
@@ -74,6 +76,7 @@ set cursorline                                                              " hi
 set showcmd                                                                 " show command in status bar as you type
 set showmatch                                                               " highlight matching brace
 set lazyredraw                                                              " buffer screen updates instead of constantly updating
+set ignorecase                                                              " use insensitive search
 set incsearch hlsearch                                                      " search and highlight as you type
 set splitright splitbelow                                                   " split right and below by default
 set ruler number relativenumber                                             " enable line and column count; use both number and relative number to
@@ -97,7 +100,6 @@ let g:syntastic_check_on_wq=0                           " why would anyone want 
 let g:syntastic_css_checkers=['stylelint']              " css linting
 let g:syntastic_javascript_checkers=['eslint']          " js linting
 let g:airline_powerline_fonts=1                         " use the powerline special font characters (chevron stubs); must install on os and select in terminal/gui prefs
-let g:SuperTabDefaultCompletionType='context'           " use all completion types based on context
 let g:SuperTabContextDefaultCompletionType='<c-n>'      " use standard tabbing behavior
 let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git' " ignore in fuzzy finder
 let g:ctrlp_match_window='bottom,order:ttb'             " direction to list from in fuzzy finder
