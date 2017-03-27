@@ -43,4 +43,4 @@
 
 ```,a:``` align block by : (uses space after : as delimeter)  
 
-```,a"``` align block by " (uses space after " as delimeter; for vim-style comments)  
+```,a"``` align block by " (useful for vim-style comments)  
