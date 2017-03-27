@@ -1,5 +1,6 @@
-# Installation
+# Setup
 
+- Install [Docker](https://docs.docker.com/docker-for-mac/install)
 - Install [Homebrew](https://github.com/Homebrew/brew)
 - Install [vim-plug](https://github.com/junegunn/vim-plug)
 - Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh)
@@ -9,20 +10,24 @@
 ```
  $ git clone https://github.com/wbbutterworth/vimrc.git
 
- $ cp vimrc/.vimrc ~/.vimrc && cp vimrc/.ctags ~/.ctags
-
- $ brew install git vim node
+ $ cp vimrc/{.vimrc,.ctags,.zshrc} ~
 
  $ brew cask install iterm2 macvim
 
+ $ brew install git vim node cmake
+
+ $ npm i -g typescript
+
  $ vim +PlugInstall +qall
 
- $ cd ~/.vim/plugged/tern_for_vim && npm install
+ $ cd ~/.vim/plugged/youcompleteme && ./install.py --tern-completer
 
- $ cd ~/.vim/plugged/matchtag/ftplugin && cp xml.vim javascript.vim && cp xml.vim jsx.vim (copy for each filetype matchtag should highlight in)
+ $ cd ~/.vim/plugged/matchtag/ftplugin && cp xml.vim javascript.vim
+
+ $ cd ~/.vim/plugged/xmledit/ftplugin && cp xml.vim javascript.vim
 ```
 
-# Mappings
+## Vim Mappings
 
 ```,l``` toggle invisible characters: spaces, tabs and cr  
 
@@ -37,3 +42,5 @@
 ```,a=``` align block by =  
 
 ```,a:``` align block by : (uses space after : as delimeter)  
+
+```,a"``` align block by " (uses space after " as delimeter; for vim-style comments)  

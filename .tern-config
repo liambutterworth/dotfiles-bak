@@ -1,0 +1,7 @@
+{
+  "exmaVersion": 5,
+
+  "plugins": {
+    "node": {}
+  }
+}

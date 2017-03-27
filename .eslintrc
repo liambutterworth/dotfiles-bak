@@ -1,0 +1,28 @@
+{
+	"extends": "airbnb",
+
+  "env": {
+    "browser": true,
+    "node": true
+  },
+
+  "rules": {
+
+    "comma-dangle":                 0,
+    "func-names":                   0,
+    "no-multi-spaces":              0,
+    "react/jsx-filename-extension": 0,
+    "space-before-function-paren":  0,
+    "import/extensions":            0,
+
+    "key-spacing": [ 2, {
+      "align": "value"
+    }],
+
+    "array-bracket-spacing": [ 2, "always", {
+      "objectsInArrays": false,
+      "arraysInArrays":  false
+    }]
+
+  }
+}
