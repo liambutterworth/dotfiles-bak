@@ -96,6 +96,7 @@ let g:autotagTagsFile='.tags'                                    " use a hidden 
 let g:autotagCtagsCmd='ctags .'                                  " ctag command to run on file save; options stored in ~/.ctags
 
 au BufNewFile,BufRead *.css set syntax=scss " use scss syntax highlighting
+au FileType *.md set wrap                   " wrap text in markdown files
 
 "
 " Mappings
