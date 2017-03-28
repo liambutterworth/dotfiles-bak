@@ -10,7 +10,7 @@
 ```
  $ git clone https://github.com/wbbutterworth/vimrc.git
 
- $ cp vimrc/{.zshrc,.gitconfig,.gitignore,.vimrc,.ctags,.tern-config,.eslint,.stylelint} ~
+ $ cp dotfiles/{.zshrc,.gitconfig,.gitignore,.vimrc,.ctags,.tern-config,.eslint,.stylelint} ~
 
  $ brew cask install iterm2 macvim
 
@@ -41,9 +41,9 @@
 
 ```,;``` toggle ; at the end of the line in any mode  
 
-```,ct``` toggle syntax checking  
-
 ```,cc``` manual syntax check  
+
+```,ct``` toggle syntax checking  
 
 ```,a=``` align block by =  
 
