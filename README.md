@@ -1,8 +1,6 @@
 # Setup
 
-Install [Homebrew](https://brew.sh), [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) and [Powerline Fonts](https://github.com/powerline/fonts). Don't forget to select the fonts in iterm (Preferences > Profiles > PROFILE > Text).
-
-Now run the command below: (the name and email arugments are for git)
+Install [Homebrew](https://brew.sh), [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) and [Powerline Fonts](https://github.com/powerline/fonts). Don't forget to select the fonts in iterm (Preferences > Profiles > PROFILE > Text). Now run the command below: (the name and email arugments are for git)
 
 ```
  $ git clone https://github.com/wbbutterworth/vimrc.git && cd dotfiles && install.sh "NAME" "EMAIL"
