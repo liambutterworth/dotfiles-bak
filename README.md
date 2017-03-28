@@ -10,7 +10,7 @@
 ```
  $ git clone https://github.com/wbbutterworth/vimrc.git
 
- $ cp vimrc/{.vimrc,.ctags,.zshrc} ~
+ $ cp vimrc/{.zshrc,.gitconfig,.gitignore,.vimrc,.ctags,.tern-config,.eslint,.stylelint} ~
 
  $ brew cask install iterm2 macvim
 
