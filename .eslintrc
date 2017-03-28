@@ -8,13 +8,12 @@
 
   "rules": {
 
-    "no-shadow":                    0,
     "func-names":                   0,
     "no-multi-spaces":              0,
     "no-mixed-operators":           0,
-    "import/extensions":            0,
     "react/require-default-props":  0,
     "react/jsx-filename-extension": 0,
+
     "max-len":                      ["warn", 128],
     "react/jsx-curly-spacing":      ["warn", "always"],
     "template-curly-spacing":       ["warn", "always"],
