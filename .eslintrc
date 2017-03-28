@@ -1,5 +1,5 @@
 {
-	"extends": "airbnb",
+  "extends": "airbnb",
 
   "env": {
     "browser": true,
@@ -8,12 +8,24 @@
 
   "rules": {
 
-    "comma-dangle":                 0,
+    "no-shadow":                    0,
     "func-names":                   0,
     "no-multi-spaces":              0,
-    "react/jsx-filename-extension": 0,
-    "space-before-function-paren":  0,
+    "no-mixed-operators":           0,
     "import/extensions":            0,
+    "react/require-default-props":  0,
+    "react/jsx-filename-extension": 0,
+    "max-len":                      ["warn", 128],
+    "react/jsx-curly-spacing":      ["warn", "always"],
+    "template-curly-spacing":       ["warn", "always"],
+    "space-before-function-paren":  ["warn", "never"],
+    "padded-blocks":                ["warn", "always"],
+    "arrow-body-style":             ["warn", "as-needed"],
+    "arrow-parens":                 ["warn", "always"],
+
+    "space-in-parens": ["warn", "always", {
+      "exceptions": ["{}", "[]", "()", "empty"]
+    }],
 
     "key-spacing": [ 2, {
       "align": "value"

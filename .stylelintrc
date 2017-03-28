@@ -1,3 +1,12 @@
 {
   "extends": "stylelint-config-standard",
+
+  "rules": {
+
+    "selector-combinator-space-before": null,
+    "block-closing-brace-space-before": null,
+    "block-opening-brace-space-before": null,
+    "function-comma-space-after":       null
+
+  }
 }
