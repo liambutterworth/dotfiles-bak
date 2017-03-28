@@ -15,6 +15,7 @@ call plug#begin()
 
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tomtom/tcomment_vim'
+Plug 'reedes/vim-pencil'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 
@@ -23,6 +24,7 @@ Plug 'mxw/vim-jsx'
 Plug 'valloric/youcompleteme'
 Plug 'raimondi/delimitmate'
 Plug 'honza/vim-snippets'
+Plug 'reedes/vim-lexical'
 Plug 'tpope/vim-endwise'
 Plug 'sirver/ultisnips'
 Plug 'mattn/emmet-vim'
@@ -42,6 +44,8 @@ Plug 'tpope/vim-vinegar'
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
 
@@ -49,6 +53,7 @@ Plug 'kien/ctrlp.vim'
 
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 
 " Other
@@ -74,6 +79,9 @@ set ts=2 sts=2 sw=2 expandtab smarttab           " tab behavior
 set nowb nowrap nobackup noswapfile nocompatible " things I don't like
 
 let g:jsx_ext_required=0                                         " use jsx in standard .js files; clean file naming
+let g:lexical#spell_key='<leader>ls'                             " shortcut for lexical spell
+let g:lexical#thesaurus_key='<leader>lt'                         " shortcut for lexical thesaurus
+let g:lexical#dictionary_key='<leader>ld'                        " shortcut for lexical dictionary
 let g:user_emmet_leader_key='<c-e>'                              " use ctrl x to expand emmet
 let g:user_emmet_settings={'javascript.jsx': {'extends': 'jsx'}} " use the javascript.jsx filetype instead of jsx
 let g:UltiSnipsExpandTrigger='<c-x>,'                            " use tab to trigger snippets
@@ -84,8 +92,13 @@ let g:delimitMate_expand_space=1                                 " expand, with 
 let g:delimitMate_jump_expansion=1                               " jump expansions when closing delimiter is pressed
 let g:ycm_collect_identifiers_from_tags_files=1                  " use ctags for autocompletion
 let g:syntastic_check_on_wq=0                                    " why would anyone want to lint a closing file
+let g:syntastic_text_checkers=['proselint']                      " prose linting
+let g:syntastic_markdown_checkers=['proselint']                  " prose linting
 let g:syntastic_css_checkers=['stylelint']                       " css linting
 let g:syntastic_javascript_checkers=['eslint']                   " js linting
+let g:goyo_width=120                                             " center at 120 lines
+let g:limelight_conceal_ctermfg=240                              " conceal text cli color
+let g:limelight_conceal_guifg='#777777'                          " conceal text gui color
 let g:ctrlp_custom_ignore='node_modules\|DS_Store\|git'          " ignore in fuzzy finder
 let g:ctrlp_match_window='bottom,order:ttb'                      " direction to list from in fuzzy finder
 let g:ctrlp_working_path_mode=0                                  " use current vim directory
@@ -96,7 +109,10 @@ let g:autotagTagsFile='.tags'                                    " use a hidden 
 let g:autotagCtagsCmd='ctags .'                                  " ctag command to run on file save; options stored in ~/.ctags
 
 au BufNewFile,BufRead *.css set syntax=scss " use scss syntax highlighting
-au FileType *.md set wrap                   " wrap text in markdown files
+au FileType markdown,text call lexical#init()
+au FileType markdown,text call pencil#init()
+au! User GoyoEnter Limelight
+au! User GoyoLeave Limelight!
 
 "
 " Mappings
@@ -111,8 +127,9 @@ endfunction
 nmap _ :Rex<cr>
 nmap <leader>s vi{:sort<cr>
 nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
+imap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
 imap <c-e><cr> <cr><esc>O<tab>
-nmap <leader>l :set list!<cr>
+nmap <leader>i :set list!<cr>
 nmap <leader>h :set hlsearch!<cr>
 vmap <leader>; :call Ender(';')<cr>
 vmap <leader>, :call Ender(',')<cr>
@@ -120,6 +137,7 @@ nmap <leader>; m`:call Ender(';')<cr>``
 nmap <leader>, m`:call Ender(',')<cr>``
 imap <leader>; <Esc>m`:call Ender(';')<cr>``a
 imap <leader>, <Esc>m`:call Ender(',')<cr>``a
+nmap <leader>go :Goyo<cr>
 nmap <leader>ct :SyntasticToggle<cr>
 nmap <leader>cc :SyntasticCheck<cr>
 nmap <leader>a" m`:Tab /"<cr>``
