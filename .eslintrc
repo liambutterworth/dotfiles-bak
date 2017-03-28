@@ -22,8 +22,12 @@
     "arrow-body-style":             ["warn", "as-needed"],
     "arrow-parens":                 ["warn", "always"],
 
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true
+    }],
+
     "space-in-parens": ["warn", "always", {
-      "exceptions": ["{}", "[]", "()", "empty"]
+      "exceptions": ["{}", "[]", "empty"]
     }],
 
     "key-spacing": [ 2, {

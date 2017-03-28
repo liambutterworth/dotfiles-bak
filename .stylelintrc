@@ -3,10 +3,12 @@
 
   "rules": {
 
-    "selector-combinator-space-before": null,
-    "block-closing-brace-space-before": null,
-    "block-opening-brace-space-before": null,
-    "function-comma-space-after":       null
+    "selector-combinator-space-before":         null,
+    "block-closing-brace-space-before":         null,
+    "block-opening-brace-space-before":         null,
+    "function-parentheses-space-inside":        "always",
+    "selector-attribute-brackets-space-inside": "always",
+    "media-feature-parentheses-space-inside":   "always"
 
   }
 }
