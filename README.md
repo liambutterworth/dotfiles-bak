@@ -1,8 +1,6 @@
 # Setup
 
-- Install [Homebrew](https://brew.sh)
-- Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh)
-- Install [Powerline Fonts](https://github.com/powerline/fonts) don't forget to select them in iterm (Preferences > Profiles > PROFILE > Text)
+Install [Homebrew](https://brew.sh), [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) and [Powerline Fonts](https://github.com/powerline/fonts). Don't forget to select the fonts in iterm (Preferences > Profiles > PROFILE > Text).
 
 Now run the command below: (the name and email arugments are for git)
 
