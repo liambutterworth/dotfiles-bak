@@ -107,8 +107,9 @@ function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
-imap <c-e><cr> <cr><esc>O<tab>
 nmap _ :Rex<cr>
+nmap <leader>s vi{:sort<cr>
+imap <c-e><cr> <cr><esc>O<tab>
 nmap <leader>l :set list!<cr>
 nmap <leader>h :set hlsearch!<cr>
 vmap <leader>; :call Ender(';')<cr>

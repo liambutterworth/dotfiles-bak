@@ -35,9 +35,13 @@
 
 ```<c-x>``` UltiSnips leader key; follows emmet convention of ```<c-x>```, ```<c-x>n``` and ```<c-x>N```
 
+```_``` exit out to last file inside netrw
+
 ```,l``` toggle invisible characters: spaces, tabs and cr  
 
 ```,h``` toggle search highlighting  
+
+```,s``` sort alphabetically inside {} (useful for css)
 
 ```,,``` toggle , at the end of the line in any mode  
 
