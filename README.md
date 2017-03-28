@@ -27,11 +27,11 @@
 
 ## Vim Mappings
 
-```<c-x>``` UltiSnips leader key; follows emmet convention of leader-n/N
-
 ```<c-e>``` Emmet leader key
 
 ```<c-e><cr>``` Meant to expand tags; set in the context of Emmet
+
+```<c-x>``` UltiSnips leader key; follows emmet convention of <c-x>, <c-x>n and <c-x>N
 
 ```,l``` toggle invisible characters: spaces, tabs and cr  
 
