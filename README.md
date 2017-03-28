@@ -1,12 +1,16 @@
 # Setup
 
-Run the command below to clone and install all dependencies. The name and email params are for git. Don't forget to install the [powerline fonts](https://github.com/powerline/fonts) and select them in iterm (Preferences > Profiles > PROFILE > Text)
+- Install [Homebrew](https://brew.sh)
+- Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh)
+- Install [Powerline Fonts](https://github.com/powerline/fonts) don't forget to select them in iterm (Preferences > Profiles > PROFILE > Text)
+
+Now run the command below: (the name and email arugments are for git)
 
 ```
  $ git clone https://github.com/wbbutterworth/vimrc.git && cd dotfiles && install.sh "NAME" "EMAIL"
 ```
 
-## Vim Mappings
+# Vim
 
 ```<c-e>``` Emmet leader key
 
