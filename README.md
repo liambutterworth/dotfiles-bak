@@ -1,9 +1,9 @@
 # Setup
 
-Run the command below to clone and install all dependencies. Don't forget to install the [powerline fonts](https://github.com/powerline/fonts) and select them in iterm (Preferences > Profiles > PROFILE > Text)
+Run the command below to clone and install all dependencies. The name and email params are for git. Don't forget to install the [powerline fonts](https://github.com/powerline/fonts) and select them in iterm (Preferences > Profiles > PROFILE > Text)
 
 ```
- $ git clone https://github.com/wbbutterworth/vimrc.git && cd dotfiles && install.sh
+ $ git clone https://github.com/wbbutterworth/vimrc.git && cd dotfiles && install.sh "NAME" "EMAIL"
 ```
 
 ## Vim Mappings
