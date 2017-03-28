@@ -31,7 +31,7 @@
 
 ```<c-e><cr>``` Meant to expand tags; set in the context of Emmet
 
-```<c-x>``` UltiSnips leader key; follows emmet convention of <c-x>, <c-x>n and <c-x>N
+```<c-x>``` UltiSnips leader key; follows emmet convention of ```<c-x>```, ```<c-x>n``` and ```<c-x>N```
 
 ```,l``` toggle invisible characters: spaces, tabs and cr  
 
