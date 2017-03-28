@@ -25,7 +25,7 @@ npm i -g typescript eslint eslint-plugin-import eslint-config-airbnb eslint-plug
 vim +PlugInstall +qall
 
 # setup git config
-git config --global user.name "$1" && git config --global user.email "$2"
+git config --global user.name $1 && git config --global user.email $2
 
 # install youcompleteme dependencies
 cd ~/.vim/plugged/youcompleteme && ./install.py --tern-completer
