@@ -109,6 +109,7 @@ endfunction
 
 nmap _ :Rex<cr>
 nmap <leader>s vi{:sort<cr>
+nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 imap <c-e><cr> <cr><esc>O<tab>
 nmap <leader>l :set list!<cr>
 nmap <leader>h :set hlsearch!<cr>

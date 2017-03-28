@@ -18,7 +18,7 @@
 
  $ git config --global user.name "Your Name" && git config --global user.email "YOUR EMAIL"
 
- $ npm i -g typescript
+ $ npm i -g typescript eslint eslint-plugin-import eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react stylelint stylelint-config-standard
 
  $ vim +PlugInstall +qall
 
@@ -42,6 +42,8 @@
 ```,h``` toggle search highlighting  
 
 ```,s``` sort alphabetically inside {} (useful for css)
+
+```,S``` sort alphabetically inside {} globally
 
 ```,,``` toggle , at the end of the line in any mode  
 
