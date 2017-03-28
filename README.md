@@ -23,11 +23,15 @@
  $ cd ~/.vim/plugged/youcompleteme && ./install.py --tern-completer
 
  $ cd ~/.vim/plugged/matchtag/ftplugin && cp xml.vim javascript.vim
-
- $ cd ~/.vim/plugged/xmledit/ftplugin && cp xml.vim javascript.vim
 ```
 
 ## Vim Mappings
+
+```<c-x>``` UltiSnips leader key; follows emmet convention of leader-n/N
+
+```<c-e>``` Emmet leader key
+
+```<c-e><cr>``` Meant to expand tags; set in the context of Emmet
 
 ```,l``` toggle invisible characters: spaces, tabs and cr  
 
@@ -37,7 +41,9 @@
 
 ```,;``` toggle ; at the end of the line in any mode  
 
-```,c``` toggle syntax checking  
+```,ct``` toggle syntax checking  
+
+```,cc``` manual syntax check  
 
 ```,a=``` align block by =  
 

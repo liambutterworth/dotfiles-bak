@@ -15,7 +15,6 @@ call plug#begin()
 
 Plug 'hail2u/vim-css3-syntax'
 Plug 'tomtom/tcomment_vim'
-Plug 'javascript-indent'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 
