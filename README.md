@@ -16,6 +16,8 @@
 
  $ brew install git vim node cmake
 
+ $ git config --global user.name "Your Name" && git config --global user.email "YOUR EMAIL"
+
  $ npm i -g typescript
 
  $ vim +PlugInstall +qall
