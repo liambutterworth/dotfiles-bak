@@ -8,6 +8,14 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 ## Custom Vim Commands
 
+```<c-h>``` go to split on the left
+
+```<c-j>``` go to split below
+
+```<c-k>``` move to split above
+
+```<c-l>``` move to on the right
+
 ```<c-e>``` Emmet leader key  
 
 ```<c-e><cr>``` Meant to expand tags; set in the context of Emmet  
@@ -16,7 +24,15 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 ```_``` exit out to last file inside netrw  
 
-```,l``` toggle invisible characters: spaces, tabs and cr  
+```,ls``` lexical spell check
+
+```,lt``` lexical thesaurus
+
+```,ld``` lexical dictionary
+
+```,lD``` open in dictionary.app
+
+```,i``` toggle invisible characters: spaces, tabs and cr  
 
 ```,h``` toggle search highlighting  
 
