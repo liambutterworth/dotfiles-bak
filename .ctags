@@ -1,4 +1,3 @@
--f ./tags
 --fields=+l
 --recurse=yes
 --exclude=.git

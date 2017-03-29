@@ -7,7 +7,7 @@ cp dotfiles/{.zshrc,.gitconfig,.gitignore,.vimrc,.ctags,.tern-config,.eslint,.st
 brew tap universal-ctags/universal-ctags
 brew install --HEAD universal-ctags
 brew cask install iterm2 macvim
-brew install git vim node cmake tree
+brew install python node git vim cmake tree
 
 # install node libraries
 npm i -g typescript eslint eslint-plugin-import eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react stylelint stylelint-config-standard

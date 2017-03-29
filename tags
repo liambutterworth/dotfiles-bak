@@ -1,0 +1,60 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/7a2d6ae/
+<c-e><cr>	.vimrc	/^imap <c-e><cr> <cr><esc>O<tab>$/;"	m	language:Vim
+<leader>,	.vimrc	/^imap <leader>, <Esc>m`:call Ender(',')<cr>``a$/;"	m	language:Vim
+<leader>,	.vimrc	/^nmap <leader>, m`:call Ender(',')<cr>``$/;"	m	language:Vim
+<leader>,	.vimrc	/^vmap <leader>, :call Ender(',')<cr>$/;"	m	language:Vim
+<leader>;	.vimrc	/^imap <leader>; <Esc>m`:call Ender(';')<cr>``a$/;"	m	language:Vim
+<leader>;	.vimrc	/^nmap <leader>; m`:call Ender(';')<cr>``$/;"	m	language:Vim
+<leader>;	.vimrc	/^vmap <leader>; :call Ender(';')<cr>$/;"	m	language:Vim
+<leader>S	.vimrc	/^nmap <leader>S m`:g#\\({\\n\\)\\@<=#.,\/}\/sort<cr>:let @\/ = ""<cr>``$/;"	m	language:Vim
+<leader>a"	.vimrc	/^imap <leader>a" m`:Tab \/"<cr>``$/;"	m	language:Vim
+<leader>a"	.vimrc	/^nmap <leader>a" m`:Tab \/"<cr>``$/;"	m	language:Vim
+<leader>a:	.vimrc	/^nmap <leader>a: m`:Tab \/:\\zs \/l0<cr>``$/;"	m	language:Vim
+<leader>a:	.vimrc	/^vmap <leader>a: m`:Tab \/:\\zs \/l0<cr>``$/;"	m	language:Vim
+<leader>a=	.vimrc	/^nmap <leader>a= m`:Tab \/=<cr>``$/;"	m	language:Vim
+<leader>a=	.vimrc	/^vmap <leader>a= m`:Tab \/=<cr>``$/;"	m	language:Vim
+<leader>cc	.vimrc	/^nmap <leader>cc :SyntasticCheck<cr>$/;"	m	language:Vim
+<leader>ct	.vimrc	/^nmap <leader>ct :SyntasticToggle<cr>$/;"	m	language:Vim
+<leader>go	.vimrc	/^nmap <leader>go :Goyo<cr>$/;"	m	language:Vim
+<leader>h	.vimrc	/^nmap <leader>h :set hlsearch!<cr>$/;"	m	language:Vim
+<leader>i	.vimrc	/^nmap <leader>i :set list!<cr>$/;"	m	language:Vim
+<leader>s	.vimrc	/^nmap <leader>s vi{:sort<cr>$/;"	m	language:Vim
+<s-tab>	.vimrc	/^imap <expr><s-tab> pumvisible()?"\\<c-p>":"\\<c-d>"$/;"	m	language:Vim
+Ender	.vimrc	/^function! Ender(char)$/;"	f	language:Vim
+_	.vimrc	/^nmap _ :Rex<cr>$/;"	m	language:Vim
+g:UltiSnipsExpandTrigger	.vimrc	/^let g:UltiSnipsExpandTrigger='<c-x>,'                            " use tab to trigger snippets$/;"	v	language:Vim
+g:UltiSnipsJumpBackwardTrigger	.vimrc	/^let g:UltiSnipsJumpBackwardTrigger='<c-x>N'                      " move to the prev placeholder$/;"	v	language:Vim
+g:UltiSnipsJumpForwardTrigger	.vimrc	/^let g:UltiSnipsJumpForwardTrigger='<c-x>n'                       " move to the next placeholder$/;"	v	language:Vim
+g:airline_powerline_fonts	.vimrc	/^let g:airline_powerline_fonts=1                                  " use the powerline special fon/;"	v	language:Vim
+g:autotagCtagsCmd	.vimrc	/^let g:autotagCtagsCmd='ctags .'                                  " ctag command to run on file s/;"	v	language:Vim
+g:autotagTagsFile	.vimrc	/^let g:autotagTagsFile='.tags'                                    " use a hidden file to store ct/;"	v	language:Vim
+g:ctrlp_custom_ignore	.vimrc	/^let g:ctrlp_custom_ignore='node_modules\\|DS_Store\\|git'          " ignore in fuzzy finder$/;"	v	language:Vim
+g:ctrlp_match_window	.vimrc	/^let g:ctrlp_match_window='bottom,order:ttb'                      " direction to list from in fuz/;"	v	language:Vim
+g:ctrlp_show_hidden	.vimrc	/^let g:ctrlp_show_hidden=1                                        " fuzzy find hidden files$/;"	v	language:Vim
+g:ctrlp_switch_buffer	.vimrc	/^let g:ctrlp_switch_buffer=0                                      " make fuzzy finder more effeci/;"	v	language:Vim
+g:ctrlp_working_path_mode	.vimrc	/^let g:ctrlp_working_path_mode=0                                  " use current vim directory$/;"	v	language:Vim
+g:delimitMate_expand_cr	.vimrc	/^let g:delimitMate_expand_cr=2                                    " expand pairs on <cr>$/;"	v	language:Vim
+g:delimitMate_expand_space	.vimrc	/^let g:delimitMate_expand_space=1                                 " expand, with padding, on <spa/;"	v	language:Vim
+g:delimitMate_jump_expansion	.vimrc	/^let g:delimitMate_jump_expansion=1                               " jump expansions when closing /;"	v	language:Vim
+g:goyo_width	.vimrc	/^let g:goyo_width=120                                             " center at 120 lines$/;"	v	language:Vim
+g:jsx_ext_required	.vimrc	/^let g:jsx_ext_required=0                                         " use jsx in standard .js files/;"	v	language:Vim
+g:lexical#dictionary_key	.vimrc	/^let g:lexical#dictionary_key='<leader>ld'                        " shortcut for lexical dictiona/;"	v	language:Vim
+g:lexical#spell_key	.vimrc	/^let g:lexical#spell_key='<leader>ls'                             " shortcut for lexical spell$/;"	v	language:Vim
+g:lexical#thesaurus_key	.vimrc	/^let g:lexical#thesaurus_key='<leader>lt'                         " shortcut for lexical thesauru/;"	v	language:Vim
+g:limelight_conceal_ctermfg	.vimrc	/^let g:limelight_conceal_ctermfg=240                              " conceal text cli color$/;"	v	language:Vim
+g:limelight_conceal_guifg	.vimrc	/^let g:limelight_conceal_guifg='#777777'                          " conceal text gui color$/;"	v	language:Vim
+g:syntastic_check_on_wq	.vimrc	/^let g:syntastic_check_on_wq=0                                    " why would anyone want to lint/;"	v	language:Vim
+g:syntastic_css_checkers	.vimrc	/^let g:syntastic_css_checkers=['stylelint']                       " css linting$/;"	v	language:Vim
+g:syntastic_javascript_checkers	.vimrc	/^let g:syntastic_javascript_checkers=['eslint']                   " js linting$/;"	v	language:Vim
+g:syntastic_markdown_checkers	.vimrc	/^let g:syntastic_markdown_checkers=['proselint']                  " prose linting$/;"	v	language:Vim
+g:syntastic_text_checkers	.vimrc	/^let g:syntastic_text_checkers=['proselint']                      " prose linting$/;"	v	language:Vim
+g:user_emmet_leader_key	.vimrc	/^let g:user_emmet_leader_key='<c-e>'                              " use ctrl x to expand emmet$/;"	v	language:Vim
+g:user_emmet_settings	.vimrc	/^let g:user_emmet_settings={'javascript.jsx': {'extends': 'jsx'}} " use the javascript.jsx filety/;"	v	language:Vim
+g:ycm_collect_identifiers_from_tags_files	.vimrc	/^let g:ycm_collect_identifiers_from_tags_files=1                  " use ctags for autocompletion$/;"	v	language:Vim
+mapleader	.vimrc	/^let mapleader=','$/;"	v	language:Vim

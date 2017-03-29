@@ -79,6 +79,7 @@ set ts=2 sts=2 sw=2 expandtab smarttab           " tab behavior
 set nowb nowrap nobackup noswapfile nocompatible " things I don't like
 
 let g:jsx_ext_required=0                                         " use jsx in standard .js files; clean file naming
+let g:lexical#spell=1                                            " use spell checking by default
 let g:lexical#spell_key='<leader>ls'                             " shortcut for lexical spell
 let g:lexical#thesaurus_key='<leader>lt'                         " shortcut for lexical thesaurus
 let g:lexical#dictionary_key='<leader>ld'                        " shortcut for lexical dictionary
@@ -108,11 +109,11 @@ let g:airline_powerline_fonts=1                                  " use the power
 let g:autotagTagsFile='.tags'                                    " use a hidden file to store ctags
 let g:autotagCtagsCmd='ctags .'                                  " ctag command to run on file save; options stored in ~/.ctags
 
-au BufNewFile,BufRead *.css set syntax=scss " use scss syntax highlighting
-au FileType markdown,text call lexical#init()
-au FileType markdown,text call pencil#init()
-au! User GoyoEnter Limelight
-au! User GoyoLeave Limelight!
+au BufNewFile,BufRead *.css set syntax=scss   " use scss syntax highlighting
+au FileType markdown,text call lexical#init() " initialize lexical in text files
+au FileType markdown,text call pencil#init()  " initialize pencil in text files
+au! User GoyoEnter Limelight                  " enable limelight when entering goyo mode
+au! User GoyoLeave Limelight!                 " disable limelight when exiting goyo mode
 
 "
 " Mappings
@@ -121,10 +122,16 @@ au! User GoyoLeave Limelight!
 let mapleader=','
 
 function! Ender(char)
-  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
+  r/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
+nmap <c-h> <c-w>h
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-l> <c-w>l
 nmap _ :Rex<cr>
+imap <c-q> <c-x><c-k>
+nmap <leader>lD :!open dict://<cword><CR><CR>
 nmap <leader>s vi{:sort<cr>
 nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 imap <expr><s-tab> pumvisible()?"\<c-p>":"\<c-d>"
