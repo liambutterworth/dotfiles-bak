@@ -10,9 +10,7 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 ```<space><space>``` enter command
 
-```<space>p``` convenience map for CtrlP
-
-```<c-e>``` emmet leader key  
+```<c-e>,``` expand text with emmet
 
 ```<c-e>j``` next emment placeholder  
 
@@ -20,21 +18,13 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 ```<c-e><cr>``` meant to expand tags; set in the context of Emmet  
 
-```<space>_``` exit out to last file inside netrw  
+```<c-x>,``` expand text with ultisnips
 
-```<space>]``` go to tag definition  
+```<c-e>j``` next ultisnips placeholder  
 
-```<space>[``` go back through tag definition chain  
+```<c-e>k``` previous ultisnips placeholder  
 
-```<space>w``` convenience map for ```<c-w>```  
-
-```<space>h``` go to split on the left
-
-```<space>j``` go to split below
-
-```<space>k``` move to split above
-
-```<space>l``` move to on the right
+```_``` exit out to last file inside netrw  
 
 ```<space>i``` toggle invisible characters: spaces, tabs and cr  
 

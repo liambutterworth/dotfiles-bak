@@ -4,11 +4,11 @@
 cp dotfiles/{.zshrc,.gitconfig,.gitignore,.vimrc,.ctags,.tern-config,.eslintrc,.stylelintrc,.proselintrc} ~
 
 # install brew libraries
-brew tap universal-ctags/universal-ctags
+brew tap caskroom/versions
 brew install --HEAD universal-ctags
-brew cask install iterm2
+brew cask install iterm2-beta
 brew cask install macvim --with-lua
-brew install git node
+brew install git node tree
 brew install vim --with-lua
 
 # install node libraries
