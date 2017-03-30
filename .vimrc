@@ -15,22 +15,22 @@ call plug#begin()
 
 Plug 'sheerun/vim-polyglot'
 Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-ragtag'
 
 " Completion
 
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'shougo/neocomplete.vim'
 Plug 'raimondi/delimitmate'
-Plug 'honza/vim-snippets'
 Plug 'tpope/vim-endwise'
-Plug 'sirver/ultisnips'
 Plug 'mattn/emmet-vim'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Code Display
 
 Plug 'gregsexton/matchtag'
 Plug 'yggdroot/indentline'
+Plug 'ap/vim-css-color'
 
 " Integrations
 
@@ -52,7 +52,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'matchit.zip'
 
 " Other
 
@@ -70,17 +69,21 @@ syntax on
 colorscheme solarized
 filetype plugin indent on
 
-set background=dark laststatus=2
-set cursorline colorcolumn=120
 set ruler number relativenumber
 set backspace=eol,start,indent
 set hlsearch ignorecase incsearch
 set tags-=.tags tags-=.tags; tags^=.tags;
+set background=dark laststatus=2 cursorline
 set nowb nowrap nobackup noswapfile nocompatible
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 
 au FileType css setlocal filetype=scss
 au FileType markdown setlocal wrap linebreak nolist columns=120
+au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 let g:jsx_ext_required = 0
 let g:airline_powerline_fonts = 1
@@ -90,21 +93,18 @@ let g:autotagTagsFile = '.tags'
 let g:autotagCtagsCmd = 'ctags .'
 
 let g:indentLine_char='┆'
-let g:indentLine_color_term=240
-let g:indentLine_color_gui='#586e75'
+let g:indentLine_color_term = 240
+let g:indentLine_color_gui = '#586e75'
+
+let g:user_emmet_leader_key = '<c-e>'
+
+let g:UltiSnipsExpandTrigger='<c-x>,'
+let g:UltiSnipsJumpForwardTrigger='<c-x>n'
+let g:UltiSnipsJumpBackwardTrigger='<c-x>N'
 
 let g:delimitMate_expand_cr = 2
 let g:delimitMate_expand_space = 1
 let g:delimitMate_jump_expansion = 1
-
-let g:UltiSnipsExpandTrigger="<c-x>,"
-let g:UltiSnipsJumpForwardTrigger="<c-x>j"
-let g:UltiSnipsJumpBackwardTrigger="<c-x>k"
-
-let g:user_emmet_next_key = '<c-e>j'
-let g:user_emmet_prev_key = '<c-e>k'
-let g:user_emmet_leader_key = '<c-e>'
-let g:user_emmet_settings = {'javascript.jsx': {'extends': 'jsx'}}
 
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
@@ -126,15 +126,10 @@ call neocomplete#custom#source('look', 'min_pattern_length', 1)
 
 let mapleader=' '
 
-nmap <leader><leader> :
-nmap <leader>w :w<cr>
-nmap <leader>W :wq<cr>
-nmap <leader>q :q<cr>
-nmap <leader>Q :q!<cr>
-nmap <leader>s vi{:sort<cr>
-nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 nmap <leader>i :set list!<cr>
 nmap <leader>n :set hlsearch!<cr>
+nmap <leader>s vi{:sort<cr>
+nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 nmap <leader>a" m`:Tab /"<cr>``
 vmap <leader>a" m`:Tab /"<cr>``
 nmap <leader>a= m`:Tab /=<cr>``
@@ -143,6 +138,7 @@ nmap <leader>a: m`:Tab /:\zs /l0<cr>``
 vmap <leader>a: m`:Tab /:\zs /l0<cr>``
 
 nmap _ :Rex<cr>
+imap <c-e><cr> <cr><esc>O
 imap <expr> <cr> pumvisible() ? "\<c-y>" : '<plug>delimitMateCR<plug>DiscretionaryEnd'
 imap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"

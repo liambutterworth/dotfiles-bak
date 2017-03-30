@@ -8,21 +8,15 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 # Vim
 
-```<space><space>``` enter command
-
 ```<c-e>,``` expand text with emmet
-
-```<c-e>j``` next emment placeholder  
-
-```<c-e>k``` previous emmet placeholder  
 
 ```<c-e><cr>``` meant to expand tags; set in the context of Emmet  
 
 ```<c-x>,``` expand text with ultisnips
 
-```<c-e>j``` next ultisnips placeholder  
+```<c-e>n``` next ultisnips placeholder  
 
-```<c-e>k``` previous ultisnips placeholder  
+```<c-e>N``` previous ultisnips placeholder  
 
 ```_``` exit out to last file inside netrw  
 
