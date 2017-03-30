@@ -6,50 +6,51 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
  $ git clone https://github.com/wbbutterworth/vimrc.git && cd dotfiles && install.sh "NAME" "EMAIL"
 ```
 
-## Custom Vim Commands
+# Vim
 
-```<c-h>``` go to split on the left
+```<space><space>``` enter command
 
-```<c-j>``` go to split below
+```<space>p``` convenience map for CtrlP
 
-```<c-k>``` move to split above
+```<c-e>``` emmet leader key  
 
-```<c-l>``` move to on the right
+```<c-e>j``` next emment placeholder  
 
-```<c-e>``` Emmet leader key  
+```<c-e>k``` previous emmet placeholder  
 
-```<c-e><cr>``` Meant to expand tags; set in the context of Emmet  
+```<c-e><cr>``` meant to expand tags; set in the context of Emmet  
 
-```<c-x>``` UltiSnips leader key; follows emmet convention of ```<c-x>```, ```<c-x>n``` and ```<c-x>N```  
+```<space>_``` exit out to last file inside netrw  
 
-```_``` exit out to last file inside netrw  
+```<space>]``` go to tag definition  
 
-```,ls``` lexical spell check
+```<space>[``` go back through tag definition chain  
 
-```,lt``` lexical thesaurus
+```<space>w``` convenience map for ```<c-w>```  
 
-```,ld``` lexical dictionary
+```<space>h``` go to split on the left
 
-```,lD``` open in dictionary.app
+```<space>j``` go to split below
 
-```,i``` toggle invisible characters: spaces, tabs and cr  
+```<space>k``` move to split above
 
-```,h``` toggle search highlighting  
+```<space>l``` move to on the right
 
-```,s``` sort alphabetically inside {} (useful for css)
+```<space>i``` toggle invisible characters: spaces, tabs and cr  
 
-```,S``` sort alphabetically inside {} globally
+```<space>h``` toggle search highlighting  
+
+```<space>s``` sort alphabetically inside {} (useful for css)  
+
+```<space>S``` sort alphabetically inside {} globally  
+
+```<space>a=``` align block by =  
+
+```<space>a:``` align block by : (uses space after : as delimeter)  
+
+```<space>a"``` align block by " (useful for vim-style comments)  
 
 ```,,``` toggle , at the end of the line in any mode  
 
-```,;``` toggle ; at the end of the line in any mode  
+```;;``` toggle ; at the end of the line in any mode  
 
-```,cc``` manual syntax check  
-
-```,ct``` toggle syntax checking  
-
-```,a=``` align block by =  
-
-```,a:``` align block by : (uses space after : as delimeter)  
-
-```,a"``` align block by " (useful for vim-style comments)  
