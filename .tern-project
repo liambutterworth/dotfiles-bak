@@ -7,7 +7,11 @@
 
   "loadEagerly": [
     "./src/*.js",
-    "./node_modules/react/**/*.js"
+    "./node_modules/redux/**/*.js",
+    "./node_modules/react/**/*.js",
+    "./node_modules/koa/**/*.js",
+    "./node_modules/mocha/**/*.js",
+    "./node_modules/chai/**/*.js"
   ],
 
   "plugins": {
