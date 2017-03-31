@@ -18,7 +18,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'yggdroot/indentline'
 Plug 'godlygeek/tabular'
-Plug 'reedes/vim-pencil'
 Plug 'plasticboy/vim-markdown'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
@@ -29,17 +28,13 @@ Plug 'craigemery/vim-autotag'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'ujihisa/neco-look'
 Plug 'raimondi/delimitmate'
-Plug 'tpope/vim-endwise'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/matchtag'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-haml'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
 Plug 'w0rp/ale'
@@ -54,47 +49,39 @@ syntax on
 colorscheme solarized
 filetype plugin indent on
 
-set ruler number relativenumber
+set splitright splitbelow
 set listchars=tab:▸\ ,eol:¬
 set backspace=eol,start,indent
+set ruler number relativenumber
 set hlsearch ignorecase incsearch
 set tags-=.tags tags-=.tags; tags^=.tags;
 set background=dark laststatus=2 cursorline
 set nowb nowrap nobackup noswapfile nocompatible
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 
-au FileType css setlocal filetype=scss
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+au FileType markdown setlocal wrap linebreak
 au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType css setlocal filetype=scss omnifunc=csscomplete#CompleteCSS
 au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-au FileType markdown call pencil#init()
 
 let g:jsx_ext_required=0
+let g:airline_powerline_fonts=1
 let g:tern_show_signature_in_pum=1
 let g:closetag_filenames='*.html,*.js,*.jsx'
-
-let g:airline_powerline_fonts=1
-let g:airline_section_x='%{PencilMode()}'
-
 let g:autotagTagsFile = '.tags'
 let g:autotagCtagsCmd = 'ctags .'
-
 let g:indentLine_char='┆'
 let g:indentLine_color_term = 240
 let g:indentLine_color_gui = '#586e75'
-
 let g:delimitMate_expand_cr=2
 let g:delimitMate_expand_space=1
 let g:delimitMate_jump_expansion=1
 let g:delimitMate_matchpairs='(:),[:],{:}'
-
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_fuzzy_completion = 1
@@ -120,8 +107,17 @@ vmap <leader>a= m`:Tab /=<cr>``
 nmap <leader>a: m`:Tab /:\zs /l0<cr>``
 vmap <leader>a: m`:Tab /:\zs /l0<cr>``
 
+nmap h gh
+nmap j gj
+nmap k gk
+nmap l gl
 nmap _ :Rex<cr>
-imap <expr> <cr> pumvisible() ? "\<c-y>" : '<plug>delimitMateCR<plug>DiscretionaryEnd'
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+imap <expr> <cr> pumvisible() ? "\<c-y>" : '<plug>delimitMateCR'
 imap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
 imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
 
