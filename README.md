@@ -8,21 +8,7 @@ Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh), [Homebrew](https
 
 # Vim
 
-```<c-e>,``` expand text with emmet
-
-```<c-e><cr>``` meant to expand tags; set in the context of Emmet  
-
-```<c-x>,``` expand text with ultisnips
-
-```<c-e>n``` next ultisnips placeholder  
-
-```<c-e>N``` previous ultisnips placeholder  
-
 ```_``` exit out to last file inside netrw  
-
-```<space>i``` toggle invisible characters: spaces, tabs and cr  
-
-```<space>h``` toggle search highlighting  
 
 ```<space>s``` sort alphabetically inside {} (useful for css)  
 
