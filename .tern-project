@@ -4,8 +4,13 @@
     "chai"
   ],
 
+  "dontLoad": [
+    "node_modules/**"
+  ],
+
   "plugins": {
     "node": {},
+    "webpack": {},
     "modules": {},
     "es_modules": {}
   }

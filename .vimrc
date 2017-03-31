@@ -107,10 +107,8 @@ vmap <leader>a= m`:Tab /=<cr>``
 nmap <leader>a: m`:Tab /:\zs /l0<cr>``
 vmap <leader>a: m`:Tab /:\zs /l0<cr>``
 
-nmap h gh
 nmap j gj
 nmap k gk
-nmap l gl
 nmap _ :Rex<cr>
 noremap <Up> <Nop>
 noremap <Down> <Nop>
