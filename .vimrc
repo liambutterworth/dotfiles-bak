@@ -13,10 +13,9 @@ call plug#begin()
 
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'yggdroot/indentline'
 Plug 'bling/vim-airline'
 Plug 'kien/ctrlp.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'yggdroot/indentline'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'cakebaker/scss-syntax.vim'
@@ -32,6 +31,7 @@ Plug 'alvan/vim-closetag'
 Plug 'gregsexton/matchtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-eunuch'
@@ -59,17 +59,12 @@ set background=dark laststatus=2 cursorline
 set nowb nowrap nobackup noswapfile nocompatible
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
 
-au FileType markdown setlocal wrap linebreak
-au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-au FileType css setlocal filetype=scss omnifunc=csscomplete#CompleteCSS
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType css setlocal filetype=scss
+au FileType markdown setlocal spell wrap linebreak
 
 let g:jsx_ext_required=0
-let g:airline_powerline_fonts=1
-let g:tern_show_signature_in_pum=1
 let g:closetag_filenames='*.html,*.js,*.jsx'
-let g:autotagTagsFile = '.tags'
-let g:autotagCtagsCmd = 'ctags .'
+let g:airline_powerline_fonts=1
 let g:indentLine_char='┆'
 let g:indentLine_color_term = 240
 let g:indentLine_color_gui = '#586e75'
@@ -87,6 +82,10 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_fuzzy_completion = 1
 let g:neocomplete#auto_completion_start_length = 1
 let g:neocomplete#enable_auto_close_preview = 1
+let g:used_javascript_libs='react,flux,jasmine,chai'
+let g:tern_show_signature_in_pum=1
+let g:autotagTagsFile = '.tags'
+let g:autotagCtagsCmd = 'ctags .'
 
 call neocomplete#custom#source('look', 'min_pattern_length', 1)
 
@@ -96,8 +95,6 @@ call neocomplete#custom#source('look', 'min_pattern_length', 1)
 
 let mapleader=' '
 
-nmap <leader>i :set list!<cr>
-nmap <leader>n :set hlsearch!<cr>
 nmap <leader>s vi{:sort<cr>
 nmap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 nmap <leader>a" m`:Tab /"<cr>``

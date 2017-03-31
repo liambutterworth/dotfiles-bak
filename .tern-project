@@ -1,11 +1,14 @@
 {
+  "ecmaVersion": 6,
+
   "libs": [
     "browser",
     "chai"
   ],
 
-  "dontLoad": [
-    "node_modules/**"
+  "loadEagerly": [
+    "./src/*.js",
+    "./node_modules/react/**/*.js"
   ],
 
   "plugins": {
