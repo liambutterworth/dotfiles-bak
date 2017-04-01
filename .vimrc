@@ -35,8 +35,8 @@ Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
-Plug 'matchit.zip'
 Plug 'w0rp/ale', { 'do': 'pip install proselint' }
+Plug 'matchit.zip'
 
 call plug#end()
 
@@ -92,7 +92,7 @@ let g:jsx_ext_required=0                              " don't require the jsx ex
 
 let mapleader=' '
 
-" motion
+" global commands
 
 noremap j gj
 noremap k gk
@@ -105,18 +105,18 @@ nnoremap <leader><leader> :
 
 " file commands
 
-nnoremap <leader>w :w
-nnoremap <leader>W :wq
-nnoremap <leader>q :q
-nnoremap <leader>Q :q!
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
 
 " git commands
 
-nnoremap <leader>gs :Gstatus
-nnoremap <leader>gl :Glog
-nnoremap <leader>ga :Gwrite
-nnoremap <leader>gd :Gdiff
-nnoremap <leader>gb :Gblame
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>ga :Gwrite<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
 
 " align commands
 
