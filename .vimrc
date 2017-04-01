@@ -100,13 +100,29 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+nnoremap <leader><leader> :
 
 " sort alphabetically between {}
 
 nnoremap <leader>s vi{:sort<cr>
 nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 
-" tabular align
+" file commands
+
+nnoremap <leader>fw :w
+nnoremap <leader>fW :wq
+nnoremap <leader>fq :q
+nnoremap <leader>fQ :q!
+
+" git commands
+
+nnoremap <leader>gs :Gstatus
+nnoremap <leader>gl :Glog
+nnoremap <leader>ga :Gwrite
+nnoremap <leader>gd :Gdiff
+nnoremap <leader>gb :Gblame
+
+" align commands
 
 nnoremap <leader>a" m`:Tab /"<cr>``
 vnoremap <leader>a" m`:Tab /"<cr>``
