@@ -105,10 +105,10 @@ nnoremap <leader><leader> :
 
 " file commands
 
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
+nnoremap <leader>fw :w<cr>
+nnoremap <leader>fW :wq<cr>
+nnoremap <leader>fq :q<cr>
+nnoremap <leader>fQ :q!<cr>
 
 " git commands
 
@@ -117,6 +117,7 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gB :Gbrowse<cr>
 
 " align commands
 
