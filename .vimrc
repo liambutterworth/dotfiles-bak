@@ -18,6 +18,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'ludovicchabant/vim-gutentags', { 'do': 'brew tap unversal-ctags/universal-ctags && brew install --HEAD universal-ctags' }
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -30,10 +31,10 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
-Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale', { 'do': 'pip install proselint' }
 
 call plug#end()
@@ -74,7 +75,7 @@ let g:ctrlp_custom_ignore='node_modules\|git'         " ignore these directories
 let g:ycm_collect_identifiers_from_tags_files=1       " autocomplete from tags
 let g:ycm_autoclose_preview_window_after_completion=1 " close preview with popup menu
 let g:closetag_filenames='*.html,*.js,*.jsx'          " enable tag completion in these files
-let g:ale_statusline_format=['⨉ %d', '⚠ %d', '⬥ ok']  " ale error message format
+let g:ale_statusline_format=['⨉ %d', '⚠ %d', '⬥ ok']  " ale status line format
 let g:ale_sign_error='▸'                              " better error sign
 let g:ale_sign_warning='▸'                            " better warning sign
 let g:airline_powerline_fonts=1                       " use the powerline fonts
