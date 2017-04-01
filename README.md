@@ -17,9 +17,8 @@ To get vim up and running make sure to have [Homebrew](https://brew.sh/) and
   $ vim +PlugInstall +qall
 ```
 
-Also grab a font for the airline special characters ([Powerline
-Fonts](https://github.com/powerline/fonts) or [Source Code
-Pro](https://github.com/adobe-fonts/source-code-pro)).
+Also grab a font for the airline special characters [Powerline Fonts](https://github.com/powerline/fonts) or
+[Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 
 #### Custom Maps
 
