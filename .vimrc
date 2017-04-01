@@ -35,6 +35,7 @@ Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
+Plug 'tmhedberg/matchit.zip'
 Plug 'w0rp/ale', { 'do': 'pip install proselint' }
 
 call plug#end()
