@@ -1,14 +1,16 @@
-# Setup
+# Dotfiles
 
-Install by running this command:
+A collection of configuration files for my dev setup.
 
-```
- $ git clone https://github.com/wbbutterworth/vimrc.git && dotfiles/install.sh
-```
+## Vim
 
-Then install [Powerline Fonts](https://github.com/powerline/fonts) and select the font in iterm (Preferences > Profiles > PROFILE > Text)
+To get vim up and running you'll need to have [Homebrew](https://brew.sh/) and
+[vim-plug](https://github.com/junegunn/vim-plug) installed then run: ```$ vim
++PlugInstall +qall```
 
-# Vim
+### Custom Keystrokes
+
+Space is setup as the leader key
 
 ```_``` exit out to last file inside netrw  
 
