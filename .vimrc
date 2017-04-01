@@ -19,7 +19,6 @@ Plug 'ludovicchabant/vim-gutentags', { 'do': 'brew tap unversal-ctags/universal-
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -31,11 +30,12 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'tomtom/tcomment_vim'
 Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
-Plug 'tmhedberg/matchit.zip'
+Plug 'matchit.zip'
 Plug 'w0rp/ale', { 'do': 'pip install proselint' }
 
 call plug#end()
@@ -103,17 +103,12 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 nnoremap <leader><leader> :
 
-" sort alphabetically between {}
-
-nnoremap <leader>s vi{:sort<cr>
-nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
-
 " file commands
 
-nnoremap <leader>fw :w
-nnoremap <leader>fW :wq
-nnoremap <leader>fq :q
-nnoremap <leader>fQ :q!
+nnoremap <leader>w :w
+nnoremap <leader>W :wq
+nnoremap <leader>q :q
+nnoremap <leader>Q :q!
 
 " git commands
 
@@ -131,6 +126,11 @@ nnoremap <leader>a= m`:Tab /=<cr>``
 vnoremap <leader>a= m`:Tab /=<cr>``
 nnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
 vnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
+
+" sort alphabetically between {}
+
+nnoremap <leader>s vi{:sort<cr>
+nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 
 " append characters
 
