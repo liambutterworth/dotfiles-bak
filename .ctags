@@ -2,7 +2,9 @@
 --fields=+l
 --recurse=yes
 --exclude=.git
---exclude=db/*
---exclude=log/*
---exclude=dist/*
---exclude=node_modules/*
+--exclude=db
+--exclude=log
+--exclude=dist
+--exclude=bower_components
+--exclude=node_modules
+--exclude=vendor
