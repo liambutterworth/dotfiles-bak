@@ -19,9 +19,9 @@ Also grab a font for the airline special characters ([Powerline
 Fonts](https://github.com/powerline/fonts) or [Source Code
 Pro](https://github.com/adobe-fonts/source-code-pro)).
 
-### Custom Keystrokes
+#### Custom Maps
 
-<space> is setup as the leader key.
+Space is setup as the leader key.
 
 ```_``` exit out to last file inside netrw  
 
