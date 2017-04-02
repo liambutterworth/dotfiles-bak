@@ -13,30 +13,32 @@ call plug#begin()
 
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ludovicchabant/vim-gutentags', { 'do': 'brew tap unversal-ctags/universal-ctags && brew install --HEAD universal-ctags' }
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-vinegar'
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-lexical', { 'do': 'curl -fo ~/.vim/thesaurus/mthesaur.txt --create-dirs https://raw.githubusercontent.com/zeke/moby/master/words.txt' }
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'tomtom/tcomment_vim'
 Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
-Plug 'w0rp/ale', { 'do': 'pip install proselint' }
+Plug 'gregsexton/MatchTag', { 'do': 'cd ftplugin && cp xml.vim javascript.vim' }
 Plug 'matchit.zip'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -62,14 +64,6 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab    " tab settings
 set foldenable foldmethod=syntax foldlevelstart=20    " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap// " dont clutter the working directory
 
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
-autocmd FileType markdown call pencil#init() | call lexical#init()           " initialize prose plugins
-
-highlight SignColumn ctermbg=8/4 guibg=#002b36
-highlight NonText ctermfg=8/4 guifg=#073642
-
 let g:ctrlp_show_hidden=1                             " show hidden files in ctrlp
 let g:ctrlp_match_window='bottom,order:ttb'           " search window on bottom sorted from top to bottom
 let g:ctrlp_custom_ignore='node_modules\|git'         " ignore these directories in ctrlp
@@ -83,8 +77,20 @@ let g:airline_powerline_fonts=1                       " use the powerline fonts
 let g:airline_section_error='%{ALEGetStatusLine()}'   " show ale error message in airline
 let g:airline_section_x='%{PencilMode()}'             " show pencil mode in airline
 let g:pencil#textwidth=120                            " default text width in markdown
+let g:lexical#spell_key='<leader>ls'                  " spell shortcut
+let g:lexical#thesaurus_key='<leader>lt'              " thesaurus shortcut
+let g:lexical#dictionary_key='<leader>lk'             " dictionary shortcut
 let g:gutentags_ctags_tagfile='.tags'                 " auto compile .tags
 let g:jsx_ext_required=0                              " don't require the jsx extension
+
+highlight SignColumn ctermbg=8/4 guibg=#002b36
+highlight NonText ctermfg=8/4 guifg=#073642
+
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
+autocmd FileType markdown call pencil#init() | call lexical#init()           " initialize prose plugins
+autocmd FileType markdown let g:AutoPairsMapCR=0                             " disable <cr> expansion in markdown files
 
 "
 " Mappings
@@ -92,16 +98,28 @@ let g:jsx_ext_required=0                              " don't require the jsx ex
 
 let mapleader=' '
 
-" global commands
-
 noremap j gj
 noremap k gk
-noremap _ :e#<cr>
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-nnoremap <leader><leader> :
+inoremap jj <esc>
+
+" append character
+
+function! Ender(char)
+  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
+endfunction
+
+vnoremap ;; :call Ender(';')<cr>
+vnoremap ,, :call Ender(',')<cr>
+nnoremap ;; m`:call Ender(';')<cr>``
+nnoremap ,, m`:call Ender(',')<cr>``
+inoremap ;; <Esc>m`:call Ender(';')<cr>``a
+inoremap ,, <Esc>m`:call Ender(',')<cr>``a
+
+nnoremap <silent> <c-a>h :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-a>j :TmuxNavigateDown<cr>
+nnoremap <silent> <c-a>k :TmuxNavigateUp<cr>
+nnoremap <silent> <c-a>l :TmuxNavigateRight<cr>
+nnoremap <silent> <c-a>\ :TmuxNavigatePrevious<cr>
 
 " file commands
 
@@ -117,7 +135,6 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gB :Gbrowse<cr>
 
 " align commands
 
@@ -128,20 +145,7 @@ vnoremap <leader>a= m`:Tab /=<cr>``
 nnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
 vnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
 
-" sort alphabetically between {}
+" Sort commands
 
-nnoremap <leader>s vi{:sort<cr>
-nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
-
-" append characters
-
-function! Ender(char)
-  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
-endfunction
-
-vnoremap ;; :call Ender(';')<cr>
-vnoremap ,, :call Ender(',')<cr>
-nnoremap ;; m`:call Ender(';')<cr>``
-nnoremap ,, m`:call Ender(',')<cr>``
-inoremap ;; <Esc>m`:call Ender(';')<cr>``a
-inoremap ,, <Esc>m`:call Ender(',')<cr>``a
+nnoremap <leader>s{ vi{:sort<cr>
+nnoremap <leader>s} m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``

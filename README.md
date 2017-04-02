@@ -8,34 +8,48 @@ To get vim up and running make sure to have [Homebrew](https://brew.sh/) and
 [vim-plug](https://github.com/junegunn/vim-plug) installed. Then:
 
 ```
-  $ git clone https://github.com/wbbutterworth/dotfiles.git ~/Downloads
+  $ git clone https://github.com/wbbutterworth/dotfiles.git && cp dotfiles/{.zshrc,.tmux.conf,.vimrc} ~
 
-  $ cp ~/Downloads/dotfiles/{.vimrc,.ctags,.tern-config,.eslintrc,.stylelintrc,proselintrc} ~
-
-  $ brew install vim && brew cask install macvim
-
-  $ vim +PlugInstall +qall
+  $ vim +PlugInstall +TmuxlineSnapshot\ .tmuxline +qall
 ```
 
-Also grab a font for the airline special characters [Powerline Fonts](https://github.com/powerline/fonts) or
-[Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
+Also grab [Powerline Fonts](https://github.com/powerline/fonts) for the special
+airline characters.
 
 #### Custom Maps
 
-```<space>``` is the leader key.
-
-```<space>s``` sort alphabetically inside {} (useful for css)  
-
-```<space>S``` sort alphabetically inside {} globally  
-
-```<space>a=``` align block by =  
-
-```<space>a:``` align block by : (uses space after : as delimeter)  
-
-```<space>a"``` align block by " (useful for vim-style comments)  
-
-```_``` exit out to last file inside netrw  
+```jj``` for escape in insert mode
 
 ```,,``` toggle , at the end of the line in any mode  
 
 ```;;``` toggle ; at the end of the line in any mode  
+
+```<space>``` leader key
+
+```<space>fw``` file write
+
+```<space>fW``` write file and quit
+
+```<space>fq``` file quit
+
+```<space>fQ``` file quit without write
+
+```<space>gs``` git status
+
+```<space>gl``` git log
+
+```<space>ga``` git add
+
+```<space>gd``` git diff
+
+```<space>gb``` git blame
+
+```<space>a=``` align block by =  
+
+```<space>a:``` align block by :
+
+```<space>a"``` align block by "
+
+```<space>s{``` sort alphabetically inside {}
+
+```<space>s}``` sort alphabetically inside {} globally  
