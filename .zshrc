@@ -11,6 +11,10 @@ ZSH_THEME="robbyrussell"
 # add plugins
 plugins=(osx tmux git node npm jsontools)
 
+# auto start tmux
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOSTART_ONCE=false
+
 # set user path
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
