@@ -2,7 +2,7 @@
 
 A collection of configuration files for my dev setup.
 
-## Setup
+## Installation
 
 Install [Homebrew](https://brew.sh):
 
@@ -34,7 +34,7 @@ Now tie everything together:
 
 Don't forget to grab the [Powerline Fonts](https://github.com/powerline/fonts).
 
-#### Custom Maps
+## Vim Maps
 
 ```jj``` for escape in insert mode
 
