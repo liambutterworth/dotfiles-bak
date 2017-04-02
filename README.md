@@ -2,27 +2,49 @@
 
 A collection of configuration files for my dev setup.
 
-## Vim
+## Setup
 
-To get vim up and running make sure to have [Homebrew](https://brew.sh/) and
-[vim-plug](https://github.com/junegunn/vim-plug) installed. Then:
+Install [Homebrew](https://brew.sh):
 
 ```
-  $ git clone https://github.com/wbbutterworth/dotfiles.git && cp dotfiles/{.zshrc,.tmux.conf,.vimrc} ~
-
-  $ vim +PlugInstall +TmuxlineSnapshot\ .tmuxline +qall
+  $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Also grab [Powerline Fonts](https://github.com/powerline/fonts) for the special
-airline characters.
+Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
+
+```
+  $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
+
+Install [Vim Plug](https://github.com/junegunn/vim-plug):
+
+```
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+Now tie everything together:
+
+```
+  $ brew install vim tmux zsh zsh-completion
+
+  $ git clone https://github.com/wbbutterworth/dotfiles.git && cp dotfiles/{.vimrc,.tmux.conf,.zshrc} ~
+
+  $ vim +PlugInstall +TmuxlineSnapshot\ ~/.tmux/tmuxline +qall
+```
+
+Don't forget to grab the [Powerline Fonts](https://github.com/powerline/fonts).
 
 #### Custom Maps
 
 ```jj``` for escape in insert mode
 
-```,,``` toggle , at the end of the line in any mode  
+```<c-a>h``` go to tmux pane on the left
 
-```;;``` toggle ; at the end of the line in any mode  
+```<c-a>j``` go to tmux pane above
+
+```<c-a>k``` go to tmux pane below
+
+```<c-a>l``` go to tmux pane on the right
 
 ```<space>``` leader key
 
@@ -53,3 +75,8 @@ airline characters.
 ```<space>s{``` sort alphabetically inside {}
 
 ```<space>s}``` sort alphabetically inside {} globally  
+
+```,,``` toggle , at the end of the line in any mode  
+
+```;;``` toggle ; at the end of the line in any mode  
+

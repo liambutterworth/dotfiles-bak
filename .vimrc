@@ -12,12 +12,12 @@
 call plug#begin()
 
 Plug 'kien/ctrlp.vim'
-Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'altercation/vim-colors-solarized'
-Plug 'ludovicchabant/vim-gutentags', { 'do': 'brew tap unversal-ctags/universal-ctags && brew install --HEAD universal-ctags' }
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-unimpaired'
@@ -81,6 +81,7 @@ let g:lexical#spell_key='<leader>ls'                  " spell shortcut
 let g:lexical#thesaurus_key='<leader>lt'              " thesaurus shortcut
 let g:lexical#dictionary_key='<leader>lk'             " dictionary shortcut
 let g:gutentags_ctags_tagfile='.tags'                 " auto compile .tags
+let g:vim_markdown_conceal=0                          " not a fan of concealed character
 let g:jsx_ext_required=0                              " don't require the jsx extension
 
 highlight SignColumn ctermbg=8/4 guibg=#002b36
@@ -91,6 +92,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " e
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
 autocmd FileType markdown call pencil#init() | call lexical#init()           " initialize prose plugins
 autocmd FileType markdown let g:AutoPairsMapCR=0                             " disable <cr> expansion in markdown files
+autocmd CompleteDone * pclose
 
 "
 " Mappings
@@ -100,20 +102,11 @@ let mapleader=' '
 
 noremap j gj
 noremap k gk
-inoremap jj <esc>
 
-" append character
-
-function! Ender(char)
-  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
-endfunction
-
-vnoremap ;; :call Ender(';')<cr>
-vnoremap ,, :call Ender(',')<cr>
-nnoremap ;; m`:call Ender(';')<cr>``
-nnoremap ,, m`:call Ender(',')<cr>``
-inoremap ;; <Esc>m`:call Ender(';')<cr>``a
-inoremap ,, <Esc>m`:call Ender(',')<cr>``a
+noremap <up> <nop>
+noremap <left> <nop>
+noremap <down> <nop>
+noremap <right> <nop>
 
 nnoremap <silent> <c-a>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-a>j :TmuxNavigateDown<cr>
@@ -149,3 +142,16 @@ vnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
 
 nnoremap <leader>s{ vi{:sort<cr>
 nnoremap <leader>s} m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
+
+" append character
+
+function! Ender(char)
+  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
+endfunction
+
+vnoremap ;; :call Ender(';')<cr>
+vnoremap ,, :call Ender(',')<cr>
+nnoremap ;; m`:call Ender(';')<cr>``
+nnoremap ,, m`:call Ender(',')<cr>``
+inoremap ;; <Esc>m`:call Ender(';')<cr>``a
+inoremap ,, <Esc>m`:call Ender(',')<cr>``a
