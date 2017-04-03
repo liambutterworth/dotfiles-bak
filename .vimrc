@@ -84,15 +84,16 @@ let g:gutentags_ctags_tagfile='.tags'                 " auto compile .tags
 let g:vim_markdown_conceal=0                          " not a fan of concealed character
 let g:jsx_ext_required=0                              " don't require the jsx extension
 
-highlight SignColumn ctermbg=8/4 guibg=#002b36
-highlight NonText ctermfg=8/4 guifg=#073642
-
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
-autocmd FileType markdown call pencil#init() | call lexical#init()           " initialize prose plugins
+autocmd FileType markdown call pencil#init()                                 " initialize pencil
+autocmd FileType markdown call lexical#init()                                " initialize lexical
 autocmd FileType markdown let g:AutoPairsMapCR=0                             " disable <cr> expansion in markdown files
-autocmd CompleteDone * pclose
+
+highlight Search ctermbg=7/7 ctermfg=9/3 guibg=#eee8d5 guifg=#cb4b16
+highlight NonText ctermfg=8/4 guifg=#073642
+highlight SignColumn ctermbg=8/4 guibg=#002b36
 
 "
 " Mappings
@@ -107,6 +108,8 @@ noremap <up> <nop>
 noremap <left> <nop>
 noremap <down> <nop>
 noremap <right> <nop>
+
+" tmux navigation
 
 nnoremap <silent> <c-a>h :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-a>j :TmuxNavigateDown<cr>

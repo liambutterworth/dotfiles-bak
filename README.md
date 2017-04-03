@@ -1,38 +1,21 @@
 # Dotfiles
 
-A collection of configuration files for my dev setup.
+A collection of configuration files for my development environment.
 
-## Installation
+## Setup
 
-Install [Homebrew](https://brew.sh):
-
-```
-  $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Install [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
+First install [Homebrew](https://brew.sh),
+[Prezto](https://github.com/sorin-ionescu/prezto), and [Vim
+Plug](https://github.com/junegunn/vim-plug). Then, grab the [Powerline
+Fonts](https://github.com/powerline/fonts). Now, tie everything together with:
 
 ```
-  $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
+  $ brew install zsh zsh-completion vim tmux
 
-Install [Vim Plug](https://github.com/junegunn/vim-plug):
-
-```
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-Now tie everything together:
-
-```
-  $ brew install vim tmux zsh zsh-completion
-
-  $ git clone https://github.com/wbbutterworth/dotfiles.git && cp dotfiles/{.vimrc,.tmux.conf,.zshrc} ~
+  $ git clone https://github.com/wbbutterworth/dotfiles.git && cp dotfiles/{.zpreztorc,.vimrc,.tmux.conf} ~
 
   $ vim +PlugInstall +TmuxlineSnapshot\ ~/.tmux/tmuxline +qall
 ```
-
-Don't forget to grab the [Powerline Fonts](https://github.com/powerline/fonts).
 
 ## Vim Maps
 
