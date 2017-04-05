@@ -15,21 +15,21 @@ Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'beloglazov/vim-online-thesaurus'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'tomtom/tcomment_vim'
 Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'pangloss/vim-javascript'
 Plug 'gregsexton/MatchTag', { 'do': 'cd ftplugin && cp xml.vim javascript.vim' }
 Plug 'yggdroot/indentline'
-Plug 'w0rp/ale'
+Plug 'kien/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'kien/ctrlp.vim'
 Plug 'whatyouhide/vim-gotham'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -53,6 +53,7 @@ syntax enable                                                                " t
 
 set lazyredraw                                                               " make vim more efficient
 set splitright splitbelow                                                    " split right and below by defualt
+set laststatus=2 cursorline                                                  " interface settings
 set ruler number relativenumber                                              " line and column count; relative for motion
 set hlsearch incsearch ignorecase                                            " search settings
 set nocompatible nowrap novisualbell                                         " things I don't like
@@ -60,7 +61,6 @@ set backspace=eol,start,indent                                               " b
 set list listchars=tab:▸\ ,trail:·                                           " invisible characters
 set wildmenu wildmode=list:longest                                           " wildmenu completion settings
 set tags-=.tags tags-=.tags; tags^=.tags;                                    " hidden tag file
-set background=dark laststatus=2 cursorline                                  " interface settings
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab                           " tab settings
 set foldenable foldmethod=syntax foldlevelstart=20                           " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap//                        " dont clutter the working directory
@@ -75,12 +75,12 @@ highlight Search ctermbg=3 ctermfg=0 guibg=#eee8d5 guifg=#cb4b16
 highlight IncSearch ctermbg=3 ctermfg=0 guibg=#eee8d5 guifg=#cb4b16
 highlight NonText ctermfg=0 guifg=#073642
 
+let g:javascript_plugin_jsdoc                       = 1
 let g:jsx_ext_required                              = 0
 let g:gutentags_ctags_tagfile                       = '.tags'
 let g:ycm_collect_identifiers_from_tags_files       = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion                     = 0
-" let g:ycm_filetype_blacklist                        = {}
 let g:closetag_filenames                            = '*.html,*.js,*.jsx'
 let g:indentLine_color_term                         = 12
 let g:indentLine_color_gui                          = '#0a3749'
