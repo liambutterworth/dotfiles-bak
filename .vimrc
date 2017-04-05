@@ -80,6 +80,7 @@ let g:gutentags_ctags_tagfile                       = '.tags'
 let g:ycm_collect_identifiers_from_tags_files       = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_key_invoke_completion                     = 0
+" let g:ycm_filetype_blacklist                        = {}
 let g:closetag_filenames                            = '*.html,*.js,*.jsx'
 let g:indentLine_color_term                         = 12
 let g:indentLine_color_gui                          = '#0a3749'
@@ -109,19 +110,17 @@ let g:tmuxline_preset = {
 
 let mapleader=' '
 
-nnoremap <leader><leader> :
+noremap j gj
+noremap k gk
+nnoremap Y y$
+nnoremap _ :e#<cr>
 
 noremap <up> <nop>
 noremap <left> <nop>
 noremap <down> <nop>
 noremap <right> <nop>
 
-noremap j gj
-noremap k gk
-nnoremap Y y$
-nnoremap _ :e#<cr>
-
-" completion commands
+nnoremap <leader><leader> :
 
 nnoremap <leader>k :OnlineThesaurusCurrentWord<cr>
 
