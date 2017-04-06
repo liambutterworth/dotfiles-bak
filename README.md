@@ -1,6 +1,6 @@
 # Dotfiles
 
-A collection of configuration files for my dev setup.
+A collection of configuration files for my dev setup. test.
 
 ## Installation
 
