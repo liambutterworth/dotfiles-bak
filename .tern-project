@@ -16,8 +16,8 @@
 
   "plugins": {
     "node": {},
-    "webpack": {},
     "modules": {},
+    "webpack": {},
     "es_modules": {}
   }
 }
