@@ -31,6 +31,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
@@ -71,24 +72,25 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " e
 autocmd FileType markdown setlocal spell complete+=kspell                    " use spell checking and enable c-n c-p word completion
 autocmd FileType dirvish call fugitive#detect(@%)                            " enable fugitive in dirvish file browser
 
-let g:javascript_plugin_jsdoc = 1                                            " syntax highlighting for JSDoc comments
-let g:jsx_ext_required = 0                                                   " use jsx in .js files
-let g:gutentags_ctags_tagfile = '.tags'                                      " use a hidden tags file
-let g:ycm_collect_identifiers_from_tags_files = 1                            " use the tags file for auto completion
-let g:ycm_autoclose_preview_window_after_completion = 1                      " close the preview window with popup menu
-let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
-let g:closetag_filenames = '*.html,*.js,*.jsx'                               " complete html in these files
-let g:indentLine_color_term = 12                                             " make consistent with colorscheme for terminal
-let g:indentLine_color_gui = '#0a3749'                                       " make consistent with colorscheme for gui
-let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
-let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
-let g:ale_sign_warning = '▸'                                                 " a better error symbol
-let g:ale_sign_error = '▸'                                                   " a better warning symbal; differs from error in color
-let g:ctrlp_show_hidden = 1                                                  " show hidden files in ctrlP
-let g:ctrlp_match_window = 'bottom,order:ttb'                                " order ctrlP window from top to bottom
-let g:ctrlp_custom_ignore = 'node_modules\|git'                              " ignore these folders in ctrlP
-let g:airline_powerline_fonts = 1                                            " use powerline fonts for status line
-let g:airline_section_error = '%{ALEGetStatusLine()}'                        " add ale output to status line
+let g:javascript_plugin_jsdoc = 1                        " syntax highlighting for JSDoc comments
+let g:jsx_ext_required = 0                               " use jsx in .js files
+let g:gutentags_ctags_tagfile = '.tags'                  " use a hidden tags file
+let g:ycm_collect_identifiers_from_tags_files = 1        " use the tags file for auto completion
+let g:ycm_autoclose_preview_window_after_completion = 1  " close the preview window with popup menu
+let g:ycm_key_invoke_completion = 0                      " reserve c-space for tmux
+let g:closetag_filenames = '*.html,*.js,*.jsx'           " complete html in these files
+let g:indentLine_color_term = 12                         " make consistent with colorscheme for terminal
+let g:indentLine_color_gui = '#0a3749'                   " make consistent with colorscheme for gui
+let g:indentLine_char = '│'                              " use a longer pipe to create a solid line
+let g:gitgutter_sign_column_always = 1                   " always display sign column; without the text is constantly shifting
+let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ] " ale format for status line
+let g:ale_sign_warning = '▸'                             " a better error symbol
+let g:ale_sign_error = '▸'                               " a better warning symbal; differs from error in color
+let g:ctrlp_show_hidden = 1                              " show hidden files in ctrlP
+let g:ctrlp_match_window = 'bottom,order:ttb'            " order ctrlP window from top to bottom
+let g:ctrlp_custom_ignore = 'node_modules\|git'          " ignore these folders in ctrlP
+let g:airline_powerline_fonts = 1                        " use powerline fonts for status line
+let g:airline_section_error = '%{ALEGetStatusLine()}'    " add ale output to status line
 
 " format tmux status line
 let g:tmuxline_preset = {
@@ -104,6 +106,10 @@ let g:tmuxline_preset = {
 " make search consistent with colorscheme
 highlight Search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
 highlight IncSearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+
+" make ale signs consistent with colorscheme
+highlight ALEErrorSign ctermbg=237 ctermfg=167
+highlight ALEWarningSign ctermbg=237 ctermfg=109
 
 " make empty line tildas the same color as background; they annoyed me
 highlight NonText ctermfg=0 guifg=#282828
