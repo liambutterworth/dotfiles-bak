@@ -17,6 +17,7 @@ Plug 'beloglazov/vim-online-thesaurus'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tomtom/tcomment_vim'
+Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
 Plug 'ludovicchabant/vim-gutentags'
@@ -57,15 +58,16 @@ set splitright splitbelow                                                    " s
 set laststatus=2 cursorline                                                  " interface settings
 set ruler number relativenumber                                              " line and column count; relative for motion
 set hlsearch incsearch ignorecase                                            " search settings
-set nocompatible nowrap novisualbell                                         " things I don't like
 set backspace=eol,start,indent                                               " backspace over everything
 set list listchars=tab:▸\ ,trail:·                                           " invisible characters
 set wildmenu wildmode=list:longest                                           " wildmenu completion settings
+set nocompatible nowrap novisualbell                                         " things I don't like
 set tags-=.tags tags-=.tags; tags^=.tags;                                    " hidden tag file
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab                           " tab settings
 set foldenable foldmethod=syntax foldlevelstart=20                           " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap//                        " dont clutter the working directory
 
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cl
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
@@ -80,6 +82,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1                      " c
 let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
 let g:closetag_filenames = '*.html,*.js,*.jsx'                               " complete html in these files
 let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
+let g:indentLine_setConceal = 0                                              " why does indentline even set a conceal
 let g:gitgutter_sign_column_always = 1                                       " always display sign column; without the text is constantly shifting
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
 let g:ale_sign_warning = '▸'                                                 " a better error symbol
