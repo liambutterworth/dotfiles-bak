@@ -30,7 +30,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'whatyouhide/vim-gotham'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
@@ -48,7 +48,7 @@ call plug#end()
 "
 
 filetype plugin indent on                                                    " init core vim plugins
-colorscheme gotham                                                           " define colorscheme
+colorscheme gruvbox                                                          " define colorscheme
 syntax enable                                                                " turn on syntax highlighting
 
 set lazyredraw                                                               " make vim more efficient
@@ -102,12 +102,11 @@ let g:tmuxline_preset = {
   \ }
 
 " make search consistent with colorscheme
-highlight Search ctermbg=3 ctermfg=0 guibg=#eee8d5 guifg=#cb4b16
-highlight IncSearch ctermbg=3 ctermfg=0 guibg=#eee8d5 guifg=#cb4b16
+highlight Search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+highlight IncSearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
 
 " make empty line tildas the same color as background; they annoyed me
-highlight NonText ctermfg=0 guifg=#073642
-
+highlight NonText ctermfg=0 guifg=#282828
 
 "
 " Maps
