@@ -67,7 +67,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab                           " t
 set foldenable foldmethod=syntax foldlevelstart=20                           " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap//                        " dont clutter the working directory
 
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cl
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cl                      " for the love of god dont wrap text
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
@@ -87,6 +87,7 @@ let g:gitgutter_sign_column_always = 1                                       " a
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
 let g:ale_sign_warning = '▸'                                                 " a better error symbol
 let g:ale_sign_error = '▸'                                                   " a better warning symbal; differs from error in color
+let g:dirvish_mode = ':sort r /[^\/]$/'                                      " put folders at the top in folder navigation
 let g:ctrlp_show_hidden = 1                                                  " show hidden files in ctrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'                                " order ctrlP window from top to bottom
 let g:ctrlp_custom_ignore = 'node_modules\|git'                              " ignore these folders in ctrlP
