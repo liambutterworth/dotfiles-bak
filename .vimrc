@@ -13,7 +13,6 @@ call plug#begin()
 
 Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
-Plug 'beloglazov/vim-online-thesaurus'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tomtom/tcomment_vim'
