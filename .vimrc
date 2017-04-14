@@ -99,7 +99,6 @@ let g:tmuxline_preset = {
   \ 'c':       '#S',
   \ 'win':     '#W',
   \ 'cwin':    '#W',
-  \ 'x':       '#(tmux-spotify-info)',
   \ 'y':       '%a %b %d %R %p',
   \ 'options': { 'status-justify': 'left' }
   \ }
