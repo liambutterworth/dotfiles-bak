@@ -140,9 +140,6 @@ noremap <right> <nop>
 " shortcut for colon command input
 nnoremap <leader><leader> :
 
-" open online dictionary/thesaurus
-nnoremap <leader>k :OnlineThesaurusCurrentWord<cr>
-
 " window resize commands; consistent with tmux
 nnoremap <c-w>h <c-w>5<
 nnoremap <c-w>j <c-w>5-
