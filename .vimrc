@@ -23,7 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'gregsexton/MatchTag', { 'do': 'cd ftplugin && cp xml.vim javascript.vim' }
+Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
 Plug 'yggdroot/indentline'
 Plug 'kien/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
