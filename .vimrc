@@ -66,7 +66,7 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab                           " t
 set foldenable foldmethod=syntax foldlevelstart=20                           " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap//                        " dont clutter the working directory
 
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cl                      " for the love of god dont wrap text
+autocmd BufNewFile,BufRead * setlocal formatoptions-=cl                      " for the love of god dont wrap code
 autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
@@ -78,7 +78,7 @@ let g:jsx_ext_required = 0                                                   " u
 let g:gutentags_ctags_tagfile = '.tags'                                      " use a hidden tags file
 let g:ycm_collect_identifiers_from_tags_files = 1                            " use the tags file for auto completion
 let g:ycm_autoclose_preview_window_after_completion = 1                      " close the preview window with popup menu
-let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
+let g:ycm_key_invoke_completion = 0                                          " reserve <c-space> for tmux
 let g:closetag_filenames = '*.html,*.js,*.jsx'                               " complete html in these files
 let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
 let g:indentLine_setConceal = 0                                              " why does indentline even set a conceal
@@ -86,10 +86,10 @@ let g:gitgutter_sign_column_always = 1                                       " a
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
 let g:ale_sign_warning = '▸'                                                 " a better error symbol
 let g:ale_sign_error = '▸'                                                   " a better warning symbal; differs from error in color
-let g:dirvish_mode = ':sort r /[^\/]$/'                                      " put folders at the top in folder navigation
+let g:dirvish_mode = ':sort r /[^\/]$/'                                      " put folders at the top in file browser
 let g:ctrlp_show_hidden = 1                                                  " show hidden files in ctrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'                                " order ctrlP window from top to bottom
-let g:ctrlp_custom_ignore = 'node_modules\|git'                              " ignore these folders in ctrlP
+let g:ctrlp_custom_ignore = 'node_modules|git'                               " ignore these folders in ctrlP
 let g:airline_powerline_fonts = 1                                            " use powerline fonts for status line
 let g:airline_section_error = '%{ALEGetStatusLine()}'                        " add ale output to status line
 
@@ -128,8 +128,8 @@ noremap k gk
 " yank to end of line; consistent with D and C
 nnoremap Y y$
 
-" open last file; convenience command for dirvish
-nnoremap _ :e#<cr>
+" open last edited file
+nnoremap <bs> <c-^>
 
 " force the use of hjkl
 noremap <up> <nop>
