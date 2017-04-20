@@ -24,18 +24,18 @@ Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
+Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'yggdroot/indentline'
 Plug 'kien/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-eunuch'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
+Plug 'benmills/vimux'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -79,7 +79,7 @@ let g:gutentags_ctags_tagfile = '.tags'                                      " u
 let g:ycm_collect_identifiers_from_tags_files = 1                            " use the tags file for auto completion
 let g:ycm_autoclose_preview_window_after_completion = 1                      " close the preview window with popup menu
 let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
-let g:closetag_filenames = '*.html,*.js,*.jsx'                               " complete html in these files
+let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'                               " complete html in these files
 let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
 let g:indentLine_setConceal = 0                                              " why does indentline even set a conceal
 let g:gitgutter_sign_column_always = 1                                       " always display sign column; without the text is constantly shifting
@@ -141,10 +141,17 @@ noremap <right> <nop>
 nnoremap <leader><leader> :
 
 " window resize commands; consistent with tmux
-nnoremap <c-w>h <c-w>5<
-nnoremap <c-w>j <c-w>5-
-nnoremap <c-w>k <c-w>5+
-nnoremap <c-w>l <c-w>5>
+nnoremap <c-w>h <c-w>12<
+nnoremap <c-w>j <c-w>12-
+nnoremap <c-w>k <c-w>12+
+nnoremap <c-w>l <c-w>12>
+
+" vimux shell commands
+
+nnoremap <leader>vp :VimuxPromptCommand<cr>
+nnoremap <leader>vl :VimuxRunLastCommand<cr>
+nnoremap <leader>vi :VimuxInspectRunner<cr>
+nnoremap <leader>vz :VimuxZoomRunner<cr>
 
 " fugitive git commands
 nnoremap <leader>gs :Gstatus<cr>
