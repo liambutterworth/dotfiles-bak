@@ -141,10 +141,10 @@ noremap <right> <nop>
 nnoremap <leader><leader> :
 
 " window resize commands; consistent with tmux
-nnoremap <c-w>h <c-w>12<
-nnoremap <c-w>j <c-w>12-
-nnoremap <c-w>k <c-w>12+
-nnoremap <c-w>l <c-w>12>
+nnoremap <c-w>h <c-w>8<
+nnoremap <c-w>j <c-w>8-
+nnoremap <c-w>k <c-w>8+
+nnoremap <c-w>l <c-w>8>
 
 " file commands
 nnoremap <leader>fw :w<cr>
