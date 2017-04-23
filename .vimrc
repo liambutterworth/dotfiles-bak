@@ -23,6 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
 Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'yggdroot/indentline'
@@ -36,7 +37,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'benmills/vimux'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
@@ -137,8 +137,17 @@ noremap <left> <nop>
 noremap <down> <nop>
 noremap <right> <nop>
 
-" shortcut for colon command input
-nnoremap <leader><leader> :
+" toggle commands
+nnoremap [h :set nohlsearch<cr>
+nnoremap ]h :set hlsearch<cr>
+nnoremap [l :set nolist<cr>
+nnoremap ]l :set list<cr>
+
+" move commands
+nnoremap <leader>k dd2kp
+nnoremap <leader>j ddp
+nnoremap <leader><space>k m`O<esc>``
+nnoremap <leader><space>j m`o<esc>``
 
 " window resize commands; consistent with tmux
 nnoremap <c-w>h <c-w>8<
