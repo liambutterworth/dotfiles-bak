@@ -3,7 +3,7 @@
 "
 " :: Plugins
 " :: Settings
-" :: Maps
+" :: Mappings
 
 "
 " Plugins
@@ -79,14 +79,14 @@ let g:gutentags_ctags_tagfile = '.tags'                                      " u
 let g:ycm_collect_identifiers_from_tags_files = 1                            " use the tags file for auto completion
 let g:ycm_autoclose_preview_window_after_completion = 1                      " close the preview window with popup menu
 let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
-let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'                               " complete html in these files
+let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'                         " complete html in these files
 let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
 let g:indentLine_setConceal = 0                                              " why does indentline even set a conceal
 let g:gitgutter_sign_column_always = 1                                       " always display sign column; without the text is constantly shifting
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
 let g:ale_sign_warning = '▸'                                                 " a better error symbol
 let g:ale_sign_error = '▸'                                                   " a better warning symbal; differs from error in color
-let g:dirvish_mode = ':sort r /[^\/]$/'                                      " put folders at the top in folder navigation
+let g:dirvish_mode = ':sort r /[^\/]$/'                                      " folders on top
 let g:ctrlp_show_hidden = 1                                                  " show hidden files in ctrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'                                " order ctrlP window from top to bottom
 let g:ctrlp_custom_ignore = 'node_modules\|git'                              " ignore these folders in ctrlP
@@ -115,7 +115,7 @@ highlight ALEWarningSign ctermbg=237 ctermfg=109
 highlight NonText ctermfg=0 guifg=#282828
 
 "
-" Maps
+" Mappings
 "
 
 " use space bar as leader
@@ -128,8 +128,8 @@ noremap k gk
 " yank to end of line; consistent with D and C
 nnoremap Y y$
 
-" open last file; convenience command for dirvish
-nnoremap _ :e#<cr>
+" open last file
+nnoremap <bs> :e#<cr>
 
 " force the use of hjkl
 noremap <up> <nop>
