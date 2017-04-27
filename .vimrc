@@ -150,16 +150,16 @@ nnoremap <leader><space>k m`O<esc>``
 nnoremap <leader><space>j m`o<esc>``
 
 " window resize commands; consistent with tmux
-nnoremap <c-w>h <c-w>8<
+nnoremap <c-w>h <c-w>12<
 nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
-nnoremap <c-w>l <c-w>8>
+nnoremap <c-w>l <c-w>12>
 
 " file commands
-nnoremap <leader>fw :w<cr>
-nnoremap <leader>fW :wq<cr>
-nnoremap <leader>fq :q<cr>
-nnoremap <leader>fQ :q!<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
 
 " vimux shell commands
 nnoremap <leader>vp :VimuxPromptCommand<cr>
