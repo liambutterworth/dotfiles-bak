@@ -30,7 +30,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'matchit.zip'
 
 call plug#end()
 
@@ -38,29 +37,26 @@ call plug#end()
 " Settings
 "
 
+runtime macros/matchit.vim
 filetype plugin indent on                                                    " init core vim plugins
 colorscheme gruvbox                                                          " define colorscheme
 syntax enable                                                                " turn on syntax highlighting
 
 set lazyredraw                                                               " make vim more efficient
+set autoindent
+set formatoptions-=cl " for the love of god don't wrap text
+set nowrap novisualbell                                         " things I don't like
 set splitright splitbelow                                                    " split right and below by defualt
 set laststatus=2 cursorline                                                  " interface settings
-set ruler number relativenumber                                              " line and column count; relative for motion
+set backspace=indent,eol,start                                               " backspace over everything
+set ruler number relativenumber                                              " use relative line count
 set hlsearch incsearch ignorecase                                            " search settings
-set backspace=eol,start,indent                                               " backspace over everything
 set list listchars=tab:▸\ ,trail:·                                           " invisible characters
 set wildmenu wildmode=list:longest                                           " wildmenu completion settings
-set nocompatible nowrap novisualbell                                         " things I don't like
 set tags-=.tags tags-=.tags; tags^=.tags;                                    " hidden tag file
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab                           " tab settings
 set foldenable foldmethod=syntax foldlevelstart=20                           " sane fold settings
 set backupdir=~/.vim/backup// directory=~/.vim/swap//                        " dont clutter the working directory
-
-autocmd BufNewFile,BufRead * setlocal formatoptions-=cl                      " for the love of god dont wrap text
-autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
-autocmd FileType markdown setlocal spell complete+=kspell                    " use spell checking and enable c-n c-p word completion
 
 let g:javascript_plugin_jsdoc = 1                                            " syntax highlighting for JSDoc comments
 let g:jsx_ext_required = 0                                                   " use jsx in .js files
@@ -97,18 +93,30 @@ highlight ALEWarningSign ctermbg=237 ctermfg=109
 " make empty line tildas the same color as background; they annoyed me
 highlight NonText ctermfg=0 guifg=#282828
 
+" setup code completion
+augroup completion
+  autocmd!
+  autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " enable html auto completion
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
+  autocmd FileType markdown setlocal spell complete+=kspell                    " use spell checking and enable c-n c-p word completion
+augroup END
+
 "
 " Mappings
 "
 
 " use space bar as leader
-let mapleader=' '
+let mapleader = ' '
+
+" command shortcut
+nnoremap <leader><leader> :
 
 " navigate wrapped lines
 noremap j gj
 noremap k gk
 
-" yank to end of line; consistent with D and C
+" yank to end of line
 nnoremap Y y$
 
 " open last file
@@ -126,29 +134,11 @@ nnoremap ]h :set hlsearch<cr>
 nnoremap [l :set nolist<cr>
 nnoremap ]l :set list<cr>
 
-" move commands
-nnoremap <leader>k dd2kp
-nnoremap <leader>j ddp
-nnoremap <leader><space>k m`O<esc>``
-nnoremap <leader><space>j m`o<esc>``
-
 " window resize commands; consistent with tmux
 nnoremap <c-w>h <c-w>12<
 nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
 nnoremap <c-w>l <c-w>12>
-
-" file commands
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-
-" vimux shell commands
-nnoremap <leader>vp :VimuxPromptCommand<cr>
-nnoremap <leader>vl :VimuxRunLastCommand<cr>
-nnoremap <leader>vi :VimuxInspectRunner<cr>
-nnoremap <leader>vz :VimuxZoomRunner<cr>
 
 " fugitive git commands
 nnoremap <leader>gs :Gstatus<cr>
@@ -173,7 +163,7 @@ nnoremap <leader>s] m`:g#\([\n\)\@<=#.,/]/sort<cr>:let @/ = ""<cr>``
 nnoremap <leader>s( vi(:sort<cr>
 nnoremap <leader>s) m`:g#\((\n\)\@<=#.,/)/sort<cr>:let @/ = ""<cr>``
 
-" append characters to end of line in any mode
+" append characters to end of line
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
