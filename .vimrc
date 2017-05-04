@@ -11,35 +11,25 @@
 
 call plug#begin()
 
-Plug 'tpope/vim-markdown'
-Plug 'nelstrom/vim-markdown-folding'
-Plug 'cakebaker/scss-syntax.vim'
+Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
-Plug 'tomtom/tcomment_vim'
-Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'edkolev/tmuxline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
+Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
-Plug 'gregsexton/MatchTag', { 'do': 'cp ftplugin/xml.vim ftplugin/javascript.vim' }
-Plug 'captbaritone/better-indent-support-for-php-with-html'
-Plug 'yggdroot/indentline'
-Plug 'kien/ctrlp.vim'
-Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-fugitive'
-Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
-Plug 'benmills/vimux'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'godlygeek/tabular'
 Plug 'matchit.zip'
 
 call plug#end()
@@ -71,22 +61,15 @@ autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags            " e
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss " enable css auto completion
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS  " enable javascript auto completion
 autocmd FileType markdown setlocal spell complete+=kspell                    " use spell checking and enable c-n c-p word completion
-autocmd FileType dirvish call fugitive#detect(@%)                            " enable fugitive in dirvish file browser
 
 let g:javascript_plugin_jsdoc = 1                                            " syntax highlighting for JSDoc comments
 let g:jsx_ext_required = 0                                                   " use jsx in .js files
 let g:gutentags_ctags_tagfile = '.tags'                                      " use a hidden tags file
-let g:ycm_collect_identifiers_from_tags_files = 1                            " use the tags file for auto completion
-let g:ycm_autoclose_preview_window_after_completion = 1                      " close the preview window with popup menu
-let g:ycm_key_invoke_completion = 0                                          " reserve c-space for tmux
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'                         " complete html in these files
-let g:indentLine_char = '│'                                                  " use a longer pipe to create a solid line
-let g:indentLine_setConceal = 0                                              " why does indentline even set a conceal
 let g:gitgutter_sign_column_always = 1                                       " always display sign column; without the text is constantly shifting
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]                     " ale format for status line
 let g:ale_sign_warning = '▸'                                                 " a better error symbol
 let g:ale_sign_error = '▸'                                                   " a better warning symbal; differs from error in color
-let g:dirvish_mode = ':sort r /[^\/]$/'                                      " folders on top
 let g:ctrlp_show_hidden = 1                                                  " show hidden files in ctrlP
 let g:ctrlp_match_window = 'bottom,order:ttb'                                " order ctrlP window from top to bottom
 let g:ctrlp_custom_ignore = 'node_modules\|git'                              " ignore these folders in ctrlP
@@ -175,12 +158,12 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 
 " tabular align commands
-nnoremap <leader>a" m`:Tab /"<cr>``
-vnoremap <leader>a" m`:Tab /"<cr>``
-nnoremap <leader>a= m`:Tab /=<cr>``
-vnoremap <leader>a= m`:Tab /=<cr>``
-nnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
-vnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
+" nnoremap <leader>a" m`:Tab /"<cr>``
+" vnoremap <leader>a" m`:Tab /"<cr>``
+" nnoremap <leader>a= m`:Tab /=<cr>``
+" vnoremap <leader>a= m`:Tab /=<cr>``
+" nnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
+" vnoremap <leader>a: m`:Tab /:\zs /l0<cr>``
 
 " sort alphabetically between {}, [] or (); s for text obj, S for global
 nnoremap <leader>s{ vi{:sort<cr>
