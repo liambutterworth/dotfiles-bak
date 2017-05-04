@@ -104,12 +104,6 @@ let mapleader = ' '
 " command shortcut
 nnoremap <leader><leader> :
 
-" force the use of hjkl
-noremap <up> <nop>
-noremap <left> <nop>
-noremap <down> <nop>
-noremap <right> <nop>
-
 " navigate wrapped lines
 noremap j gj
 noremap k gk
