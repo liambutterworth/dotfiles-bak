@@ -15,7 +15,8 @@ Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -26,7 +27,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -65,9 +65,10 @@ let g:gitgutter_sign_column_always = 1
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
 let g:ale_sign_warning = '▸'
 let g:ale_sign_error = '▸'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_custom_ignore = 'node_modules\|git'
+let g:fzf_layout = { 'down': '~40%' }
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_custom_ignore = 'node_modules\|git'
 let g:airline_powerline_fonts = 1
 let g:airline_section_error = '%{ALEGetStatusLine()}'
 
@@ -102,7 +103,7 @@ augroup END
 let mapleader = ' '
 
 " command shortcut
-nnoremap <leader><leader> :
+nnoremap <Leader><Leader> :
 
 " navigate wrapped lines
 noremap j gj
@@ -112,44 +113,50 @@ noremap k gk
 nnoremap Y y$
 
 " align commands
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " open last file
-nnoremap <bs> :e#<cr>
+nnoremap <BS> :e#<CR>
 
 " toggle commands
-nnoremap [h :set nohlsearch<cr>
-nnoremap ]h :set hlsearch<cr>
-nnoremap [l :set nolist<cr>
-nnoremap ]l :set list<cr>
+nnoremap [h :set nohlsearch<CR>
+nnoremap ]h :set hlsearch<CR>
+nnoremap [l :set nolist<CR>
+nnoremap ]l :set list<CR>
 
 " window resize commands; consistent with tmux
-nnoremap <c-w>h <c-w>12<
-nnoremap <c-w>j <c-w>8-
-nnoremap <c-w>k <c-w>8+
-nnoremap <c-w>l <c-w>12>
+nnoremap <C-w>h <C-w>12<
+nnoremap <C-w>j <C-w>8-
+nnoremap <C-w>k <C-w>8+
+nnoremap <C-w>l <C-w>12>
+
+" fzf completion
+imap <C-x><C-k> <Plug>(fzf-complete-word)
+imap <C-x><C-f> <Plug>(fzf-complete-path)
+imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <Plug>(fzf-complete-line)
 
 " file commands
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>W :wq<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q!<CR>
 
 " git commands
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>ga :Gwrite<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>ga :Gwrite<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
 
 " sort commands; s for textobj, S for global
-nnoremap <leader>s{ vi{:sort<cr>
-nnoremap <leader>s} m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
-nnoremap <leader>s[ vi[:sort<cr>
-nnoremap <leader>s] m`:g#\([\n\)\@<=#.,/]/sort<cr>:let @/ = ""<cr>``
-nnoremap <leader>s( vi(:sort<cr>
-nnoremap <leader>s) m`:g#\((\n\)\@<=#.,/)/sort<cr>:let @/ = ""<cr>``
+nnoremap <Leader>s{ vi{:sort<CR>
+nnoremap <Leader>s} m`:g#\({\n\)\@<=#.,/}/sort<CR>:let @/ = ""<CR>``
+nnoremap <Leader>s[ vi[:sort<CR>
+nnoremap <Leader>s] m`:g#\([\n\)\@<=#.,/]/sort<CR>:let @/ = ""<CR>``
+nnoremap <Leader>s( vi(:sort<cr>
+nnoremap <Leader>s) m`:g#\((\n\)\@<=#.,/)/sort<CR>:let @/ = ""<CR>``
 
 " append characters to end of line
 function! Ender(char)
@@ -157,11 +164,11 @@ function! Ender(char)
 endfunction
 
 " append comma
-vnoremap ,, :call Ender(',')<cr>
-nnoremap ,, m`:call Ender(',')<cr>``
-inoremap ,, <Esc>m`:call Ender(',')<cr>``a
+vnoremap ,, :call Ender(',')<CR>
+nnoremap ,, m`:call Ender(',')<CR>``
+inoremap ,, <Esc>m`:call Ender(',')<CR>``a
 
 " append semicolon
-vnoremap ;; :call Ender(';')<cr>
-nnoremap ;; m`:call Ender(';')<cr>``
-inoremap ;; <Esc>m`:call Ender(';')<cr>``a
+vnoremap ;; :call Ender(';')<CR>
+nnoremap ;; m`:call Ender(';')<CR>``
+inoremap ;; <Esc>m`:call Ender(';')<CR>``a
