@@ -39,11 +39,11 @@ call plug#end()
 " :: Highlight
 " :: Completion
 
+" General
+
 runtime macros/matchit.vim
 filetype plugin indent on
 colorscheme gruvbox
-
-" General
 
 set lazyredraw
 set autoindent
@@ -104,11 +104,14 @@ augroup end
 "
 " Mappings
 "
+" :: General
 " :: Leader
 " :: Align
 " :: Toggle
 " :: Splits
 " :: Ender
+
+" General
 
 " navigate wrapped lines
 noremap j gj
