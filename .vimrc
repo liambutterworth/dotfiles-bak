@@ -15,8 +15,6 @@ Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -36,10 +34,16 @@ call plug#end()
 "
 " Settings
 "
+" :: General
+" :: Plugins
+" :: Highlight
+" :: Completion
 
 runtime macros/matchit.vim
 filetype plugin indent on
 colorscheme gruvbox
+
+" General
 
 set lazyredraw
 set autoindent
@@ -57,6 +61,8 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set foldenable foldmethod=syntax foldlevelstart=20
 set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
+" Plugins
+
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:gutentags_ctags_tagfile = '.tags'
@@ -65,7 +71,6 @@ let g:gitgutter_sign_column_always = 1
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
 let g:ale_sign_warning = '▸'
 let g:ale_sign_error = '▸'
-let g:fzf_layout = { 'down': '~40%' }
 let g:airline_powerline_fonts = 1
 let g:airline_section_error = '%{ALEGetStatusLine()}'
 
@@ -78,94 +83,97 @@ let g:tmuxline_preset = {
   \ 'options': { 'status-justify': 'left' }
   \ }
 
-highlight Search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
-highlight IncSearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
-highlight ALEErrorSign ctermbg=237 ctermfg=167
-highlight ALEWarningSign ctermbg=237 ctermfg=109
-highlight NonText ctermfg=0 guifg=#282828
+" Highlight
+
+highlight search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+highlight incsearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+highlight aleerrorsign ctermbg=237 ctermfg=167
+highlight alewarningsign ctermbg=237 ctermfg=109
+highlight nontext ctermfg=0 guifg=#282828
+
+" Completion
 
 augroup completion
   autocmd!
-  autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType markdown setlocal spell complete+=kspell
+  autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss
+  autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd filetype markdown setlocal spell complete+=kspell
 augroup END
 
 "
 " Mappings
 "
+" :: Leader
+" :: Align
+" :: Toggle
+" :: Splits
+" :: Ender
 
-" use space bar as leader
-let mapleader = ' '
-
-" command shortcut
-nnoremap <Leader><Leader> :
-
-" navigate wrapped lines
+" navigate over wrapped lines
 noremap j gj
 noremap k gk
 
 " yank to end of line
 nnoremap Y y$
 
-" open last file
-nnoremap <BS> :e#<CR>
+" open previous file
+nnoremap <bs> :e#<cr>
 
-" align commands
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+" Leader
 
-" toggle commands
-nnoremap [h :set nohlsearch<CR>
-nnoremap ]h :set hlsearch<CR>
-nnoremap [l :set nolist<CR>
-nnoremap ]l :set list<CR>
+let mapleader = ' '
 
-" window resize commands; consistent with tmux
-nnoremap <C-w>h <C-w>12<
-nnoremap <C-w>j <C-w>8-
-nnoremap <C-w>k <C-w>8+
-nnoremap <C-w>l <C-w>12>
-
-" fzf completion
-imap <C-x><C-k> <Plug>(fzf-complete-word)
-imap <C-x><C-f> <Plug>(fzf-complete-path)
-imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
-imap <C-x><C-l> <Plug>(fzf-complete-line)
+nnoremap <leader><leader> :
 
 " file commands
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>W :wq<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :q!<CR>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
+
+" sort commands
+nnoremap <leader>s vi{:sort<cr>
+nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 
 " git commands
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>ga :Gwrite<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>ga :Gwrite<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
 
-" sort commands; s for textobj, S for global
-nnoremap <Leader>s{ vi{:sort<CR>
-nnoremap <Leader>s} m`:g#\({\n\)\@<=#.,/}/sort<CR>:let @/ = ""<CR>``
-nnoremap <Leader>s[ vi[:sort<CR>
-nnoremap <Leader>s] m`:g#\([\n\)\@<=#.,/]/sort<CR>:let @/ = ""<CR>``
-nnoremap <Leader>s( vi(:sort<CR>
-nnoremap <Leader>s) m`:g#\((\n\)\@<=#.,/)/sort<CR>:let @/ = ""<CR>``
+" Align
 
-" append characters to end of line
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+
+" Toggle
+
+nnoremap [h :set nohlsearch<cr>
+nnoremap ]h :set hlsearch<cr>
+nnoremap [l :set nolist<cr>
+nnoremap ]l :set list<cr>
+
+" Splits
+
+nnoremap <c-w>h <c-w>12<
+nnoremap <c-w>j <c-w>8-
+nnoremap <c-w>k <c-w>8+
+nnoremap <c-w>l <c-w>12>
+
+" Ender
+
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
-" append comma
-vnoremap ,, :call Ender(',')<CR>
-nnoremap ,, m`:call Ender(',')<CR>``
-inoremap ,, <Esc>m`:call Ender(',')<CR>``a
+" append comma to end of line
+vnoremap ,, :call Ender(',')<cr>
+nnoremap ,, m`:call Ender(',')<cr>``
+inoremap ,, <esc>m`:call Ender(',')<cr>``a
 
-" append semicolon
-vnoremap ;; :call Ender(';')<CR>
-nnoremap ;; m`:call Ender(';')<CR>``
-inoremap ;; <Esc>m`:call Ender(';')<CR>``a
+" append semicolon to end of line
+vnoremap ;; :call Ender(';')<cr>
+nnoremap ;; m`:call Ender(';')<cr>``
+inoremap ;; <esc>m`:call Ender(';')<cr>``a
