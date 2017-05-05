@@ -11,15 +11,15 @@
 
 call plug#begin()
 
+" Global
+
 Plug 'morhetz/gruvbox'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'edkolev/tmuxline.vim'
+Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
@@ -28,6 +28,8 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
@@ -37,7 +39,7 @@ call plug#end()
 " :: General
 " :: Plugins
 " :: Highlight
-" :: Completion
+" :: Commands
 
 " General
 
@@ -45,12 +47,12 @@ runtime macros/matchit.vim
 filetype plugin indent on
 colorscheme gruvbox
 
-set lazyredraw
 set autoindent
+set cursorline
+set laststatus=2
 set formatoptions-=cl
 set nowrap novisualbell
 set splitright splitbelow
-set laststatus=2 cursorline
 set backspace=indent,eol,start
 set ruler number relativenumber
 set hlsearch incsearch ignorecase
@@ -67,6 +69,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 let g:gutentags_ctags_tagfile = '.tags'
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
+let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always = 1
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
 let g:ale_sign_warning = '▸'
@@ -91,7 +94,7 @@ highlight aleerrorsign ctermbg=237 ctermfg=167
 highlight alewarningsign ctermbg=237 ctermfg=109
 highlight nontext ctermfg=0 guifg=#282828
 
-" Completion
+" Commands
 
 augroup completion
   autocmd!
@@ -106,22 +109,30 @@ augroup end
 "
 " :: General
 " :: Leader
-" :: Align
 " :: Toggle
-" :: Splits
 " :: Ender
 
 " General
 
-" navigate wrapped lines
 noremap j gj
 noremap k gk
 
-" yank to end of line
 nnoremap Y y$
 
-" previous file
 nnoremap <bs> :e#<cr>
+
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+
+nnoremap <space>h i<space><esc>
+nnoremap <space>j m`o<esc>``
+nnoremap <space>k m`O<esc>``
+nnoremap <space>l a<space><esc>
+
+nnoremap <c-w>h <c-w>12<
+nnoremap <c-w>j <c-w>8-
+nnoremap <c-w>k <c-w>8+
+nnoremap <c-w>l <c-w>12>
 
 " Leader
 
@@ -129,27 +140,21 @@ let mapleader = ' '
 
 nnoremap <leader><leader> :
 
-" file commands
+nnoremap <leader>s vi{:sort<cr>
+nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
+
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 
-" sort commands
-nnoremap <leader>s vi{:sort<cr>
-nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
-
-" git commands
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
-
-" Align
-
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
+nnoremap <leader>gn <plug>GitGutterNextHunk
+nnoremap <leader>gN <plug>GitGutterPrevHunk
 
 " Toggle
 
@@ -158,26 +163,16 @@ nnoremap ]h :set hlsearch<cr>
 nnoremap [l :set nolist<cr>
 nnoremap ]l :set list<cr>
 
-" Splits
-
-nnoremap <c-w>h <c-w>12<
-nnoremap <c-w>j <c-w>8-
-nnoremap <c-w>k <c-w>8+
-nnoremap <c-w>l <c-w>12>
-
 " Ender
 
-" append character to end of line
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
-" append comma
 vnoremap ,, :call Ender(',')<cr>
 nnoremap ,, m`:call Ender(',')<cr>``
 inoremap ,, <esc>m`:call Ender(',')<cr>``a
 
-" append semicolon
 vnoremap ;; :call Ender(';')<cr>
 nnoremap ;; m`:call Ender(';')<cr>``
 inoremap ;; <esc>m`:call Ender(';')<cr>``a
