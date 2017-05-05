@@ -15,7 +15,8 @@ Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'w0rp/ale'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -64,9 +65,7 @@ let g:gitgutter_sign_column_always = 1
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
 let g:ale_sign_warning = '▸'
 let g:ale_sign_error = '▸'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_custom_ignore = 'node_modules\|git'
+let g:fzf_layout = { 'down': '~40%' }
 let g:airline_powerline_fonts = 1
 let g:airline_section_error = '%{ALEGetStatusLine()}'
 
@@ -128,6 +127,12 @@ nnoremap <C-w>h <C-w>12<
 nnoremap <C-w>j <C-w>8-
 nnoremap <C-w>k <C-w>8+
 nnoremap <C-w>l <C-w>12>
+
+" fzf completion
+imap <C-x><C-k> <Plug>(fzf-complete-word)
+imap <C-x><C-f> <Plug>(fzf-complete-path)
+imap <C-x><C-j> <Plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <Plug>(fzf-complete-line)
 
 " file commands
 nnoremap <Leader>w :w<CR>
