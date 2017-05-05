@@ -99,7 +99,7 @@ augroup completion
   autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss
   autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd filetype markdown setlocal spell complete+=kspell
-augroup END
+augroup end
 
 "
 " Mappings
@@ -110,14 +110,14 @@ augroup END
 " :: Splits
 " :: Ender
 
-" navigate over wrapped lines
+" navigate wrapped lines
 noremap j gj
 noremap k gk
 
 " yank to end of line
 nnoremap Y y$
 
-" open previous file
+" previous file
 nnoremap <bs> :e#<cr>
 
 " Leader
@@ -164,16 +164,17 @@ nnoremap <c-w>l <c-w>12>
 
 " Ender
 
+" append character to end of line
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
-" append comma to end of line
+" append comma
 vnoremap ,, :call Ender(',')<cr>
 nnoremap ,, m`:call Ender(',')<cr>``
 inoremap ,, <esc>m`:call Ender(',')<cr>``a
 
-" append semicolon to end of line
+" append semicolon
 vnoremap ;; :call Ender(';')<cr>
 nnoremap ;; m`:call Ender(';')<cr>``
 inoremap ;; <esc>m`:call Ender(';')<cr>``a
