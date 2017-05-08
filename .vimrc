@@ -13,11 +13,11 @@ call plug#begin()
 
 " Global
 
+Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -65,8 +65,8 @@ set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
 " Plugins
 
-let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
+let g:javascript_plugin_jsdoc = 1
 let g:gutentags_ctags_tagfile = '.tags'
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys = 0
@@ -121,24 +121,25 @@ nnoremap Y y$
 
 nnoremap <bs> :e#<cr>
 
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
-
-nnoremap <space>h i<space><esc>
-nnoremap <space>j m`o<esc>``
-nnoremap <space>k m`O<esc>``
-nnoremap <space>l a<space><esc>
-
 nnoremap <c-w>h <c-w>12<
 nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
 nnoremap <c-w>l <c-w>12>
+
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
 
 " Leader
 
 let mapleader = ' '
 
 nnoremap <leader><leader> :
+
+nnoremap <leader>ek ddkP
+nnoremap <leader>ej ddp
+
+nnoremap <leader>o m`o<esc>``
+nnoremap <leader>O m`O<esc>``
 
 nnoremap <leader>s vi{:sort<cr>
 nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
@@ -154,7 +155,7 @@ nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
-nnoremap <leader>gN <plug>GitGutterPrevHunk
+nnoremap <leader>gp <plug>GitGutterPrevHunk
 
 " Toggle
 
@@ -166,6 +167,8 @@ nnoremap ]l :set list<cr>
 " Ender
 
 function! Ender(char)
+
+  " add char to end of line
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 
