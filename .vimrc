@@ -11,8 +11,6 @@
 
 call plug#begin()
 
-" Global
-
 Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-vinegar'
@@ -25,6 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
