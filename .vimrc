@@ -49,6 +49,7 @@ colorscheme gruvbox
 set autoindent
 set cursorline
 set laststatus=2
+set tags=./.tags;
 set formatoptions-=cl
 set nowrap novisualbell
 set splitright splitbelow
@@ -57,7 +58,6 @@ set ruler number relativenumber
 set hlsearch incsearch ignorecase
 set list listchars=tab:▸\ ,trail:·
 set wildmenu wildmode=list:longest
-set tags-=.tags tags-=.tags; tags^=.tags;
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set foldenable foldmethod=syntax foldlevelstart=20
 set backupdir=~/.vim/backup// directory=~/.vim/swap//
