@@ -134,13 +134,13 @@ let mapleader = ' '
 
 nnoremap <leader><leader> :
 
-nnoremap <leader>ek ddkP
-nnoremap <leader>ej ddp
+nnoremap <leader>k ddkP
+nnoremap <leader>j ddp
 
 nnoremap <leader>o m`o<esc>``
 nnoremap <leader>O m`O<esc>``
 
-nnoremap <leader>s vi{:sort<cr>
+nnoremap <leader>s m`vi{:sort<cr>``
 nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 
 nnoremap <leader>w :w<cr>
