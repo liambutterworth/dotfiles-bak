@@ -11,10 +11,11 @@
 
 call plug#begin()
 
-Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
+Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
@@ -27,8 +28,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 
 call plug#end()
 
