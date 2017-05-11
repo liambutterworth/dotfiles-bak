@@ -11,11 +11,11 @@
 
 call plug#begin()
 
+Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
-Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
@@ -96,10 +96,10 @@ highlight nontext ctermfg=0 guifg=#282828
 
 augroup completion
   autocmd!
+  autocmd filetype markdown setlocal spell complete+=kspell
   autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss
   autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd filetype markdown setlocal spell complete+=kspell
 augroup end
 
 "
