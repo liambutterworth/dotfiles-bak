@@ -8,7 +8,7 @@
     "block-closing-brace-space-before":         null,
     "block-opening-brace-space-before":         null,
     "function-parentheses-space-inside":        "always",
-    "selector-attribute-brackets-space-inside": "always",
+    "selector-attribute-brackets-space-inside": "never",
     "media-feature-parentheses-space-inside":   "always"
 
   }

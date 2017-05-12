@@ -1,5 +1,6 @@
 {
 
+  "parser": "babel-eslint",
   "extends": "airbnb",
 
   "env": {
@@ -19,12 +20,12 @@
     "react/require-default-props":  0,
     "react/jsx-filename-extension": 0,
 
-    "max-len":                      [ "warn", 128 ],
-    "space-before-function-paren":  [ "warn", "never" ],
-    "template-curly-spacing":       [ "warn", "always" ],
-    "padded-blocks":                [ "warn", "always" ],
-    "arrow-parens":                 [ "warn", "always" ],
-    "arrow-body-style":             [ "warn", "as-needed" ],
+    "max-len":                     [ "warn", 128 ],
+    "space-before-function-paren": [ "warn", "never" ],
+    "template-curly-spacing":      [ "warn", "always" ],
+    "padded-blocks":               [ "warn", "always" ],
+    "arrow-parens":                [ "warn", "always" ],
+    "arrow-body-style":            [ "warn", "as-needed" ],
 
     "key-spacing": [ 2, {
       "align": "value"
