@@ -25,8 +25,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 
 call plug#end()
@@ -49,7 +49,6 @@ set autoindent
 set cursorline
 set laststatus=2
 set tags=./.tags;
-set formatoptions-=cl
 set nowrap novisualbell
 set splitright splitbelow
 set backspace=indent,eol,start
@@ -94,10 +93,9 @@ highlight nontext ctermfg=0 guifg=#282828
 
 " Commands
 
-augroup filetypes
-  autocmd!
-  autocmd bufread,bufnewfile *.scss set filetype=scss.css
-augroup END
+autocmd filetype * set formatoptions-=o
+autocmd filetype scss.css setlocal commentstring=/*%s*/
+autocmd bufread,bufnewfile *.css set filetype=scss.css
 
 augroup completion
   autocmd!
