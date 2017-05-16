@@ -94,13 +94,18 @@ highlight nontext ctermfg=0 guifg=#282828
 
 " Commands
 
+augroup filetypes
+  autocmd!
+  autocmd bufread,bufnewfile *.scss set filetype=scss.css
+augroup END
+
 augroup completion
   autocmd!
   autocmd filetype markdown setlocal spell complete+=kspell
   autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSs filetype=scss
+  autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-augroup end
+augroup END
 
 "
 " Mappings
