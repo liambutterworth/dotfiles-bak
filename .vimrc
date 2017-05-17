@@ -68,11 +68,17 @@ let g:gutentags_ctags_tagfile = '.tags'
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_sign_column_always = 1
+let g:airline_powerline_fonts = 1
+let g:airline_section_error = '%{ALEGetStatusLine()}'
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
 let g:ale_sign_warning = '▸'
 let g:ale_sign_error = '▸'
-let g:airline_powerline_fonts = 1
-let g:airline_section_error = '%{ALEGetStatusLine()}'
+
+let g:ale_linters = {
+  \ 'javascript': [ 'eslint' ],
+  \ 'css':        [ 'stylelint' ],
+  \ 'html':       [ 'htmlhint' ]
+  \ }
 
 let g:tmuxline_preset = {
   \ 'b':       '#(whoami)@#H',
