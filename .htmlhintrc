@@ -1,5 +1,4 @@
 {
-
   "attr-lowercase": true,
   "attr-value-double-quotes": true,
   "attr-value-not-empty": true,
@@ -10,5 +9,4 @@
   "style-disabled": true,
   "tag-self-close": true,
   "tagname-lowercase": true
-
 }

@@ -1,17 +1,4 @@
 {
   "source": "./src",
-  "destination": "./doc",
-  "extension": false,
-
-  "plugins": [
-    {
-      "name": "esdoc-importpath-plugin",
-
-      "option": {
-        "replaces": [
-          { "from": "portfolio", "to": "foo" }
-        ]
-      }
-    }
-  ]
+  "destination": "./doc"
 }
