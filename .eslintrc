@@ -10,6 +10,7 @@
   },
   "rules": {
     "func-names": 0,
+    "quote-props": 0,
     "no-multi-spaces": 0,
     "no-mixed-operators": 0,
     "max-len": [ "warn", 128 ],
@@ -24,7 +25,6 @@
     "import/no-extraneous-dependencies": [ "error", { "devDependencies": true }],
     "react/jsx-curly-spacing": [ 2, "always", {"spacing": { "objectLiterals": "never" }}],
     "react/require-default-props": 0,
-    "react/jsx-filename-extension": 0,
-    "error/quote-props": 0
+    "react/jsx-filename-extension": 0
   }
 }
