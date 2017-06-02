@@ -2,9 +2,9 @@
 --fields=+l
 --recurse=yes
 --exclude=.git
---exclude=db
---exclude=log
---exclude=dist
 --exclude=bower_components
+--exclude=db
+--exclude=dist
+--exclude=log
 --exclude=node_modules
 --exclude=vendor

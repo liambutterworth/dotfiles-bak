@@ -1,11 +1,11 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "selector-combinator-space-before": null,
     "block-closing-brace-space-before": null,
     "block-opening-brace-space-before": null,
     "function-parentheses-space-inside": "always",
+    "media-feature-parentheses-space-inside": "always",
     "selector-attribute-brackets-space-inside": "never",
-    "media-feature-parentheses-space-inside": "always"
+    "selector-combinator-space-before": null
   }
 }
