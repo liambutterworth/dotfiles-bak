@@ -1,30 +1,33 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+
   "env": {
     "browser": true,
     "node": true
   },
+
   "settings": {
     "import/resolver": "webpack"
   },
+
   "rules": {
-    "array-bracket-spacing": [ 2, "always", { "objectsInArrays": false, "arraysInArrays": false }],
-    "arrow-body-style": [ "warn", "as-needed" ],
-    "arrow-parens": [ "warn", "always" ],
-    "func-names": 0,
-    "import/no-extraneous-dependencies": [ "error", { "devDependencies": true }],
-    "key-spacing": [ 2, { "align": "value" }],
-    "max-len": [ "warn", 128 ],
-    "no-mixed-operators": 0,
-    "no-multi-spaces": 0,
-    "padded-blocks": [ "warn", "always" ],
-    "quote-props": 0,
-    "react/jsx-curly-spacing": [ 2, "always", {"spacing": { "objectLiterals": "never" }}],
     "react/jsx-filename-extension": 0,
-    "react/require-default-props": 0,
-    "space-before-function-paren": [ "warn", "never" ],
-    "space-in-parens": [ "warn", "always", { "exceptions": [ "{}", "[]", "empty" ] }],
-    "template-curly-spacing": [ "warn", "always" ]
+
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["**/*.config.js"],
+    }],
+
+    "key-spacing": ["warn", {
+      "align": "value"
+    }],
+
+    "no-multi-spaces": ["warn", {
+      "exceptions": {
+        "Property":           true,
+        "ImportDeclaration":  true,
+        "VariableDeclarator": true
+      }
+    }]
   }
 }
