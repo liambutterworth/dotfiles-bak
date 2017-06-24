@@ -13,7 +13,9 @@ call plug#begin()
 
 Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
-Plug 'sheerun/vim-polyglot'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -21,7 +23,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
@@ -133,9 +134,6 @@ nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
 nnoremap <c-w>l <c-w>12>
 
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
-
 " Leader
 
 let mapleader = ' '
@@ -147,9 +145,6 @@ nnoremap <leader>j ddp
 
 nnoremap <leader>o m`o<esc>``
 nnoremap <leader>O m`O<esc>``
-
-nnoremap <leader>s m`vi{:sort<cr>``
-nnoremap <leader>S m`:g#\({\n\)\@<=#.,/}/sort<cr>:let @/ = ""<cr>``
 
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
@@ -174,8 +169,6 @@ nnoremap ]l :set list<cr>
 " Ender
 
 function! Ender(char)
-
-  " add char to end of line
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
 endfunction
 

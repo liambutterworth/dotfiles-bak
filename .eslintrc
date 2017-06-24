@@ -16,18 +16,6 @@
 
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["**/*.config.js"],
-    }],
-
-    "key-spacing": ["warn", {
-      "align": "value"
-    }],
-
-    "no-multi-spaces": ["warn", {
-      "exceptions": {
-        "Property":           true,
-        "ImportDeclaration":  true,
-        "VariableDeclarator": true
-      }
     }]
   }
 }
