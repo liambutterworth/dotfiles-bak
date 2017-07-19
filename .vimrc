@@ -11,8 +11,8 @@
 
 call plug#begin()
 
-Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
+Plug 'w0rp/ale'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'cakebaker/scss-syntax.vim'
@@ -25,7 +25,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
