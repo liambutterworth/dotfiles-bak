@@ -11,8 +11,8 @@
 
 call plug#begin()
 
-Plug 'morhetz/gruvbox'
 Plug 'w0rp/ale'
+Plug 'morhetz/gruvbox'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'cakebaker/scss-syntax.vim'
@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
@@ -41,14 +42,15 @@ call plug#end()
 
 " General
 
-runtime macros/matchit.vim
-filetype plugin indent on
 colorscheme gruvbox
+filetype plugin indent on
+runtime macros/matchit.vim
 
 set autoindent
 set cursorline
 set laststatus=2
 set tags=./.tags;
+set signcolumn=yes
 set nowrap novisualbell
 set splitright splitbelow
 set backspace=indent,eol,start
@@ -56,7 +58,7 @@ set ruler number relativenumber
 set hlsearch incsearch ignorecase
 set list listchars=tab:▸\ ,trail:·
 set wildmenu wildmode=list:longest
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+set tabstop=4 shiftwidth=4
 set foldenable foldmethod=syntax foldlevelstart=20
 set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
@@ -67,7 +69,6 @@ let g:javascript_plugin_jsdoc = 1
 let g:gutentags_ctags_tagfile = '.tags'
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_column_always = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_error = '%{ALEGetStatusLine()}'
 let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
@@ -157,6 +158,9 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
 nnoremap <leader>gp <plug>GitGutterPrevHunk
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Toggle
 
