@@ -58,7 +58,7 @@ set ruler number relativenumber
 set hlsearch incsearch ignorecase
 set list listchars=tab:▸\ ,trail:·
 set wildmenu wildmode=list:longest
-set tabstop=4 shiftwidth=4
+set tabstop=2 shiftwidth=2 noexpandtab
 set foldenable foldmethod=syntax foldlevelstart=20
 set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
@@ -138,8 +138,6 @@ nnoremap <c-w>l <c-w>12>
 
 let mapleader = ' '
 
-nnoremap <leader><leader> :
-
 nnoremap <leader>k ddkP
 nnoremap <leader>j ddp
 
@@ -168,6 +166,8 @@ nnoremap [h :set nohlsearch<cr>
 nnoremap ]h :set hlsearch<cr>
 nnoremap [l :set nolist<cr>
 nnoremap ]l :set list<cr>
+nnoremap [a :ALEDisable<cr>
+nnoremap ]a :ALEEnable<cr>
 
 " Ender
 
