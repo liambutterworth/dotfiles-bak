@@ -1,6 +1,6 @@
 ## Installation
 
-First install [Homebrew](https://brew.sh), [Vim Plug](https://github.com/junegunn/vim-plug), and [zPlug](https://github.com/zplug/zplug). Optionally, install [Adobe Source Code Pro](https://github.com/adobe-fonts/source-code-pro). Then run:
+First install [Homebrew](https://brew.sh), [Vim Plug](https://github.com/junegunn/vim-plug), [zPlug](https://github.com/zplug/zplug), and [Adobe Source Code Pro](https://github.com/adobe-fonts/source-code-pro). Then run:
 
 ```
 $ brew install vim git tmux zsh
