@@ -1,22 +1,17 @@
-# Dotfiles
-
-A collection of configuration files for my dev setup. test.
-
 ## Installation
 
-First install [Homebrew](https://brew.sh),
-[Prezto](https:/jk/github.com/sorin-ionescu/prezto), and [Vim
-Plug](https://github.com/junegunn/vim-plug). Then, grab the [Powerline
-Fonts](https://github.com/powerline/fonts). Now, tie everything together with:
+First install [Homebrew](https://brew.sh), [Vim Plug](https://github.com/junegunn/vim-plug), and [zPlug](https://github.com/zplug/zplug). Optionally, install [Adobe Source Code Pro](https://github.com/adobe-fonts/source-code-pro). Then run:
 
 ```
-  $ brew install vim tmux zsh zsh-completion
+$ brew install vim git tmux zsh
 
-  $ git clone https://github.com/wbbutterworth/dotfiles.git && cd dotfiles
+$ git clone https://github.com/wbbutterworth/dotfiles.git && cd dotfiles
 
-  $ cp dotfiles/{.vimrc,.tmux.conf,.zpreztorc} ~
+$ cp dotfiles/{.vimrc,.zshrc,.tmux.conf,.tmuxline} ~
 
-  $ vim +PlugInstall +qall
+$ vim +PlugInstall +qall
+
+$ zplug install
 ```
 
 ## Tmux Maps
@@ -40,36 +35,23 @@ Fonts](https://github.com/powerline/fonts). Now, tie everything together with:
 ## Vim Maps
 
 ```
-  ,, toggle , at the end of the line in any mode  
+  ,, toggle , at the end of the line in any mode
 
-  ;; toggle ; at the end of the line in any mode  
+  ;; toggle ; at the end of the line in any mode
 
   _ go to previous file; for exiting file browser
 
   Y yank to end of line; consistent with D and C
 
-  <space> leader key  
+  <space> leader key
 
-  <leader><leader> input command
+  <leader>gs git status
 
-  <leader>gs git status  
+  <leader>gl git log
 
-  <leader>gl git log  
+  <leader>ga git add
 
-  <leader>ga git add 
+  <leader>gd git diff
 
-  <leader>gd git diff  
-
-  <leader>gb git blame  
-
-  <leader>a= align block by =  
-
-  <leader>a: align block by :  
-
-  <leader>a" align block by "  
-
-  <leader>s{ sort alphabetically inside {}  
-
-  <leader>s} sort alphabetically inside {} globally  
-
+  <leader>gb git blame
 ```
