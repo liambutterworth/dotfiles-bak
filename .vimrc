@@ -13,16 +13,17 @@ call plug#begin()
 
 Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm i' }
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -66,7 +67,6 @@ set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
 let g:jsx_ext_required = 0
 let g:javascript_plugin_jsdoc = 1
-let g:gutentags_ctags_tagfile = '.tags'
 let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys = 0
 let g:airline_powerline_fonts = 1
