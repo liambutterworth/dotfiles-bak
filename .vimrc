@@ -103,6 +103,7 @@ highlight nontext ctermfg=0 guifg=#282828
 autocmd filetype * set formatoptions-=o
 autocmd filetype scss.css setlocal commentstring=/*%s*/
 autocmd bufread,bufnewfile *.css set filetype=scss.css
+autocmd CompleteDone * pclose
 
 augroup completion
   autocmd!
