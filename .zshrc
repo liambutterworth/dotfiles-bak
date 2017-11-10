@@ -2,6 +2,8 @@
 # Zsh Config
 #
 # :: Plugins
+# :: Path
+# :: Fuzzy Finder
 # :: Tab Completion
 
 #
@@ -19,6 +21,18 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
 zplug load
+
+#
+# Path
+#
+
+export PATH="/usr/local/bin:$PATH"
+
+#
+# Fuzzy Finder
+#
+
+export FZF_DEFAULT_COMMAND='find .'
 
 #
 # Completion
@@ -41,3 +55,5 @@ export CLICOLOR=1
 zstyle ':completion:*' menu select
 zstyle ':completion:*' completer _complete _approximate _expand
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

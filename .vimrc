@@ -24,6 +24,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
@@ -118,6 +120,8 @@ augroup END
 "
 " :: General
 " :: Leader
+" :: FZF
+" :: Git
 " :: Toggle
 " :: Ender
 
@@ -135,12 +139,12 @@ nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
 nnoremap <c-w>l <c-w>12>
 
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " Leader
 
 let mapleader = ' '
-
-nnoremap <leader>k ddkP
-nnoremap <leader>j ddp
 
 nnoremap <leader>o m`o<esc>``
 nnoremap <leader>O m`O<esc>``
@@ -150,6 +154,17 @@ nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 
+" FZF
+
+nnoremap <leader><leader> :Files<cr>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Git
+
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>ga :Gwrite<cr>
@@ -157,9 +172,6 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
 nnoremap <leader>gp <plug>GitGutterPrevHunk
-
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " Toggle
 
