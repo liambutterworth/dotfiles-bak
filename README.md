@@ -45,13 +45,25 @@ $ zplug install
 
   <space> leader key
 
+	<leader><leader> FZF Find Files
+
+	<c-x><c-k> FZF Complete Word
+	<c-x><c-f> FZF Complete Path
+	<c-x><c-j> FZF Complete File
+	<c-x><c-l> FZF Complete Line
+
   <leader>gs git status
-
   <leader>gl git log
-
   <leader>ga git add
-
   <leader>gd git diff
-
   <leader>gb git blame
+
+	[h Highlight Search
+	]h Unhighlight Search
+
+	[l Show Invisible Characters
+	]l Hide Invisible Characters
+
+	[a Lint File
+	]a Don't Lint File
 ```
