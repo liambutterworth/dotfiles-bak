@@ -16,7 +16,6 @@ Plug 'morhetz/gruvbox'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'marijnh/tern_for_vim', { 'do': 'npm i' }
-Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
