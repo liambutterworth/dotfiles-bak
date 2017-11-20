@@ -66,15 +66,15 @@ set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
 " Plugins
 
-let g:jsx_ext_required = 0
+let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
-let g:closetag_filenames = '*.html,*.php,*.js,*.jsx'
-let g:gitgutter_map_keys = 0
+let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
+let g:gitgutter_map_keys      = 0
 let g:airline_powerline_fonts = 1
-let g:airline_section_error = '%{ALEGetStatusLine()}'
-let g:ale_statusline_format = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
-let g:ale_sign_warning = '▸'
-let g:ale_sign_error = '▸'
+let g:airline_section_error   = '%{ALEGetStatusLine()}'
+let g:ale_statusline_format   = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
+let g:ale_sign_warning        = '▸'
+let g:ale_sign_error          = '▸'
 
 let g:ale_linters = {
   \ 'javascript': [ 'eslint' ],
