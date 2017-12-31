@@ -7,10 +7,10 @@ cp ./{.zshrc,.vimrc,.tmux.conf,.tmux.conf} ~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # install zplug
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+# curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 
 # install vim plugins
 vim +PlugInstall +qall
 
 # install zsh plugins
-zplug install
+# zplug install
