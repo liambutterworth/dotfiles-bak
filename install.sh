@@ -1,2 +1,2 @@
 #!/bin/bash
-cp {.zshrc,.vimrc,.tmux.conf} ~
+cp .zshrc ~
