@@ -44,10 +44,12 @@ call plug#end()
 
 " General
 
-colorscheme gruvbox
+silent! colorscheme gruvbox
 filetype plugin indent on
 runtime macros/matchit.vim
+scriptencoding utf-8
 
+set encoding=utf-8
 set autoindent
 set cursorline
 set laststatus=2

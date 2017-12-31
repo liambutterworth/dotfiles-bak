@@ -10,7 +10,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 
 # install vim plugins
-vim +silent! +PlugInstall +qall
+vim +PlugInstall +qall
 
 # install zsh plugins
 zplug install
