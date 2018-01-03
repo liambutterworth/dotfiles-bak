@@ -19,8 +19,6 @@ Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
-Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -46,9 +44,7 @@ call plug#end()
 silent! colorscheme gruvbox
 filetype plugin indent on
 runtime macros/matchit.vim
-scriptencoding utf-8
 
-set encoding=utf-8
 set autoindent
 set cursorline
 set laststatus=2
@@ -71,26 +67,29 @@ let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
 let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys      = 0
-let g:airline_powerline_fonts = 1
-let g:airline_section_error   = '%{ALEGetStatusLine()}'
-let g:ale_statusline_format   = [ '⨉ %d', '⚠ %d', '⬥ ok' ]
-let g:ale_sign_warning        = '▸'
-let g:ale_sign_error          = '▸'
+let g:ale_statusline_format   = [ 'X %d %*', '! %d %*', 'O' ]
+let g:ale_sign_warning        = '>'
+let g:ale_sign_error          = '>'
 
-let g:ale_linters = {
-  \ 'javascript': [ 'eslint' ],
-  \ 'css':        [ 'stylelint' ],
-  \ 'html':       [ 'htmlhint' ]
-  \ }
+function! GitBranch()
+	let branch = fugitive#head(7)
+	return empty(branch) ? "" : " " . branch . " >"
+endfunction
 
-let g:tmuxline_preset = {
-  \ 'b':       '#(whoami)@#H',
-  \ 'c':       '#S',
-  \ 'win':     '#W',
-  \ 'cwin':    '#W',
-  \ 'y':       '%a %b %d %R %p',
-  \ 'options': { 'status-justify': 'left' }
-  \ }
+set statusline =
+set statusline +=\%{GitBranch()}
+set statusline +=\ %f                                    " Full path to file
+set statusline +=\ [%{ALEGetStatusLine()}]
+set statusline +=%=%l,%v                        " Line, column-virtual column
+
+" let g:tmuxline_preset = {
+"   \ 'b':       '#(whoami)@#H',
+"   \ 'c':       '#S',
+"   \ 'win':     '#W',
+"   \ 'cwin':    '#W',
+"   \ 'y':       '%a %b %d %R %p',
+"   \ 'options': { 'status-justify': 'left' }
+"   \ }
 
 " Highlight
 
