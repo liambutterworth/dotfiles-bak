@@ -67,20 +67,24 @@ let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
 let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys      = 0
-let g:ale_statusline_format   = [ 'X %d %*', '! %d %*', 'O' ]
 let g:ale_sign_warning        = '>'
 let g:ale_sign_error          = '>'
 
-function! GitBranch()
-	let branch = fugitive#head(7)
-	return empty(branch) ? "" : " " . branch . " >"
+function! AleStatus() abort
+	let l:counts         = ale#statusline#Count(bufnr(''))
+	let l:all_errors     = l:counts.error + l:counts.style_error
+	let l:all_non_errors = l:counts.total - l:all_errors
+
+	return printf('%de%dw', all_errors, all_non_errors)
 endfunction
 
 set statusline =
-set statusline +=\%{GitBranch()}
-set statusline +=\ %f                                    " Full path to file
-set statusline +=\ [%{ALEGetStatusLine()}]
-set statusline +=%=%l,%v                        " Line, column-virtual column
+set statusline +=%m
+set statusline +=%{fugitive#statusline()}
+set statusline +=[%{AleStatus()}]
+set statusline +=\ %f
+set statusline +=%=
+set statusline +=[%l:%c]
 
 " let g:tmuxline_preset = {
 "   \ 'b':       '#(whoami)@#H',
