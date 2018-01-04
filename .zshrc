@@ -2,9 +2,8 @@
 # Zsh Config
 #
 # :: Plugins
-# :: Path
-# :: Fuzzy Finder
-# :: Tab Completion
+# :: Settings
+# :: Completion
 
 #
 # Plugins
@@ -23,15 +22,10 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug load
 
 #
-# Path
+# Settings
 #
 
-export PATH="/usr/local/bin:$PATH"
-
-#
-# Fuzzy Finder
-#
-
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export FZF_DEFAULT_COMMAND='find .'
 
 #

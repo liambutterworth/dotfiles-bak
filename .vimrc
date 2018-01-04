@@ -34,17 +34,19 @@ call plug#end()
 "
 " Settings
 "
-" :: General
-" :: Plugins
-" :: Highlight
-" :: Commands
-
-" General
 
 silent! colorscheme gruvbox
 filetype plugin indent on
 runtime macros/matchit.vim
 
+let g:jsx_ext_required        = 0
+let g:javascript_plugin_jsdoc = 1
+let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
+let g:gitgutter_map_keys      = 0
+let g:ale_sign_warning        = '>'
+let g:ale_sign_error          = '>'
+
+set background=dark
 set autoindent
 set cursorline
 set laststatus=2
@@ -61,54 +63,52 @@ set tabstop=2 shiftwidth=2 noexpandtab
 set foldenable foldmethod=syntax foldlevelstart=20
 set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
-" Plugins
+function! GitBranch()
+	let l:branch = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+	return empty(branch) ? '' : branch . ' '
+endfunction
 
-let g:jsx_ext_required        = 0
-let g:javascript_plugin_jsdoc = 1
-let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
-let g:gitgutter_map_keys      = 0
-let g:ale_sign_warning        = '>'
-let g:ale_sign_error          = '>'
-
-function! AleStatus() abort
+function! AleStatus(type) abort
 	let l:counts         = ale#statusline#Count(bufnr(''))
 	let l:all_errors     = l:counts.error + l:counts.style_error
 	let l:all_non_errors = l:counts.total - l:all_errors
 
-	return printf('%de%dw', all_errors, all_non_errors)
+	if a:type == 'errors'
+		return all_errors > 0 ? printf('%d', all_errors) : ''
+	elseif a:type == 'warnings'
+		return all_non_errors > 0 ? printf('%d', all_non_errors) : ''
+	else
+		return printf('%de%dw', all_errors, all_non_errors)
+	endif
 endfunction
 
 set statusline =
-set statusline +=%m
-set statusline +=%{fugitive#statusline()}
-set statusline +=[%{AleStatus()}]
-set statusline +=\ %f
+set statusline +=%#GruvboxFg4#
+set statusline +=\ %{GitBranch()}%f%M
+set statusline +=%#GruvboxRed#
+set statusline +=\ %{AleStatus('errors')}
+set statusline +=%#GruvboxBlue#
+set statusline +=\ %{AleStatus('warnings')}
 set statusline +=%=
-set statusline +=[%l:%c]
+set statusline +=%#GruvboxFg4#
+set statusline +=\ %{&fileformat}
+set statusline +=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline +=\ %l:%c
+set statusline +=\ %p%%
+set statusline +=\ %#END#
 
-" let g:tmuxline_preset = {
-"   \ 'b':       '#(whoami)@#H',
-"   \ 'c':       '#S',
-"   \ 'win':     '#W',
-"   \ 'cwin':    '#W',
-"   \ 'y':       '%a %b %d %R %p',
-"   \ 'options': { 'status-justify': 'left' }
-"   \ }
-
-" Highlight
-
+highlight clear SignColumn
 highlight search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
 highlight incsearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
-highlight aleerrorsign ctermbg=237 ctermfg=167
-highlight alewarningsign ctermbg=237 ctermfg=109
+highlight aleerrorsign ctermbg=235 ctermfg=167
+highlight alewarningsign ctermbg=235 ctermfg=109
 highlight nontext ctermfg=0 guifg=#282828
 
-" Commands
-
+autocmd CompleteDone * pclose
 autocmd filetype * set formatoptions-=o
 autocmd filetype scss.css setlocal commentstring=/*%s*/
 autocmd bufread,bufnewfile *.css set filetype=scss.css
-autocmd CompleteDone * pclose
+autocmd bufread,bufnewfile .tmuxrc set filetype=tmux
 
 augroup completion
   autocmd!
