@@ -11,11 +11,11 @@
 
 call plug#begin()
 
-Plug 'w0rp/ale'
 Plug 'morhetz/gruvbox'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
