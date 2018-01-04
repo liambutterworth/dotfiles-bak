@@ -38,6 +38,7 @@ call plug#end()
 silent! colorscheme gruvbox
 filetype plugin indent on
 runtime macros/matchit.vim
+scriptencoding utf-8
 
 let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
@@ -46,6 +47,7 @@ let g:gitgutter_map_keys      = 0
 let g:ale_sign_warning        = '>'
 let g:ale_sign_error          = '>'
 
+set encoding=utf-8
 set background=dark
 set autoindent
 set cursorline
@@ -57,7 +59,7 @@ set splitright splitbelow
 set backspace=indent,eol,start
 set ruler number relativenumber
 set hlsearch incsearch ignorecase
-set list listchars=tab:▸\ ,trail:·
+set list listchars=tab:\|\ ,trail:.
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set foldenable foldmethod=syntax foldlevelstart=20
