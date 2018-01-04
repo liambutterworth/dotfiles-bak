@@ -8,7 +8,8 @@ RUN apt update \
 	&& apt install -y sudo curl zsh git vim tmux nodejs \
 	&& useradd -m admin \
 	&& echo "admin:admin" | chpasswd \
-	&& adduser admin sudo
+	&& adduser admin sudo \
+	&& chsh -s $(which zsh) admin
 
 USER admin
 WORKDIR /home/admin
@@ -18,4 +19,4 @@ RUN git clone http://github.com/wbbutterworth/dotfiles.git \
 	&& cd ~/dotfiles \
 	&& ./install.sh
  
-CMD ["/bin/bash"]
+CMD ["/usr/bin/zsh"]
