@@ -9,4 +9,4 @@ vim +PlugInstall +qall
 
 # install zplug and plugins
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
-zplug install
+# zplug install
