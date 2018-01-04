@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # copy config files to home directory
-cp ./{.zshrc,.vimrc,.tmuxrc} ~
+# cp ./{.zshrc,.vimrc,.tmuxrc} ~
+cp ./{.vimrc,.tmuxrc} ~
 
 # install vim-plug and plugins
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
