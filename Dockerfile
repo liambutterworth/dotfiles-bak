@@ -5,7 +5,7 @@ RUN apt update \
 	&& apt install -y software-properties-common \
 	&& add-apt-repository ppa:jonathonf/vim \
 	&& apt update \
-	&& apt install -y sudo curl zsh zsh-antigen git vim tmux nodejs \
+	&& apt install -y sudo curl zsh git vim tmux nodejs \
 	&& useradd -m admin \
 	&& echo "admin:admin" | chpasswd \
 	&& adduser admin sudo \
