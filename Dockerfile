@@ -9,7 +9,7 @@ RUN apt update \
 	&& useradd -m admin \
 	&& echo "admin:admin" | chpasswd \
 	&& adduser admin sudo \
-	&& chsh -s $(which zsh) admin
+	&& chsh -s /bin/zsh admin
 
 USER admin
 WORKDIR /home/admin
@@ -19,4 +19,4 @@ RUN git clone http://github.com/wbbutterworth/dotfiles.git \
 	&& cd ~/dotfiles \
 	&& ./install.sh
  
-CMD ["/usr/bin/zsh"]
+CMD ["/bin/zsh"]
