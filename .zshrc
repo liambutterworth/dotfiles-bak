@@ -1,5 +1,7 @@
 source ~/.zsh/antigen.zsh
 
+antigen bundle mafredri/zsh-async
+antigen bundle sindresorhus/pure
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
