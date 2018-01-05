@@ -19,4 +19,5 @@ RUN git clone http://github.com/wbbutterworth/dotfiles.git \
 	&& cd ~/dotfiles \
 	&& ./install.sh
  
+ENV LANG C.UTF-8
 CMD ["/bin/zsh"]
