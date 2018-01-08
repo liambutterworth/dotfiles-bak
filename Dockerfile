@@ -20,5 +20,5 @@ RUN git clone http://github.com/wbbutterworth/dotfiles.git \
 	&& ./install.sh
  
 ENV LANG C.UTF-8
-# ENTRYPOINT tmux
-# CMD ["/bin/zsh -c tmux"]
+# ENTRYPOINT ["tmux", "-u"]
+CMD /bin/zsh

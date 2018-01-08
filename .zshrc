@@ -14,6 +14,11 @@ export TERM="xterm-256color"
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+alias tmux="tmux -2 -u"
+if which tmux 2>&1 >/dev/null; then
+	test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
 # # Sensible, short .zshrc
 # # Gist page: git.io/vSBRk  
 # # Raw file:  curl -L git.io/sensible-zshrc
