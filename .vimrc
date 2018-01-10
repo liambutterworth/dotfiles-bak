@@ -54,7 +54,6 @@ set cursorline
 set laststatus=2
 set tags=./.tags;
 set signcolumn=yes
-set nowrap novisualbell
 set splitright splitbelow
 set backspace=indent,eol,start
 set ruler number relativenumber
@@ -62,8 +61,8 @@ set hlsearch incsearch ignorecase
 set list listchars=tab:\|\ ,trail:.
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
+set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
-" set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
 function! GitBranch()
 	let l:branch = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")

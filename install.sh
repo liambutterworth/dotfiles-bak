@@ -9,8 +9,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 vim +PlugInstall +qall
 
 # install antigen and plugins
-mkdir -p ~/.zsh && curl -L git.io/antigen > ~/.zsh/antigen.zsh
+# mkdir -p ~/.zsh && curl -L git.io/antigen > ~/.zsh/antigen.zsh
 
 # install zplug and plugins
-# curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh || true
-# zplug install
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh || true
+zplug install
