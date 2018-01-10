@@ -5,29 +5,29 @@
 # :: Settings
 # :: Prompt
 
-PATH=/usr/local/bin:$PATH
+# PATH=/usr/local/bin:$PATH
 
 #
 # Plugins
 #
 
-source ~/.zplug/init.zsh
+# source ~/.zplug/init.zsh
 
-zplug "zplug/zplug", hook-build:"zplug --self-manage"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search", defer:2
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
+# zplug "zplug/zplug", hook-build:"zplug --self-manage"
+# zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-history-substring-search", defer:2
+# zplug "zsh-users/zsh-syntax-highlighting", defer:3
 
-zplug load
+# zplug load
 
-# source ~/.zsh/antigen.zsh
+source ~/.zsh/antigen.zsh
 
-# antigen bundle zsh-users/zsh-autosuggestions
-# antigen bundle zsh-users/zsh-completions
-# antigen bundle zsh-users/zsh-history-substring-search
-# antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen apply
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
 #
 # Settings
