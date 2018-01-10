@@ -63,7 +63,7 @@ set list listchars=tab:\|\ ,trail:.
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set foldenable foldmethod=syntax foldlevelstart=20
-set backupdir=~/.vim/backup// directory=~/.vim/swap//
+" set backupdir=~/.vim/backup// directory=~/.vim/swap//
 
 function! GitBranch()
 	let l:branch = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
