@@ -23,14 +23,26 @@ antigen apply
 #
 
 export TERM="xterm-256color"
-export CLICOLOR=1
 
 setopt prompt_subst
 
+# use ctrl-n and ctrl-p for history search
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# GNU and BSD (macOS) ls flags aren't compatible
+ls --version &>/dev/null
+if [ $? -eq 0 ]; then
+  lsflags="--color --group-directories-first -F"
+else
+  lsflags="-GF"
+  export CLICOLOR=1
+fi
+
+# Aliases
+alias ls="ls ${lsflags}"
+alias ll="ls ${lsflags} -l"
+alias la="ls ${lsflags} -la"
 
 #
 # Prompt
