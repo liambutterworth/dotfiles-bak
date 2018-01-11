@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cwd=$(dirname $0)
+
+ln -s ~/.vimrc ${path}/../.vimrc
+ln -s ~/.tmux.conf ${path}/../.tmux.conf
+ln -s ~/.zshrc ${path}/../.zshrc
+
+mkdir -p ~/.vim ${path}/../plugins
+ln -s ~/.vim/plugins ${path}/../plugins
+git submodule update --remote --init
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install

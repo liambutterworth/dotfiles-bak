@@ -10,7 +10,6 @@
 "
 
 call plug#begin()
-
 Plug 'morhetz/gruvbox'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
@@ -28,7 +27,6 @@ Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-
 call plug#end()
 
 "
@@ -122,33 +120,21 @@ augroup END
 "
 " Mappings
 "
-" :: General
-" :: Leader
-" :: FZF
-" :: Git
-" :: Toggle
-" :: Ender
 
-" General
+let mapleader = ' '
 
 noremap j gj
 noremap k gk
-
 nnoremap Y y$
-
 nnoremap <bs> :e#<cr>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 nnoremap <c-w>h <c-w>12<
 nnoremap <c-w>j <c-w>8-
 nnoremap <c-w>k <c-w>8+
 nnoremap <c-w>l <c-w>12>
-
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" Leader
-
-let mapleader = ' '
 
 nnoremap <leader>o m`o<esc>``
 nnoremap <leader>O m`O<esc>``
@@ -158,16 +144,11 @@ nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 
-" FZF
-
 nnoremap <leader><leader> :Files<cr>
-
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Git
 
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
@@ -177,16 +158,12 @@ nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
 nnoremap <leader>gp <plug>GitGutterPrevHunk
 
-" Toggle
-
 nnoremap [h :set nohlsearch<cr>
 nnoremap ]h :set hlsearch<cr>
 nnoremap [l :set nolist<cr>
 nnoremap ]l :set list<cr>
 nnoremap [a :ALEDisable<cr>
 nnoremap ]a :ALEEnable<cr>
-
-" Ender
 
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
@@ -195,7 +172,6 @@ endfunction
 vnoremap ,, :call Ender(',')<cr>
 nnoremap ,, m`:call Ender(',')<cr>``
 inoremap ,, <esc>m`:call Ender(',')<cr>``a
-
 vnoremap ;; :call Ender(';')<cr>
 nnoremap ;; m`:call Ender(';')<cr>``
 inoremap ;; <esc>m`:call Ender(';')<cr>``a
