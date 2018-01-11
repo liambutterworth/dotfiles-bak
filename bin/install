@@ -17,5 +17,6 @@ ln -sf ${env}/.zshrc ~/.zshrc
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# git submodule update --remote --init
+# install vim plugins
+git submodule update --remote --init
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install

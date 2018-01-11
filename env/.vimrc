@@ -7,26 +7,6 @@
 " :: Commands
 " :: Mappings
 
-" call plug#begin()
-" Plug 'morhetz/gruvbox'
-" Plug 'cakebaker/scss-syntax.vim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
-" Plug 'w0rp/ale'
-" Plug 'tpope/vim-vinegar'
-" Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
-" Plug 'junegunn/vim-easy-align'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'alvan/vim-closetag'
-" Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-repeat'
-" call plug#end()
-
 "
 " Settings
 "

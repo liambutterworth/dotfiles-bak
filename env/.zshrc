@@ -2,6 +2,7 @@
 # Zsh
 #
 # :: Plugins
+# :: Aliases
 # :: Settings
 # :: Prompt
 
@@ -10,6 +11,7 @@
 #
 
 source ~/.zsh/antigen.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
@@ -17,8 +19,6 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen apply
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #
 # Settings
@@ -28,11 +28,13 @@ export TERM="xterm-256color"
 
 setopt prompt_subst
 
-# use ctrl-n and ctrl-p for history search
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-# GNU and BSD (macOS) ls flags aren't compatible
+#
+# Aliases
+#
+
 ls --version &>/dev/null
 if [ $? -eq 0 ]; then
   lsflags="--color --group-directories-first -F"
@@ -41,7 +43,6 @@ else
   export CLICOLOR=1
 fi
 
-# Aliases
 alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
