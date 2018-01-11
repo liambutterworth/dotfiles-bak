@@ -2,12 +2,12 @@
 
 cwd=$(dirname $0)
 
-ln -s ~/.vimrc ${path}/../.vimrc
-ln -s ~/.tmux.conf ${path}/../.tmux.conf
-ln -s ~/.zshrc ${path}/../.zshrc
+ln -s ~/.vimrc ${path}/../env/.vimrc
+ln -s ~/.tmux.conf ${path}/../env/.tmux.conf
+ln -s ~/.zshrc ${path}/.././env/zshrc
 
-mkdir -p ~/.vim ${path}/../plugins
-ln -s ~/.vim/plugins ${path}/../plugins
+mkdir -p ~/.vim ${path}/../env/plugins
+ln -s ~/.vim/plugins ${path}/../env/plugins
 git submodule update --remote --init
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
