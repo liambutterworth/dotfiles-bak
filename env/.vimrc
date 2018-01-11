@@ -1,42 +1,40 @@
 "
 " Vim Config
 "
-" :: Plugins
 " :: Settings
+" :: Statusline
+" :: Highlights
+" :: Commands
 " :: Mappings
 
-"
-" Plugins
-"
-
-call plug#begin()
-Plug 'morhetz/gruvbox'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-call plug#end()
+" call plug#begin()
+" Plug 'morhetz/gruvbox'
+" Plug 'cakebaker/scss-syntax.vim'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'w0rp/ale'
+" Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/vim-easy-align'
+" Plug 'jiangmiao/auto-pairs'
+" Plug 'alvan/vim-closetag'
+" Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-repeat'
+" call plug#end()
 
 "
 " Settings
 "
 
-silent! colorscheme gruvbox
+" execute pathogen#infect()
 filetype plugin indent on
 runtime macros/matchit.vim
-scriptencoding utf-8
+silent! colorscheme gruvbox
 
 let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
@@ -45,7 +43,6 @@ let g:gitgutter_map_keys      = 0
 let g:ale_sign_warning        = '>'
 let g:ale_sign_error          = '>'
 
-set encoding=utf-8
 set background=dark
 set autoindent
 set cursorline
@@ -61,6 +58,10 @@ set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
+
+"
+" Statusline
+"
 
 function! GitBranch()
 	let l:branch = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -96,12 +97,20 @@ set statusline +=\ %l:%c
 set statusline +=\ %p%%
 set statusline +=\ %#END#
 
+"
+" Highlights
+"
+
 highlight clear SignColumn
 highlight search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
 highlight incsearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
 highlight aleerrorsign ctermbg=235 ctermfg=167
 highlight alewarningsign ctermbg=235 ctermfg=109
 highlight nontext ctermfg=0 guifg=#282828
+
+"
+" Commands
+"
 
 autocmd CompleteDone * pclose
 autocmd filetype * set formatoptions-=o
