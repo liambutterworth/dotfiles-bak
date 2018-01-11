@@ -1,0 +1,51 @@
+[submodule "env/plugins/gruvbox"]
+	path = env/plugins/gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule "env/plugins/scss-syntax.vim"]
+	path = env/plugins/scss-syntax.vim
+	url = https://github.com/cakebaker/scss-syntax.vim
+[submodule "env/plugins/vim-javascript"]
+	path = env/plugins/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule "env/plugins/vim-jsx"]
+	path = env/plugins/vim-jsx
+	url = https://github.com/mxw/vim-jsx
+[submodule "env/plugins/ale"]
+	path = env/plugins/ale
+	url = https://github.com/w0rp/ale
+[submodule "env/plugins/vim-vinegar"]
+	path = env/plugins/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
+[submodule "env/plugins/vim-fugitive"]
+	path = env/plugins/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "env/plugins/vim-gitgutter"]
+	path = env/plugins/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "env/plugins/vim-tmux-navigator"]
+	path = env/plugins/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "env/plugins/fzf.vim"]
+	path = env/plugins/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "env/plugins/vim-easy-align"]
+	path = env/plugins/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "env/plugins/auto-pairs"]
+	path = env/plugins/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "env/plugins/vim-closetag"]
+	path = env/plugins/vim-closetag
+	url = https://github.com/alvan/vim-closetag
+[submodule "env/plugins/vim-surround"]
+	path = env/plugins/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "env/plugins/vim-commentary"]
+	path = env/plugins/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "env/plugins/vim-repeat"]
+	path = env/plugins/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "env/plugins/fzf"]
+	path = env/plugins/fzf
+	url = https://github.com/junegunn/fzf

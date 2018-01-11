@@ -1,4 +1,4 @@
 #!/bin/bash
 rm ~/{.zshrc,.vimrc,.tmux.conf}
-rm -rf ~/.vim/plugins
+rm -rf ~/.vim/plugins ~/.vim/autoload
 ~/.fzf/uninstall

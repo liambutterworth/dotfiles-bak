@@ -1,14 +1,21 @@
 #!/bin/bash
 
+# set current working directory and absolute env path
 cwd=$(dirname $0)
 env=$(readlink -f ${cwd}/../env)
 
-mkdir -p ${env}/plugins ~/.vim
+# ensure the required directories
+mkdir -p ${env}/plugins ~/.vim/autoload ~/.zsh
 
+# symlink dotfiles and plugins directory
 ln -sf ${env}/plugins ~/.vim/plugins
 ln -sf ${env}/.vimrc ~/.vimrc
 ln -sf ${env}/.tmux.conf ~/.tmux.conf
 ln -sf ${env}/.zshrc ~/.zshrc
 
+# install antigen and pathogen
+curl -L git.io/antigen > ~/.zsh/antigen.zsh
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
 # git submodule update --remote --init
-# git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install

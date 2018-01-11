@@ -31,10 +31,11 @@
 " Settings
 "
 
-" execute pathogen#infect()
-filetype plugin indent on
-runtime macros/matchit.vim
+execute pathogen#infect('plugins/{}')
 silent! colorscheme gruvbox
+runtime macros/matchit.vim
+filetype plugin indent on
+syntax on
 
 let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
