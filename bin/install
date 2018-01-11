@@ -13,10 +13,11 @@ ln -sf ${env}/.vimrc ~/.vimrc
 ln -sf ${env}/.tmux.conf ~/.tmux.conf
 ln -sf ${env}/.zshrc ~/.zshrc
 
-# install antigen and pathogen
+# download antigen and pathogen
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# install vim plugins
+# install vim plugins and fzf
 git submodule update --remote --init
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --key-bindings --completion --update-rc
