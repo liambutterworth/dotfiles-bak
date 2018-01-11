@@ -43,10 +43,18 @@ git_branch() {
 	fi
 }
 
+user_info() {
+	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then	
+		echo '%F{241}%n@%m'
+	fi
+}
+
 local dir='%F{4}%3~$(git_branch)'
-local user='%F{241}%n@%m'
+local user='$(user_info)'
 local char='%(?.%F{5}.%F{1})%#'
 
 PROMPT="
 $dir $user
 $char %F{15}"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
