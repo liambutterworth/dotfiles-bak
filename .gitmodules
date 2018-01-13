@@ -49,3 +49,6 @@
 [submodule "env/plugins/fzf"]
 	path = env/plugins/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "env/plugins/base16-vim"]
+	path = env/plugins/base16-vim
+	url = http://github.com/chriskempson/base16-vim

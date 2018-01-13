@@ -10,8 +10,8 @@
 # Plugins
 #
 
+source ~/.fzf.zsh
 source ~/.zsh/antigen.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions

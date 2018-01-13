@@ -1,3 +1,3 @@
 #!/bin/bash
 rm ~/{.zshrc,.vimrc,.tmux.conf}
-rm -rf ~/.fzf ~/.vim/plugins ~/.vim/autoload
+rm -rf ~/.fzf ~/.vim/bundle ~/.vim/autoload
