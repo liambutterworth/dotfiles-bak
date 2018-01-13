@@ -43,9 +43,3 @@
 [submodule "env/bundle/vim-surround"]
 	path = env/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround
-[submodule "vim-tmux-navigator"]
-	path = vim-tmux-navigator
-	url = https://github.com/christoomey/vim-tmux-navigator
-[submodule "vim-vinegar"]
-	path = vim-vinegar
-	url = https://github.com/tpope/vim-vinegar
