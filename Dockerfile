@@ -12,6 +12,6 @@ USER admin
 WORKDIR /home/admin
 
 # install and initialize dev environment
-RUN git clone http://github.com/wbbutterworth/dotfiles.git && ~/dotfiles/bin/install
+RUN git clone http://github.com/wbbutterworth/dotfiles.git && cd dotfiles && bin/install
 ENV LANG en_US.UTF-8
 CMD /bin/zsh

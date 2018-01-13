@@ -12,7 +12,7 @@
 "
 
 execute pathogen#infect('plugins/{}')
-silent! colorscheme gruvbox
+colorscheme base16-tomorrow-night
 runtime macros/matchit.vim
 filetype plugin indent on
 syntax on
@@ -24,7 +24,8 @@ let g:gitgutter_map_keys      = 0
 let g:ale_sign_warning        = '>'
 let g:ale_sign_error          = '>'
 
-set background=dark
+" set background=dark
+" set termguicolors=false
 set autoindent
 set cursorline
 set laststatus=2
@@ -64,14 +65,14 @@ function! AleStatus(type) abort
 endfunction
 
 set statusline =
-set statusline +=%#GruvboxFg4#
+" set statusline +=%#base00#
 set statusline +=\ %{GitBranch()}%f%M
-set statusline +=%#GruvboxRed#
+" set statusline +=%#GruvboxRed#
 set statusline +=\ %{AleStatus('errors')}
-set statusline +=%#GruvboxBlue#
+" set statusline +=%#GruvboxBlue#
 set statusline +=\ %{AleStatus('warnings')}
 set statusline +=%=
-set statusline +=%#GruvboxFg4#
+" set statusline +=%#GruvboxFg4#
 set statusline +=\ %{&fileformat}
 set statusline +=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline +=\ %l:%c
@@ -82,12 +83,25 @@ set statusline +=\ %#END#
 " Highlights
 "
 
-highlight clear SignColumn
-highlight search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
-highlight incsearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
-highlight aleerrorsign ctermbg=235 ctermfg=167
-highlight alewarningsign ctermbg=235 ctermfg=109
-highlight nontext ctermfg=0 guifg=#282828
+exe 'hi StatusLine ctermbg='            . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi CursorLine ctermbg='            . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi CursorLineNr ctermbg='          . base16_cterm00 . 'ctermfg=' . base16_cterm06
+exe 'hi LineNr ctermbg='                . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi SignColumn ctermbg='            . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi AleErrorSign ctermbg='          . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi AleWarningSign ctermbg='        . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi GitGutterAdd ctermbg='          . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi GitGutterChange ctermbg='       . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi GitGutterDelete ctermbg='       . base16_cterm00 . 'ctermfg=' . base16_cterm05
+exe 'hi GitGutterChangeDelete ctermbg=' . base16_cterm00 . 'ctermfg=' . base16_cterm05
+" call <sid>hi("StatusLine", g:base16_cterm00, "", g:base16_cterm05, "", "", "")
+" hi StatusLine ctermbg=g:base16_cterm00 ctermfg={base16_cterm05}
+" highlight clear SignColumn
+" highlight search ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+" highlight incsearch ctermbg=0 ctermfg=3 guibg=#282828 guifg=#d79921
+" highlight aleerrorsign ctermbg=235 ctermfg=167
+" highlight alewarningsign ctermbg=235 ctermfg=109
+" highlight nontext ctermfg=0 guifg=#282828
 
 "
 " Commands
