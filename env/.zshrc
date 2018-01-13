@@ -60,7 +60,7 @@ git_branch() {
 
 user_info() {
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then	
-		echo '%F{241}%n@%m'
+		echo '%F{8}%n@%m'
 	fi
 }
 

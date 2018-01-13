@@ -44,7 +44,7 @@ set foldenable foldmethod=syntax foldlevelstart=20
 " Highlights
 "
 
-exe 'hi StatusLineText ctermfg='        . base16_cterm05
+exe 'hi StatusLineText ctermfg='        . base16_cterm03
 exe 'hi StatusLineError ctermfg='       . base16_cterm08
 exe 'hi StatusLineWarning ctermfg='     . base16_cterm0A
 exe 'hi LineNr ctermbg='                . base16_cterm00
