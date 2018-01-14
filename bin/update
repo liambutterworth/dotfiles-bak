@@ -1,3 +1,14 @@
 #!/bin/bash
-git -C ~/.dotfiles submodule update --recursive --remote
-git -C ~/.fzf pull && ~/.fzf/install --key-bindings --completion --update-rc
+
+# update git submodules
+git -C ~/.dotfiles submodule update \
+	--recursive \
+	--remote
+
+# update fzf
+~/.dotfiles/env/bundle/fzf/install \
+	--key-bindings \
+	--completion \
+	--update-rc \
+	--no-bash \
+	--no-zsh
