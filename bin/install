@@ -8,7 +8,6 @@ curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # symlink dotfiles and plugins directory
-ln -sf ~/.dotfiles/.hyper.js ~/.hyper.js
 ln -sf ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/env/.vimrc ~/.vimrc
