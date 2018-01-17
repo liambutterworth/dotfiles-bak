@@ -1,3 +1,4 @@
 #!/bin/bash
-rm ~/{.zshrc,.vimrc,.tmux.conf}
-rm -rf ~/.vim/bundle ~/.vim/autoload
+~/.fzf/uninstall
+rm ~/{.hyper.js,.zshrc,.vimrc,.tmux.conf}
+rm -rf ~/.vim/autoload ~/.vim/bundle ~/.fzf

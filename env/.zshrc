@@ -71,4 +71,5 @@ PROMPT="
 $dir $user
 $char %F{15}"
 
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

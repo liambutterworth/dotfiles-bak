@@ -67,6 +67,10 @@ function! GitBranch()
 endfunction
 
 function! AleStatus(type) abort
+	if !exists("ale#statusline")
+		return ""
+	endif
+
 	let l:counts         = ale#statusline#Count(bufnr(''))
 	let l:all_errors     = l:counts.error + l:counts.style_error
 	let l:all_non_errors = l:counts.total - l:all_errors
