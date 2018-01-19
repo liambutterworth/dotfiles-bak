@@ -1,27 +1,16 @@
 #!/bin/bash
 
-# ensure the required directories
-mkdir -p ~/.vim/autoload ~/.zsh
-
 # download antigen and pathogen
-curl -L git.io/antigen > ~/.zsh/antigen.zsh
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+curl -L git.io/antigen > ~/.zsh/antigen.zsh --create-dirs
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim --create-dirs
 
-# symlink dotfiles and plugins directory
+# symlink dotfiles and vim plugins
 ln -sf ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -sf ~/.dotfiles/env/bundle ~/.vim/bundle
 ln -sf ~/.dotfiles/env/bundle/fzf ~/.fzf
 
-# pull git submodules
-git -C ~/.dotfiles submodule update \
-	--recursive \
-	--init
-
-# install fzf
-~/.dotfiles/env/bundle/fzf/install \
-	--key-bindings \
-	--completion \
-	--update-rc \
-	--no-bash
+# ensure modules are updated and setup fzf
+git -C ~/.dotfiles submodule update --recursive --init
+~/.fzf/install --key-bindings --completion --update-rc --no-bash
