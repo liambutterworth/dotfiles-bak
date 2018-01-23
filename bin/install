@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # download antigen and pathogen
-curl -L git.io/antigen > ~/.zsh/antigen.zsh --create-dirs
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim --create-dirs
+mkdir -p ~/.zsh ~/.vim/autoload
+curl -L git.io/antigen > ~/.zsh/antigen.zsh
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # symlink dotfiles and vim plugins
 ln -sf ~/.dotfiles/env/.zshrc ~/.zshrc

@@ -1,11 +1,11 @@
 FROM ubuntu:latest
 
 # install core packages
-RUN apt update \
-	&& apt install -y software-properties-common \
-	&& add-apt-repository ppa:jonathonf/vim \
-	&& apt update \
-	&& apt install -y sudo curl zsh git vim tmux nodejs
+RUN apt update
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:jonathonf/vim
+RUN apt update
+RUN apt install -y sudo curl zsh git vim tmux
 
 # setup admin user as default
 RUN useradd -m admin && adduser admin sudo && echo "admin:admin" | chpasswd
