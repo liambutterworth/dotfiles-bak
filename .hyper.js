@@ -9,7 +9,7 @@ module.exports = {
 		fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 		cursorShape: 'BLOCK',
 		cursorBlink: false,
-		padding: '12px',
+		padding: '5px 10px 10px',
 		shellArgs: ['--login'],
 		bell: false,
 		copyOnSelect: false,

@@ -30,6 +30,8 @@ setopt prompt_subst
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 #
 # Aliases
 #
