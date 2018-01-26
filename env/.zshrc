@@ -48,6 +48,15 @@ alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
 
+alias gs="git status"
+alias gf="git fetch"
+alias gm="git merge"
+alias gp="git pull"
+alias gb="git branch"
+alias ga="git add"
+alias gA="git add -A"
+alias gd="gid rm"
+
 #
 # Prompt
 #
