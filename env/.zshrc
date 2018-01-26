@@ -36,6 +36,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Aliases
 #
 
+alias c="clear"
+
 ls --version &>/dev/null
 if [ $? -eq 0 ]; then
   lsflags="--color --group-directories-first -F"
@@ -52,9 +54,9 @@ alias gl="git log"
 alias gs="git status"
 alias gf="git fetch"
 alias gm="git merge"
-alias ga="git add"
+alias ga="git add -A"
 alias gd="git rm"
-alias gc="git commit"
+alias gc="git commit -m"
 alias gp="git push"
 
 #
