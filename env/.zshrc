@@ -2,8 +2,8 @@
 # Zsh
 #
 # :: Plugins
-# :: Aliases
 # :: Settings
+# :: Aliases
 # :: Prompt
 
 #
