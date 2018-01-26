@@ -151,8 +151,8 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>ga :Gwrite<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>

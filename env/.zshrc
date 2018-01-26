@@ -48,14 +48,14 @@ alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
 
+alias gl="git log"
 alias gs="git status"
 alias gf="git fetch"
 alias gm="git merge"
-alias gp="git pull"
-alias gb="git branch"
 alias ga="git add"
-alias gA="git add -A"
-alias gd="gid rm"
+alias gd="git rm"
+alias gc="git commit"
+alias gp="git push"
 
 #
 # Prompt
@@ -81,6 +81,5 @@ local char='%(?.%F{5}.%F{1})%#'
 PROMPT="
 $dir $user
 $char %F{15}"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
