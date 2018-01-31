@@ -53,6 +53,9 @@ alias o="open ."
 alias v="vim"
 alias t="tmux"
 
+alias dr="docker run -it"
+alias dc="docker-compose"
+
 alias gl="git log"
 alias gs="git status"
 alias gC="git clone"
