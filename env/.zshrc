@@ -54,6 +54,7 @@ alias la="ls ${lsflags} -la"
 alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux attach -t"
+alias tr="tmux rename-session -t"
 alias tk="tmux kill-session -t"
 
 alias dr="docker run -it"
