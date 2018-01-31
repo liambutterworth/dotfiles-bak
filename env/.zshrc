@@ -36,6 +36,9 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Aliases
 #
 
+alias c="clear"
+alias o="open ."
+
 ls --version &>/dev/null
 if [ $? -eq 0 ]; then
   lsflags="--color --group-directories-first -F"
@@ -48,18 +51,26 @@ alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
 
-alias c="clear"
-alias o="open ."
-alias v="vim"
-alias t="tmux"
+alias tl="tmux ls"
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tk="tmux kill-session -t"
 
 alias dr="docker run -it"
-alias dc="docker-compose"
+alias di="docker images"
+alias dI="docker image"
+alias dc="docker ps -a"
+alias dC="docker container"
 
+alias dcu="docker-compose up"
+alias dcd="docker-compose down"
+
+alias gp="git push"
+alias gP="git pull"
+alias gc="git commit -m"
+alias gC="git clone"
 alias gl="git log"
 alias gs="git status"
-alias gC="git clone"
-alias gP="git pull"
 alias gf="git fetch"
 alias gm="git merge"
 alias ga="git add"
@@ -67,8 +78,6 @@ alias gA="git add -A"
 alias gb="git branch"
 alias gB="git checkout"
 alias gd="git rm"
-alias gc="git commit -m"
-alias gp="git push"
 
 #
 # Prompt
