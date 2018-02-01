@@ -36,9 +36,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # Aliases
 #
 
-alias c="clear"
-alias o="open ."
-
 ls --version &>/dev/null
 if [ $? -eq 0 ]; then
   lsflags="--color --group-directories-first -F"
@@ -51,34 +48,47 @@ alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
 
+alias c="clear"
+alias o="open ."
+
+alias vr="vim ~/.vimrc"
+alias vz="vim ~/.zshrc"
+alias vt="vim ~/.tmux.conf"
+
+alias ts="tmux"
 alias tl="tmux ls"
 alias tn="tmux new -s"
 alias ta="tmux attach -t"
 alias tr="tmux rename-session -t"
 alias tk="tmux kill-session -t"
 
+alias db="docker build -t"
 alias dr="docker run -it"
 alias di="docker images"
 alias dI="docker image"
 alias dc="docker ps -a"
 alias dC="docker container"
+alias dp="docker push"
+alias dP="docker pull"
+alias dt="docker tag"
 
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
+alias dcf="docker-compose up -f"
 
 alias gp="git push"
 alias gP="git pull"
-alias gc="git commit -m"
-alias gC="git clone"
-alias gl="git log"
-alias gs="git status"
-alias gf="git fetch"
-alias gm="git merge"
 alias ga="git add"
 alias gA="git add -A"
 alias gb="git branch"
 alias gB="git checkout"
+alias gc="git commit -m"
+alias gC="git clone"
+alias gf="git fetch"
+alias gm="git merge"
 alias gd="git rm"
+alias gl="git log"
+alias gs="git status"
 
 #
 # Prompt
