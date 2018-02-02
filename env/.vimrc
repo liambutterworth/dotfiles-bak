@@ -35,7 +35,6 @@ set splitright splitbelow
 set backspace=indent,eol,start
 set ruler number relativenumber
 set list listchars=tab:\|\ ,trail:.
-set fillchars+=vert:│
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set nowrap novisualbell nobackup noswapfile
@@ -54,8 +53,7 @@ exe 'hi CursorLineNr ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_
 exe 'hi StatusLineText ctermfg='        . base16_cterm03
 exe 'hi StatusLineError ctermfg='       . base16_cterm08
 exe 'hi StatusLineWarning ctermfg='     . base16_cterm0A
-" exe 'hi StatusLineNC ctermbg='          . base16_cterm03 . ' ctermfg=' . base16_cterm05
-exe 'hi StatusLineNC ctermbg=none ctermfg=none'
+exe 'hi StatusLineNC ctermbg='          . base16_cterm03 . ' ctermfg=' . base16_cterm03
 exe 'hi VertSplit ctermbg='             . base16_cterm00 . ' ctermfg=' . base16_cterm03
 exe 'hi AleErrorSign ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm08
 exe 'hi AleWarningSign ctermbg='        . base16_cterm00 . ' ctermfg=' . base16_cterm0D

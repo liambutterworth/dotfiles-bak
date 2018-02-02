@@ -16,5 +16,8 @@ WORKDIR /home/editor
 RUN git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
 RUN ~/.dotfiles/bin/install
 
+# enable utf-8 encoding
+ENV LANG en_US.UTF-8
+
 # start zsh
 CMD /bin/zsh
