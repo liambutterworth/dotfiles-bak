@@ -50,6 +50,7 @@ alias la="ls ${lsflags} -la"
 
 alias c="clear"
 alias o="open ."
+alias s="source ~/.zshrc"
 
 alias vr="vim ~/.vimrc"
 alias vz="vim ~/.zshrc"
@@ -70,6 +71,7 @@ alias dc="docker ps -a"
 alias dC="docker container"
 alias dp="docker push"
 alias dP="docker pull"
+alias da="docker attach"
 alias dt="docker tag"
 
 alias dcu="docker-compose up"
