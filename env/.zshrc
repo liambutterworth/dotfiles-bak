@@ -73,7 +73,7 @@ alias dp="docker push"
 alias dP="docker pull"
 alias dt="docker tag"
 
-alias dcu="docker-compose up"
+alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcf="docker-compose up -f"
 
