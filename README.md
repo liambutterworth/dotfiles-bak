@@ -6,7 +6,6 @@ Install vim git tmux and zsh with whatever package manager. Then run:
   $ git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
 
   $ ~/.dotfiles/bin/install
-
 ```
 
 ## Tmux Maps
