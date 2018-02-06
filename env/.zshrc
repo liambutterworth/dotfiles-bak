@@ -47,6 +47,7 @@ fi
 alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
+alias lg="gl ${lsflags} -la | grep"
 
 alias c="clear"
 alias o="open ."
