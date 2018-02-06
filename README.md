@@ -3,9 +3,9 @@
 Install vim git tmux and zsh with whatever package manager. Then run:
 
 ```
-$ git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
+  $ git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
 
-$ ~/.dotfiles/bin/install
+  $ ~/.dotfiles/bin/install
 
 ```
 
@@ -27,17 +27,17 @@ $ ~/.dotfiles/bin/install
 ```
   <space> leader key
 
-	<leader><leader> FZF Find Files
+  leader><leader> FZF Find Files
 
   Y yank to end of line; consistent with D and C
 
   ,, toggle , at the end of the line in any mode
   ;; toggle ; at the end of the line in any mode
 
-	<c-x><c-k> FZF Complete Word
-	<c-x><c-f> FZF Complete Path
-	<c-x><c-j> FZF Complete File
-	<c-x><c-l> FZF Complete Line
+  <c-x><c-k> FZF Complete Word
+  <c-x><c-f> FZF Complete Path
+  <c-x><c-j> FZF Complete File
+  <c-x><c-l> FZF Complete Line
 
   <leader>gl git log
   <leader>gs git status
@@ -45,10 +45,10 @@ $ ~/.dotfiles/bin/install
   <leader>gd git diff
   <leader>gb git blame
 
-	[h Highlight Search
-	]h Unhighlight Search
-	[l Show Invisible Characters
-	]l Hide Invisible Characters
-	[a Enable Linters
-	]a Disable Linters
+  [h Highlight Search
+  ]h Unhighlight Search
+  [l Show Invisible Characters
+  ]l Hide Invisible Characters
+  [a Enable Linters
+  ]a Disable Linters
 ```
