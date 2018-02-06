@@ -30,11 +30,12 @@ set cursorline
 set laststatus=2
 set tags=./.tags;
 set signcolumn=yes
+set fillchars+=vert:│
 set incsearch ignorecase
 set splitright splitbelow
 set backspace=indent,eol,start
 set ruler number relativenumber
-set list listchars=tab:\|\ ,trail:.
+set list listchars=tab:▸\ ,trail:·
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set nowrap novisualbell nobackup noswapfile
