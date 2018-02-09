@@ -41,8 +41,6 @@ set tabstop=2 shiftwidth=2 noexpandtab
 set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
 
-" foobar
-
 "
 " Highlights
 "
