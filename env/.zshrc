@@ -77,6 +77,7 @@ alias dt="docker tag"
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcf="docker-compose up -f"
+alias dcr="docker-compose restart"
 
 alias gp="git push"
 alias gP="git pull"
