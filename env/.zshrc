@@ -24,13 +24,12 @@ antigen apply
 #
 
 export TERM="xterm-256color"
+export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
 
 setopt prompt_subst
 
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
-
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 #
 # Aliases
