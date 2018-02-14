@@ -137,10 +137,10 @@ nnoremap <bs> :e#<cr>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-nnoremap <c-w>h <c-w>12<
-nnoremap <c-w>j <c-w>8-
-nnoremap <c-w>k <c-w>8+
-nnoremap <c-w>l <c-w>12>
+nnoremap <c-w>< <c-w>10<
+nnoremap <c-w>- <c-w>10-
+nnoremap <c-w>+ <c-w>10+
+nnoremap <c-w>> <c-w>10>
 
 nnoremap <leader>o m`o<esc>``
 nnoremap <leader>O m`O<esc>``
