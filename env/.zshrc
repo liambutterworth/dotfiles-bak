@@ -28,6 +28,8 @@ export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd
 
 setopt prompt_subst
 
+unsetopt beep
+
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
@@ -73,7 +75,7 @@ alias dp="docker push"
 alias dP="docker pull"
 alias dt="docker tag"
 
-alias dcu="docker-compose up -d"
+alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 alias dcf="docker-compose up -f"
 alias dcr="docker-compose restart"
