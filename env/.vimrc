@@ -21,8 +21,8 @@ let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
 let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys      = 0
-let g:ale_sign_warning        = '*'
-let g:ale_sign_error          = '*'
+let g:ale_sign_warning        = '▸'
+let g:ale_sign_error          = '▸'
 
 set lazyredraw
 set autoindent
