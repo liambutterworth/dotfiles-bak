@@ -2,8 +2,8 @@
 " Vim Config
 "
 " :: Settings
-" :: Statusline
 " :: Highlights
+" :: Statusline
 " :: Commands
 " :: Mappings
 
@@ -17,6 +17,7 @@ colorscheme base16-ocean
 filetype plugin indent on
 syntax on
 
+let g:mapleader               = ' '
 let g:jsx_ext_required        = 0
 let g:javascript_plugin_jsdoc = 1
 let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
@@ -28,7 +29,6 @@ set lazyredraw
 set autoindent
 set cursorline
 set laststatus=2
-set tags=./.tags;
 set signcolumn=yes
 set fillchars+=vert:│
 set incsearch ignorecase
@@ -45,6 +45,8 @@ set foldenable foldmethod=syntax foldlevelstart=20
 " Highlights
 "
 
+exe 'hi Pmenu ctermbg='                 . base16_cterm00
+exe 'hi PmenuSel ctermbg='              . base16_cterm03 . ' ctermfg=' . base16_cterm05
 exe 'hi TabLine ctermbg='               . base16_cterm00 . ' ctermfg=' . base16_cterm03
 exe 'hi TabLineSel ctermbg='            . base16_cterm00 . ' ctermfg=' . base16_cterm05
 exe 'hi TabLineFill ctermbg='           . base16_cterm00
@@ -113,7 +115,6 @@ autocmd CompleteDone * pclose
 autocmd filetype * set formatoptions-=o
 autocmd filetype scss.css setlocal commentstring=/*%s*/
 autocmd bufread,bufnewfile *.css set filetype=scss.css
-autocmd bufread,bufnewfile .tmuxrc set filetype=tmux
 
 augroup completion
   autocmd!
@@ -127,42 +128,19 @@ augroup END
 " Mappings
 "
 
-let mapleader = ' '
-
 noremap j gj
 noremap k gk
 nnoremap Y y$
-nnoremap <bs> :e#<cr>
 
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 nnoremap <c-w>< <c-w>10<
 nnoremap <c-w>- <c-w>10-
 nnoremap <c-w>+ <c-w>10+
 nnoremap <c-w>> <c-w>10>
-
-nnoremap <leader>o m`o<esc>``
-nnoremap <leader>O m`O<esc>``
-
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-
-nnoremap <leader><leader> :Files<cr>
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>ga :Gwrite<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gn <plug>GitGutterNextHunk
-nnoremap <leader>gp <plug>GitGutterPrevHunk
 
 nnoremap [h :set nohlsearch<cr>
 nnoremap ]h :set hlsearch<cr>
@@ -171,13 +149,26 @@ nnoremap ]l :set list<cr>
 nnoremap [a :ALEDisable<cr>
 nnoremap ]a :ALEEnable<cr>
 
-function! Ender(char)
-  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
-endfunction
+nnoremap <leader><leader> :
+nnoremap <leader>o m`o<esc>``
+nnoremap <leader>O m`O<esc>``
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>ga :Gwrite<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gn <plug>GitGutterNextHunk
+nnoremap <leader>gp <plug>GitGutterPrevHunk
 
-vnoremap ,, :call Ender(',')<cr>
-nnoremap ,, m`:call Ender(',')<cr>``
-inoremap ,, <esc>m`:call Ender(',')<cr>``a
-vnoremap ;; :call Ender(';')<cr>
-nnoremap ;; m`:call Ender(';')<cr>``
-inoremap ;; <esc>m`:call Ender(';')<cr>``a
+xmap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
+
+nnoremap <leader>f :Files<cr>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
