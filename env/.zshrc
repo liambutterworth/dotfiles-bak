@@ -33,6 +33,8 @@ unsetopt beep
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+
 #
 # Aliases
 #
