@@ -16,9 +16,6 @@
 [submodule "env/bundle/scss-syntax.vim"]
 	path = env/bundle/scss-syntax.vim
 	url = https://github.com/cakebaker/scss-syntax.vim
-[submodule "env/bundle/vim-closetag"]
-	path = env/bundle/vim-closetag
-	url = https://github.com/alvan/vim-closetag
 [submodule "env/bundle/vim-commentary"]
 	path = env/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary
@@ -46,3 +43,9 @@
 [submodule "env/bundle/vim-vinegar"]
 	path = env/bundle/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "env/bundle/vim-ragtag"]
+	path = env/bundle/vim-ragtag
+	url = https://github.com/tpope/vim-ragtag
+[submodule "env/bundle/vim-unimpaired"]
+	path = env/bundle/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired

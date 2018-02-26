@@ -53,6 +53,7 @@ fi
 alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
+alias lc="ls | wc -l"
 
 alias c="clear"
 alias o="open ."

@@ -132,6 +132,12 @@ noremap j gj
 noremap k gk
 nnoremap Y y$
 
+nnoremap [oa :ALEDisable<cr>
+nnoremap ]oa :ALEEnable<cr>
+
+xmap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
+
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -141,13 +147,6 @@ nnoremap <c-w>< <c-w>10<
 nnoremap <c-w>- <c-w>10-
 nnoremap <c-w>+ <c-w>10+
 nnoremap <c-w>> <c-w>10>
-
-nnoremap [h :set nohlsearch<cr>
-nnoremap ]h :set hlsearch<cr>
-nnoremap [l :set nolist<cr>
-nnoremap ]l :set list<cr>
-nnoremap [a :ALEDisable<cr>
-nnoremap ]a :ALEEnable<cr>
 
 nnoremap <leader><leader> :
 nnoremap <leader>o m`o<esc>``
@@ -163,9 +162,6 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
 nnoremap <leader>gp <plug>GitGutterPrevHunk
-
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)
 
 nnoremap <leader>f :Files<cr>
 imap <c-x><c-k> <plug>(fzf-complete-word)
