@@ -53,7 +53,6 @@ fi
 alias ls="ls ${lsflags}"
 alias ll="ls ${lsflags} -l"
 alias la="ls ${lsflags} -la"
-alias lc="ls | wc -l"
 
 alias c="clear"
 alias o="open ."
@@ -71,7 +70,6 @@ alias tr="tmux rename-session -t"
 alias tk="tmux kill-session -t"
 
 alias gp="git push"
-alias gP="git pull"
 alias ga="git add"
 alias gA="git add -A"
 alias gb="git branch"
