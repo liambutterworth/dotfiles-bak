@@ -11,11 +11,11 @@ RUN apt install -y nodejs
 RUN npm install npm -g
 
 # setup default user
-RUN useradd -m editor
-RUN adduser editor sudo
-RUN echo "editor:editor" | chpasswd
-USER editor
-WORKDIR /home/editor
+RUN useradd -m user
+RUN adduser user sudo
+RUN echo "user:user" | chpasswd
+USER user
+WORKDIR /home/user
 
 # install config files
 RUN git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
