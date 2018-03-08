@@ -21,5 +21,10 @@ WORKDIR /home/user
 RUN git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
 RUN ~/.dotfiles/bin/install
 
+# setup git
+git config --global user.email "wbbutterworth@gmail.com"
+git config --global user.name "Liam Butterworth"
+git config --global credential.helper cache
+
 # start zsh
 CMD /bin/zsh
