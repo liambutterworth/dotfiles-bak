@@ -3,7 +3,6 @@
 #
 # :: Plugins
 # :: Settings
-# :: Aliases
 # :: Prompt
 
 #
@@ -37,22 +36,6 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
-
-#
-# Aliases
-#
-
-ls --version &>/dev/null
-if [ $? -eq 0 ]; then
-  lsflags="--color --group-directories-first -F"
-else
-  lsflags="-GF"
-  export CLICOLOR=1
-fi
-
-alias ls="ls ${lsflags}"
-alias ll="ls ${lsflags} -l"
-alias la="ls ${lsflags} -la"
 
 #
 # Prompt

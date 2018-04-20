@@ -55,7 +55,7 @@ exe 'hi CursorLine ctermbg='            . base16_cterm00
 exe 'hi CursorLineNr ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm05
 exe 'hi StatusLineText ctermfg='        . base16_cterm03
 exe 'hi StatusLineError ctermfg='       . base16_cterm08
-exe 'hi StatusLineWarning ctermfg='     . base16_cterm0A
+exe 'hi StatusLineWarning ctermfg='     . base16_cterm0D
 exe 'hi StatusLineNC ctermbg='          . base16_cterm03 . ' ctermfg=' . base16_cterm03
 exe 'hi VertSplit ctermbg='             . base16_cterm00 . ' ctermfg=' . base16_cterm03
 exe 'hi AleErrorSign ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm08
@@ -75,10 +75,6 @@ function! GitBranch()
 endfunction
 
 function! AleStatus(type) abort
-	if !exists("ale#statusline")
-		return ""
-	endif
-
 	let l:counts         = ale#statusline#Count(bufnr(''))
 	let l:all_errors     = l:counts.error + l:counts.style_error
 	let l:all_non_errors = l:counts.total - l:all_errors
@@ -128,35 +124,35 @@ augroup END
 " Mappings
 "
 
-noremap j gj
-noremap k gk
-nnoremap Y y$
+map j gj
+map k gk
+nmap Y y$
+imap jk <esc>
 
-nnoremap [oa :ALEDisable<cr>
-nnoremap ]oa :ALEEnable<cr>
+noremap <Up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
+nmap <c-w>< <c-w>10<
+nmap <c-w>- <c-w>10-
+nmap <c-w>+ <c-w>10+
+nmap <c-w>> <c-w>10>
+
+nmap ]oa :ALEEnable<cr>
+nmap [oa :ALEDisable<cr>
 xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+nmap <leader>gl :Glog<cr>
+nmap <leader>gs :Gstatus<cr>
+nmap <leader>ga :Gwrite<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gb :Gblame<cr>
+nmap <leader>gn <plug>GitGutterNextHunk
+nmap <leader>gp <plug>GitGutterPrevHunk
 
-nnoremap <c-w>< <c-w>10<
-nnoremap <c-w>- <c-w>10-
-nnoremap <c-w>+ <c-w>10+
-nnoremap <c-w>> <c-w>10>
-
-nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>ga :Gwrite<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gn <plug>GitGutterNextHunk
-nnoremap <leader>gp <plug>GitGutterPrevHunk
-
-nnoremap <leader>f :Files<cr>
+nmap <leader>f :Files<cr>
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
