@@ -10,8 +10,8 @@ ln -sf ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -sf ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -sf ~/.dotfiles/env/bundle ~/.vim/bundle
-ln -sf ~/.dotfiles/env/bundle/fzf ~/.fzf
+#ln -sf ~/.dotfiles/env/bundle/fzf ~/.fzf
 
 # ensure modules are updated and setup fzf
 git -C ~/.dotfiles submodule update --recursive --init
-~/.fzf/install --key-bindings --completion --update-rc --no-bash
+#~/.fzf/install --key-bindings --completion --update-rc --no-bash

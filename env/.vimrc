@@ -19,8 +19,6 @@ syntax on
 
 let g:mapleader               = ' '
 let g:jsx_ext_required        = 0
-let g:javascript_plugin_jsdoc = 1
-let g:closetag_filenames      = '*.html,*.php,*.js,*.jsx'
 let g:gitgutter_map_keys      = 0
 let g:ale_sign_warning        = '▸'
 let g:ale_sign_error          = '▸'
@@ -54,8 +52,6 @@ exe 'hi LineNr ctermbg='                . base16_cterm00
 exe 'hi CursorLine ctermbg='            . base16_cterm00
 exe 'hi CursorLineNr ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm05
 exe 'hi StatusLineText ctermfg='        . base16_cterm03
-exe 'hi StatusLineError ctermfg='       . base16_cterm08
-exe 'hi StatusLineWarning ctermfg='     . base16_cterm0A
 exe 'hi StatusLineNC ctermbg='          . base16_cterm03 . ' ctermfg=' . base16_cterm03
 exe 'hi VertSplit ctermbg='             . base16_cterm00 . ' ctermfg=' . base16_cterm03
 exe 'hi AleErrorSign ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm08
@@ -69,43 +65,13 @@ exe 'hi GitGutterChangeDelete ctermbg=' . base16_cterm00
 " Statusline
 "
 
-function! GitBranch()
-	let l:branch = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-	return empty(branch) ? '' : branch . ' '
-endfunction
-
-function! AleStatus(type) abort
-	if !exists("ale#statusline")
-		return ""
-	endif
-
-	let l:counts         = ale#statusline#Count(bufnr(''))
-	let l:all_errors     = l:counts.error + l:counts.style_error
-	let l:all_non_errors = l:counts.total - l:all_errors
-
-	if a:type == 'errors'
-		return all_errors > 0 ? printf('%d', all_errors) : ''
-	elseif a:type == 'warnings'
-		return all_non_errors > 0 ? printf('%d', all_non_errors) : ''
-	else
-		return printf('%de%dw', all_errors, all_non_errors)
-	endif
-endfunction
-
-set statusline =
-set statusline +=%#StatusLineText#
-set statusline +=\ %{GitBranch()}%f%M
-set statusline +=%#StatusLineError#
-set statusline +=\ %{AleStatus('errors')}
-set statusline +=%#StatusLineWarning#
-set statusline +=\ %{AleStatus('warnings')}
+set statusline =%#StatusLineText#
+set statusline +=%{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
 set statusline +=%=
-set statusline +=%#StatusLineText#
-set statusline +=\ %{&fileformat}
+set statusline +=%{&fileformat}
 set statusline +=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline +=\ %l:%c
 set statusline +=\ %p%%
-set statusline +=\ %#END#
 
 "
 " Commands
@@ -138,17 +104,11 @@ nnoremap ]oa :ALEEnable<cr>
 xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
 nnoremap <c-w>< <c-w>10<
 nnoremap <c-w>- <c-w>10-
 nnoremap <c-w>+ <c-w>10+
 nnoremap <c-w>> <c-w>10>
 
-nnoremap <leader><leader> :
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
@@ -160,16 +120,3 @@ nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gn <plug>GitGutterNextHunk
 nnoremap <leader>gp <plug>GitGutterPrevHunk
-
-nnoremap <leader>f :Files<cr>
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-function! Ender(char)
-  s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
-endfunction
-
-inoremap <c-e>, <esc>m`:call Ender(',')<cr>``a
-inoremap <c-e>; <esc>m`:call Ender(';')<cr>``a
