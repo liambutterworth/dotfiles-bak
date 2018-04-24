@@ -18,10 +18,10 @@ filetype plugin indent on
 syntax on
 
 let g:mapleader               = ' '
-let g:jsx_ext_required        = 0
-let g:gitgutter_map_keys      = 0
 let g:ale_sign_warning        = '▸'
 let g:ale_sign_error          = '▸'
+let g:jsx_ext_required        = 0
+let g:gitgutter_map_keys      = 0
 
 set lazyredraw
 set autoindent
@@ -94,29 +94,17 @@ augroup END
 " Mappings
 "
 
-noremap j gj
-noremap k gk
-nnoremap Y y$
+noremap Y y$
+nnoremap j gj
+nnoremap k gk
 
-nnoremap [oa :ALEDisable<cr>
-nnoremap ]oa :ALEEnable<cr>
+noremap [oa :ALEDisable<cr>
+noremap ]oa :ALEEnable<cr>
 
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)
+nnoremap ga <plug>(EasyAlign)
+xnoremap ga <plug>(EasyAlign)
 
 nnoremap <c-w>< <c-w>10<
 nnoremap <c-w>- <c-w>10-
 nnoremap <c-w>+ <c-w>10+
 nnoremap <c-w>> <c-w>10>
-
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>ga :Gwrite<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gn <plug>GitGutterNextHunk
-nnoremap <leader>gp <plug>GitGutterPrevHunk
