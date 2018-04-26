@@ -39,48 +39,6 @@ bindkey '^N' history-substring-search-down
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 
 #
-# Aliases
-#
-
-ls --version &>/dev/null
-if [ $? -eq 0 ]; then
-  lsflags="--color --group-directories-first -F"
-else
-  lsflags="-GF"
-  export CLICOLOR=1
-fi
-
-alias ls="ls ${lsflags}"
-alias ll="ls ${lsflags} -l"
-alias la="ls ${lsflags} -la"
-
-alias c="clear"
-alias o="open ."
-alias s="source ~/.zshrc"
-
-alias vv="vim ~/.vimrc"
-alias vz="vim ~/.zshrc"
-alias vt="vim ~/.tmux.conf"
-
-alias ts="tmux"
-alias tl="tmux ls"
-alias tn="tmux new -s"
-alias ta="tmux attach -t"
-alias tr="tmux rename-session -t"
-alias tk="tmux kill-session -t"
-
-alias gp="git push"
-alias ga="git add"
-alias gA="git add -A"
-alias gc="git commit -m"
-alias gC="git clone"
-alias gf="git fetch"
-alias gm="git merge"
-alias gd="git rm"
-alias gl="git log"
-alias gs="git status"
-
-#
 # Prompt
 #
 

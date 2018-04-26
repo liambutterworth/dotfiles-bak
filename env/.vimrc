@@ -66,12 +66,13 @@ exe 'hi GitGutterChangeDelete ctermbg=' . base16_cterm00
 "
 
 set statusline =%#StatusLineText#
-set statusline +=%{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
+set statusline +=\ %{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
 set statusline +=%=
 set statusline +=%{&fileformat}
 set statusline +=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline +=\ %l:%c
 set statusline +=\ %p%%
+set statusline +=\ %#End#
 
 "
 " Commands
