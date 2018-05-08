@@ -95,20 +95,20 @@ augroup END
 " Mappings
 "
 
-noremap Y y$
-nnoremap j gj
-nnoremap k gk
+nmap Y y$
+nmap j gj
+nmap k gk
 
-noremap [oa :ALEDisable<cr>
-noremap ]oa :ALEEnable<cr>
+nmap [oa :ALEDisable<cr>
+nmap ]oa :ALEEnable<cr>
 
-nnoremap ga <plug>(EasyAlign)
-xnoremap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
 
-nnoremap <c-w>< <c-w>10<
-nnoremap <c-w>- <c-w>10-
-nnoremap <c-w>+ <c-w>10+
-nnoremap <c-w>> <c-w>10>
+nmap <c-w>< <c-w>10<
+nmap <c-w>- <c-w>10-
+nmap <c-w>+ <c-w>10+
+nmap <c-w>> <c-w>10>
 
 function! Ender(char)
   s/\v(.)$/\=submatch(1)==a:char ? '' : submatch(1).a:char
