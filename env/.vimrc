@@ -99,16 +99,16 @@ nmap Y y$
 nmap j gj
 nmap k gk
 
+nmap <c-w>< <c-w>10<
+nmap <c-w>- <c-w>10-
+nmap <c-w>+ <c-w>10+
+nmap <c-w>> <c-w>10>
+
 nmap [oa :ALEDisable<cr>
 nmap ]oa :ALEEnable<cr>
 
 nmap ga <plug>(EasyAlign)
 xmap ga <plug>(EasyAlign)
-
-nmap <c-w>< <c-w>10<
-nmap <c-w>- <c-w>10-
-nmap <c-w>+ <c-w>10+
-nmap <c-w>> <c-w>10>
 
 imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
