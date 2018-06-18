@@ -13,7 +13,7 @@
 
 execute pathogen#infect()
 runtime macros/matchit.vim
-colorscheme base16-ocean
+colorscheme base16-tomorrow-night
 filetype plugin indent on
 syntax on
 
@@ -33,7 +33,7 @@ set incsearch ignorecase
 set splitright splitbelow
 set backspace=indent,eol,start
 set ruler number relativenumber
-set list listchars=tab:▸\ ,trail:·
+set list listchars=tab:│\ ,trail:·
 set wildmenu wildmode=list:longest
 set tabstop=2 shiftwidth=2 noexpandtab
 set nowrap novisualbell nobackup noswapfile
