@@ -1,41 +1,62 @@
 {
-	"parser":  "babel-eslint",
-	"extends": "airbnb",
+	extends: "airbnb",
+	parser:  "babel-eslint",
 
-	"env": {
-		"browser": true,
-		"node":    true,
+	parserOptions: {
+		ecmaVersion: 6,
+		sourceType: "module",
+
+		ecmaFeatures: {
+			jsx: true,
+		},
 	},
 
-	"settings": {
+	env: {
+		browser: true,
+		node:    true,
+	},
+
+	settings: {
 		"import/resolver": "webpack",
 	},
 
-	"rules": {
+	rules: {
 		"no-param-reassign":            0,
 		"no-tabs":                      0,
 		"default-case":                 0,
-		"max-len":                      [ "warn", 128 ]
+		"max-len":                      [ "warn", 192 ],
 		"no-return-assign":             [ "error", "except-parens" ],
 		"template-curly-spacing":       [ "warn", "always" ],
 		"arrow-parens":                 [ "warn", "always" ],
-		"space-in-parens":              [ "warn", "always" ],
-		"padded-blocks":                [ "warn", "always" ],
 		"object-shorthand":             [ "warn", "consistent" ],
 		"one-var-declaration-per-line": [ "warn", "initializations" ],
 
+		"space-in-parens": [ "warn", "always", {
+			"exceptions": [ "()", "[]", "{}" ],
+		}],
+
 		"key-spacing": [ "warn", {
 			align: "value"
-		} ],
+		}],
+
+		"padded-blocks": [ "warn", {
+			classes: "always",
+		}],
+
+		"lines-around-comment": [ "warn", {
+			beforeBlockComment:   true,
+			afterBlockComment:    true,
+			beforeLineComment:    true,
+		}],
 
 		"indent": [ "error", "tab", {
 			SwitchCase: 1,
-		} ],
+		}],
 
 		"array-bracket-spacing": [ "warn", "always", {
 			objectsInArrays: false,
 			arraysInArrays:  false,
-		} ],
+		}],
 
 		"no-multi-spaces": [ "warn", {
 			exceptions: {
@@ -44,25 +65,23 @@
 				VariableDeclarator:   true,
 				ImportDeclaration:    true,
 			}
-		} ],
+		}],
 
 		"import/no-extraneous-dependencies": [ "error", {
 			devDependencies: true,
-		} ],
+		}],
 
-		"react/jsx-indent":       [ "error", "tab" ],
-		"react/jsx-indent-props": [ "error", "tab" ],
+		"react/forbid-prop-types": 0,
+		"react/jsx-indent":        [ "error", "tab" ],
+		"react/jsx-indent-props":  [ "error", "tab" ],
 
 		"react/jsx-curly-spacing": [ "warn", {
-			when: "always",
-
-			spacing: {
-				objectLiterals: "never",
-			},
-		} ],
+			when:    "always",
+			spacing: { objectLiterals: "never" },
+		}],
 
 		"react/jsx-filename-extension": [ "error", {
 			extensions: [ ".js", ".jsx" ],
-		} ],
+		}],
 	},
 }
