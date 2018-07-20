@@ -36,8 +36,8 @@ Install vim git tmux and zsh with whatever package manager. Then run:
   [oa enable linting
   ]oa enable linting
 
-	ga easy align plugin prefix
+  ga easy align plugin prefix
 
   <c-e>, toggle comma at end-of-line (input mode)
-	<c-e>; toggle semi-colon at end-of-line (input mode)
+  <c-e>; toggle semi-colon at end-of-line (input mode)
 ```
