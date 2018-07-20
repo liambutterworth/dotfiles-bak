@@ -3,7 +3,7 @@
 Install vim git tmux and zsh with whatever package manager. Then run:
 
 ```
-  $ git clone http://github.com/wbbutterworth/dotfiles.git ~/.dotfiles
+  $ git clone http://github.com/liambutterworth/dotfiles.git ~/.dotfiles
 
   $ ~/.dotfiles/bin/install
 ```
@@ -11,14 +11,14 @@ Install vim git tmux and zsh with whatever package manager. Then run:
 ## Tmux Maps
 
 ```
-  <c-space>r reload tmux config file
-  <c-space>s split window horizontally
-  <c-space>v split window vertically
+  <c-a>r reload tmux config file
+  <c-a>s split window horizontally
+  <c-a>v split window vertically
 
-  <c-h> move to tmux or vim split to the left
-  <c-j> move to tmux or vim split below
-  <c-k> move to tmux or vim split above
-  <c-l> move to tmux or vim split to the right
+  <c-a>< move vertical divider left by 10px
+  <c-a>> move vertical divider right by 10px
+  <c-a>- move horizontal divider downard by 10px
+  <c-a>+ move horizontal divider upward by 10px
 ```
 
 ## Vim Maps
@@ -26,28 +26,18 @@ Install vim git tmux and zsh with whatever package manager. Then run:
 ```
   <space> leader key
 
-  leader><leader> FZF Find Files
-
   Y yank to end of line; consistent with D and C
 
-  ,, toggle , at the end of the line in any mode
-  ;; toggle ; at the end of the line in any mode
+  <c-w>< move vertical divider left by 10px
+  <c-w>> move vertical divider right by 10px
+  <c-w>- move horizontal divider downard by 10px
+  <c-w>+ move horizontal divider upward by 10px
 
-  <c-x><c-k> FZF Complete Word
-  <c-x><c-f> FZF Complete Path
-  <c-x><c-j> FZF Complete File
-  <c-x><c-l> FZF Complete Line
+  [oa enable linting
+  ]oa enable linting
 
-  <leader>gl git log
-  <leader>gs git status
-  <leader>ga git add
-  <leader>gd git diff
-  <leader>gb git blame
+	ga easy align plugin prefix
 
-  [h Highlight Search
-  ]h Unhighlight Search
-  [l Show Invisible Characters
-  ]l Hide Invisible Characters
-  [a Enable Linters
-  ]a Disable Linters
+  <c-e>, toggle comma at end-of-line (input mode)
+	<c-e>; toggle semi-colon at end-of-line (input mode)
 ```

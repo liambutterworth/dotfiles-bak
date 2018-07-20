@@ -100,9 +100,9 @@ nmap j gj
 nmap k gk
 
 nmap <c-w>< <c-w>10<
+nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
-nmap <c-w>> <c-w>10>
 
 nmap [oa :ALEDisable<cr>
 nmap ]oa :ALEEnable<cr>
