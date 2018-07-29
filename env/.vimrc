@@ -13,7 +13,7 @@
 
 execute pathogen#infect()
 runtime macros/matchit.vim
-colorscheme base16-tomorrow-night
+colorscheme base16-gruvbox-dark-medium
 filetype plugin indent on
 syntax on
 
