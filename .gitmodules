@@ -43,3 +43,6 @@
 [submodule "env/bundle/vim-unimpaired"]
 	path = env/bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired
+[submodule "env/bundle/vim-tmux-navigator"]
+	path = env/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git

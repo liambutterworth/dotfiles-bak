@@ -38,6 +38,9 @@ bindkey '^N' history-substring-search-down
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -la --group-directories-first'
+
 #
 # Prompt
 #
