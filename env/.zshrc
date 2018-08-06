@@ -38,9 +38,16 @@ bindkey '^N' history-substring-search-down
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 
-alias ls='ls -G'
-alias la='ls -aG'
-alias ll='ls -laG'
+case 'uname' in 
+	Linux)
+		alias ls='ls --color=auto --groupd-directories-first'
+		alias ll='ls -la'
+	;;
+	Darwin)
+		alias ls='ls -G'
+		alias ll='ls -la'
+	;;
+esac
 
 #
 # Prompt
