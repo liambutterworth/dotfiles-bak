@@ -40,7 +40,6 @@ zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
 
 case `uname` in
 	Linux)
-		echo LS_FOR_LINUX
 		alias ls='ls --color --group-directories-first'
 		alias ll='ls -la'
 	;;
