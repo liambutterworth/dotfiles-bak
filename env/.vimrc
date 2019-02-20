@@ -108,8 +108,5 @@ nmap <c-w>+ <c-w>10+
 nmap [oa :ALEDisable<cr>
 nmap ]oa :ALEEnable<cr>
 
-" nmap ga <plug>(EasyAlign)
-" xmap ga <plug>(EasyAlign)
-
 imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
