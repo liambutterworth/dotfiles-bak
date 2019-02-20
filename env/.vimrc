@@ -29,6 +29,7 @@ set cursorline
 set laststatus=2
 set signcolumn=yes
 set fillchars+=vert:│
+set rtp+=~/.fzf
 set incsearch ignorecase
 set splitright splitbelow
 set backspace=indent,eol,start
