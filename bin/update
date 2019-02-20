@@ -1,2 +1,3 @@
 #!/bin/bash
-git -C ~/.dotfiles submodule update --recursive --remote
+git -C ~/.dotfiles submodule update --remote
+~/.dotfiles/env/fzf/install
