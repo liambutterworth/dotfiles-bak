@@ -3,7 +3,6 @@
 # download antigen and pathogen
 mkdir -p ~/.zsh ~/.vim/autoload
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
-# cuel -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw:githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # symlink dotfiles and vim plugins
@@ -13,4 +12,4 @@ ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/env/bundle ~/.vim/bundle
 
 # ensure modules are updated and setup fzf
-git -C ~/.dotfiles submodule update --recursive --init
+# git -C ~/.dotfiles submodule update --recursive --init
