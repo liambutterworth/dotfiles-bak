@@ -46,3 +46,6 @@
 [submodule "env/bundle/vim-tmux-navigator"]
 	path = env/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "env/bundle/fzf.vim"]
+	path = env/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

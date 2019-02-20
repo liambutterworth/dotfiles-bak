@@ -17,11 +17,11 @@ colorscheme base16-gruvbox-dark-medium
 filetype plugin indent on
 syntax on
 
-let g:mapleader               = ' '
-let g:ale_sign_warning        = '▸'
-let g:ale_sign_error          = '▸'
-let g:jsx_ext_required        = 0
-let g:gitgutter_map_keys      = 0
+let g:mapleader = ' '
+let g:ale_sign_warning = '▸'
+let g:ale_sign_error = '▸'
+let g:jsx_ext_required = 0
+let g:gitgutter_map_keys = 0
 
 set lazyredraw
 set autoindent
@@ -43,22 +43,22 @@ set foldenable foldmethod=syntax foldlevelstart=20
 " Highlights
 "
 
-exe 'hi Pmenu ctermbg='                 . base16_cterm00
-exe 'hi PmenuSel ctermbg='              . base16_cterm03 . ' ctermfg=' . base16_cterm05
-exe 'hi TabLine ctermbg='               . base16_cterm00 . ' ctermfg=' . base16_cterm03
-exe 'hi TabLineSel ctermbg='            . base16_cterm00 . ' ctermfg=' . base16_cterm05
-exe 'hi TabLineFill ctermbg='           . base16_cterm00
-exe 'hi LineNr ctermbg='                . base16_cterm00
-exe 'hi CursorLine ctermbg='            . base16_cterm00
-exe 'hi CursorLineNr ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm05
-exe 'hi StatusLineText ctermfg='        . base16_cterm03
-exe 'hi StatusLineNC ctermbg='          . base16_cterm03 . ' ctermfg=' . base16_cterm03
-exe 'hi VertSplit ctermbg='             . base16_cterm00 . ' ctermfg=' . base16_cterm03
-exe 'hi AleErrorSign ctermbg='          . base16_cterm00 . ' ctermfg=' . base16_cterm08
-exe 'hi AleWarningSign ctermbg='        . base16_cterm00 . ' ctermfg=' . base16_cterm0D
-exe 'hi GitGutterAdd ctermbg='          . base16_cterm00
-exe 'hi GitGutterChange ctermbg='       . base16_cterm00
-exe 'hi GitGutterDelete ctermbg='       . base16_cterm00
+exe 'hi Pmenu ctermbg=' . base16_cterm00
+exe 'hi PmenuSel ctermbg=' . base16_cterm03 . ' ctermfg=' . base16_cterm05
+exe 'hi TabLine ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm03
+exe 'hi TabLineSel ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm05
+exe 'hi TabLineFill ctermbg=' . base16_cterm00
+exe 'hi LineNr ctermbg=' . base16_cterm00
+exe 'hi CursorLine ctermbg=' . base16_cterm00
+exe 'hi CursorLineNr ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm05
+exe 'hi StatusLineText ctermfg=' . base16_cterm03
+exe 'hi StatusLineNC ctermbg=' . base16_cterm03 . ' ctermfg=' . base16_cterm03
+exe 'hi VertSplit ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm03
+exe 'hi AleErrorSign ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm08
+exe 'hi AleWarningSign ctermbg=' . base16_cterm00 . ' ctermfg=' . base16_cterm0D
+exe 'hi GitGutterAdd ctermbg=' . base16_cterm00
+exe 'hi GitGutterChange ctermbg=' . base16_cterm00
+exe 'hi GitGutterDelete ctermbg=' . base16_cterm00
 exe 'hi GitGutterChangeDelete ctermbg=' . base16_cterm00
 
 "
