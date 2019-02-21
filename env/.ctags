@@ -1,0 +1,8 @@
+--tag-relative=yes
+--recurse=yes
+--languages=-sql
+--exclude=.git
+--exclude=vendor
+--exclude=node_modules
+--langmap=javascript:.js.jsx
+--langmap=php:.php

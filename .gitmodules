@@ -55,3 +55,9 @@
 [submodule "env/fzf"]
 	path = env/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "env/bundle/ultisnips"]
+	path = env/bundle/ultisnips
+	url = https://github.com/sirver/ultisnips
+[submodule "env/bundle/vim-snippets"]
+	path = env/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets

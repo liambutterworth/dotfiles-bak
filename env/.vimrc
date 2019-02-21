@@ -22,6 +22,7 @@ let g:ale_sign_warning = '▸'
 let g:ale_sign_error = '▸'
 let g:jsx_ext_required = 0
 let g:gitgutter_map_keys = 0
+let g:fzf_tags_command = 'git ctags'
 
 set lazyredraw
 set autoindent
@@ -105,8 +106,24 @@ nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
 
-nmap [oa :ALEDisable<cr>
-nmap ]oa :ALEEnable<cr>
+nmap <leader><space> :Files<cr>
+nmap <leader>ft :Tags<cr>
+nmap <leader>fT :BTags<cr>
+nmap <leader>fh :History<cr>
+nmap <leader>fa :Ag<cr>
+nmap <leader>fg :GFiles<cr>
+nmap <leader>gc :Commits<cr>
+nmap <leader>gC :BCommits<cr>
+nmap <leader>gs :Gstatus<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gl :Glog<cr>
+nmap <leader>gb :Gblame<cr>
+nmap <leader>gt :Git ctags<cr>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
