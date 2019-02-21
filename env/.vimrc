@@ -17,20 +17,22 @@ colorscheme base16-gruvbox-dark-medium
 filetype plugin indent on
 syntax on
 
-let g:mapleader = ' '
-let g:ale_sign_warning = '▸'
-let g:ale_sign_error = '▸'
-let g:jsx_ext_required = 0
-let g:gitgutter_map_keys = 0
-let g:fzf_tags_command = 'git ctags'
+let g:mapleader=' '
+let g:ale_sign_warning='▸'
+let g:ale_sign_error='▸'
+let g:jsx_ext_required=0
+let g:gitgutter_map_keys=0
+let g:fzf_tags_command='git ctags'
+let g:user_emmet_leader_key='<c-x>'
+let g:NERDTreeMinimalUI=1
 
 set lazyredraw
 set autoindent
 set cursorline
+set rtp+=~/.fzf
 set laststatus=2
 set signcolumn=yes
 set fillchars+=vert:│
-set rtp+=~/.fzf
 set incsearch ignorecase
 set splitright splitbelow
 set backspace=indent,eol,start
@@ -67,14 +69,14 @@ exe 'hi GitGutterChangeDelete ctermbg=' . base16_cterm00
 " Statusline
 "
 
-set statusline =%#StatusLineText#
-set statusline +=\ %{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
-set statusline +=%=
-set statusline +=%{&fileformat}
-set statusline +=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline +=\ %l:%c
-set statusline +=\ %p%%
-set statusline +=\ %#End#
+set statusline=%#StatusLineText#
+set statusline+=\ %{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
+set statusline+=%=
+set statusline+=%{&fileformat}
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ %l:%c
+set statusline+=\ %p%%
+set statusline+=\ %#End#
 
 "
 " Commands
@@ -105,20 +107,16 @@ nmap <c-w>< <c-w>10<
 nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
+nmap <c-n> :NERDTreeToggle<cr>
 
 nmap <leader><space> :Files<cr>
-nmap <leader>ft :Tags<cr>
-nmap <leader>fT :BTags<cr>
-nmap <leader>fh :History<cr>
-nmap <leader>fa :Ag<cr>
-nmap <leader>fg :GFiles<cr>
-nmap <leader>gc :Commits<cr>
-nmap <leader>gC :BCommits<cr>
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>gd :Gdiff<cr>
-nmap <leader>gl :Glog<cr>
-nmap <leader>gb :Gblame<cr>
-nmap <leader>gt :Git ctags<cr>
+nmap <leader>t :Tags<cr>
+nmap <leader>T :BTags<cr>
+nmap <leader>h :History<cr>
+nmap <leader>a :Ag<cr>
+nmap <leader>g :GFiles<cr>
+nmap <leader>c :Commits<cr>
+nmap <leader>C :BCommits<cr>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)

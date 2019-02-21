@@ -61,3 +61,12 @@
 [submodule "env/bundle/vim-snippets"]
 	path = env/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets
+[submodule "env/bundle/vim-blade"]
+	path = env/bundle/vim-blade
+	url = https://github.com/jwalton512/vim-blade
+[submodule "env/bundle/emmet-vim"]
+	path = env/bundle/emmet-vim
+	url = https://github.com/mattn/emmet-vim
+[submodule "env/bundle/nerdtree"]
+	path = env/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
