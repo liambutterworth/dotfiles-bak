@@ -5,6 +5,8 @@ Install vim git tmux and zsh with whatever package manager. Then run:
 ```
   $ git clone http://github.com/liambutterworth/dotfiles.git ~/.dotfiles
 
+  $ brew install git zsh tmux vim cmake
+
   $ ~/.dotfiles/bin/install
 ```
 

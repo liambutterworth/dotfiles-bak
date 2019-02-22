@@ -7,20 +7,24 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # set git global config
 git config --global core.editor vim
-git config --global alias.root 'cd $(git rev-parse --show-toplevel)'
 git config --global alias.ctags '!.git/hooks/ctags'
 git config --global init.templatedir '~/.dotfiles/env/git/template'
 git config --global credential.helper cache
 
 # initialize submodules
-git -C ~/.dotfiles submodule update --init
+git -C ~/.dotfiles submodule update --init --recursive
 
 # install fzf
-~/.dotfiles/env/fzf/install
+~/.dotfiles/env/vim/bundle/fzf/install
+
+# compile ycm with support for js added in
+~/.dotfiles/env/vim/bundle/youcompleteme/install.py
+npm install -g typescript
 
 # symlink dotfiles, vim plugins and fzf
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/env/bundle ~/.vim/bundle
-ln -s ~/.dotfiles/env/fzf ~/.fzf
+ln -s ~/.dotfiles/env/vim/bundle ~/.vim/bundle
+ln -s ~/.dotfiles/env/vim/snips ~/.vim/snips
+ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf

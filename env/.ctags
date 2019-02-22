@@ -1,5 +1,6 @@
 --tag-relative=yes
 --recurse=yes
+--fields=+l
 --languages=-sql
 --exclude=.git
 --exclude=vendor

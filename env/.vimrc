@@ -23,8 +23,10 @@ let g:ale_sign_error='▸'
 let g:jsx_ext_required=0
 let g:gitgutter_map_keys=0
 let g:fzf_tags_command='git ctags'
+let g:ycm_collect_identifiers_from_tags_files=1
 let g:user_emmet_leader_key='<c-x>'
-let g:NERDTreeMinimalUI=1
+let g:UltiSnipsExpandTrigger='<c-x>.'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 
 set lazyredraw
 set autoindent
@@ -32,6 +34,7 @@ set cursorline
 set rtp+=~/.fzf
 set laststatus=2
 set signcolumn=yes
+set tags=.git/tags
 set fillchars+=vert:│
 set incsearch ignorecase
 set splitright splitbelow
@@ -39,7 +42,7 @@ set backspace=indent,eol,start
 set ruler number relativenumber
 set list listchars=tab:│\ ,trail:·
 set wildmenu wildmode=list:longest
-set tabstop=2 shiftwidth=2 noexpandtab
+set tabstop=2 shiftwidth=2 expandtab
 set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
 
@@ -107,7 +110,11 @@ nmap <c-w>< <c-w>10<
 nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
-nmap <c-n> :NERDTreeToggle<cr>
+
+imap <c-o>j <esc>o
+imap <c-o>k <esc>O
+imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
+imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 
 nmap <leader><space> :Files<cr>
 nmap <leader>t :Tags<cr>
@@ -117,11 +124,3 @@ nmap <leader>a :Ag<cr>
 nmap <leader>g :GFiles<cr>
 nmap <leader>c :Commits<cr>
 nmap <leader>C :BCommits<cr>
-
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
-imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a

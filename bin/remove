@@ -10,4 +10,4 @@ git config --global --unset credential.helper
 
 # remove all files
 rm ~/{.zshrc,.vimrc,.tmux.conf}
-rm -rf ~/.vim/autoload ~/.vim/bundle ~/.fzf
+rm -rf ~/.vim/autoload ~/.vim/bundle ~/.vim/snips ~/.fzf
