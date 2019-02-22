@@ -1,5 +1,11 @@
 snippet section "@section"
 @section('$1')
-	$0
+	${2:${VISUAL}}
 @endsection
+endsnippet
+
+snippet foreach "@foreach"
+@foreach ($1)
+	${2:${VISUAL}}
+@endforeach
 endsnippet

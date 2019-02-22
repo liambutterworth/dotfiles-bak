@@ -18,14 +18,16 @@ filetype plugin indent on
 syntax on
 
 let g:mapleader=' '
+let g:netrw_liststyle=3
 let g:ale_sign_warning='▸'
 let g:ale_sign_error='▸'
 let g:jsx_ext_required=0
 let g:gitgutter_map_keys=0
 let g:fzf_tags_command='git ctags'
 let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_previous_completion=['<c-p']
 let g:user_emmet_leader_key='<c-x>'
-let g:UltiSnipsExpandTrigger='<c-x>.'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 
 set lazyredraw
@@ -42,7 +44,7 @@ set backspace=indent,eol,start
 set ruler number relativenumber
 set list listchars=tab:│\ ,trail:·
 set wildmenu wildmode=list:longest
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=4 shiftwidth=4 expandtab
 set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
 
@@ -111,8 +113,8 @@ nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
 
-imap <c-o>j <esc>o
-imap <c-o>k <esc>O
+" imap <c-o>j <esc>o
+" imap <c-o>k <esc>O
 imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 

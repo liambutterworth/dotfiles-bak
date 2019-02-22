@@ -1,3 +1,57 @@
-snippet test "Test snippet"
-This is a test for UltiSnips $0
+#
+# PHP Snippets
+#
+# :: Public Method
+# :: Protected Method
+# :: Private Method
+
+#
+# Public Method
+#
+
+snippet pub "public method" m
+/**
+ * $1
+ *
+ * @return ${2:void}
+ */
+
+public function $3()
+{
+	$0
+}
+endsnippet
+
+#
+# Protected Method
+#
+
+snippet pro "protected method" m
+/**
+ * $1
+ *
+ * @return ${2:void}
+ */
+
+protected function $3()
+{
+	$0
+}
+endsnippet
+
+#
+# Private Method
+#
+
+snippet pri "private method" m
+/**
+ * $1
+ *
+ * @return ${2:void}
+ */
+
+private function $3()
+{
+	$0
+}
 endsnippet
