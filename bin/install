@@ -15,7 +15,7 @@ git config --global credential.helper cache
 git -C ~/.dotfiles submodule update --init --recursive
 
 # install fzf
-~/.dotfiles/env/vim/bundle/fzf/install
+~/.dotfiles/env/vim/bundle/fzf/install --all
 
 # compile ycm with support for js added in
 ~/.dotfiles/env/vim/bundle/youcompleteme/install.py
