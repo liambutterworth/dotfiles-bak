@@ -82,3 +82,15 @@
 [submodule "env/vim/bundle/ultisnips"]
 	path = env/vim/bundle/ultisnips
 	url = https://github.com/sirver/ultisnips
+[submodule "env/vim/bundle/splitjoin.vim"]
+	path = env/vim/bundle/splitjoin.vim
+	url = https://github.com/andrewradev/splitjoin.vim
+[submodule "env/vim/bundle/vim-easy-align"]
+	path = env/vim/bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "env/vim/bundle/vim-polyglot"]
+	path = env/vim/bundle/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
+[submodule "env/vim/bundle/vim-ragtag"]
+	path = env/vim/bundle/vim-ragtag
+	url = https://github.com/tpope/vim-ragtag
