@@ -89,7 +89,7 @@ set statusline +=\ %#End#
 autocmd CompleteDone * pclose
 autocmd filetype * set formatoptions-=o
 autocmd filetype scss.css setlocal commentstring=/*%s*/
-autocmd bufread,bufnewfile *.css set filetype=css.scss
+autocmd bufread,bufnewfile *.css set filetype=scss.css
 
 augroup completion
     autocmd!
@@ -112,13 +112,16 @@ nmap <c-w>< <c-w>10<
 nmap <c-w>> <c-w>10>
 nmap <c-w>- <c-w>10-
 nmap <c-w>+ <c-w>10+
-nmap <c-w>P :tabm 0<cr>
-nmap <c-w>N :tabm +1<cr>
+
+nmap gP :tabm -1<cr>
+nmap gN :tabm +1<cr>
+xmap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
 
 imap <c-x>o <cr><esc>O
 imap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$gJa
-imap <c-e>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
-imap <c-e>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
+imap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
+imap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 
 nmap <leader><space> :Files<cr>
 nmap <leader>t :Tags<cr>
@@ -128,6 +131,3 @@ nmap <leader>a :Ag<cr>
 nmap <leader>g :GFiles<cr>
 nmap <leader>c :Commits<cr>
 nmap <leader>C :BCommits<cr>
-
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)

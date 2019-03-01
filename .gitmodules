@@ -94,3 +94,27 @@
 [submodule "env/vim/bundle/vim-ragtag"]
 	path = env/vim/bundle/vim-ragtag
 	url = https://github.com/tpope/vim-ragtag
+[submodule "env/vim/bundle/vim-git"]
+	path = env/vim/bundle/vim-git
+	url = https://github.com/tpope/vim-git
+[submodule "env/vim/bundle/vim-javascript"]
+	path = env/vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule "env/vim/bundle/scss-syntax.vim"]
+	path = env/vim/bundle/scss-syntax.vim
+	url = https://github.com/cakebaker/scss-syntax.vim
+[submodule "env/vim/bundle/vim-blade"]
+	path = env/vim/bundle/vim-blade
+	url = https://github.com/jwalton512/vim-blade
+[submodule "env/vim/bundle/vim-vue"]
+	path = env/vim/bundle/vim-vue
+	url = https://github.com/posva/vim-vue
+[submodule "env/vim/bundle/dockerfile.vim"]
+	path = env/vim/bundle/dockerfile.vim
+	url = https://github.com/ekalinin/dockerfile.vim
+[submodule "env/vim/bundle/php.vim"]
+	path = env/vim/bundle/php.vim
+	url = https://github.com/stanangeloff/php.vim
+[submodule "env/vim/bundle/vim-json"]
+	path = env/vim/bundle/vim-json
+	url = https://github.com/elzr/vim-json
