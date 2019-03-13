@@ -1,24 +1,33 @@
 #
 # PHP Snippets
 #
+# :: Comment
 # :: Public Method
 # :: Protected Method
 # :: Private Method
+# :: Class
+# :: Trait
+# :: Laravel
+
+
+#
+# Comment
+#
+
+snippet comment "multiline comment" m
+/**
+ * $1
+ */
+endsnippet
 
 #
 # Public Method
 #
 
-snippet pub "public method" m
-/**
- * $1
- *
- * @return ${2:void}
- */
-
-public function $3($4)
+snippet public_function "public method" m
+public function $1($2)
 {
-	$0
+	${3:${VISUAL}}
 }
 endsnippet
 
@@ -26,16 +35,10 @@ endsnippet
 # Protected Method
 #
 
-snippet pro "protected method" m
-/**
- * $1
- *
- * @return ${2:void}
- */
-
-protected function $3($4)
+snippet protected_function "protected method" m
+protected function $1($2)
 {
-	$0
+	${3:${VISUAL}}
 }
 endsnippet
 
@@ -43,15 +46,46 @@ endsnippet
 # Private Method
 #
 
-snippet pri "private method" m
-/**
- * $1
- *
- * @return ${2:void}
- */
-
-private function $3($4)
+snippet private_function "private method" m
+private function $1($2)
 {
-	$0
+	${3:${VISUAL}}
+}
+endsnippet
+
+#
+# Class
+#
+
+snippet class "class" m
+class $1 extends $2
+{
+	${3:${VISUAL}}
+}
+endsnippet
+
+#
+# Trait
+#
+
+snippet trait "class trait" m
+trait $1
+{
+	${2:${VISUAL}}
+}
+endsnippet
+
+#
+# Laravel
+#
+
+snippet l_trait "laravel trait" m
+<?php
+
+namespace App;
+
+trait $1
+{
+	${2:${VISUAL}}
 }
 endsnippet

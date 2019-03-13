@@ -27,7 +27,7 @@ let g:user_emmet_leader_key                   = '<c-x>'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion          = ['<c-n>']
 let g:ycm_key_list_previous_completion        = ['<c-p']
-let g:UltiSnipsSnippetDirectories             = ['~/.vim/snips']
+let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
 
 set lazyredraw
 set autoindent

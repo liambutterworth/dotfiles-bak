@@ -6,11 +6,12 @@
 # :: Aliases
 # :: Prompt
 
+source ~/.zsh/antigen.zsh
+source ~/.fzf.zsh
+
 #
 # Plugins
 #
-
-source ~/.zsh/antigen.zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
@@ -37,9 +38,27 @@ unsetopt menu_complete
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+#
+# Aliases
+#
 
-alias git-root='cd $(git rev-parse --show-toplevel); echo $(pwd)'
+alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
+alias ga='git add'
+alias gaa='git add .'
+alias gmv='git mv'
+alias grm='git rm'
+alias gb='git branch'
+alias gco='git checkout'
+alias gc='git commit -m'
+alias gst='git stash'
+alias gd='git diff'
+alias gt='git tag'
+alias gf='git fetch'
+alias gl='git log'
+alias gll='git log --graph --pretty=format:'\''%Cred%h%Creset =%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\'' --abbrev-commit'
+alias grl='git reflog'
+alias gsh='git show'
+alias gs='git status'
 
 case `uname` in
 	Linux)
@@ -76,5 +95,3 @@ local char='%(?.%F{5}.%F{1})%#'
 PROMPT="
 $dir $user
 $char %F{15}"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
