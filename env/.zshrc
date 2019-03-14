@@ -88,6 +88,8 @@ git_branch() {
         local directory=$(git rev-parse --git-dir 2> /dev/null)
         local color=$grey
 
+        local ahead;
+
         # if merging
         if [ -n $directory ] && test -r $directory/MERGE_HEAD; then
             branch+="${blue}|${red}merging"
