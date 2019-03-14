@@ -1,11 +1,11 @@
-Clone and install in home as hidden directory
+Installation:
 
 ```
+
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles
+    $ brew install cmake git zsh tmux vim
+    $ brew cask tap homebrew/cask-fonts
+    $ brew cask install font-source-code-pro
+    $ brew cask install iterm2
+    $ ~/.dotfiles/bin/install
 ```
-
-MacOS installation with Homebrew: `$ brew install cmake git zsh tmux vim`
-
-Ubuntu Installation: `$ sudo apt install build-essential cmake python3-dev git zsh tmux vim`
-
-Run install script: `$ ~/.dotfiles/bin/install`

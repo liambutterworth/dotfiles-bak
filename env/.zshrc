@@ -38,6 +38,8 @@ unsetopt menu_complete
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+
 #
 # Aliases
 #
@@ -74,29 +76,28 @@ esac
 # Prompt
 #
 
-red='%F{1}'
-green='%F{2}'
-yellow='%F{3}'
-blue='%F{4}'
-purple='%F{5}'
-teal='%F{6}'
-grey='%F{7}'
+local red='%F{1}'
+local green='%F{2}'
+local yellow='%F{3}'
+local blue='%F{4}'
+local purple='%F{5}'
+local teal='%F{6}'
+local grey='%F{7}'
+local white='%F{15}'
 
 git_branch() {
     if ( $(git rev-parse --is-inside-work-tree 2>/dev/null) ); then
         local branch=$(git symbolic-ref HEAD | cut -d'/' -f3)
         local directory=$(git rev-parse --git-dir 2> /dev/null)
         local color=$grey
+        local output=""
 
-        local ahead;
-
-        # if merging
-        if [ -n $directory ] && test -r $directory/MERGE_HEAD; then
-            branch+="${blue}|${red}merging"
-        fi
+        # if there are untracked files
+        if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+            color=$red
 
         # if there are modified files
-        if ! git diff --quiet 2> /dev/null; then
+        elif ! git diff --quiet 2> /dev/null; then
             color=$yellow
 
         # if there are staged files
@@ -104,7 +105,14 @@ git_branch() {
             color=$green
         fi
 
-        echo "(${color}${branch}${blue})"
+        output="(${color}${branch}${blue})"
+
+        # if merging
+        if test -r $directory/MERGE_HEAD; then
+            output+="${blue}->${purple}merging${blue}"
+        fi
+
+        echo $output
     fi
 }
 
@@ -120,4 +128,4 @@ local char='%(?.${purple}.${red})%#'
 
 PROMPT="
 $dir $user
-$char %F{15}"
+$char $white"
