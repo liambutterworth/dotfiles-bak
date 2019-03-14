@@ -60,6 +60,7 @@ alias gll='git log --graph --pretty=format:'\''%Cred%h%Creset =%C(yellow)%d%Cres
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
+alias gw='while; do; clear; gs; sleep 1; done'
 
 case `uname` in
     Linux)
