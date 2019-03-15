@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# download antigen, pure and pathogen
+# download antigen and pathogen
 mkdir -p ~/.zsh ~/.vim/autoload
-curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh > ~/.zsh/async.zsh
-curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh > ~/.zsh/pure.zsh
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# download and symlink files for pure prompt
+curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh > ~/.zsh/async.zsh
+curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh > ~/.zsh/pure.zsh
+ln -s ~/.zsh/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+ln -s ~/.zsh/async.zsh /usr/local/share/zsh/site-functions/async
 
 # set git global config
 git config --global core.editor vim
@@ -13,16 +17,13 @@ git config --global alias.ctags '!.git/hooks/ctags'
 git config --global init.templatedir '~/.dotfiles/env/git/template'
 git config --global credential.helper cache
 
-# initialize submodules
-git -C ~/.dotfiles submodule update --init --recursive
-
-# install fzf and youcompleteme
+# symlink and install fzf
+ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf
 ~/.fzf/install --all
-~/.vim/bundle/youcompleteme/install.py --ts-completer
 
-# symlink pure scripts into zsh path
-ln -s ~/.zsh/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
-ln -s ~/.zsh/async.zsh /usr/local/share/zsh/site-functions/async
+# initialize submodules and install compiled packages
+git -C ~/.dotfiles submodule update --init --recursive
+~/.vim/bundle/youcompleteme/install.py --ts-completer
 
 # symlink dotfiles, vim plugins and fzf to home
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
@@ -30,4 +31,3 @@ ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/env/vim/bundle ~/.vim/bundle
 ln -s ~/.dotfiles/env/vim/snips ~/.vim/snips
-ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf
