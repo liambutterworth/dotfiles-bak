@@ -118,3 +118,6 @@
 [submodule "env/vim/bundle/vim-json"]
 	path = env/vim/bundle/vim-json
 	url = https://github.com/elzr/vim-json
+[submodule "env/vim/bundle/nord-vim"]
+	path = env/vim/bundle/nord-vim
+	url = git://github.com/arcticicestudio/nord-vim.git
