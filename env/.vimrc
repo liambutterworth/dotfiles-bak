@@ -77,7 +77,8 @@ endfunction
 
 function TabLabel(n)
     let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
+    let winnr   = tabpagewinnr(a:n)
+
     return bufname(buflist[winnr - 1])
 endfunction
 
