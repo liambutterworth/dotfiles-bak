@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# download antigen and pathogen
+# download antigen, pure and pathogen
 mkdir -p ~/.zsh ~/.vim/autoload
+curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh > ~/.zsh/async.zsh
+curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh > ~/.zsh/pure.zsh
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
@@ -14,14 +16,15 @@ git config --global credential.helper cache
 # initialize submodules
 git -C ~/.dotfiles submodule update --init --recursive
 
-# install fzf
-~/.dotfiles/env/vim/bundle/fzf/install --all
+# install fzf and youcompleteme
+~/.fzf/install --all
+~/.vim/bundle/youcompleteme/install.py --ts-completer
 
-# compile ycm with support for js added in
-~/.dotfiles/env/vim/bundle/youcompleteme/install.py
-npm install -g typescript
+# symlink pure scripts into zsh path
+ln -s ~/.zsh/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
+ln -s ~/.zsh/async.zsh /usr/local/share/zsh/site-functions/async
 
-# symlink dotfiles, vim plugins and fzf
+# symlink dotfiles, vim plugins and fzf to home
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/env/.vimrc ~/.vimrc

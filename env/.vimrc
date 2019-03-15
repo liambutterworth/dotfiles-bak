@@ -2,8 +2,8 @@
 " Vim Config
 "
 " :: Settings
-" :: Highlights
-" :: Statusline
+" :: Tab Line
+" :: Status Line
 " :: Commands
 " :: Mappings
 
@@ -13,7 +13,7 @@
 
 execute pathogen#infect()
 runtime macros/matchit.vim
-colorscheme base16-gruvbox-dark-medium
+colorscheme nord
 filetype plugin indent on
 syntax on
 
@@ -23,7 +23,6 @@ let g:ale_sign_error                          = '▸'
 let g:gitgutter_map_keys                      = 0
 let g:splitjoin_trailing_comma                = 1
 let g:fzf_tags_command                        = 'git ctags'
-let g:user_emmet_leader_key                   = '<c-x>'
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion          = ['<c-n>']
 let g:ycm_key_list_previous_completion        = ['<c-p']
@@ -36,7 +35,7 @@ set rtp+=~/.fzf
 set laststatus=2
 set signcolumn=yes
 set tags=.git/tags
-set fillchars+=vert:│
+set fillchars+=vert:\ 
 set incsearch ignorecase
 set splitright splitbelow
 set backspace=indent,eol,start
@@ -48,29 +47,38 @@ set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
 
 "
-" Highlights
+" Tab Line
 "
 
-exe 'hi Pmenu ctermbg='                . base16_cterm00
-exe 'hi PmenuSel ctermbg='             . base16_cterm03 . ' ctermfg=' . base16_cterm05
-exe 'hi TabLine ctermbg='              . base16_cterm00 . ' ctermfg=' . base16_cterm03
-exe 'hi TabLineSel ctermbg='           . base16_cterm00 . ' ctermfg=' . base16_cterm05
-exe 'hi TabLineFill ctermbg='          . base16_cterm00
-exe 'hi LineNr ctermbg='               . base16_cterm00
-exe 'hi CursorLine ctermbg='           . base16_cterm00
-exe 'hi CursorLineNr ctermbg='         . base16_cterm00 . ' ctermfg=' . base16_cterm05
-exe 'hi StatusLineText ctermfg='       . base16_cterm03
-exe 'hi StatusLineNC ctermbg='         . base16_cterm03 . ' ctermfg=' . base16_cterm03
-exe 'hi VertSplit ctermbg='            . base16_cterm00 . ' ctermfg=' . base16_cterm03
-exe 'hi AleErrorSign ctermbg='         . base16_cterm00 . ' ctermfg=' . base16_cterm08
-exe 'hi AleWarningSign ctermbg='       . base16_cterm00 . ' ctermfg=' . base16_cterm0D
-exe 'hi GitGutterAdd ctermbg='         . base16_cterm00
-exe 'hi GitGutterChange ctermbg='      . base16_cterm00
-exe 'hi GitGutterDelete ctermbg='      . base16_cterm00
-exe 'hi GitGutterChangeDelete ctermbg='. base16_cterm00
+set tabline=%!TabLine()
+
+function! TabLine()
+    let s = ''
+
+    for i in range(tabpagenr('$'))
+        if i + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+
+        let s .= '%' . (i + 1) . 'T'
+        let s .= ' %{TabLabel(' . (i + 1) . ')} '
+    endfor
+
+    let s .= '%#TabLineFill#%T'
+
+    return s
+endfunction
+
+function TabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    return bufname(buflist[winnr - 1])
+endfunction
 
 "
-" Statusline
+" Status Line
 "
 
 set statusline  =%#StatusLineText#
@@ -108,10 +116,10 @@ nmap Y y$
 nmap j gj
 nmap k gk
 
-nmap <c-w>< <c-w>10<
-nmap <c-w>> <c-w>10>
-nmap <c-w>- <c-w>10-
-nmap <c-w>+ <c-w>10+
+nmap <c-w>h <c-w>10<
+nmap <c-w>j <c-w>10-
+nmap <c-w>k <c-w>10+
+nmap <c-w>l <c-w>10>
 
 nmap gP :tabm -1<cr>
 nmap gN :tabm +1<cr>
