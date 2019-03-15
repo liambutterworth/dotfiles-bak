@@ -4,9 +4,6 @@
 [submodule "env/bundle/auto-pairs"]
 	path = env/bundle/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs
-[submodule "env/bundle/base16-vim"]
-	path = env/bundle/base16-vim
-	url = https://github.com/chriskempson/base16-vim
 [submodule "env/bundle/scss-syntax.vim"]
 	path = env/bundle/scss-syntax.vim
 	url = https://github.com/cakebaker/scss-syntax.vim
@@ -25,9 +22,6 @@
 [submodule "env/bundle/vim-javascript"]
 	path = env/bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
-[submodule "env/bundle/vim-jsx"]
-	path = env/bundle/vim-jsx
-	url = https://github.com/mxw/vim-jsx
 [submodule "env/bundle/vim-repeat"]
 	path = env/bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat
@@ -64,12 +58,6 @@
 [submodule "env/bundle/vim-blade"]
 	path = env/bundle/vim-blade
 	url = https://github.com/jwalton512/vim-blade
-[submodule "env/bundle/emmet-vim"]
-	path = env/bundle/emmet-vim
-	url = https://github.com/mattn/emmet-vim
-[submodule "env/bundle/nerdtree"]
-	path = env/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
 [submodule "env/bundle/youcompleteme"]
 	path = env/bundle/youcompleteme
 	url = https://github.com/valloric/youcompleteme
@@ -88,9 +76,6 @@
 [submodule "env/vim/bundle/vim-easy-align"]
 	path = env/vim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align
-[submodule "env/vim/bundle/vim-polyglot"]
-	path = env/vim/bundle/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot
 [submodule "env/vim/bundle/vim-ragtag"]
 	path = env/vim/bundle/vim-ragtag
 	url = https://github.com/tpope/vim-ragtag
@@ -115,9 +100,6 @@
 [submodule "env/vim/bundle/php.vim"]
 	path = env/vim/bundle/php.vim
 	url = https://github.com/stanangeloff/php.vim
-[submodule "env/vim/bundle/vim-json"]
-	path = env/vim/bundle/vim-json
-	url = https://github.com/elzr/vim-json
 [submodule "env/vim/bundle/nord-vim"]
 	path = env/vim/bundle/nord-vim
 	url = git://github.com/arcticicestudio/nord-vim.git

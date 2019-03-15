@@ -44,7 +44,12 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
+zstyle ':completion:*' auto-description 'Specify: %d'
+zstyle ':completion:*' format 'Completing: %d'
+zstyle ':completion:*' completer _complete _correct _approximate
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*' verbose true
 
 autoload -U edit-command-line
 autoload -U colors && colors
@@ -56,16 +61,18 @@ prompt pure
 # Aliases
 #
 
-case `uname` in
-    Linux)
-        alias ls='ls --color --group-directories-first'
-        alias ll='ls -la'
-        ;;
-    Darwin)
-        alias ls='ls -G'
-        alias ll='ls -la'
-        ;;
-esac
+alias ls='gls --color --group-directories-first'
+alias ll='ls -la'
+alias lt='tree -a -I ".git|node_modules|vendor"'
+
+alias vp='vim -p'
+alias vs='vim -o'
+alias vv='vim -O'
+
+alias ta='tmux attach-session -t'
+alias tk='tmux kill-session -t'
+alias tl='tmux list-sessions'
+alias tn='tmux rename-session'
 
 alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
 alias ga='git add'
@@ -84,12 +91,3 @@ alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
 alias gw='while; do; clear; gs -sbu; sleep 1; done'
-
-alias ta='tmux attach-session -t'
-alias tk='tmux kill-session -t'
-alias tl='tmux list-sessions'
-alias tn='tmux rename-session'
-
-alias vp='vim -p'
-alias vs='vim -o'
-alias vv='vim -O'
