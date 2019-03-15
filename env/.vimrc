@@ -2,9 +2,8 @@
 " Vim Config
 "
 " :: Settings
-" :: Tab Line
-" :: Status Line
-" :: Commands
+" :: TabLine
+" :: StatusLine
 " :: Mappings
 
 "
@@ -17,37 +16,42 @@ colorscheme nord
 filetype plugin indent on
 syntax on
 
-let g:mapleader                               = ' '
 let g:ale_sign_warning                        = '▸'
 let g:ale_sign_error                          = '▸'
-let g:gitgutter_map_keys                      = 0
-let g:splitjoin_trailing_comma                = 1
 let g:fzf_tags_command                        = 'git ctags'
+let g:gitgutter_map_keys                      = 0
+let g:mapleader                               = ' '
+let g:splitjoin_trailing_comma                = 1
+let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_key_list_select_completion          = ['<c-n>']
 let g:ycm_key_list_previous_completion        = ['<c-p']
-let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
 
-set lazyredraw
 set autoindent
+set backspace=indent,eol,start
 set cursorline
-set rtp+=~/.fzf
-set laststatus=2
-set signcolumn=yes
-set tags=.git/tags
 set fillchars+=vert:\ 
 set incsearch ignorecase
-set splitright splitbelow
-set backspace=indent,eol,start
-set ruler number relativenumber
-set list listchars=tab:│\ ,trail:·
-set wildmenu wildmode=list:longest
-set tabstop=4 shiftwidth=4 expandtab
-set nowrap novisualbell nobackup noswapfile
 set foldenable foldmethod=syntax foldlevelstart=20
+set laststatus=2
+set lazyredraw
+set list listchars=tab:│\ ,trail:·
+set nowrap novisualbell nobackup noswapfile
+set signcolumn=yes
+set splitright splitbelow
+set tabstop=4 shiftwidth=4 expandtab
+set tags=.git/tags
+set rtp+=~/.fzf
+set ruler number relativenumber
+set wildmenu wildmode=list:longest
+
+autocmd filetype * set formatoptions-=o
+autocmd filetype scss.css setlocal commentstring=/*%s*/
+autocmd filetype php setlocal commentstring=//%s
+autocmd bufread,bufnewfile *.css set filetype=scss.css
 
 "
-" Tab Line
+" TabLine
 "
 
 set tabline=%!TabLine()
@@ -78,7 +82,7 @@ function TabLabel(n)
 endfunction
 
 "
-" Status Line
+" StatusLine
 "
 
 set statusline  =%#StatusLineText#
@@ -91,24 +95,6 @@ set statusline +=\ %p%%
 set statusline +=\ %#End#
 
 "
-" Commands
-"
-
-autocmd CompleteDone * pclose
-autocmd filetype * set formatoptions-=o
-autocmd filetype scss.css setlocal commentstring=/*%s*/
-autocmd bufread,bufnewfile *.css set filetype=scss.css
-
-augroup completion
-    autocmd!
-    autocmd filetype markdown setlocal spell complete+=kspell
-    autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
-augroup END
-
-"
 " Mappings
 "
 
@@ -116,26 +102,31 @@ nmap Y y$
 nmap j gj
 nmap k gk
 
-nmap <c-w>h <c-w>10<
-nmap <c-w>j <c-w>10-
-nmap <c-w>k <c-w>10+
-nmap <c-w>l <c-w>10>
+noremap <left> <nop>
+noremap <down> <nop>
+noremap <up> <nop>
+noremap <right> <nop>
 
-nmap gP :tabm -1<cr>
-nmap gN :tabm +1<cr>
-xmap ga <plug>(EasyAlign)
-nmap ga <plug>(EasyAlign)
+nnoremap <c-w>h <c-w>10<
+nnoremap <c-w>j <c-w>10-
+nnoremap <c-w>k <c-w>10+
+nnoremap <c-w>l <c-w>10>
 
-imap <c-x>o <cr><esc>O
-imap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$gJa
-imap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
-imap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
+xnoremap ga <plug>(EasyAlign)
+nnoremap ga <plug>(EasyAlign)
+nnoremap gP :tabm -1<cr>
+nnoremap gN :tabm +1<cr>
 
-nmap <leader><space> :Files<cr>
-nmap <leader>t :Tags<cr>
-nmap <leader>T :BTags<cr>
-nmap <leader>h :History<cr>
-nmap <leader>a :Ag<cr>
-nmap <leader>g :GFiles<cr>
-nmap <leader>c :Commits<cr>
-nmap <leader>C :BCommits<cr>
+inoremap <c-x>o <cr><esc>O
+inoremap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$gJa
+inoremap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
+inoremap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
+
+nnoremap <leader><space> :Files<cr>
+nnoremap <leader>t :Tags<cr>
+nnoremap <leader>T :BTags<cr>
+nnoremap <leader>h :History<cr>
+nnoremap <leader>a :Ag<cr>
+nnoremap <leader>g :GFiles<cr>
+nnoremap <leader>c :Commits<cr>
+nnoremap <leader>C :BCommits<cr>
