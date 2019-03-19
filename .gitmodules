@@ -19,9 +19,6 @@
 [submodule "env/vim/bundle/splitjoin.vim"]
 	path = env/vim/bundle/splitjoin.vim
 	url = https://github.com/andrewradev/splitjoin.vim
-[submodule "env/vim/bundle/ultisnips"]
-	path = env/vim/bundle/ultisnips
-	url = https://github.com/sirver/ultisnips
 [submodule "env/vim/bundle/vim-blade"]
 	path = env/vim/bundle/vim-blade
 	url = https://github.com/jwalton512/vim-blade
