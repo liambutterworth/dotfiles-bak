@@ -16,18 +16,6 @@ colorscheme nord
 filetype plugin indent on
 syntax on
 
-let g:ale_sign_warning                        = '▸'
-let g:ale_sign_error                          = '▸'
-let g:fzf_tags_command                        = 'git ctags'
-let g:gitgutter_map_keys                      = 0
-let g:mapleader                               = ' '
-let g:nord_comment_brightness                 = 20
-let g:splitjoin_trailing_comma                = 1
-let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_key_list_select_completion          = ['<c-n>']
-let g:ycm_key_list_previous_completion        = ['<c-p']
-
 set autoindent
 set backspace=indent,eol,start
 set cursorline
@@ -50,6 +38,22 @@ autocmd filetype * set formatoptions-=o
 autocmd filetype scss.css setlocal commentstring=/*%s*/
 autocmd filetype php setlocal commentstring=//%s
 autocmd bufread,bufnewfile *.css set filetype=scss.css
+
+let g:ale_sign_warning                        = '▸'
+let g:ale_sign_error                          = '▸'
+let g:fzf_tags_command                        = 'git ctags'
+let g:gitgutter_map_keys                      = 0
+let g:mapleader                               = ' '
+let g:nord_comment_brightness                 = 20
+let g:splitjoin_trailing_comma                = 1
+let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_list_select_completion          = ['<c-n>']
+let g:ycm_key_list_previous_completion        = ['<c-p']
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': [ 'typescript-language-server', '--stdio' ]
+    \ }
 
 "
 " TabLine
