@@ -21,6 +21,7 @@ let g:ale_sign_error                          = '▸'
 let g:fzf_tags_command                        = 'git ctags'
 let g:gitgutter_map_keys                      = 0
 let g:mapleader                               = ' '
+let g:nord_comment_brightness                 = 20
 let g:splitjoin_trailing_comma                = 1
 let g:UltiSnipsSnippetDirectories             = [$HOME.'/.vim/snips']
 let g:ycm_collect_identifiers_from_tags_files = 1
@@ -57,29 +58,22 @@ autocmd bufread,bufnewfile *.css set filetype=scss.css
 set tabline=%!TabLine()
 
 function! TabLine()
-    let s = ''
+    let output = ''
 
-    for i in range(tabpagenr('$'))
-        if i + 1 == tabpagenr()
-            let s .= '%#TabLineSel#'
-        else
-            let s .= '%#TabLine#'
-        endif
-
-        let s .= '%' . (i + 1) . 'T'
-        let s .= ' %{TabLabel(' . (i + 1) . ')} '
+    for index in range(tabpagenr('$'))
+        let output .= (index + 1 == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+        let output .= '%' . (index + 1) . 'T'
+        let output .= ' %{TabLabel(' . (index + 1) . ')} '
     endfor
 
-    let s .= '%#TabLineFill#%T'
-
-    return s
+    return output . '%#TabLineFill#%T'
 endfunction
 
-function TabLabel(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr   = tabpagewinnr(a:n)
+function TabLabel(tab)
+    let buflist = tabpagebuflist(a:tab)
+    let winnr   = tabpagewinnr(a:tab)
 
-    return bufname(buflist[winnr - 1])
+    return fnamemodify(bufname(buflist[winnr - 1]), ':r')
 endfunction
 
 "
@@ -103,20 +97,15 @@ nmap Y y$
 nmap j gj
 nmap k gk
 
-noremap <left> <nop>
-noremap <down> <nop>
-noremap <up> <nop>
-noremap <right> <nop>
-
 nnoremap <c-w>h <c-w>10<
 nnoremap <c-w>j <c-w>10-
 nnoremap <c-w>k <c-w>10+
 nnoremap <c-w>l <c-w>10>
 
-xnoremap ga <plug>(EasyAlign)
-nnoremap ga <plug>(EasyAlign)
-nnoremap gP :tabm -1<cr>
-nnoremap gN :tabm +1<cr>
+xmap ga <plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
+nmap gP :tabm -1<cr>
+nmap gN :tabm +1<cr>
 
 inoremap <c-x>o <cr><esc>O
 inoremap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$gJa
