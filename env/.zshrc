@@ -17,8 +17,8 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
+# antigen bundle mafredri/zsh-async
+# antigen bundle sindresorhus/pure
 antigen apply
 
 #
@@ -53,9 +53,9 @@ zstyle ':completion:*' verbose true
 
 autoload -U edit-command-line
 autoload -U colors && colors
-autoload -U promptinit && promptinit
 
-prompt pure
+# autoload -U promptinit && promptinit
+# prompt pure
 
 #
 # Aliases
@@ -91,3 +91,79 @@ alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
 alias gw='while; do; clear; gs -sbu; sleep 1; done'
+
+    #
+# Prompt
+#
+
+local red='%F{1}'
+local green='%F{2}'
+local yellow='%F{3}'
+local blue='%F{4}'
+local purple='%F{5}'
+local teal='%F{6}'
+local grey='%F{8}'
+local white='%F{15}'
+
+git-info() {
+    if ( $(git rev-parse --is-inside-work-tree 2>/dev/null) ); then
+        local branch=$(git symbolic-ref HEAD | cut -d'/' -f3)
+        # [[ $(git diff --shortstat 2>/dev/null | tail -n1) != "" ]] && branch+="*"
+        [[ $(git status --porcelain 2>/dev/null | tail -n1) != "" ]] && branch+="*"
+
+        # local directory=$(git rev-parse --git-dir 2> /dev/null)
+        # local color=$grey
+        # local output=""
+
+        # if there are untracked files
+        # if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+        #     color=$red
+
+        # if there are modified files
+        # elif ! git diff --quiet 2> /dev/null; then
+        #     color=$yellow
+
+        # if there are staged files
+        # elif ! git diff --cached --quiet 2> /dev/null; then
+        #     color=$green
+        # fi
+
+        # output="(${color}${branch}${blue})"
+
+        # if merging
+        # if test -r $directory/MERGE_HEAD; then
+        #     output+="${blue}->${purple}merging${blue}"
+        # fi
+
+        echo "${grey}${branch}"
+    fi
+}
+
+user-info() {
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        echo '${grey}%n@%m${blue}'
+    fi
+}
+
+set-prompt() {
+    local dir="${blue}%3~"
+    local char="%(?.${purple}.${red})"
+    local newline=$'\n'
+
+    case ${KEYMAP} in
+        (vicmd)      char+="❮" ;;
+        (main|viins) char+="❯" ;;
+    esac
+
+    PROMPT="${dir} $(git-info) $(user-info)${newline}${char} "
+}
+
+function zle-line-init zle-keymap-select {
+    set-prompt
+    zle reset-prompt
+}
+
+precmd() { print }
+preexec() { print }
+
+zle -N zle-line-init zle-keymap-select
