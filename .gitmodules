@@ -67,6 +67,3 @@
 [submodule "env/vim/bundle/vim-vue"]
 	path = env/vim/bundle/vim-vue
 	url = https://github.com/posva/vim-vue
-[submodule "env/vim/bundle/youcompleteme"]
-	path = env/vim/bundle/youcompleteme
-	url = https://github.com/valloric/youcompleteme

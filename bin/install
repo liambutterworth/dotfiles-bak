@@ -5,12 +5,6 @@ mkdir -p ~/.zsh ~/.vim/autoload
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# download and symlink files for pure prompt
-curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh > ~/.zsh/async.zsh
-curl -L https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh > ~/.zsh/pure.zsh
-ln -s ~/.zsh/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup
-ln -s ~/.zsh/async.zsh /usr/local/share/zsh/site-functions/async
-
 # set git global config
 git config --global core.editor vim
 git config --global alias.ctags '!.git/hooks/ctags'
@@ -18,12 +12,13 @@ git config --global init.templatedir '~/.dotfiles/env/git/template'
 git config --global credential.helper cache
 
 # symlink and install fzf
-ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf
-~/.fzf/install --all
+ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf && ~/.fzf/install --all
 
 # initialize submodules and install compiled packages
 git -C ~/.dotfiles submodule update --init --recursive
-~/.vim/bundle/youcompleteme/install.py --ts-completer
+
+# install language servers
+npm i -g typescript typescrypt-language-server intelephense vscode-css-languageserver-bin
 
 # symlink dotfiles, vim plugins and fzf to home
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
