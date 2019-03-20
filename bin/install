@@ -11,18 +11,17 @@ git config --global alias.ctags '!.git/hooks/ctags'
 git config --global init.templatedir '~/.dotfiles/env/git/template'
 git config --global credential.helper cache
 
-# symlink and install fzf
-ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf && ~/.fzf/install --all
-
 # initialize submodules and install compiled packages
 git -C ~/.dotfiles submodule update --init --recursive
 
 # install language servers
-npm i -g typescript typescrypt-language-server intelephense vscode-css-languageserver-bin
+npm i -g typescript typescrypt-language-server vscode-html-languageserver-bin vscode-css-languageserver-bin
+
+# symlink and install fzf
+ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf && ~/.fzf/install --all
 
 # symlink dotfiles, vim plugins and fzf to home
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/env/vim/bundle ~/.vim/bundle
-ln -s ~/.dotfiles/env/vim/snips ~/.vim/snips

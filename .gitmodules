@@ -64,3 +64,6 @@
 [submodule "env/vim/bundle/LanguageClient-neovim"]
 	path = env/vim/bundle/LanguageClient-neovim
 	url = https://github.com/autozimu/LanguageClient-neovim
+[submodule "env/vim/bundle/vim-abolish"]
+	path = env/vim/bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish
