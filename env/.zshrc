@@ -5,6 +5,7 @@
 # :: Settings
 # :: Aliases
 # :: Prompt
+# :: Fuzzy Finder
 
 #
 # Plugins
@@ -54,8 +55,6 @@ autoload -U colors && colors
 # Aliases
 #
 
-export GIT_LOG_FORMAT='%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset'
-
 alias ls='gls --color --group-directories-first'
 alias ll='ls -la'
 alias lt="tree -a -I '.git|node_modules|vendor'"
@@ -78,10 +77,11 @@ alias gco='git checkout'
 alias gc='git commit -m'
 alias gst='git stash'
 alias gd='git diff'
+alias gdt="git diff-tree --no-commit-id --name-only -r"
 alias gt='git tag'
 alias gf='git fetch'
 alias gl='git log'
-alias gll="git log --graph --pretty=format:'$GIT_LOG_FORMAT' --abbrev-commit"
+alias gll="git log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
@@ -91,43 +91,26 @@ alias gw='while; do; clear; gs -sbu; sleep 1; done'
 # Prompt
 #
 
-local red='%F{1}'
-local green='%F{2}'
-local yellow='%F{3}'
-local blue='%F{4}'
-local purple='%F{5}'
-local teal='%F{6}'
-local grey='%F{8}'
-local white='%F{7}'
-
 git-info() {
     if ( $(git rev-parse --is-inside-work-tree 2>/dev/null) ); then
         local branch=$(git symbolic-ref HEAD | cut -d'/' -f3)
         [[ $(git status --porcelain 2>/dev/null | tail -n1) != "" ]] && branch+="*"
-        echo "${grey}${branch}${blue}"
+        echo $branch
     fi
 }
 
 user-info() {
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        local username='%n'
-        local hostname='%m'
-        echo '${grey}${username}@${hostname}${blue}'
-    fi
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && echo '%n@%m'
 }
 
 set-prompt() {
-    local dir="${blue}%3~"
-    local char="%(?.${purple}.${red})"
-    local newline=$'\n'
+    PROMPT="%F{4}%3~ %F{8}$(git-info) $(user-info)"
+    PROMPT+=$'\n'"%(?.%F{5}.%F{1})"
 
     case ${KEYMAP} in
-        (vicmd)      char+="❮" ;;
-        (main|viins) char+="❯" ;;
-        (*)          char+="❯" ;;
+        (vicmd)      PROMPT+="❮ " ;;
+        (main|viins) PROMPT+="❯ " ;;
     esac
-
-    PROMPT="${dir} $(git-info) $(user-info)${newline}${char} "
 }
 
 precmd() { print }

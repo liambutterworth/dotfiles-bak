@@ -2,12 +2,10 @@
 " Vim Config
 "
 " :: Settings
-" :: Mappings
-" :: Status Line
-" :: Tab Line
+" :: Maps
 " :: Theme
-" :: Easy Align
-" :: Split Join
+" :: Tab Line
+" :: Status Line
 " :: Language Client
 " :: Fuzzy Finder
 
@@ -70,17 +68,13 @@ inoremap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 inoremap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 
 "
-" Status Line
+" Theme
 "
 
-set statusline=%#StatusLineText#
-set statusline+=\ %{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
-set statusline+=%=
-set statusline+=%{&fileformat}
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ %l:%c
-set statusline+=\ %p%%
-set statusline+=\ %#End#
+if !empty(globpath(&runtimepath, '*/nord-vim'))
+    colorscheme nord
+    let g:nord_comment_brightness=20
+endif
 
 "
 " Tab Line
@@ -107,30 +101,17 @@ function! TabLabel(tab)
 endfunction
 
 "
-" Theme
+" Status Line
 "
 
-if !empty(globpath(&runtimepath, '*/nord-vim'))
-    colorscheme nord
-    let g:nord_comment_brightness=20
-endif
-
-"
-" Easy Align
-"
-
-if !empty(globpath(&runtimepath, '*/vim-easy-align'))
-    xmap ga <plug>(EasyAlign)
-    nmap ga <plug>(EasyAlign)
-endif
-
-"
-" Split Join
-"
-
-if !empty(globpath(&runtimepath, '*/split-join.vim'))
-    set g:splitjoin_trailing_comma=1
-endif
+set statusline=%#StatusLineText#
+set statusline+=\ %{empty(fugitive#head(7))?'':fugitive#head(7).'\ '}%f%M
+set statusline+=%=
+set statusline+=%{&fileformat}
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ %l:%c
+set statusline+=\ %p%%
+set statusline+=\ %#End#
 
 "
 " Language Client
@@ -162,7 +143,7 @@ endif
 if !empty(globpath(&runtimepath, '*/fzf.vim'))
     set runtimepath+=~/.fzf
 
-    let g:fzf_commits_log_options = '--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
+    let g:fzf_commits_log_options='--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
     let g:fzf_tags_command='git ctags'
 
     command! -bang -nargs=? -complete=dir Files
