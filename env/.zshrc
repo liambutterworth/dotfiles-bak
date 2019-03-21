@@ -94,7 +94,7 @@ alias gw='while; do; clear; gs -sbu; sleep 1; done'
 git-info() {
     if ( $(git rev-parse --is-inside-work-tree 2>/dev/null) ); then
         local branch=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        [[ $(git status --porcelain 2>/dev/null | tail -n1) != "" ]] && branch+="*"
+        [[ $(git status --porcelain 2>/dev/null | tail -n1) != '' ]] && branch+='*'
         echo $branch
     fi
 }
@@ -104,13 +104,9 @@ user-info() {
 }
 
 set-prompt() {
+    [[ $KEYMAP = 'vicmd' ]] && char="❮" || char="❯"
     PROMPT="%F{4}%3~ %F{8}$(git-info) $(user-info)"
-    PROMPT+=$'\n'"%(?.%F{5}.%F{1})"
-
-    case ${KEYMAP} in
-        (vicmd)      PROMPT+="❮ " ;;
-        (main|viins) PROMPT+="❯ " ;;
-    esac
+    PROMPT+=$'\n'"%(?.%F{5}.%F{1})$char "
 }
 
 precmd() { print }
