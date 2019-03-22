@@ -1,6 +1,3 @@
-[submodule "env/vim/bundle/auto-pairs"]
-	path = env/vim/bundle/auto-pairs
-	url = https://github.com/jiangmiao/auto-pairs
 [submodule "env/vim/bundle/fzf"]
 	path = env/vim/bundle/fzf
 	url = https://github.com/junegunn/fzf
@@ -64,3 +61,12 @@
 [submodule "env/vim/bundle/vim-abolish"]
 	path = env/vim/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish
+[submodule "env/vim/bundle/vim-easy-align"]
+	path = env/vim/bundle/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "env/vim/bundle/delimitmate"]
+	path = env/vim/bundle/delimitmate
+	url = https://github.com/raimondi/delimitmate
+[submodule "env/vim/bundle/vim-endwise"]
+	path = env/vim/bundle/vim-endwise
+	url = https://github.com/tpope/vim-endwise

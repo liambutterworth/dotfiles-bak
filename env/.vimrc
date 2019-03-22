@@ -6,6 +6,14 @@
 " :: Theme
 " :: Tab Line
 " :: Status Line
+" :: Text Editing
+" :: Language Client
+" :: Fuzzy Finder
+
+" :: Settings
+" :: Maps
+" :: User Interface
+" :: Text Editing
 " :: Language Client
 " :: Fuzzy Finder
 
@@ -20,23 +28,24 @@ syntax on
 
 set autoindent
 set backspace=indent,eol,start
-set cursorline
-set fillchars+=vert:\ 
 set hidden
-set ignorecase
 set incsearch
-set laststatus=2
+set ignorecase smartcase
 set lazyredraw
-set list listchars=tab:│\ ,trail:·
 set nobackup
 set noswapfile
-set nowrap
 set splitbelow splitright
-set tabstop=4 shiftwidth=4 expandtab
 set tags=.git/tags
 set number relativenumber
-set signcolumn=yes
 set wildmenu wildmode=list:longest,full
+set nowrap
+set cursorline
+set fillchars+=vert:\ 
+set laststatus=2
+set signcolumn=yes
+
+set expandtab tabstop=4 shiftwidth=4
+set list listchars=tab:│\ ,trail:·
 
 autocmd filetype * set formatoptions-=o
 autocmd filetype php setlocal commentstring=//%s
@@ -53,19 +62,25 @@ let mapleader=' '
 nmap Y y$
 nmap j gj
 nmap k gk
+nmap U <c-r>
 
-nmap gP :tabm -1<cr>
-nmap gN :tabm +1<cr>
+nnoremap + <c-a>
+nnoremap - <c-x>
+nnoremap <bs> <c-^>
+nnoremap <tab> <c-i>
+nnoremap <s-tab> <c-o>
 
-nnoremap <c-w>h <c-w>10<
-nnoremap <c-w>j <c-w>10-
-nnoremap <c-w>k <c-w>10+
-nnoremap <c-w>l <c-w>10>
-
-inoremap <c-x>o <cr><esc>O
-inoremap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$gJi
 inoremap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 inoremap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
+
+nnoremap <leader>n gt
+nnoremap <leader>p gT
+nnoremap <leader>N :tabm +1<cr>
+nnoremap <leader>P :tabm -1<cr>
+nnoremap <leader>h <c-w>10<
+nnoremap <leader>j <c-w>10-
+nnoremap <leader>k <c-w>10+
+nnoremap <leader>l <c-w>10>
 
 "
 " Theme
@@ -114,6 +129,26 @@ set statusline+=\ %p%%
 set statusline+=\ %#End#
 
 "
+" Text Editing
+"
+
+if !empty(globpath(&runtimepath, '*/delimitmate'))
+    let g:delimitMate_expand_cr=1
+    let g:delimitMate_expand_space=1
+endif
+
+if !empty(globpath(&runtimepath, '*/splitjoin.vim'))
+    let g:spitjoin_trailing_comma=1
+    inoremap <c-x>o <space><esc>diw:SplitjoinSplit<cr>o
+    inoremap <c-x><bs> <esc>ddk:s/\s\+$//e<cr>$:SplitjoinJoin<cr>a
+endif
+
+if !empty(globpath(&runtimepath, '*/vim-easy-align'))
+    xmap ga <plug>(EasyAlign)
+    nmap ga <plug>(EasyAlign)
+endif
+
+"
 " Language Client
 "
 
@@ -129,8 +164,8 @@ if !empty(globpath(&runtimepath, '*/LanguageClient-neovim'))
 
     autocmd bufwinenter __LanguageClient__ :setl wrap
 
-    nnoremap <leader>p :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <leader>P :pclose<cr>
+    nnoremap <leader>l :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <leader>L :pclose<cr>
 
     imap <c-x>p <esc>:call LanguageClient#textDocument_hover()<cr>a
     imap <c-x>P <esc>:pclose<cr>a
@@ -149,17 +184,17 @@ if !empty(globpath(&runtimepath, '*/fzf.vim'))
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
 
-    nnoremap <leader><space> :Files<cr>
-    nnoremap <leader>g :GFiles<cr>
-    nnoremap <leader>l :Lines<cr>
-    nnoremap <leader>L :BLines<cr>
-    nnoremap <leader>t :Tags<cr>
-    nnoremap <leader>T :BTags<cr>
-    nnoremap <leader>c :Commits<cr>
-    nnoremap <leader>C :BCommits<cr>
-    nnoremap <leader>h :History<cr>
-    nnoremap <leader>: :History:<cr>
-    nnoremap <leader>/ :History/<cr>
+    nnoremap <leader>ff :Files<cr>
+    nnoremap <leader>fg :GFiles<cr>
+    nnoremap <leader>fl :Lines<cr>
+    nnoremap <leader>fL :BLines<cr>
+    nnoremap <leader>ft :Tags<cr>
+    nnoremap <leader>fT :BTags<cr>
+    nnoremap <leader>fc :Commits<cr>
+    nnoremap <leader>fC :BCommits<cr>
+    nnoremap <leader>fh :History<cr>
+    nnoremap <leader>f: :History:<cr>
+    nnoremap <leader>f/ :History/<cr>
 
     nmap <leader><tab> <plug>(fzf-maps-n)
     xmap <leader><tab> <plug>(fzf-maps-x)
