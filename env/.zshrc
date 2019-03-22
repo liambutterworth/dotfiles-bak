@@ -59,16 +59,16 @@ alias ls='gls --color --group-directories-first'
 alias ll='ls -la'
 alias lt="tree -a -I '.git|node_modules|vendor'"
 
-alias vp='vim -p'
+alias vt='vim -p'
 alias vs='vim -o'
 alias vv='vim -O'
 
+alias tc='clear && tmux clear-history'
+alias tn='tmux rename-session'
 alias ta='tmux attach-session -t'
 alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
-alias tn='tmux rename-session'
 
-alias groot='cd $(git rev-parse --show-toplevel); echo $(pwd)'
 alias ga='git add'
 alias gmv='git mv'
 alias grm='git rm'
@@ -86,6 +86,7 @@ alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
 alias gw='while; do; clear; gs -sbu; sleep 1; done'
+alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
 
 #
 # Prompt
