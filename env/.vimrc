@@ -8,12 +8,15 @@
 " :: Tab Line
 " :: Status Line
 " :: Text Editing
-" :: Language Client
 " :: Fuzzy Finder
 
 "
 " Settings
 "
+
+if !empty(globpath(&runtimepath, '*/nord-vim'))
+    let g:ale_completion_enabled=1
+endif
 
 execute pathogen#infect()
 runtime macros/matchit.vim
@@ -36,17 +39,17 @@ set tags=.git/tags
 " Commands
 "
 
-augroup Commenting
-    autocmd!
-    autocmd filetype * set formatoptions-=o
-    autocmd filetype php setlocal commentstring=//%s
-    autocmd filetype scss.css setlocal commentstring=/*%s*/
-augroup END
-
 augroup FileTypes
     autocmd!
     autocmd bufread,bufnewfile *.scss,*.css set filetype=scss.css
     autocmd bufread,bufnewfile *.blade.php set filetype=blade.html
+augroup END
+
+augroup Commenting
+    autocmd!
+    autocmd filetype * set formatoptions-=o
+    autocmd filetype php setlocal commentstring=//%s
+    autocmd filetype css setlocal commentstring=/*%s*/
 augroup END
 
 "
@@ -95,6 +98,9 @@ set wildmode=list:longest,full
 
 if !empty(globpath(&runtimepath, '*/nord-vim'))
     colorscheme nord
+    let g:nord_italic=1
+    let g:nord_underline=1
+    let g:nord_italic_comments=1
     let g:nord_comment_brightness=20
 endif
 
@@ -162,29 +168,6 @@ endif
 if !empty(globpath(&runtimepath, '*/vim-easy-align'))
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
-endif
-
-"
-" Language Client
-"
-
-if !empty(globpath(&runtimepath, '*/LanguageClient-neovim'))
-    set completefunc=LanguageClient#complete
-    set completeopt-=preview
-
-    let g:LanguageClient_serverCommands = {
-        \ 'javascript': [ 'typescript-language-server', '--stdio' ],
-        \ 'html':       [ 'html-languageserver', '--stdio' ],
-        \ 'scss.css':   [ 'css-languageserver', '--stdio' ],
-        \ }
-
-    autocmd bufwinenter __LanguageClient__ :setl wrap
-
-    nnoremap <leader>l :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <leader>L :pclose<cr>
-
-    imap <c-x>p <esc>:call LanguageClient#textDocument_hover()<cr>a
-    imap <c-x>P <esc>:pclose<cr>a
 endif
 
 "
