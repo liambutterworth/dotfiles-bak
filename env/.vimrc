@@ -58,11 +58,7 @@ nmap Y y$
 nmap j gj
 nmap k gk
 nmap U <c-r>
-nnoremap + <c-a>
-nnoremap - <c-x>
 nnoremap <bs> <c-^>
-nnoremap <tab> <c-i>
-nnoremap <s-tab> <c-o>
 nnoremap <leader>n gt
 nnoremap <leader>p gT
 nnoremap <leader>N :tabm +1<cr>
@@ -94,9 +90,6 @@ set wildmode=list:longest,full
 
 if !empty(globpath(&runtimepath, '*/nord-vim'))
     colorscheme nord
-    let g:nord_italic=1
-    let g:nord_underline=1
-    let g:nord_italic_comments=1
     let g:nord_comment_brightness=20
 endif
 
@@ -190,10 +183,6 @@ if !empty(globpath(&runtimepath, '*/fzf.vim'))
     nnoremap <leader>fh :History<cr>
     nnoremap <leader>f: :History:<cr>
     nnoremap <leader>f/ :History/<cr>
-
-    nmap <leader><tab> <plug>(fzf-maps-n)
-    xmap <leader><tab> <plug>(fzf-maps-x)
-    omap <leader><tab> <plug>(fzf-maps-o)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-f> <plug>(fzf-complete-path)
