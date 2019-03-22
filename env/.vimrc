@@ -2,17 +2,11 @@
 " Vim Config
 "
 " :: Settings
-" :: Maps
-" :: Theme
+" :: Commands
+" :: Mappings
+" :: User Interface
 " :: Tab Line
 " :: Status Line
-" :: Text Editing
-" :: Language Client
-" :: Fuzzy Finder
-
-" :: Settings
-" :: Maps
-" :: User Interface
 " :: Text Editing
 " :: Language Client
 " :: Fuzzy Finder
@@ -24,37 +18,39 @@
 execute pathogen#infect()
 runtime macros/matchit.vim
 filetype plugin indent on
-syntax on
+syntax enable
 
 set autoindent
-set backspace=indent,eol,start
 set hidden
 set incsearch
-set ignorecase smartcase
+set ignorecase
 set lazyredraw
 set nobackup
+set noerrorbells
 set noswapfile
-set splitbelow splitright
+set novisualbell
+set smartcase
 set tags=.git/tags
-set number relativenumber
-set wildmenu wildmode=list:longest,full
-set nowrap
-set cursorline
-set fillchars+=vert:\ 
-set laststatus=2
-set signcolumn=yes
-
-set expandtab tabstop=4 shiftwidth=4
-set list listchars=tab:│\ ,trail:·
-
-autocmd filetype * set formatoptions-=o
-autocmd filetype php setlocal commentstring=//%s
-autocmd filetype scss.css setlocal commentstring=/*%s*/
-autocmd bufread,bufnewfile *.scss,*.css set filetype=scss.css
-autocmd bufread,bufnewfile *.blade.php set filetype=blade.html
 
 "
-" Maps
+" Commands
+"
+
+augroup Commenting
+    autocmd!
+    autocmd filetype * set formatoptions-=o
+    autocmd filetype php setlocal commentstring=//%s
+    autocmd filetype scss.css setlocal commentstring=/*%s*/
+augroup END
+
+augroup FileTypes
+    autocmd!
+    autocmd bufread,bufnewfile *.scss,*.css set filetype=scss.css
+    autocmd bufread,bufnewfile *.blade.php set filetype=blade.html
+augroup END
+
+"
+" Mappings
 "
 
 let mapleader=' '
@@ -63,16 +59,11 @@ nmap Y y$
 nmap j gj
 nmap k gk
 nmap U <c-r>
-
 nnoremap + <c-a>
 nnoremap - <c-x>
 nnoremap <bs> <c-^>
 nnoremap <tab> <c-i>
 nnoremap <s-tab> <c-o>
-
-inoremap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
-inoremap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
-
 nnoremap <leader>n gt
 nnoremap <leader>p gT
 nnoremap <leader>N :tabm +1<cr>
@@ -81,14 +72,34 @@ nnoremap <leader>h <c-w>10<
 nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
+inoremap <c-x>, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
+inoremap <c-x>; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 
 "
-" Theme
+" User Interface
 "
+
+set cursorline
+set fillchars+=vert:\ 
+set list
+set listchars=tab:│\ ,trail:·
+set laststatus=2
+set nowrap
+set number
+set relativenumber
+set signcolumn=yes
+set splitbelow
+set splitright
+set wildmenu
+set wildmode=list:longest,full
 
 if !empty(globpath(&runtimepath, '*/nord-vim'))
     colorscheme nord
     let g:nord_comment_brightness=20
+endif
+
+if !empty(globpath(&runtimepath, '*/nord-vim'))
+    let g:jsx_ext_required=0
 endif
 
 "
@@ -131,6 +142,11 @@ set statusline+=\ %#End#
 "
 " Text Editing
 "
+
+set backspace=indent,eol,start
+set expandtab
+set shiftwidth=4
+set softtabstop=4
 
 if !empty(globpath(&runtimepath, '*/delimitmate'))
     let g:delimitMate_expand_cr=1

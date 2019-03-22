@@ -68,7 +68,7 @@ alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
 
-alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
+alias groot='cd $(git rev-parse --show-toplevel); echo $(pwd)'
 alias ga='git add'
 alias gmv='git mv'
 alias grm='git rm'
