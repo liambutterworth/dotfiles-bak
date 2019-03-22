@@ -14,10 +14,6 @@
 " Settings
 "
 
-if !empty(globpath(&runtimepath, '*/nord-vim'))
-    let g:ale_completion_enabled=1
-endif
-
 execute pathogen#infect()
 runtime macros/matchit.vim
 filetype plugin indent on
