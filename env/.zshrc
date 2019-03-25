@@ -5,7 +5,7 @@
 # :: Settings
 # :: Aliases
 # :: Prompt
-# :: Fuzzy Finder
+# :: FZF
 
 #
 # Plugins
@@ -122,7 +122,7 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 #
-# Fuzzy Finder
+# FZF
 #
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'

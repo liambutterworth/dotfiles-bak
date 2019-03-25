@@ -18,11 +18,9 @@ syntax enable
 
 set autoindent
 set backspace=indent,eol,start
-set cursorline
 set expandtab shiftwidth=4 softtabstop=4
 set encoding=utf-8
 set fillchars+=vert:\ 
-set foldmethod=indent foldlevel=2
 set hidden
 set history=1000
 set incsearch
@@ -31,6 +29,7 @@ set laststatus=2
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
 set nobackup noswapfile
+set nocursorline
 set noerrorbells novisualbell
 set nowrap
 set number relativenumber
@@ -62,7 +61,7 @@ augroup END
 " Mappings
 "
 
-let mapleader=' '
+map <space> <leader>
 
 nmap j gj
 nmap k gk
@@ -74,7 +73,7 @@ inoremap <c-x>, <c-c>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 inoremap <c-x>; <c-c>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
 
 nnoremap <leader>w :w<cr>
-nnoremap <leader>W :w!<cr>
+nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 
@@ -127,20 +126,34 @@ endfunction
 "
 " Plugins
 "
+" :: Nord
+" :: JSX
+" :: DelimitMate
+" :: SplitJoin
+" :: Easy Align
+" :: FZF
+
+" Nord
 
 if !empty(globpath(&runtimepath, '*/nord-vim'))
     colorscheme nord
     let g:nord_comment_brightness=20
 endif
 
+" JSX
+
 if !empty(globpath(&runtimepath, '*/vim-jsx'))
     let g:jsx_ext_required=0
 endif
+
+" DelimitMate
 
 if !empty(globpath(&runtimepath, '*/delimitmate'))
     let g:delimitMate_expand_cr=1
     let g:delimitMate_expand_space=1
 endif
+
+" SplitJoin
 
 if !empty(globpath(&runtimepath, '*/splitjoin.vim'))
     let g:spitjoin_trailing_comma=1
@@ -148,10 +161,14 @@ if !empty(globpath(&runtimepath, '*/splitjoin.vim'))
     inoremap <c-x><bs> <c-c>ddk:s/\s\+$//e<cr>$:SplitjoinJoin<cr>a
 endif
 
+" Easy Align
+
 if !empty(globpath(&runtimepath, '*/vim-easy-align'))
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
+
+" FZF
 
 if !empty(globpath(&runtimepath, '*/fzf.vim'))
     set runtimepath+=~/.fzf
@@ -160,6 +177,11 @@ if !empty(globpath(&runtimepath, '*/fzf.vim'))
     let g:fzf_tags_command='git ctags'
 
     command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
+
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-f> <plug>(fzf-complete-path)
+    imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader>ff :Files<cr>
     nnoremap <leader>fg :GFiles<cr>
@@ -173,11 +195,6 @@ if !empty(globpath(&runtimepath, '*/fzf.vim'))
     nnoremap <leader>fT :BTags<cr>
     nnoremap <leader>fc :Commits<cr>
     nnoremap <leader>fC :BCommits<cr>
-    nnoremap <leader>fl :Linnes<cr>
+    nnoremap <leader>fl :Lines<cr>
     nnoremap <leader>fL :BLines<cr>
-
-    imap <c-x><c-k> <plug>(fzf-complete-word)
-    imap <c-x><c-f> <plug>(fzf-complete-path)
-    imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-    imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
