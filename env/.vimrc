@@ -14,16 +14,17 @@
 execute pathogen#infect()
 runtime macros/matchit.vim
 filetype plugin indent on
-syntax enable
+let mapleader = ' '
 
-let mapleader      = ' '
-let maplocalleader = ' '
+if !(g:syntax_on)
+    syntax enable
+endif
 
+set autoread
 set autoindent
 set backspace=indent,eol,start
-set complete-=i complete+=k
+set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set expandtab shiftwidth=4 softtabstop=4
 set encoding=utf-8
 set fillchars+=vert:\ 
 set hidden
@@ -38,11 +39,14 @@ set nocursorline
 set noerrorbells novisualbell
 set nowrap
 set number relativenumber
+set shiftwidth=4 softtabstop=4 expandtab
+set showmatch
 set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
 set tags=.git/tags
+set undofile undodir=~/.vim/undodir
 set wildmenu wildmode=list:longest,full
 
 "
@@ -89,7 +93,7 @@ function! TabLine() abort
         let tab_index      = index + 1
         let buflist        = tabpagebuflist(tab_index)
         let winnr          = tabpagewinnr(tab_index)
-        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
+        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':r')
         let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
         let output        .= tab_highlight . ' ' . tab_name . ' '
     endfor
@@ -113,6 +117,7 @@ endfunction
 
 if PluginExists('nord-vim')
     colorscheme nord
+    set background=dark
     let g:nord_comment_brightness = 20
 endif
 
@@ -140,6 +145,12 @@ if PluginExists('vim-easy-align')
     nmap <leader>a <plug>(EasyAlign)
 endif
 
+if PluginExists('vim-fugitive')
+    nnoremap <leader>gs :Gstatus
+    nnoremap <leader>gd :Gvdiff
+    nnoremap <leader>ga :Gwrite
+endif
+
 if PluginExists('fzf.vim')
     set runtimepath+=~/.fzf
     let g:fzf_commits_log_options='--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
@@ -150,16 +161,12 @@ if PluginExists('fzf.vim')
     nnoremap <leader>fg :GFiles<cr>
     nnoremap <leader>fw :Windows<cr>
     nnoremap <leader>fb :Buffers<cr>
-    nnoremap <leader>fm :Marks<cr>
     nnoremap <leader>fh :History<cr>
     nnoremap <leader>f: :History:<cr>
     nnoremap <leader>f/ :History/<cr>
     nnoremap <leader>ft :Tags<cr>
-    nnoremap <leader>fT :BTags<cr>
     nnoremap <leader>fc :Commits<cr>
-    nnoremap <leader>fC :BCommits<cr>
     nnoremap <leader>fl :Lines<cr>
-    nnoremap <leader>fL :BLines<cr>
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -171,11 +178,11 @@ endif
 " Mappings
 "
 
-nmap j gj
-nmap k gk
-nmap Y y$
-nmap U <c-r>
-nmap <bs> <c-^>
+nnoremap j gj
+nnoremap k gk
+nnoremap Y y$
+nnoremap U <c-r>
+nnoremap <bs> <c-^>
 
 nnoremap <leader><space> :
 nnoremap <leader>w :w<cr>
@@ -194,5 +201,7 @@ nnoremap <leader>s :%s//g<left><left>
 xnoremap <leader>s :s//g<left><left>
 xnoremap <leader>r y:%s/<c-r>"//g<left><left>
 
+inoremap <c-a> <c-o>A
+inoremap <c-i> <c-o>I
 inoremap ,, <esc>m`:call LineEnder(',')<cr>``a
 inoremap ;; <esc>m`:call LineEnder(';')<cr>``a

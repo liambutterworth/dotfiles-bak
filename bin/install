@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # download antigen and pathogen
-mkdir -p ~/.zsh ~/.vim/autoload
+mkdir -p ~/.zsh ~/.vim/autoload ~/.vim/undodir
 curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
