@@ -26,6 +26,7 @@ antigen apply
 
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
+export GIT_LOG_FORMAT='--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0'
@@ -61,12 +62,7 @@ autoload -U colors && colors
 # Aliases
 #
 
-if type "$gls" > /dev/null; then
-    local ls='gls'
-else
-    local ls='ls'
-fi
-
+[[ -x "$(command -v gls)" ]] && ls='gls' || ls='ls'
 alias ls="$ls --color --group-directories-first"
 alias ll='ls -la'
 alias lt="tree -a -I '.git|node_modules|vendor'"
@@ -93,11 +89,12 @@ alias gdt="git diff-tree --no-commit-id --name-only -r"
 alias gt='git tag'
 alias gf='git fetch'
 alias gl='git log'
-alias gll="git log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
+
+# alias gll="git log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
+alias gll="git log $GIT_LOG_FORMAT"
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
-alias gw='while; do; clear; gs -sbu; sleep 1; done'
 alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
 
 #

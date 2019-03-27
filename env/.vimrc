@@ -15,10 +15,7 @@ execute pathogen#infect()
 runtime macros/matchit.vim
 filetype plugin indent on
 let mapleader = ' '
-
-if !(g:syntax_on)
-    syntax enable
-endif
+syntax enable
 
 set autoread
 set autoindent
@@ -47,7 +44,7 @@ set statusline=%!StatusLine()
 set tabline=%!TabLine()
 set tags=.git/tags
 set undofile undodir=~/.vim/undodir
-set wildmenu wildmode=list:longest,full
+set wildmenu wildignorecase wildmode=list:longest,full
 
 "
 " Commands
@@ -93,7 +90,7 @@ function! TabLine() abort
         let tab_index      = index + 1
         let buflist        = tabpagebuflist(tab_index)
         let winnr          = tabpagewinnr(tab_index)
-        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':r')
+        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
         let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
         let output        .= tab_highlight . ' ' . tab_name . ' '
     endfor
@@ -117,7 +114,6 @@ endfunction
 
 if PluginExists('nord-vim')
     colorscheme nord
-    set background=dark
     let g:nord_comment_brightness = 20
 endif
 
@@ -146,16 +142,17 @@ if PluginExists('vim-easy-align')
 endif
 
 if PluginExists('vim-fugitive')
-    nnoremap <leader>gs :Gstatus
-    nnoremap <leader>gd :Gvdiff
-    nnoremap <leader>ga :Gwrite
+    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gd :Gvdiff<cr>
 endif
 
 if PluginExists('fzf.vim')
     set runtimepath+=~/.fzf
-    let g:fzf_commits_log_options='--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
+    let g:fzf_commits_log_options=system('echo $GIT_LOG_FORMAT')
     let g:fzf_tags_command='git ctags'
-    command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
+
+    command! -bang -nargs=? -complete=dir Files
+        \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
 
     nnoremap <leader>ff :Files<cr>
     nnoremap <leader>fg :GFiles<cr>
@@ -184,6 +181,9 @@ nnoremap Y y$
 nnoremap U <c-r>
 nnoremap <bs> <c-^>
 
+inoremap ,, <esc>m`:call LineEnder(',')<cr>``a
+inoremap ;; <esc>m`:call LineEnder(';')<cr>``a
+
 nnoremap <leader><space> :
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
@@ -200,8 +200,3 @@ nnoremap <leader>l <c-w>10>
 nnoremap <leader>s :%s//g<left><left>
 xnoremap <leader>s :s//g<left><left>
 xnoremap <leader>r y:%s/<c-r>"//g<left><left>
-
-inoremap <c-a> <c-o>A
-inoremap <c-i> <c-o>I
-inoremap ,, <esc>m`:call LineEnder(',')<cr>``a
-inoremap ;; <esc>m`:call LineEnder(';')<cr>``a

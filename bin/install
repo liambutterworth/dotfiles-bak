@@ -6,10 +6,10 @@ curl -L git.io/antigen > ~/.zsh/antigen.zsh
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # set git global config
-git config --global core.editor vim
 git config --global alias.ctags '!.git/hooks/ctags'
 git config --global init.templatedir '~/.dotfiles/env/git/template'
 git config --global credential.helper cache
+git config --global core.editor vim
 
 # initialize submodules and install compiled packages
 git -C ~/.dotfiles submodule update --init --recursive
