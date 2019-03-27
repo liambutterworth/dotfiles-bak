@@ -3,9 +3,9 @@
 "
 " :: Settings
 " :: Commands
+" :: Mappings
 " :: Functions
 " :: Plugins
-" :: Mappings
 
 "
 " Settings
@@ -70,6 +70,35 @@ augroup Completion
     autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
+
+"
+" Mappings
+"
+
+nnoremap j gj
+nnoremap k gk
+nnoremap Y y$
+nnoremap U <c-r>
+nnoremap <bs> <c-^>
+inoremap ,, <esc>mm:call LineEnder(',')<cr>`ma
+inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
+
+nnoremap <leader><space> :
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
+nnoremap <leader>n gt
+nnoremap <leader>p gT
+nnoremap <leader>N :tabm +1<cr>
+nnoremap <leader>P :tabm -1<cr>
+nnoremap <leader>h <c-w>10<
+nnoremap <leader>j <c-w>10-
+nnoremap <leader>k <c-w>10+
+nnoremap <leader>l <c-w>10>
+nnoremap <leader>s :%s//g<left><left>
+xnoremap <leader>s :s//g<left><left>
+xnoremap <leader>r y:%s/<c-r>"//g<left><left>
 
 "
 " Functions
@@ -143,7 +172,7 @@ endif
 
 if PluginExists('vim-fugitive')
     nnoremap <leader>gs :Gstatus<cr>
-    nnoremap <leader>gd :Gvdiff<cr>
+    nnoremap <leader>gd :Gdiff<cr>
 endif
 
 if PluginExists('fzf.vim')
@@ -155,8 +184,6 @@ if PluginExists('fzf.vim')
         \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
 
     nnoremap <leader>ff :Files<cr>
-    nnoremap <leader>fg :GFiles<cr>
-    nnoremap <leader>fw :Windows<cr>
     nnoremap <leader>fb :Buffers<cr>
     nnoremap <leader>fh :History<cr>
     nnoremap <leader>f: :History:<cr>
@@ -171,32 +198,3 @@ if PluginExists('fzf.vim')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-"
-" Mappings
-"
-
-nnoremap j gj
-nnoremap k gk
-nnoremap Y y$
-nnoremap U <c-r>
-nnoremap <bs> <c-^>
-
-inoremap ,, <esc>m`:call LineEnder(',')<cr>``a
-inoremap ;; <esc>m`:call LineEnder(';')<cr>``a
-
-nnoremap <leader><space> :
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-nnoremap <leader>n gt
-nnoremap <leader>p gT
-nnoremap <leader>N :tabm +1<cr>
-nnoremap <leader>P :tabm -1<cr>
-nnoremap <leader>h <c-w>10<
-nnoremap <leader>j <c-w>10-
-nnoremap <leader>k <c-w>10+
-nnoremap <leader>l <c-w>10>
-nnoremap <leader>s :%s//g<left><left>
-xnoremap <leader>s :s//g<left><left>
-xnoremap <leader>r y:%s/<c-r>"//g<left><left>
