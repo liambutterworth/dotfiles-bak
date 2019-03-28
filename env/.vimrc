@@ -50,17 +50,10 @@ set wildmenu wildignorecase wildmode=list:longest,full
 " Commands
 "
 
-augroup FileTypes
+augroup Settings
     autocmd!
-    autocmd bufread,bufnewfile *.scss,*.css setlocal filetype=scss.css
-    autocmd bufread,bufnewfile *.blade.php setlocal filetype=blade.html
-augroup END
-
-augroup Commenting
-    autocmd!
-    autocmd filetype * set formatoptions-=o
-    autocmd filetype php setlocal commentstring=//%s
-    autocmd filetype css setlocal commentstring=/*%s*/
+    autocmd bufenter * setlocal formatoptions-=o
+    autocmd bufread,bufnewfile *.scss,*.css setlocal filetype=css.sass
 augroup END
 
 augroup Completion
@@ -82,7 +75,6 @@ nnoremap U <c-r>
 nnoremap <bs> <c-^>
 inoremap ,, <esc>mm:call LineEnder(',')<cr>`ma
 inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
-
 nnoremap <leader><space> :
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
@@ -146,6 +138,10 @@ if PluginExists('nord-vim')
     let g:nord_comment_brightness = 20
 endif
 
+if PluginExists('vim-vue')
+    autocmd filetype vue syntax sync fromstart
+endif
+
 if PluginExists('vim-jsx')
     let g:jsx_ext_required = 0
 endif
@@ -170,6 +166,16 @@ if PluginExists('vim-easy-align')
     nmap <leader>a <plug>(EasyAlign)
 endif
 
+if PluginExists('tcomment_vim')
+    let g:tcomment_mapleader1=0
+    let g:tcomment_mapleader2=0
+    noremap gcp yy:TComment<cr>p
+    noremap <leader>tr :TCommentRight<cr>
+    noremap <leader>tb :TCommentBlock<cr>
+    noremap <leader>ts :TCommentBlock<cr>A*<esc>
+    noremap <leader>ts :TCommentBlock<cr>A*<esc>
+endif
+
 if PluginExists('vim-fugitive')
     nnoremap <leader>gs :Gstatus<cr>
     nnoremap <leader>gd :Gdiff<cr>
@@ -177,8 +183,9 @@ endif
 
 if PluginExists('fzf.vim')
     set runtimepath+=~/.fzf
-    let g:fzf_commits_log_options=system('echo $GIT_LOG_FORMAT')
+
     let g:fzf_tags_command='git ctags'
+    let g:fzf_commits_log_options='--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)

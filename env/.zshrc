@@ -5,13 +5,13 @@
 # :: Settings
 # :: Aliases
 # :: Prompt
+# :: FZF
 
 #
 # Plugins
 #
 
 source ~/.zsh/antigen.zsh
-source ~/.fzf.zsh
 
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
@@ -26,13 +26,9 @@ antigen apply
 
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
-export GIT_LOG_FORMAT='--graph --color=always --format="%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset"'
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0'
-export FZF_PREVIEW_OPTS='(highlight -0 ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
-export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-export FZF_TMUX=1
+export GIT_LOG_FORMAT='%C(red)%h%Creset %C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset'
+export DOCKER_PS_FORMAT="ID\\t{{.ID}}\\nNAME\\t{{.Names}}\\nIMAGE\\t{{.Image}}\\nPORTS\\t{{.Ports}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.CreatedAt}}\\nSTATUS\\t{{.Status}}\\n"
+export DOCKER_LS_FORMAT="ID\\t{{.ID}}\\nREPO\\t{{.Repository}}\\nTAG\\t{{.Tag}}\\nCREATED\\t{{.CreatedAt}}\\nSIZE\\t{{.Size}}\\n"
 
 setopt autocd
 setopt auto_menu
@@ -66,6 +62,7 @@ autoload -U colors && colors
 alias ls="$ls --color --group-directories-first"
 alias ll='ls -la'
 alias lt="tree -a -I '.git|node_modules|vendor'"
+alias lp="tr ':' '\n' <<< $PATH"
 
 alias vt='vim -p'
 alias vs='vim -o'
@@ -85,17 +82,27 @@ alias gco='git checkout'
 alias gc='git commit -m'
 alias gst='git stash'
 alias gd='git diff'
-alias gdt="git diff-tree --no-commit-id --name-only -r"
+alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gt='git tag'
 alias gf='git fetch'
 alias gl='git log'
-
-# alias gll="git log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
-alias gll="git log $GIT_LOG_FORMAT"
+# alias gll="git log $GIT_LOG_FORMAT"
+alias gll="git log --graph --color=always --format='$GIT_LOG_FORMAT'"
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
 alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
+
+alias di='docker image'
+alias dc='docker container'
+alias dis="docker image ls --format='$DOCKER_LS_FORMAT'"
+alias dcs="docker ps -a --format='$DOCKER_PS_FORMAT'"
+alias db='docker build -t'
+alias dr='docker run'
+alias da='docker attach'
+alias de='docker exec'
+alias ds='docker stop'
+alias dk='docker kill'
 
 #
 # Prompt
@@ -129,3 +136,16 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+#
+# FZF
+#
+
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0'
+export FZF_PREVIEW_OPTS='(highlight -0 ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
+export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+export FZF_TMUX=1
+
+source ~/.fzf.zsh

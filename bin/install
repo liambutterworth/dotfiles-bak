@@ -22,4 +22,4 @@ ln -s ~/.dotfiles/env/vim/bundle ~/.vim/bundle
 ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf
 
 # install fzf
-~/.fzf/install --all
+~/.fzf/install --all --no-bash

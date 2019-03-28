@@ -19,9 +19,6 @@
 [submodule "env/vim/bundle/vim-blade"]
 	path = env/vim/bundle/vim-blade
 	url = https://github.com/jwalton512/vim-blade
-[submodule "env/vim/bundle/vim-commentary"]
-	path = env/vim/bundle/vim-commentary
-	url = https://github.com/tpope/vim-commentary
 [submodule "env/vim/bundle/vim-fugitive"]
 	path = env/vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
@@ -70,3 +67,12 @@
 [submodule "env/vim/bundle/phpcomplete.vim"]
 	path = env/vim/bundle/phpcomplete.vim
 	url = https://github.com/shawncplus/phpcomplete.vim
+[submodule "env/vim/bundle/dockerfile.vim"]
+	path = env/vim/bundle/dockerfile.vim
+	url = https://github.com/ekalinin/dockerfile.vim
+[submodule "env/vim/bundle/context_filtype.vim"]
+	path = env/vim/bundle/context_filtype.vim
+	url = https://github.com/shougo/context_filetype.vim
+[submodule "env/vim/bundle/tcomment_vim"]
+	path = env/vim/bundle/tcomment_vim
+	url = https://github.com/tomtom/tcomment_vim
