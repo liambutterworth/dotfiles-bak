@@ -17,8 +17,8 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
-
 antigen apply
+
 
 #
 # Settings
@@ -58,10 +58,8 @@ autoload -U colors && colors
 # Aliases
 #
 
-[[ -x "$(command -v gls)" ]] && ls='gls' || ls='ls'
-alias ls="$ls --color --group-directories-first"
-alias ll='ls -la'
-alias lt="tree -a -I '.git|node_modules|vendor'"
+alias ls='ls -GA'
+alias ll='ls -l'
 alias lp="tr ':' '\n' <<< $PATH"
 
 alias vt='vim -p'
@@ -86,7 +84,6 @@ alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gt='git tag'
 alias gf='git fetch'
 alias gl='git log'
-# alias gll="git log $GIT_LOG_FORMAT"
 alias gll="git log --graph --color=always --format='$GIT_LOG_FORMAT'"
 alias grl='git reflog'
 alias gsh='git show'
@@ -143,9 +140,10 @@ zle -N zle-keymap-select
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0'
-export FZF_PREVIEW_OPTS='(highlight -0 ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'
+export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1
 
-source ~/.fzf.zsh
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
