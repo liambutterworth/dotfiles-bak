@@ -76,3 +76,15 @@
 [submodule "env/vim/bundle/tcomment_vim"]
 	path = env/vim/bundle/tcomment_vim
 	url = https://github.com/tomtom/tcomment_vim
+[submodule "env/zsh/bundle/zsh-syntax-highlighting"]
+	path = env/zsh/bundle/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "env/zsh/bundle/zsh-autosuggestions"]
+	path = env/zsh/bundle/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "env/zsh/bundle/zsh-completions"]
+	path = env/zsh/bundle/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "env/zsh/bundle/zsh-history-substring-search"]
+	path = env/zsh/bundle/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
