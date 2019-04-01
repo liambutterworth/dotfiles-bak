@@ -1,13 +1,3 @@
 #!/bin/bash
-
-# unset git config
-git config --global --unset core.editor
-git config --global --unset init.templatedir
-git config --global --unset credential.helper
-
-# uninstall fzf
-~/.fzf/uninstall
-
-# remove all files
-rm ~/{.zshrc,.vimrc,.tmux.conf}
-rm -rf ~/.vim/autoload ~/.vim/bundle ~/.vim/undodir ~/.fzf
+rm -rf ~/.zplug ~/.vim/{autoload,undodir,plugged}
+rm ~/.{vimrc,zshrc,tmux.conf,gitconfig}

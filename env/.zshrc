@@ -1,24 +1,10 @@
 #
 # Zsh Config
-#
-# :: Plugins
+
 # :: Settings
+# :: Functions
 # :: Aliases
-# :: Prompt
-# :: FZF
-
-#
-# Plugins
-#
-
-source ~/.zsh/antigen.zsh
-
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen apply
-
+# :: Plugins
 
 #
 # Settings
@@ -30,13 +16,6 @@ export GIT_LOG_FORMAT='%C(red)%h%Creset %C(yellow)%d%Creset %s %C(green)(%cr) %C
 export DOCKER_PS_FORMAT="ID\\t{{.ID}}\\nNAME\\t{{.Names}}\\nIMAGE\\t{{.Image}}\\nPORTS\\t{{.Ports}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.CreatedAt}}\\nSTATUS\\t{{.Status}}\\n"
 export DOCKER_LS_FORMAT="ID\\t{{.ID}}\\nREPO\\t{{.Repository}}\\nTAG\\t{{.Tag}}\\nCREATED\\t{{.CreatedAt}}\\nSIZE\\t{{.Size}}\\n"
 
-setopt autocd
-setopt auto_menu
-
-unsetopt beep
-unsetopt correct_all
-unsetopt menu_complete
-
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' format 'Completing: %d'
@@ -45,8 +24,6 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' verbose true
 
 bindkey -v
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
@@ -55,10 +32,19 @@ autoload -U edit-command-line
 autoload -U colors && colors
 
 #
+# Functions
+#
+
+function plugin-exists() {
+    [[ -n "$(zplug list --installed | grep $1)" ]]
+}
+
+#
 # Aliases
 #
 
-alias ls='ls -GA'
+[[ -x "$(command -v gls)" ]] && ls='gls' || ls='ls'
+alias ls="$ls -hA --color --group-directories-first"
 alias ll='ls -l'
 alias lp="tr ':' '\n' <<< $PATH"
 
@@ -88,7 +74,7 @@ alias gll="git log --graph --color=always --format='$GIT_LOG_FORMAT'"
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
-alias gr='cd $(git rev-parse --show-toplevel); echo $(pwd)'
+alias gr='git root'
 
 alias di='docker image'
 alias dc='docker container'
@@ -102,48 +88,34 @@ alias ds='docker stop'
 alias dk='docker kill'
 
 #
-# Prompt
+# Plugins
 #
 
-git-info() {
-    if ( $(git rev-parse --is-inside-work-tree 2>/dev/null) ); then
-        local branch=$(git symbolic-ref HEAD | cut -d'/' -f3)
-        [[ $(git status --porcelain 2>/dev/null | tail -n1) != '' ]] && branch+='*'
-        echo $branch
-    fi
-}
+source ~/.zplug/init.zsh
 
-user-info() {
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && echo '%n@%m'
-}
+zplug 'junegunn/fzf', hook-build:'./install --all --no-bash'
+zplug 'mafredri/zsh-async'
+zplug 'sindresorhus/pure'
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
-set-prompt() {
-    [[ $KEYMAP = 'vicmd' ]] && char="❮" || char="❯"
-    PROMPT="%F{4}%3~ %F{8}$(git-info) $(user-info)"
-    PROMPT+=$'\n'"%(?.%F{5}.%F{1})$char "
-}
+zplug load
 
-precmd() { print }
-preexec() { print }
+if plugin-exists 'zsh-history-substring-search'; then
+    bindkey '^P' history-substring-search-up
+    bindkey '^N' history-substring-search-down
+fi
 
-function zle-line-init zle-keymap-select {
-    set-prompt
-    zle reset-prompt
-}
+if plugin-exists 'fzf'; then
+    source ~/.fzf.zsh
 
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-#
-# FZF
-#
-
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
-export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-export FZF_TMUX=1
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+    export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+    export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+    export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
+    export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+    export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+    export FZF_TMUX=1
+fi

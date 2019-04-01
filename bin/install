@@ -1,25 +1,18 @@
 #!/bin/bash
 
-# download antigen and pathogen
-mkdir -p ~/.zsh ~/.vim/autoload ~/.vim/undodir
-curl -L git.io/antigen > ~/.zsh/antigen.zsh
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+# ensure directories
+mkdir -p ~/.vim/{autoload,undodir}
 
-# set git global config
-git config --global alias.ctags '!.git/hooks/ctags'
-git config --global init.templatedir '~/.dotfiles/env/git/template'
-git config --global credential.helper cache
-git config --global core.editor vim
+# download plugin managers
+curl -sL --proto-redir -all,https://raw.githubusercontent.com/zplug/installer/master/installer.sh | zsh
+curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# initialize submodules and install compiled packages
-git -C ~/.dotfiles submodule update --init --recursive
-
-# symlink dotfiles, vim plugins and fzf to home
+# symlink dotfiles
+ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/env/vim/bundle ~/.vim/bundle
-ln -s ~/.dotfiles/env/vim/bundle/fzf ~/.fzf
+ln -s ~/.dotfiles/env/.gitconfig ~/.gitconfig
 
-# install fzf
-~/.fzf/install --all --no-bash
+# install plugins
+zplug install
+vim +PlugInstall +qa

@@ -2,20 +2,13 @@
 " Vim Config
 "
 " :: Settings
-" :: Commands
-" :: Mappings
 " :: Functions
+" :: Mappings
 " :: Plugins
 
 "
 " Settings
 "
-
-execute pathogen#infect()
-runtime macros/matchit.vim
-filetype plugin indent on
-let mapleader = ' '
-syntax enable
 
 set autoread
 set autoindent
@@ -46,14 +39,9 @@ set tags=.git/tags
 set undofile undodir=~/.vim/undodir
 set wildmenu wildignorecase wildmode=list:longest,full
 
-"
-" Commands
-"
-
-augroup Settings
+augroup Formatting
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
-    autocmd bufread,bufnewfile *.scss,*.css setlocal filetype=css.sass
 augroup END
 
 augroup Completion
@@ -65,44 +53,8 @@ augroup Completion
 augroup END
 
 "
-" Mappings
-"
-
-nnoremap j gj
-nnoremap k gk
-nnoremap Y y$
-nnoremap U <c-r>
-nnoremap <bs> <c-^>
-inoremap ,, <esc>mm:call LineEnder(',')<cr>`ma
-inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
-nnoremap <leader><space> :
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-nnoremap <leader>n gt
-nnoremap <leader>p gT
-nnoremap <leader>N :tabm +1<cr>
-nnoremap <leader>P :tabm -1<cr>
-nnoremap <leader>h <c-w>10<
-nnoremap <leader>j <c-w>10-
-nnoremap <leader>k <c-w>10+
-nnoremap <leader>l <c-w>10>
-nnoremap <leader>s :%s//g<left><left>
-xnoremap <leader>s :s//g<left><left>
-xnoremap <leader>r y:%s/<c-r>"//g<left><left>
-
-"
 " Functions
 "
-
-function! PluginExists(plugin) abort
-    return !empty(globpath(&runtimepath, '*/' . a:plugin))
-endfunction
-
-function! LineEnder(char) abort
-    s/\v(.)$/\=submatch(1) == a:char ? '' : submatch(1) . a:char
-endfunction
 
 function! TabLine() abort
     let output = ''
@@ -129,25 +81,79 @@ function! StatusLine() abort
     return output . '%f%m%r%=%c:%l/%L %{&fenc} %{&ff}'
 endfunction
 
+function! PluginExists(plugin) abort
+    return !empty(globpath(&runtimepath, '*/' . a:plugin))
+endfunction
+
+function! LineEnder(char) abort
+    s/\v(.)$/\=submatch(1) == a:char ? '' : submatch(1) . a:char
+endfunction
+
+"
+" Mappings
+"
+
+let mapleader = ' '
+
+nnoremap j gj
+nnoremap k gk
+nnoremap Y y$
+nnoremap U <c-r>
+nnoremap <bs> <c-^>
+nnoremap g= mmgg=G`m
+nnoremap <leader><space> :
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
+nnoremap <leader>n gt
+nnoremap <leader>p gT
+nnoremap <leader>N :tabm +1<cr>
+nnoremap <leader>P :tabm -1<cr>
+nnoremap <leader>h <c-w>10<
+nnoremap <leader>j <c-w>10-
+nnoremap <leader>k <c-w>10+
+nnoremap <leader>l <c-w>10>
+nnoremap <leader>s :%s//g<left><left>
+xnoremap <leader>s :s//g<left><left>
+xnoremap <leader>r y:%s/<c-r>"//g<left><left>
+inoremap ,, <esc>mm:call LineEnder(',')<cr>`ma
+inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
+
 "
 " Plugins
 "
 
+call plug#begin()
+
+Plug 'andrewradev/splitjoin.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'arcticicestudio/nord-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'raimondi/delimitmate'
+Plug 'sheerun/vim-polyglot'
+Plug 'tmhedberg/matchit'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+
+call plug#end()
+
 if PluginExists('nord-vim')
     colorscheme nord
-    let g:nord_comment_brightness = 20
 endif
 
-if PluginExists('vim-vue')
-    autocmd filetype vue syntax sync fromstart
-endif
-
-if PluginExists('vim-jsx')
-    let g:jsx_ext_required = 0
-endif
-
-if PluginExists('vim-javascript')
+if PluginExists('vim-polyglot')
     let g:javascript_plugin_jsdoc = 1
+    let g:jsx_ext_required = 0
+
+    autocmd filetype vue syntax sync fromstart
 endif
 
 if PluginExists('delimitmate')
@@ -157,6 +163,7 @@ endif
 
 if PluginExists('splitjoin.vim')
     let g:spitjoin_trailing_comma = 1
+
     inoremap <c-j><cr> <space><c-c>diw:SplitjoinSplit<cr>o
     inoremap <c-j><bs> <c-c>ddk:s/\s\+$//e<cr>$:SplitjoinJoin<cr>a
 endif
@@ -169,6 +176,7 @@ endif
 if PluginExists('tcomment_vim')
     let g:tcomment_mapleader1=0
     let g:tcomment_mapleader2=0
+
     noremap gcp yy:TComment<cr>p
     noremap <leader>tr :TCommentRight<cr>
     noremap <leader>tb :TCommentBlock<cr>
@@ -204,4 +212,3 @@ if PluginExists('fzf.vim')
     imap <c-x><c-j> <plug>(fzf-complete-file-ag)
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
-
