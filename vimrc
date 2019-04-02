@@ -125,7 +125,6 @@ call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
 Plug 'andrewradev/splitjoin.vim'
-Plug 'andrewradev/switch.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
@@ -201,6 +200,7 @@ if PluginExists('vim-polyglot')
 endif
 
 if PluginExists('vim-fugitive')
+    nnoremap <leader>gs :Gstatus<cr>
     nnoremap <leader>gb :Gblame<cr>
     nnoremap <leader>gd :Gdiff<cr>
 endif
