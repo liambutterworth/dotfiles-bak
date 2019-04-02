@@ -1,18 +1,10 @@
 #!/bin/bash
-
-# ensure directories
 mkdir -p ~/.vim/{autoload,undodir}
-
-# download plugin managers
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# symlink dotfiles
-ln -s ~/.dotfiles/env/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/env/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/env/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/env/.gitconfig ~/.gitconfig
-
-# install plugins
+ln -s ~/.dotfiles/vimrc ~/.vimrc
+ln -s ~/.dotfiles/zshrc ~/.zshrc
+ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 zplug install
 vim +PlugInstall +qa
