@@ -35,7 +35,6 @@ set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
-set tags=.git/tags
 set undofile undodir=~/.vim/undodir
 set wildmenu wildignorecase wildmode=list:longest,full
 
@@ -98,27 +97,25 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap U <c-r>
-nnoremap <bs> <c-^>
 nnoremap g= mmgg=G`m
-nnoremap <leader><space> :
+nnoremap c* *``cgn
+nnoremap c# #``cgN
+nnoremap d* *``dgn
+nnoremap d# #``dgN
+nnoremap <bs> <c-^>
+
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
-nnoremap <leader>n gt
-nnoremap <leader>p gT
+nnoremap <leader>n :tabn<cr>
+nnoremap <leader>p :tabp<cr>
 nnoremap <leader>N :tabm +1<cr>
 nnoremap <leader>P :tabm -1<cr>
 nnoremap <leader>h <c-w>10<
 nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
-nnoremap <leader>s :%s//g<left><left>
-xnoremap <leader>s :s//g<left><left>
-xnoremap <leader>r y:%s/<c-r>"//g<left><left>
-inoremap ,, <esc>mm:call LineEnder(',')<cr>`ma
-inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
 
 "
 " Plugins
@@ -126,34 +123,69 @@ inoremap ;; <esc>mm:call LineEnder(';')<cr>`ma
 
 call plug#begin()
 
-Plug 'andrewradev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'andrewradev/splitjoin.vim'
+Plug 'andrewradev/switch.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
+Plug 'suy/vim-context-commentstring'
 Plug 'tmhedberg/matchit'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
-if PluginExists('nord-vim')
-    colorscheme nord
+if PluginExists('splitjoin.vim')
+    let g:spitjoin_trailing_comma = 1
 endif
 
-if PluginExists('vim-polyglot')
-    let g:javascript_plugin_jsdoc = 1
-    let g:jsx_ext_required = 0
+if PluginExists('nord-vim')
+    colorscheme nord
+    let g:nord_uniform_diff_background = 1
+endif
 
-    autocmd filetype vue syntax sync fromstart
+if PluginExists('fzf.vim')
+    set runtimepath+=~/.zplug/repos/junegunn/fzf
+
+    let g:fzf_tags_command        = 'git ctags'
+    let g:fzf_commits_log_options = '--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
+
+    command! -bang -nargs=? -complete=dir Files
+                \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
+
+    nnoremap <leader><space> :Files<cr>
+    nnoremap <leader><cr> :Buffers<cr>
+    nnoremap <leader>gf :GFiles?<cr>
+    nnoremap <leader>gc :Commits<cr>
+    nnoremap <leader>: :History:<cr>
+    nnoremap <leader>/ :History/<cr>
+    nnoremap <leader>` :Marks<cr>
+    nnoremap <leader>] :Tags<cr>
+
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-f> <plug>(fzf-complete-path)
+    imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
+endif
+
+if PluginExists('vim-easy-align')
+    xmap ga <plug>(EasyAlign)
+    nmap ga <plug>(EasyAlign)
+endif
+
+if PluginExists('vim-gutentags')
+    let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
 if PluginExists('delimitmate')
@@ -161,54 +193,14 @@ if PluginExists('delimitmate')
     let g:delimitMate_expand_space = 1
 endif
 
-if PluginExists('splitjoin.vim')
-    let g:spitjoin_trailing_comma = 1
+if PluginExists('vim-polyglot')
+    let g:javascript_plugin_jsdoc = 1
+    let g:jsx_ext_required        = 0
 
-    inoremap <c-j><cr> <space><c-c>diw:SplitjoinSplit<cr>o
-    inoremap <c-j><bs> <c-c>ddk:s/\s\+$//e<cr>$:SplitjoinJoin<cr>a
-endif
-
-if PluginExists('vim-easy-align')
-    xmap <leader>a <plug>(EasyAlign)
-    nmap <leader>a <plug>(EasyAlign)
-endif
-
-if PluginExists('tcomment_vim')
-    let g:tcomment_mapleader1=0
-    let g:tcomment_mapleader2=0
-
-    noremap gcp yy:TComment<cr>p
-    noremap <leader>tr :TCommentRight<cr>
-    noremap <leader>tb :TCommentBlock<cr>
-    noremap <leader>ts :TCommentBlock<cr>A*<esc>
-    noremap <leader>ts :TCommentBlock<cr>A*<esc>
+    autocmd filetype vue syntax sync fromstart
 endif
 
 if PluginExists('vim-fugitive')
-    nnoremap <leader>gs :Gstatus<cr>
+    nnoremap <leader>gb :Gblame<cr>
     nnoremap <leader>gd :Gdiff<cr>
-endif
-
-if PluginExists('fzf.vim')
-    set runtimepath+=~/.fzf
-
-    let g:fzf_tags_command='git ctags'
-    let g:fzf_commits_log_options='--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
-
-    command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
-
-    nnoremap <leader>ff :Files<cr>
-    nnoremap <leader>fb :Buffers<cr>
-    nnoremap <leader>fh :History<cr>
-    nnoremap <leader>f: :History:<cr>
-    nnoremap <leader>f/ :History/<cr>
-    nnoremap <leader>ft :Tags<cr>
-    nnoremap <leader>fc :Commits<cr>
-    nnoremap <leader>fl :Lines<cr>
-
-    imap <c-x><c-k> <plug>(fzf-complete-word)
-    imap <c-x><c-f> <plug>(fzf-complete-path)
-    imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-    imap <c-x><c-l> <plug>(fzf-complete-line)
 endif

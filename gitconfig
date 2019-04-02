@@ -6,7 +6,4 @@
 [credential]
     helper = cache
 [alias]
-    ctags = !.git/hooks/ctags
     root = !cd $(git rev-parse --show-toplevel) && echo $(pwd)
-[init]
-    templatedir = ~/.dotfiles/env/git/template

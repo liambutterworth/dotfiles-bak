@@ -12,7 +12,7 @@
 
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
-export GIT_LOG_FORMAT='%C(red)%h%Creset %C(yellow)%d%Creset %s %C(green)(%cr) %C(blue)<%an>%Creset'
+export GIT_LOG_FORMAT='%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%cr) %C(blue)<%an>%C(reset)'
 export DOCKER_PS_FORMAT="ID\\t{{.ID}}\\nNAME\\t{{.Names}}\\nIMAGE\\t{{.Image}}\\nPORTS\\t{{.Ports}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.CreatedAt}}\\nSTATUS\\t{{.Status}}\\n"
 export DOCKER_LS_FORMAT="ID\\t{{.ID}}\\nREPO\\t{{.Repository}}\\nTAG\\t{{.Tag}}\\nCREATED\\t{{.CreatedAt}}\\nSIZE\\t{{.Size}}\\n"
 
@@ -76,10 +76,10 @@ alias gsh='git show'
 alias gs='git status'
 alias gr='git root'
 
-alias di='docker image'
 alias dc='docker container'
-alias dis="docker image ls --format='$DOCKER_LS_FORMAT'"
 alias dcs="docker ps -a --format='$DOCKER_PS_FORMAT'"
+alias di='docker image'
+alias dis="docker image ls --format='$DOCKER_LS_FORMAT'"
 alias db='docker build -t'
 alias dr='docker run'
 alias da='docker attach'
