@@ -9,18 +9,6 @@
 # Settings
 #
 
-source ~/.zplug/init.zsh
-
-zplug 'junegunn/fzf', hook-build:'./install --all --no-bash'
-zplug 'mafredri/zsh-async'
-zplug 'sindresorhus/pure'
-zplug 'zsh-users/zsh-autosuggestions'
-zplug 'zsh-users/zsh-completions'
-zplug 'zsh-users/zsh-history-substring-search'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-
-zplug load
-
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
 export GIT_LOG_FORMAT='%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%cr) %C(blue)<%an>%C(reset)'
@@ -29,7 +17,7 @@ export DOCKER_LS_FORMAT="ID\\t{{.ID}}\\nREPO\\t{{.Repository}}\\nTAG\\t{{.Tag}}\
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
-zstyle ':completion:*' format 'Completing: %d'
+zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' completer _complete _correct _approximate
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' verbose true
@@ -39,16 +27,25 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
-autoload -U edit-command-line
-autoload -U colors && colors
+autoload -Uz edit-command-line
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+
+preexec() { print }
 
 #
 # Aliases
 #
 
-[[ -x "$(command -v gls)" ]] && ls='gls' || ls='ls'
-alias ls="$ls -hA --color --group-directories-first"
-alias ll='ls -l'
+if [[ -x "$(command -v gls)" ]]; then
+    alias ls='gls --color --group-directories-first'
+elif [[ `uname` = Linux ]]; then
+    alias ls='ls --color --group-directories-first'
+elif [[ `uname` = Darwin ]]; then
+    alias ls='ls -G'
+fi
+
+alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
 
 alias vt='vim -p'
@@ -93,8 +90,22 @@ alias dk='docker kill'
 #
 # Plugins
 #
-# :: History Substring Search
-# :: FZF
+
+source ~/.zplug/init.zsh
+
+zplug 'junegunn/fzf', hook-build:'./install --all --no-bash'
+zplug 'mafredri/zsh-async'
+zplug 'sindresorhus/pure'
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+
+zplug load
+
+# Autosuggestions
+
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
 
 # History Substring Search
 

@@ -1,9 +1,11 @@
 [user]
     name = Liam Butterworth
     email = account@liambutterworth.me
-[core]
-    editor = vim
 [credential]
     helper = cache
+[core]
+    editor = vim
+[diff]
+    tool = vimdiff
 [alias]
     root = !cd $(git rev-parse --show-toplevel) && echo $(pwd)

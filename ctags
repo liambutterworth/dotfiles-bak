@@ -1,9 +1,10 @@
+-f .git/tags
 --tag-relative=yes
 --recurse=yes
 --fields=+l
 --languages=-sql
 --exclude=.git
---exclude=vendor
 --exclude=node_modules
+--exclude=vendor
 --langmap=javascript:.js.jsx
 --langmap=php:.php

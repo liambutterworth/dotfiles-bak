@@ -9,30 +9,6 @@
 " Settings
 "
 
-call plug#begin()
-
-Plug 'airblade/vim-gitgutter'
-Plug 'andrewradev/splitjoin.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'raimondi/delimitmate'
-Plug 'sheerun/vim-polyglot'
-Plug 'suy/vim-context-commentstring'
-Plug 'tmhedberg/matchit'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-
-call plug#end()
-
 set autoread
 set autoindent
 set backspace=indent,eol,start
@@ -112,7 +88,6 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap U <c-r>
 nnoremap <bs> <c-^>
 nnoremap g= mmgg=G`m
 nnoremap gs :s//g<left><left>
@@ -139,24 +114,64 @@ nnoremap <leader>l <c-w>10>
 "
 " Plugins
 "
-" :: EasyAlign
-" :: DelimitMate
-" :: Fugitive
-" :: GutenTags
-" :: Nord
-" :: Polyglot
-" :: SplitJoin
-" :: FZF
+
+call plug#begin()
+
+Plug 'airblade/vim-gitgutter'
+Plug 'andrewradev/splitjoin.vim'
+Plug 'andrewradev/sideways.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mattn/emmet-vim'
+Plug 'raimondi/delimitmate'
+Plug 'sheerun/vim-polyglot'
+Plug 'suy/vim-context-commentstring'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+
+call plug#end()
 
 " EasyAlign
 
 xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
 
+" SplitJoin
+
+let g:splitjoin_trailing_comma                    = 1
+let g:splitjoin_curly_brace_padding               = 1
+let g:splitjoin_html_attributes_brack_on_new_line = 1
+
+" Sideways
+
+nnoremap an :SidewaysRight<cr>
+nnoremap ap :SidewaysLeft<cr>
+nnoremap aw :SidewaysJumpRight<cr>
+nnoremap ab :SidewaysJumpLeft<cr>
+
+omap aa <plug>SidewaysArgumentTextobjA
+xmap aa <plug>SidewaysArgumentTextobjA
+omap ia <plug>SidewaysArgumentTextobjI
+xmap ia <plug>SidewaysArgumentTextobjI
+
 " DelimitMate
 
 let g:delimitMate_expand_cr    = 1
 let g:delimitMate_expand_space = 1
+
+" Emmet
+
+let g:user_emmet_leader_key = '<c-j>'
 
 " Fugitive
 
@@ -164,14 +179,26 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 
+" GitGutter
+
+let g:gitgutter_map_keys = 0
+
+omap ih <plug>GitGutterTextObjectInnerPending
+omap ah <plug>GitGutterTextObjectOuterPending
+xmap ih <plug>GitGutterTextObjectInnerVisual
+xmap ah <plug>GitGutterTextObjectOuterVisual
 
 " GutenTags
 
+let g:gutentags_project_root = [ '.git' ]
 let g:gutentags_ctags_tagfile = '.git/tags'
 
 " Nord
 
 colorscheme nord
+
+let g:nord_italic                  = 1
+let g:nord_underline               = 1
 let g:nord_uniform_diff_background = 1
 
 " Polyglot
@@ -181,28 +208,24 @@ let g:jsx_ext_required        = 0
 
 autocmd filetype vue syntax sync fromstart
 
-" SplitJoin
-
-let g:spitjoin_trailing_comma = 1
-
 " FZF
 
 set runtimepath+=~/.zplug/repos/junegunn/fzf
-
-let g:fzf_tags_command        = 'git ctags'
 let g:fzf_commits_log_options = '--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
 
 command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, {'options': ['--preview', system('echo $FZF_PREVIEW_OPTS')]}, <bang>0)
+            \ call fzf#vim#files(<q-args>, {'options': [ '--preview', system('echo $FZF_PREVIEW_OPTS') ]}, <bang>0)
 
 nnoremap <leader><space> :Files<cr>
-nnoremap <leader><cr> :Buffers<cr>
+nnoremap <leader><bs> :Buffers<cr>
+nnoremap <leader><cr> :Ag<cr>
+nnoremap <leader><tab> :Tags<cr>
 nnoremap <leader>gf :GFiles?<cr>
 nnoremap <leader>gc :Commits<cr>
+nnoremap <leader>G :BLines<cr>
 nnoremap <leader>: :History:<cr>
 nnoremap <leader>/ :History/<cr>
 nnoremap <leader>` :Marks<cr>
-nnoremap <leader>] :Tags<cr>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
