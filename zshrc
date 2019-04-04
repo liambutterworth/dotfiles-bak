@@ -47,6 +47,7 @@ fi
 
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
+alias lt="tree -I '.git|node_modules|vendor'"
 
 alias vt='vim -p'
 alias vs='vim -o'
@@ -61,6 +62,7 @@ alias tl='tmux list-sessions'
 alias ga='git add'
 alias gmv='git mv'
 alias grm='git rm'
+alias gun='git rm --cached'
 alias gb='git branch'
 alias gco='git checkout'
 alias gc='git commit -m'

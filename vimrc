@@ -89,15 +89,27 @@ nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
 nnoremap <bs> <c-^>
-nnoremap g= mmgg=G`m
-nnoremap gs :s//g<left><left>
-xnoremap gs :s//g<left><left>
-xnoremap gr y:%s/<c-r>"//g<left><left>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
+nnoremap g= mmgg=G`m
+nnoremap gs :s//g<left><left>
+xnoremap gs :s//g<left><left>
+xnoremap gr y:%s/<c-r>"//g<left><left>
 
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprevious<c>
+nnoremap ]B :blast<cr>
+nnoremap [B :bfirst<cr>
+nnoremap ]<space> o<esc>'[k
+nnoremap [<space> O<esc>j
+nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
+vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv='
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv='
+
+nnoremap <leader>s :so ~/.vimrc<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
@@ -110,6 +122,12 @@ nnoremap <leader>h <c-w>10<
 nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
+
+nnoremap <leader>oh :set hlsearch!<cr>
+nnoremap <leader>or :set relativenumber!<cr>
+nnoremap <leader>ol :set list!<cr>
+nnoremap <leader>os :set spell!<cr>
+nnoremap <leader>ow :set wrap!<cr>
 
 "
 " Plugins
@@ -130,21 +148,21 @@ Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
 Plug 'suy/vim-context-commentstring'
 Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
 " EasyAlign
 
-xmap ga <plug>(EasyAlign)
 nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
 
 " SplitJoin
 
@@ -154,15 +172,13 @@ let g:splitjoin_html_attributes_brack_on_new_line = 1
 
 " Sideways
 
-nnoremap an :SidewaysRight<cr>
-nnoremap ap :SidewaysLeft<cr>
-nnoremap aw :SidewaysJumpRight<cr>
-nnoremap ab :SidewaysJumpLeft<cr>
+nnoremap ]a :SidewaysRight<cr>
+nnoremap [a :SidewaysLeft<cr>
 
-omap aa <plug>SidewaysArgumentTextobjA
-xmap aa <plug>SidewaysArgumentTextobjA
 omap ia <plug>SidewaysArgumentTextobjI
+omap aa <plug>SidewaysArgumentTextobjA
 xmap ia <plug>SidewaysArgumentTextobjI
+xmap aa <plug>SidewaysArgumentTextobjA
 
 " DelimitMate
 
@@ -172,6 +188,7 @@ let g:delimitMate_expand_space = 1
 " Emmet
 
 let g:user_emmet_leader_key = '<c-j>'
+let g:user_emmet_mode       = 'i'
 
 " Fugitive
 
@@ -182,6 +199,9 @@ nnoremap <leader>gd :Gdiff<cr>
 " GitGutter
 
 let g:gitgutter_map_keys = 0
+
+nnoremap ]h <plug>GitGutterNextHunk
+nnoremap [h <plug>GitGutterPrevHunk
 
 omap ih <plug>GitGutterTextObjectInnerPending
 omap ah <plug>GitGutterTextObjectOuterPending
@@ -211,6 +231,7 @@ autocmd filetype vue syntax sync fromstart
 " FZF
 
 set runtimepath+=~/.zplug/repos/junegunn/fzf
+
 let g:fzf_commits_log_options = '--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
 
 command! -bang -nargs=? -complete=dir Files
