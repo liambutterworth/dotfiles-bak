@@ -11,9 +11,6 @@
 
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
-export GIT_LOG_FORMAT='%C(red)%h%C(reset) %C(yellow)%d%C(reset) %s %C(green)(%cr) %C(blue)<%an>%C(reset)'
-export DOCKER_PS_FORMAT="ID\\t{{.ID}}\\nNAME\\t{{.Names}}\\nIMAGE\\t{{.Image}}\\nPORTS\\t{{.Ports}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.CreatedAt}}\\nSTATUS\\t{{.Status}}\\n"
-export DOCKER_LS_FORMAT="ID\\t{{.ID}}\\nREPO\\t{{.Repository}}\\nTAG\\t{{.Tag}}\\nCREATED\\t{{.CreatedAt}}\\nSIZE\\t{{.Size}}\\n"
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
@@ -37,6 +34,12 @@ preexec() { print }
 # Aliases
 #
 
+alias /='cd /'
+alias ~='cd ~'
+alias ..='cd ..'
+alias -- -='cd -'
+alias src='source ~/.zshrc; echo source ~/.zshrc'
+
 if [[ -x "$(command -v gls)" ]]; then
     alias ls='gls --color --group-directories-first'
 elif [[ `uname` = Linux ]]; then
@@ -47,7 +50,7 @@ fi
 
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
-alias lt="tree -I '.git|node_modules|vendor'"
+alias lt='tree -I ".git|node_modules|vendor"'
 
 alias vt='vim -p'
 alias vs='vim -o'
@@ -62,26 +65,31 @@ alias tl='tmux list-sessions'
 alias ga='git add'
 alias gmv='git mv'
 alias grm='git rm'
-alias gun='git rm --cached'
+alias gun='git unstage'
 alias gb='git branch'
 alias gco='git checkout'
 alias gc='git commit -m'
+alias gam='git ammend -m'
 alias gst='git stash'
 alias gd='git diff'
-alias gdt='git diff-tree --no-commit-id --name-only -r'
+alias gch='git changed'
 alias gt='git tag'
 alias gf='git fetch'
 alias gl='git log'
-alias gll="git log --graph --color=always --format='$GIT_LOG_FORMAT'"
+alias gll='git log-long'
+alias glg='git log-graph'
 alias grl='git reflog'
 alias gsh='git show'
 alias gs='git status'
 alias gr='git root'
+alias ge='git edits'
+alias gwh='git whoami'
+alias gau='git authors'
 
 alias dc='docker container'
-alias dcs="docker ps -a --format='$DOCKER_PS_FORMAT'"
+alias dcs='docker ps -a'
 alias di='docker image'
-alias dis="docker image ls --format='$DOCKER_LS_FORMAT'"
+alias dis='docker image'
 alias db='docker build -t'
 alias dr='docker run'
 alias da='docker attach'

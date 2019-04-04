@@ -2,10 +2,20 @@
     name = Liam Butterworth
     email = account@liambutterworth.me
 [credential]
-    helper = cache
+    helper = cache --timeout=3600
 [core]
     editor = vim
 [diff]
     tool = vimdiff
 [alias]
+    log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(blue)<%an>\\ %C(green)%ad%n%C(white)%s%n" --date=relative
+    log-graph = log-pretty --graph
+    ammend = commit --amend
+    info = config --list
     root = !cd $(git rev-parse --show-toplevel) && echo $(pwd)
+    edits = diff --color-words
+    changed = diff-tree --no-commit-id --name-only -r
+    staged = diff --cached
+    unstage = rm --cached
+    whoami = !git config user.name && git config user.email
+    authors = !sh -c 'git log --format="%aN" | sort -k 2 -u'

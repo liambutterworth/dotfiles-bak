@@ -34,12 +34,8 @@ set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
+set undofile undodir=~/.vim/undodir
 set wildmenu wildignorecase wildmode=list:longest,full
-
-if has('persistent_undo')
-    silent call system('mkdir -p ~/.vim/undodir')
-    set undofile undodir=~/.vim/undodir
-endif
 
 augroup Formatting
     autocmd!
@@ -192,9 +188,9 @@ let g:user_emmet_mode       = 'i'
 
 " Fugitive
 
-nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gx :Gdiff<cr>
+nnoremap <leader>gv :Gvdiff<cr>
 
 " GitGutter
 
@@ -232,7 +228,8 @@ autocmd filetype vue syntax sync fromstart
 
 set runtimepath+=~/.zplug/repos/junegunn/fzf
 
-let g:fzf_commits_log_options = '--color=always --format="' . system('echo $GIT_LOG_FORMAT') . '"'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_tags_command        = 'ctags -R'
 
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, {'options': [ '--preview', system('echo $FZF_PREVIEW_OPTS') ]}, <bang>0)
