@@ -1,0 +1,15 @@
+#!/bin/bash
+
+truncate-string () {
+    [ $(echo -n $1 | wc -m) -ge 20 ] && echo "$(echo -n $1 | cut -c -20).." || echo $1
+}
+
+spotify-info () {
+    if [[ -x "$(command -v spotify)" ]]; then
+        local artist=$(cut -d':' -f2 <<< $(spotify status | grep 'Artist'))
+        local track=$(cut -d':' -f2 <<< $(spotify status | grep 'Track'))
+        echo "$artist - $(truncate-string "$track")"
+    fi
+}
+
+echo -n $(spotify-info)

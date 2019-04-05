@@ -8,7 +8,7 @@
 [diff]
     tool = vimdiff
 [alias]
-    log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(blue)<%an>\\ %C(green)%ad%n%C(white)%s%n" --date=relative
+    log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
     log-graph = log-pretty --graph
     ammend = commit --amend
     info = config --list

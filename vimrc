@@ -26,6 +26,7 @@ set list listchars=tab:│\ ,trail:·
 set nobackup noswapfile
 set nocursorline
 set noerrorbells novisualbell
+set noshowmode
 set nowrap
 set number relativenumber
 set shiftwidth=4 softtabstop=4 expandtab
@@ -48,6 +49,12 @@ augroup Completion
     autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
+augroup END
+
+augroup Mode
+    autocmd!
+    autocmd insertenter * setlocal cursorline
+    autocmd insertleave * setlocal nocursorline
 augroup END
 
 function! TabLine() abort
@@ -211,11 +218,11 @@ let g:gutentags_ctags_tagfile = '.git/tags'
 
 " Nord
 
-colorscheme nord
-
 let g:nord_italic                  = 1
 let g:nord_underline               = 1
 let g:nord_uniform_diff_background = 1
+
+colorscheme nord
 
 " Polyglot
 
