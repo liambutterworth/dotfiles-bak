@@ -9,6 +9,11 @@
 # Settings
 #
 
+autoload -Uz edit-command-line
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+autoload -Uz vcs_info
+
 export TERM="xterm-256color"
 export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
 
@@ -18,16 +23,26 @@ zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' completer _complete _correct _approximate
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' verbose true
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats '%b'
 
 bindkey -v
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
-autoload -Uz edit-command-line
-autoload -Uz colors && colors
-autoload -Uz compinit && compinit
+function zle-line-init zle-keymap-select {
+    PROMPT="%F{4}%3~ %F{8}${vcs_info_msg_0_}"
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && echo '%n@%m'
+    PROMPT+=$'\n''%(?.%F{5}.%F{1})'
+    [[ $KEYMAP = 'vicmd' ]] && PROMPT+="❮ " || PROMPT+="❯ "
+    zle reset-prompt
+}
 
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+precmd() { vcs_info; print }
 preexec() { print }
 
 #
@@ -104,8 +119,6 @@ alias dk='docker kill'
 source ~/.zplug/init.zsh
 
 zplug 'junegunn/fzf', hook-build:'./install --all --no-bash'
-zplug 'mafredri/zsh-async'
-zplug 'sindresorhus/pure'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-history-substring-search'
