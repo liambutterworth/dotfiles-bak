@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-Install `vim zsh tmux git ctags` and optionally `coreutils htop tree shpotify`
+Install `vim zsh tmux git ctags ripgrep tree`
 
 ## Install
 

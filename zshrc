@@ -62,21 +62,20 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-if [[ -x "$(command -v gls)" ]]; then
-    alias ls='gls --color --group-directories-first'
+if [[ `uname` = Darwin ]]; then
+    alias ls='ls -G'
 elif [[ `uname` = Linux ]]; then
     alias ls='ls --color --group-directories-first'
-elif [[ `uname` = Darwin ]]; then
-    alias ls='ls -G'
 fi
 
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
-alias lt='tree -I ".git|node_modules|vendor"'
+alias lt="tree -I '.git|node_modules|vendor'"
 
 alias vt='vim -p'
 alias vs='vim -o'
 alias vv='vim -O'
+alias vd='vimdiff'
 
 alias tc='clear && tmux clear-history'
 alias tn='tmux rename-session'
@@ -91,7 +90,7 @@ alias gun='git unstage'
 alias gb='git branch'
 alias gco='git checkout'
 alias gc='git commit -m'
-alias gam='git ammend -m'
+alias gam='git ammend'
 alias gst='git stash'
 alias gd='git diff'
 alias gch='git changed'
@@ -144,10 +143,12 @@ bindkey '^N' history-substring-search-down
 
 # FZF
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+# export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
+# export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
+export FZF_PREVIEW_OPTS='(bat --color=always --style=header,grid --line-range :300 {} || ls -A {}) 2> /dev/null | head -200'
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1

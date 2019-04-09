@@ -241,9 +241,15 @@ let g:fzf_tags_command        = 'ctags -R'
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, {'options': [ '--preview', system('echo $FZF_PREVIEW_OPTS') ]}, <bang>0)
 
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0
+  \ )
+
 nnoremap <leader><space> :Files<cr>
 nnoremap <leader><bs> :Buffers<cr>
-nnoremap <leader><cr> :Ag<cr>
+nnoremap <leader><cr> :Rg<cr>
 nnoremap <leader><tab> :Tags<cr>
 nnoremap <leader>gf :GFiles?<cr>
 nnoremap <leader>gc :Commits<cr>
