@@ -62,11 +62,10 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-[[ `uname` = Darwin ]] && lsopts='-G' || lsopts='--color --group-directories-first'
-alias ls="ls $lsopts"
+[[ `uname` = Darwin ]] && lsargs='-G' || lsargs='--color --group-directories-first'
+alias ls="ls $lsargs"
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
-alias lt="tree -I '.git|node_modules|vendor'"
 
 alias vt='vim -p'
 alias vs='vim -o'
