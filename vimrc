@@ -102,7 +102,7 @@ xnoremap gs :s//g<left><left>
 xnoremap gr y:%s/<c-r>"//g<left><left>
 
 nnoremap ]b :bnext<cr>
-nnoremap [b :bprevious<c>
+nnoremap [b :bprevious<cr>
 nnoremap ]B :blast<cr>
 nnoremap [B :bfirst<cr>
 nnoremap ]<space> o<esc>'[k
@@ -198,6 +198,11 @@ let g:user_emmet_mode       = 'i'
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gx :Gdiff<cr>
 nnoremap <leader>gv :Gvdiff<cr>
+
+" Commentary
+
+nnoremap gp mmyyP:Commentary<cr>`m
+xnoremap gp ygv:Commentary<cr>`>p
 
 " GitGutter
 
