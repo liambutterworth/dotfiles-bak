@@ -62,12 +62,8 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-if [[ `uname` = Darwin ]]; then
-    alias ls='ls -G'
-elif [[ `uname` = Linux ]]; then
-    alias ls='ls --color --group-directories-first'
-fi
-
+[[ `uname` = Darwin ]] && lsopts='-G' || lsopts='--color --group-directories-first'
+alias ls="ls $lsopts"
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
 alias lt="tree -I '.git|node_modules|vendor'"
