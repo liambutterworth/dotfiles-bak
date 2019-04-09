@@ -142,8 +142,7 @@ bindkey '^N' history-substring-search-down
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-# export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
-export FZF_PREVIEW_OPTS='(bat --color=always --style=header,grid --line-range :300 {} || ls -A {}) 2> /dev/null | head -200'
+export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
 export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1
