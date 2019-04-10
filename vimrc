@@ -218,7 +218,8 @@ xmap ah <plug>GitGutterTextObjectOuterVisual
 
 " GutenTags
 
-let g:gutentags_project_root = [ '.git' ]
+let g:gutentags_enabled       = system('command -v ctags')
+let g:gutentags_project_root  = [ '.git' ]
 let g:gutentags_ctags_tagfile = '.git/tags'
 
 " Nord

@@ -63,10 +63,9 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-[[ `uname` = Darwin ]] && lsargs='-G' || lsargs='--color --group-directories-first'
-alias ls="ls $lsargs"
-alias ll='ls -lhA'
-alias lp="tr ':' '\n' <<< $PATH"
+alias ea='exa --all'
+alias el='ea --long --group-directories-first'
+alias et='ea --tree --git-ignore --ignore-glob=".git"'
 
 alias vt='vim -p'
 alias vs='vim -o'
