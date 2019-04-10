@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function install() {
+    mkdir -p ~/.zsh ~/.vim/{autoload,undodir}
+    curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ln -s ~/.dotfiles/vimrc ~/.vimrc
+    ln -s ~/.dotfiles/zshrc ~/.zshrc
+    ln -s ~/.dotfiles/tmux.conf ~/.tmux.conf
+    ln -s ~/.dotfiles/gitconfig ~/.gitconfig
+    ln -s ~/.dotfiles/ctags ~/.ctags
+    vim +PlugInstall +qa
+    zplug install
+    ~/.tmux/plugins/tpm/bin/install_plugins
+}
+
+function update() {
+    zplug update
+    vim +PlugUpdate +qa
+}
+
+function remove() {
+    rm -rf ~/.zplug ~/.vim/{autoload,undodir,plugged}
+    rm ~/.{vimrc,zshrc,tmux.conf,gitconfig}
+}
+
+eval "$1"

@@ -9,13 +9,10 @@
 # Settings
 #
 
-autoload -Uz edit-command-line
-autoload -Uz colors && colors
 autoload -Uz compinit && compinit
+autoload -Uz colors && colors
+autoload -Uz edit-command-line
 autoload -Uz vcs_info
-
-export TERM="xterm-256color"
-export LS_COLORS='no=00:fi=00:di=34:ow=34;40:ln=35:pi=30;44:so=35;44:do=35;44:bd=33;44:cd=37;44:or=05;37;41:mi=05;37;41:ex=01;31'
 
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
@@ -51,7 +48,6 @@ zle -N zle-keymap-select
 
 precmd() { vcs_info; print }
 preexec() { print }
-precmd() { vcs_info; print }
 
 #
 # Aliases

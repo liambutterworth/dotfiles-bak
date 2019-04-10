@@ -1,3 +1,0 @@
-#!/bin/bash
-rm -rf ~/.zplug ~/.vim/{autoload,undodir,plugged}
-rm ~/.{vimrc,zshrc,tmux.conf,gitconfig}

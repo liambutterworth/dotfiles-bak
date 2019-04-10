@@ -3,5 +3,7 @@
 ```
     $ brew install vim zsh tmux git ctags ripgrep exa
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles
-    $ ~/.dotfiles/bin/install
+    $ ~/.dotfiles/bin/dotfiles install
 ```
+
+Add dotfiles bin to $PATH `PATH="$HOME/.dotfiles/bin:$PATH"`
