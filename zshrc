@@ -24,6 +24,7 @@ zstyle ':completion:*' completer _complete _correct _approximate
 zstyle ':completion:*' menu select=2
 zstyle ':completion:*' verbose true
 zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats '%b'
 
 bindkey -v
@@ -31,11 +32,17 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
+function set-prompt {
+    PROMPT='%F{4}%3~%F{8}'
+    [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%m'
+    PROMPT+=$'\n'"%(?.%F{5}.%F{1})"
+    [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
+    PROMPT+=' '
+}
+
 function zle-line-init zle-keymap-select {
-    PROMPT="%F{4}%3~ %F{8}${vcs_info_msg_0_}"
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && echo '%n@%m'
-    PROMPT+=$'\n''%(?.%F{5}.%F{1})'
-    [[ $KEYMAP = 'vicmd' ]] && PROMPT+="❮ " || PROMPT+="❯ "
+    set-prompt
     zle reset-prompt
 }
 
@@ -44,6 +51,7 @@ zle -N zle-keymap-select
 
 precmd() { vcs_info; print }
 preexec() { print }
+precmd() { vcs_info; print }
 
 #
 # Aliases
@@ -55,21 +63,15 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-if [[ -x "$(command -v gls)" ]]; then
-    alias ls='gls --color --group-directories-first'
-elif [[ `uname` = Linux ]]; then
-    alias ls='ls --color --group-directories-first'
-elif [[ `uname` = Darwin ]]; then
-    alias ls='ls -G'
-fi
-
+[[ `uname` = Darwin ]] && lsargs='-G' || lsargs='--color --group-directories-first'
+alias ls="ls $lsargs"
 alias ll='ls -lhA'
 alias lp="tr ':' '\n' <<< $PATH"
-alias lt='tree -I ".git|node_modules|vendor"'
 
 alias vt='vim -p'
 alias vs='vim -o'
 alias vv='vim -O'
+alias vd='vimdiff'
 
 alias tc='clear && tmux clear-history'
 alias tn='tmux rename-session'
@@ -84,7 +86,7 @@ alias gun='git unstage'
 alias gb='git branch'
 alias gco='git checkout'
 alias gc='git commit -m'
-alias gam='git ammend -m'
+alias gam='git ammend'
 alias gst='git stash'
 alias gd='git diff'
 alias gch='git changed'
@@ -137,7 +139,7 @@ bindkey '^N' history-substring-search-down
 
 # FZF
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
 export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
 export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'

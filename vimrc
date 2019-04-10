@@ -102,7 +102,7 @@ xnoremap gs :s//g<left><left>
 xnoremap gr y:%s/<c-r>"//g<left><left>
 
 nnoremap ]b :bnext<cr>
-nnoremap [b :bprevious<c>
+nnoremap [b :bprevious<cr>
 nnoremap ]B :blast<cr>
 nnoremap [B :bfirst<cr>
 nnoremap ]<space> o<esc>'[k
@@ -199,6 +199,11 @@ nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gx :Gdiff<cr>
 nnoremap <leader>gv :Gvdiff<cr>
 
+" Commentary
+
+nnoremap gp mmyyP:Commentary<cr>`m
+xnoremap gp ygv:Commentary<cr>`>p
+
 " GitGutter
 
 let g:gitgutter_map_keys = 0
@@ -241,9 +246,15 @@ let g:fzf_tags_command        = 'ctags -R'
 command! -bang -nargs=? -complete=dir Files
             \ call fzf#vim#files(<q-args>, {'options': [ '--preview', system('echo $FZF_PREVIEW_OPTS') ]}, <bang>0)
 
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0
+  \ )
+
 nnoremap <leader><space> :Files<cr>
 nnoremap <leader><bs> :Buffers<cr>
-nnoremap <leader><cr> :Ag<cr>
+nnoremap <leader><cr> :Rg<cr>
 nnoremap <leader><tab> :Tags<cr>
 nnoremap <leader>gf :GFiles?<cr>
 nnoremap <leader>gc :Commits<cr>

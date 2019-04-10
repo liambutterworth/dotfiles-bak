@@ -9,7 +9,7 @@
     tool = vimdiff
 [alias]
     log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
-    log-graph = log-pretty --graph
+    log-graph = log-long --graph
     ammend = commit --amend
     info = config --list
     root = !cd $(git rev-parse --show-toplevel) && echo $(pwd)
