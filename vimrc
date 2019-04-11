@@ -60,12 +60,12 @@ augroup END
 function! TabLine() abort
     let output = ''
 
-    for index in range(tabpagenr('$'))
+    for index in range( tabpagenr( '$' ) )
         let tab_index      = index + 1
-        let buflist        = tabpagebuflist(tab_index)
-        let winnr          = tabpagewinnr(tab_index)
-        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
-        let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+        let buflist        = tabpagebuflist( tab_index )
+        let winnr          = tabpagewinnr( tab_index )
+        let tab_name       = fnamemodify( bufname( buflist[ winnr - 1 ] ), ':t' )
+        let tab_highlight  = ( tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#' )
         let output        .= tab_highlight . ' ' . tab_name . ' '
     endfor
 
@@ -73,13 +73,24 @@ function! TabLine() abort
 endfunction
 
 function! StatusLine() abort
-    let output = ' '
+    let dir  = expand( '%:h' )
+    let file = expand( '%:t' )
+    let path = expand( '%:p' )
+    let mode = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
 
-    if exists('g:loaded_fugitive') && !empty(fugitive#head(7))
-        let output .= fugitive#head(7) . ' '
+    let output  = ' '
+    let output .= '%f%m'
+    let output .= '%='
+    let output .= ' %{&fileformat}'
+
+    if filereadable( path )
+        let output .= ' %{&fileencoding}'
+        let output .= ' ' . substitute( mode, '\n', '', 'g' )
     endif
 
-    return output . '%f%m%r%=%c:%l/%L %{&fenc} %{&ff} '
+    let output .= ' '
+
+    return output
 endfunction
 
 "
@@ -113,6 +124,8 @@ vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv='
 vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv='
 
 nnoremap <leader>s :so ~/.vimrc<cr>
+nnoremap <leader>e :e<cr>
+nnoremap <leader>E :e!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
 nnoremap <leader>q :q<cr>
@@ -151,10 +164,9 @@ Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
 Plug 'suy/vim-context-commentstring'
 Plug 'tmhedberg/matchit'
-Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -218,7 +230,7 @@ xmap ah <plug>GitGutterTextObjectOuterVisual
 
 " GutenTags
 
-let g:gutentags_enabled       = system('command -v ctags')
+let g:gutentags_enabled       = system( 'command -v ctags' )
 let g:gutentags_project_root  = [ '.git' ]
 let g:gutentags_ctags_tagfile = '.git/tags'
 
@@ -241,17 +253,17 @@ autocmd filetype vue syntax sync fromstart
 
 set runtimepath+=~/.zplug/repos/junegunn/fzf
 
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
 let g:fzf_tags_command        = 'ctags -R'
 
 command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, {'options': [ '--preview', system('echo $FZF_PREVIEW_OPTS') ]}, <bang>0)
+            \ call fzf#vim#files( <q-args>, { 'options': [ '--preview', system( 'echo $FZF_PREVIEW_OPTS' ) ] }, <bang>0 )
 
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0
-  \ )
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape( <q-args> ), 1,
+            \   <bang>0 ? fzf#vim#with_preview( 'up:60%' ) : fzf#vim#with_preview( 'right:50%:hidden', '?' ), <bang>0
+            \ )
 
 nnoremap <leader><space> :Files<cr>
 nnoremap <leader><bs> :Buffers<cr>

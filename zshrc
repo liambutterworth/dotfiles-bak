@@ -14,6 +14,11 @@ autoload -Uz colors && colors
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
+bindkey -v
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' format 'Completing %d'
@@ -24,16 +29,12 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats '%b'
 
-bindkey -v
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
     [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
     [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%m'
-    PROMPT+=$'\n'"%(?.%F{5}.%F{1})"
+    PROMPT+=$'\n'
+    PROMPT+='%(?.%F{5}.%F{1})'
     [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
     PROMPT+=' '
 }
@@ -59,9 +60,11 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-alias ea='exa --all'
+alias ea='exa --all --git'
 alias el='ea --long --group-directories-first'
-alias et='ea --tree --git-ignore --ignore-glob=".git"'
+alias et='ea --tree --ignore-glob=".git|node_modules|vendor"'
+alias ep="echo '${PATH//:/\n}'"
+alias ef="echo '${fpath// /\n}'"
 
 alias vt='vim -p'
 alias vs='vim -o'
