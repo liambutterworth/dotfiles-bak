@@ -78,10 +78,10 @@ function! StatusLine() abort
     let file   = expand( '%:t' )
     let path   = expand( '%:p' )
     let mode   = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
-    let output = ' %f%m%=%{&fileformat}'
+    let output = ' %f%m%=%{&ff}'
 
     if filereadable( path )
-        let output .= ' %{&fileencoding} ' . substitute( mode, '\n', '', 'g' )
+        let output .= ' %{&fenc} ' . substitute( mode, '\n', '', 'g' )
     endif
 
     return output . ' '
