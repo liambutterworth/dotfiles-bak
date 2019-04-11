@@ -66,31 +66,25 @@ function! TabLine() abort
         let winnr          = tabpagewinnr( tab_index )
         let tab_name       = fnamemodify( bufname( buflist[ winnr - 1 ] ), ':t' )
         let tab_highlight  = ( tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#' )
-        let output        .= tab_highlight . ' ' . tab_name . ' '
+
+        let output .= tab_highlight . ' ' . tab_name . ' '
     endfor
 
     return output . '%#TabLineFill#%T'
 endfunction
 
 function! StatusLine() abort
-    let dir  = expand( '%:h' )
-    let file = expand( '%:t' )
-    let path = expand( '%:p' )
-    let mode = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
-
-    let output  = ' '
-    let output .= '%f%m'
-    let output .= '%='
-    let output .= ' %{&fileformat}'
+    let dir    = expand( '%:h' )
+    let file   = expand( '%:t' )
+    let path   = expand( '%:p' )
+    let mode   = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
+    let output = ' %f%m%=%{&fileformat}'
 
     if filereadable( path )
-        let output .= ' %{&fileencoding}'
-        let output .= ' ' . substitute( mode, '\n', '', 'g' )
+        let output .= ' %{&fileencoding} ' . substitute( mode, '\n', '', 'g' )
     endif
 
-    let output .= ' '
-
-    return output
+    return output . ' '
 endfunction
 
 "

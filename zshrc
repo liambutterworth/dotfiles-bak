@@ -146,3 +146,5 @@ export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
