@@ -2,9 +2,6 @@
 --tag-relative=yes
 --recurse=yes
 --fields=+l
---languages=-sql
---exclude=.git
---exclude=node_modules
---exclude=vendor
+--exclude={.git,node_modules,vendor}
 --langmap=javascript:.js.jsx
 --langmap=php:.php

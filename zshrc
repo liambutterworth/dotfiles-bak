@@ -27,14 +27,15 @@ zstyle ':completion:*' menu select=2
 zstyle ':completion:*' verbose true
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats '%b'
+zstyle ':vcs_info:*' unstagedstr '*'
+zstyle ':vcs_info:*' stagedstr '*'
+zstyle ':vcs_info:*' formats '%b%c%u'
 
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
     [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
     [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%m'
-    PROMPT+=$'\n'
-    PROMPT+='%(?.%F{5}.%F{1})'
+    PROMPT+=$'\n''%(?.%F{5}.%F{1})'
     [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
     PROMPT+=' '
 }
@@ -60,57 +61,49 @@ alias ..='cd ..'
 alias -- -='cd -'
 alias src='source ~/.zshrc; echo source ~/.zshrc'
 
-alias ea='exa --all --git'
-alias el='ea --long --group-directories-first'
+alias ea='exa --all --group-directories-first'
+alias el='ea --long --git --time-style="iso"'
 alias et='ea --tree --ignore-glob=".git|node_modules|vendor"'
 alias ep="echo '${PATH//:/\n}'"
 alias ef="echo '${fpath// /\n}'"
 
+alias vc='vim --clean'
+alias vd='vim -d'
 alias vt='vim -p'
 alias vs='vim -o'
 alias vv='vim -O'
-alias vd='vimdiff'
 
-alias tc='clear && tmux clear-history'
-alias tn='tmux rename-session'
 alias ta='tmux attach-session -t'
+alias tc='clear && tmux clear-history'
 alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
+alias tn='tmux rename-session'
 
+alias gcl='git clone'
 alias ga='git add'
 alias gmv='git mv'
 alias grm='git rm'
-alias gun='git unstage'
+alias gsh='git show'
+alias gs='git status'
 alias gb='git branch'
 alias gco='git checkout'
 alias gc='git commit -m'
-alias gam='git ammend'
-alias gst='git stash'
 alias gd='git diff'
-alias gch='git changed'
 alias gt='git tag'
 alias gf='git fetch'
-alias gl='git log'
+alias gst='git stash'
+alias grl='git reflog'
+alias gam='git ammend'
+alias gau='git authors'
+alias gch='git changed'
+alias ge='git edits'
+alias gi='git info'
 alias gll='git log-long'
 alias glg='git log-graph'
-alias grl='git reflog'
-alias gsh='git show'
-alias gs='git status'
-alias gr='git root'
-alias ge='git edits'
+alias gr='cd $(git root)'
+alias gss='git staged'
+alias gun='git unstage'
 alias gwh='git whoami'
-alias gau='git authors'
-
-alias dc='docker container'
-alias dcs='docker ps -a'
-alias di='docker image'
-alias dis='docker image'
-alias db='docker build -t'
-alias dr='docker run'
-alias da='docker attach'
-alias de='docker exec'
-alias ds='docker stop'
-alias dk='docker kill'
 
 #
 # Plugins
@@ -146,5 +139,3 @@ export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

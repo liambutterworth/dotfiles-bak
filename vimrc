@@ -16,6 +16,7 @@ set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set fillchars+=vert:\ 
+set foldenable foldmethod=indent
 set hidden
 set history=1000
 set incsearch
@@ -41,6 +42,7 @@ set wildmenu wildignorecase wildmode=list:longest,full
 augroup Formatting
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
+    autocmd bufwinenter * normal zR
 augroup END
 
 augroup Completion
@@ -96,7 +98,6 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap <bs> <c-^>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
@@ -106,6 +107,7 @@ nnoremap gs :s//g<left><left>
 xnoremap gs :s//g<left><left>
 xnoremap gr y:%s/<c-r>"//g<left><left>
 
+nnoremap <bs> <c-^>
 nnoremap ]b :bnext<cr>
 nnoremap [b :bprevious<cr>
 nnoremap ]B :blast<cr>
@@ -165,6 +167,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
+Plug 'sirver/ultisnips'
 
 call plug#end()
 
@@ -262,15 +265,28 @@ command! -bang -nargs=* Rg
 nnoremap <leader><space> :Files<cr>
 nnoremap <leader><bs> :Buffers<cr>
 nnoremap <leader><cr> :Rg<cr>
-nnoremap <leader><tab> :Tags<cr>
+nnoremap <leader><tab> :Snippets<cr>
 nnoremap <leader>gf :GFiles?<cr>
 nnoremap <leader>gc :Commits<cr>
 nnoremap <leader>G :BLines<cr>
+nnoremap <leader>h :Helptags<cr>
+nnoremap <leader>] :Tags<cr>
 nnoremap <leader>: :History:<cr>
 nnoremap <leader>/ :History/<cr>
 nnoremap <leader>` :Marks<cr>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-j> <plug>(fzf-complete-file)
 imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" UltiSnips
+
+let g:UltiSnipsExpandTrigger            = '<tab>'
+" let g:UltiSnipsExpandJumpForwardTrigger = '<tab>'
+" let g:UltiSnipsJumpBackgwardTrigger     = '<s-tab>'
+" let g:UltiSnipsSnippetsDir              = '~/.dotfiles/snips'
+" let g:UltiSnipsSnippetsDir              = $HOME . '/.dotfiles/snips'
+" let g:UltiSnipsEditSplit                = 'horizontal'
+
+" nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
