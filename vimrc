@@ -155,9 +155,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'mattn/emmet-vim'
 Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
+Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
@@ -167,14 +167,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'sirver/ultisnips'
 
 call plug#end()
 
-" EasyAlign
+" GitGutter
 
-nmap ga <plug>(EasyAlign)
-xmap ga <plug>(EasyAlign)
+let g:gitgutter_map_keys = 0
+
+nnoremap ]h <plug>GitGutterNextHunk
+nnoremap [h <plug>GitGutterPrevHunk
+
+omap ih <plug>GitGutterTextObjectInnerPending
+omap ah <plug>GitGutterTextObjectOuterPending
+xmap ih <plug>GitGutterTextObjectInnerVisual
+xmap ah <plug>GitGutterTextObjectOuterVisual
 
 " SplitJoin
 
@@ -192,45 +198,6 @@ omap aa <plug>SidewaysArgumentTextobjA
 xmap ia <plug>SidewaysArgumentTextobjI
 xmap aa <plug>SidewaysArgumentTextobjA
 
-" DelimitMate
-
-let g:delimitMate_expand_cr    = 1
-let g:delimitMate_expand_space = 1
-
-" Emmet
-
-let g:user_emmet_leader_key = '<c-j>'
-let g:user_emmet_mode       = 'i'
-
-" Fugitive
-
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gx :Gdiff<cr>
-nnoremap <leader>gv :Gvdiff<cr>
-
-" Commentary
-
-nnoremap gp mmyyP:Commentary<cr>`m
-xnoremap gp ygv:Commentary<cr>`>p
-
-" GitGutter
-
-let g:gitgutter_map_keys = 0
-
-nnoremap ]h <plug>GitGutterNextHunk
-nnoremap [h <plug>GitGutterPrevHunk
-
-omap ih <plug>GitGutterTextObjectInnerPending
-omap ah <plug>GitGutterTextObjectOuterPending
-xmap ih <plug>GitGutterTextObjectInnerVisual
-xmap ah <plug>GitGutterTextObjectOuterVisual
-
-" GutenTags
-
-let g:gutentags_enabled       = system( 'command -v ctags' )
-let g:gutentags_project_root  = [ '.git' ]
-let g:gutentags_ctags_tagfile = '.git/tags'
-
 " Nord
 
 let g:nord_italic                  = 1
@@ -238,13 +205,6 @@ let g:nord_underline               = 1
 let g:nord_uniform_diff_background = 1
 
 colorscheme nord
-
-" Polyglot
-
-let g:javascript_plugin_jsdoc = 1
-let g:jsx_ext_required        = 0
-
-autocmd filetype vue syntax sync fromstart
 
 " FZF
 
@@ -280,13 +240,46 @@ imap <c-x><c-j> <plug>(fzf-complete-file)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" EasyAlign
+
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
+
+" GutenTags
+
+let g:gutentags_enabled       = system( 'command -v ctags' )
+let g:gutentags_project_root  = [ '.git' ]
+let g:gutentags_ctags_tagfile = '.git/tags'
+
+" DelimitMate
+
+let g:delimitMate_expand_cr    = 1
+let g:delimitMate_expand_space = 1
+
+" Polyglot
+
+let g:javascript_plugin_jsdoc = 1
+let g:jsx_ext_required        = 0
+
+autocmd filetype vue syntax sync fromstart
+
 " UltiSnips
 
-let g:UltiSnipsExpandTrigger            = '<tab>'
-" let g:UltiSnipsExpandJumpForwardTrigger = '<tab>'
-" let g:UltiSnipsJumpBackgwardTrigger     = '<s-tab>'
-" let g:UltiSnipsSnippetsDir              = '~/.dotfiles/snips'
-" let g:UltiSnipsSnippetsDir              = $HOME . '/.dotfiles/snips'
-" let g:UltiSnipsEditSplit                = 'horizontal'
+let g:UltiSnipsSnippetDirectories  = [ $HOME.'/.dotfiles/snips' ]
+let g:UltiSnipsExpandTrigger       = '<tab>'
+let g:UltiSnipsJumpForwardTrigger  = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsEditSplit           = 'horizontal'
 
-" nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+
+" Commentary
+
+nnoremap gp mmyyP:Commentary<cr>`m
+xnoremap gp ygv:Commentary<cr>`>p
+
+" Fugitive
+
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gx :Gdiff<cr>
+nnoremap <leader>gv :Gvdiff<cr>

@@ -1,0 +1,321 @@
+#
+# HTML Snippets
+#
+# :: Document
+# :: Content
+# :: Text
+# :: Table
+# :: Form
+
+#
+# Document
+#
+
+snippet html5 "basic html doc"
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie-edge" />
+	<meta name="viewport" content="width=device-width,intial-scale=1" />
+	<title>$1</title>
+    </head>
+
+    <body>
+	${0:${VISUAL}}
+    </body>
+</html>
+endsnippet
+
+snippet doc "doc type"
+<!DOCTYPE html>
+endsnippet
+
+snippet html "html"
+<html>
+    ${0:${VISUAL}}
+</html>
+endsnippet
+
+snippet head "<head>"
+<head>
+    ${0:${VISUAL}}
+</head>
+endsnippet
+
+snippet body "<body>"
+<body>
+    ${0:${VISUAL}}
+</body>
+endsnippet
+
+snippet title "<title>"
+<title>$0</title>
+endsnippet
+
+snippet link "<link>"
+<link type="html/css" rel="stlesheet" href="$0" />
+endsnippet
+
+#
+# Content
+#
+
+snippet div "<div>"
+<div>
+    ${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet div# "<div> with id"
+<div id="$1">
+    ${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet div. "<div> with class"
+<div class="$1">
+    ${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet header "<header>"
+<header>
+    ${0:${VISUAL}}
+</header>
+endsnippet
+
+snippet footer "<footer>"
+<footer>
+    ${0:${VISUAL}}
+</footer>
+endsnippet
+
+snippet main "<main>"
+<main>
+    ${0:${VISUAL}}
+</main>
+endsnippet
+
+snippet nav "<nav>"
+<nav>
+    ${0:${VISUAL}}
+</nav>
+endsnippet
+
+snippet section "<section>"
+<section>
+    ${0:${VISUAL}}
+</section>
+endsnippet
+
+snippet article "<article>"
+<article>
+    ${0:${VISUAL}}
+</article>
+endsnippet
+
+snippet aside "<aside>"
+<aside>
+    ${0:${VISUAL}}
+</aside>
+endsnippet
+
+snippet address "<address>"
+<address>
+    ${0:${VISUAL}}
+</address>
+endsnippet
+
+#
+# Text
+#
+
+snippet span "<span>"
+<span>$0<span>
+endsnippet
+
+snippet span# "<span>"
+<span id="$1">$0</span>
+endsnippet
+
+snippet span. "<span> with class"
+<span class="$1">$0</span>
+endsnippet
+
+snippet h1 "<h1>"
+<h1>$0</h1>
+endsnippet
+
+snippet h2 "<h2>"
+<h2>$0</h2>
+endsnippet
+
+snippet h3 "<h3>"
+<h3>$0</h3>
+endsnippet
+
+snippet h4 "<h4>"
+<h4>$0</h4>
+endsnippet
+
+snippet h5 "<h5>"
+<h5>$0</h5>
+endsnippet
+
+snippet h6 "<h6>"
+<h6>$0</h6>
+endsnippet
+
+snippet p "<p>"
+<p>${0:${VISUAL}}
+endsnippet
+
+snippet a "<a>"
+<a href="$1">${0:${VISUAL}}</a>
+endsnippet
+
+snippet img "<img>"
+<img src="$1" alt="$0" />
+endsnippet
+
+snippet ul "<ul>"
+<ul>
+    ${0:${VISUAL}}
+</ul>
+endsnippet
+
+snippet ol "<ol>"
+<ol>
+    ${0:${VISUAL}}
+</ol>
+endsnippet
+
+snippet li "<li>"
+<li>${0:${VISUAL}}</li>
+endsnippet
+
+snippet figure "<figure>"
+<figure>
+    ${0:${VISUAL}}
+</figure>
+endsnippet
+
+snippet figcaption "<figcaption>"
+<figcaption>${0:${VISUAL}}</figcaption>
+endsnippet
+
+snippet blockquote "<blockquote>"
+<blockquote>
+    ${0:${VISUAL}}
+<blockquote>
+endsnippet
+
+snippet small "<small>"
+<small>${0:${VISUAL}}</small>
+endsnippet
+
+snippet strong "<strong>"
+<strong>${0:${VISUAL}}</strong>
+endsnippet
+
+snippet em "<em>"
+<em>${0:${VISUAL}}</em>
+endsnippet
+
+snippet br "<br>"
+<br />
+endsnippet
+
+snippet hr "<hr>"
+<hr />
+endsnippet
+
+#
+# Table
+#
+
+snippet table "<table>"
+<table>
+    ${0:${VISUAL}}
+</table>
+endsnippet
+
+snippet thead "<thead>"
+<thead>
+    ${0:${VISUAL}}
+</thead>
+endsnippet
+
+snippet tbody "<tbody>"
+<tbody>
+    ${0:${VISUAL}}
+</tbody>
+endsnippet
+
+snippet tfoot "<tfoot>"
+<tfoot>
+    ${0:${VISUAL}}
+</tfooet>
+endsnippet
+
+snippet th "<th>"
+<th>${0:${VISUAL}}</th>
+endsnippet
+
+snippet td "<td>"
+<td>${0:${VISUAL}}</td>
+endsnippet
+
+#
+# Form
+#
+
+snippet form "<form>"
+<form action="$1" method="$2">
+    ${0:${VISUAL}}
+</form>
+endsnippet
+
+snippet fieldset "<fieldset>"
+<fieldset>
+    ${0:${VISUAL}}
+</fieldset>
+endsnippet
+
+snippet label "<label>"
+<label for="$1">${0:${VISUAL}}</label>
+endsnippet
+
+snippet input "<input>"
+<input name"${2:$1}" type="${3}" $0/>
+endsnippet
+
+snippet label_input "<input> with <label>"
+<label for="$1">$2</label>
+<input id="${3:$1}" name="$4" type="$5" $0/>
+endsnippet
+
+snippet textarea "<textarea>"
+<textarea name="$1">${0:${VISUAL}}</textarea>
+endsnippet
+
+snippet label_textarea "<textarea> with <label>"
+<label for="$1">$2</label>
+<textarea id="${3:$1}" name="$4"></textarea>
+endsnippet
+
+snippet select "<select>"
+<select id="$1" name="${2:$1}">
+    ${0:${VISUAL}}
+</select>
+endsnippet
+
+snippet option "<option>"
+<option value="$1">${0:${VISUAL}}</option>
+endsnippet
+
+snippet button "<button>"
+<button type="${1:button}">$0</button>
+endsnippet
