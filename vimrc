@@ -1,4 +1,4 @@
-"
+
 " Vim Config
 "
 " :: Settings
@@ -16,7 +16,7 @@ set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set fillchars+=vert:\ 
-set foldenable foldmethod=indent
+set foldenable foldmethod=indent foldlevelstart=99
 set hidden
 set history=1000
 set incsearch
@@ -27,7 +27,6 @@ set list listchars=tab:│\ ,trail:·
 set nobackup noswapfile
 set nocursorline
 set noerrorbells novisualbell
-set noshowmode
 set nowrap
 set number relativenumber
 set shiftwidth=4 softtabstop=4 expandtab
@@ -42,7 +41,6 @@ set wildmenu wildignorecase wildmode=list:longest,full
 augroup Formatting
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
-    autocmd bufwinenter * normal zR
 augroup END
 
 augroup Completion
@@ -51,12 +49,6 @@ augroup Completion
     autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
-augroup END
-
-augroup Mode
-    autocmd!
-    autocmd insertenter * setlocal cursorline
-    autocmd insertleave * setlocal nocursorline
 augroup END
 
 function! TabLine() abort
@@ -80,7 +72,13 @@ function! StatusLine() abort
     let file   = expand( '%:t' )
     let path   = expand( '%:p' )
     let mode   = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
-    let output = ' %f%m%=%{&ff}'
+    let output = ' '
+
+    if !empty(globpath(&runtimepath, '*/vim-fugitive')) && !empty(fugitive#head())
+        let output .= fugitive#head() . ' '
+    endif
+
+    let output .= '%f%m%=%{&ff}'
 
     if filereadable( path )
         let output .= ' %{&fenc} ' . substitute( mode, '\n', '', 'g' )
@@ -116,8 +114,12 @@ nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
 nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
-vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv='
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv='
+vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
+vnoremap ;; :s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>
+vnoremap ,, :s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>
+inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
+inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
 
 nnoremap <leader>s :so ~/.vimrc<cr>
 nnoremap <leader>e :e<cr>
@@ -137,9 +139,9 @@ nnoremap <leader>l <c-w>10>
 
 nnoremap <leader>oh :set hlsearch!<cr>
 nnoremap <leader>or :set relativenumber!<cr>
-nnoremap <leader>ol :set list!<cr>
 nnoremap <leader>os :set spell!<cr>
 nnoremap <leader>ow :set wrap!<cr>
+nnoremap <leader>ol :set list!<cr>
 
 "
 " Plugins
@@ -267,8 +269,8 @@ autocmd filetype vue syntax sync fromstart
 
 let g:UltiSnipsSnippetDirectories  = [ $HOME.'/.dotfiles/snips' ]
 let g:UltiSnipsExpandTrigger       = '<tab>'
-let g:UltiSnipsJumpForwardTrigger  = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsEditSplit           = 'horizontal'
 
 nnoremap <leader><s-tab> :UltiSnipsEdit<cr>

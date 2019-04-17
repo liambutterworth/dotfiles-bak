@@ -1,52 +1,58 @@
 #
 # HTML Snippets
 #
+# :: Functions
 # :: Document
-# :: Content
-# :: Text
+# :: Outline
+# :: Inline
 # :: Table
 # :: Form
+
+#
+# Functions
+#
+
+#${0:${1/(^[a-z]|(?<=[-_])[a-z])|([A-Z])|([-_])/(?1:\u$1)(?2: $2)(?3: )/g}}
+
+global !p
+
+def readable(var):
+    var = re.sub('[-_]', ' ', var)
+    var = re.sub('([A-Z])', r' \1', var)
+    return var.title()
+
+endglobal
 
 #
 # Document
 #
 
-snippet html5 "basic html doc"
-<!DOCTYPE html>
-
-<html>
-    <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="x-ua-compatible" content="ie-edge" />
-	<meta name="viewport" content="width=device-width,intial-scale=1" />
-	<title>$1</title>
-    </head>
-
-    <body>
-	${0:${VISUAL}}
-    </body>
-</html>
-endsnippet
-
-snippet doc "doc type"
+snippet doc "<DOCTYPE>"
 <!DOCTYPE html>
 endsnippet
 
-snippet html "html"
-<html>
-    ${0:${VISUAL}}
+snippet html "<html>"
+<html lang="en">
+    ${VISUAL}$0
 </html>
 endsnippet
 
 snippet head "<head>"
 <head>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </head>
+endsnippet
+
+snippet meta "meta tags"
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie-edge" />
+<meta name="viewport" content="width=device-width,intial-scale=1" />
+<title>$0</title>
 endsnippet
 
 snippet body "<body>"
 <body>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </body>
 endsnippet
 
@@ -55,93 +61,91 @@ snippet title "<title>"
 endsnippet
 
 snippet link "<link>"
-<link type="html/css" rel="stlesheet" href="$0" />
+<link type="$1" rel="$2" href="$0" />
+endsnippet
+
+snippet stylesheet "<link> stylesheet"
+<link type="text/css" rel="stlesheet" href="$0" />
+endsnippet
+
+snippet style "<style>"
+<style type="text/css">
+    ${VISUAL}$0
+</style>
+endsnippet
+
+snippet script/ "<script> include"
+<script type="text/javascript" src="$0"></script>
+endsnippet
+
+snippet script "<script>"
+<script type="text/javascript">
+    ${VISUAL}$0
+</script>
 endsnippet
 
 #
-# Content
+# Outline
 #
 
 snippet div "<div>"
 <div>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </div>
 endsnippet
 
 snippet div# "<div> with id"
 <div id="$1">
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </div>
 endsnippet
 
 snippet div. "<div> with class"
 <div class="$1">
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </div>
 endsnippet
 
 snippet header "<header>"
 <header>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </header>
 endsnippet
 
 snippet footer "<footer>"
 <footer>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </footer>
 endsnippet
 
 snippet main "<main>"
 <main>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </main>
 endsnippet
 
 snippet nav "<nav>"
 <nav>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </nav>
 endsnippet
 
 snippet section "<section>"
 <section>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </section>
 endsnippet
 
 snippet article "<article>"
 <article>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </article>
 endsnippet
 
 snippet aside "<aside>"
 <aside>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </aside>
-endsnippet
-
-snippet address "<address>"
-<address>
-    ${0:${VISUAL}}
-</address>
-endsnippet
-
-#
-# Text
-#
-
-snippet span "<span>"
-<span>$0<span>
-endsnippet
-
-snippet span# "<span>"
-<span id="$1">$0</span>
-endsnippet
-
-snippet span. "<span> with class"
-<span class="$1">$0</span>
 endsnippet
 
 snippet h1 "<h1>"
@@ -169,11 +173,27 @@ snippet h6 "<h6>"
 endsnippet
 
 snippet p "<p>"
-<p>${0:${VISUAL}}
+<p>${VISUAL}$0
+endsnippet
+
+#
+# Inline
+#
+
+snippet span "<span>"
+<span>$0<span>
+endsnippet
+
+snippet span# "<span>"
+<span id="$1">$0</span>
+endsnippet
+
+snippet span. "<span> with class"
+<span class="$1">$0</span>
 endsnippet
 
 snippet a "<a>"
-<a href="$1">${0:${VISUAL}}</a>
+<a href="$1">${VISUAL}$0</a>
 endsnippet
 
 snippet img "<img>"
@@ -182,54 +202,30 @@ endsnippet
 
 snippet ul "<ul>"
 <ul>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </ul>
 endsnippet
 
-snippet ol "<ol>"
-<ol>
-    ${0:${VISUAL}}
-</ol>
-endsnippet
-
 snippet li "<li>"
-<li>${0:${VISUAL}}</li>
+<li>${VISUAL}$0</li>
 endsnippet
 
-snippet figure "<figure>"
-<figure>
-    ${0:${VISUAL}}
-</figure>
-endsnippet
-
-snippet figcaption "<figcaption>"
-<figcaption>${0:${VISUAL}}</figcaption>
-endsnippet
-
-snippet blockquote "<blockquote>"
-<blockquote>
-    ${0:${VISUAL}}
-<blockquote>
+snippet address "<address>"
+<address>
+    ${VISUAL}$0
+</address>
 endsnippet
 
 snippet small "<small>"
-<small>${0:${VISUAL}}</small>
+<small>${VISUAL}$0</small>
 endsnippet
 
 snippet strong "<strong>"
-<strong>${0:${VISUAL}}</strong>
+<strong>${VISUAL}$0</strong>
 endsnippet
 
 snippet em "<em>"
-<em>${0:${VISUAL}}</em>
-endsnippet
-
-snippet br "<br>"
-<br />
-endsnippet
-
-snippet hr "<hr>"
-<hr />
+<em>${VISUAL}$0</em>
 endsnippet
 
 #
@@ -238,34 +234,34 @@ endsnippet
 
 snippet table "<table>"
 <table>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </table>
 endsnippet
 
 snippet thead "<thead>"
 <thead>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </thead>
 endsnippet
 
 snippet tbody "<tbody>"
 <tbody>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </tbody>
 endsnippet
 
 snippet tfoot "<tfoot>"
 <tfoot>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </tfooet>
 endsnippet
 
 snippet th "<th>"
-<th>${0:${VISUAL}}</th>
+<th>${VISUAL}$0</th>
 endsnippet
 
 snippet td "<td>"
-<td>${0:${VISUAL}}</td>
+<td>${VISUAL}$0</td>
 endsnippet
 
 #
@@ -273,49 +269,77 @@ endsnippet
 #
 
 snippet form "<form>"
-<form action="$1" method="$2">
-    ${0:${VISUAL}}
+<form action="$1"${2: method="${3:get}"}>
+    ${VISUAL}$0
 </form>
 endsnippet
 
-snippet fieldset "<fieldset>"
+snippet field "<fieldset>"
 <fieldset>
-    ${0:${VISUAL}}
+    ${VISUAL}$0
 </fieldset>
 endsnippet
 
 snippet label "<label>"
-<label for="$1">${0:${VISUAL}}</label>
+<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
 endsnippet
 
 snippet input "<input>"
 <input name"${2:$1}" type="${3}" $0/>
 endsnippet
 
-snippet label_input "<input> with <label>"
-<label for="$1">$2</label>
-<input id="${3:$1}" name="$4" type="$5" $0/>
+snippet linput "<input> with <label>"
+<label for="$1">${2:`!p snip.rv=readable(t[1])`}</label>
+<input id="$1" name="${3:$1}" type="${4:text}" $0/>
 endsnippet
 
-snippet textarea "<textarea>"
-<textarea name="$1">${0:${VISUAL}}</textarea>
+snippet check "checkbox <input>"
+<input id="$1" name="${2:$1}" type="checkbox" value="$3" $0/>
 endsnippet
 
-snippet label_textarea "<textarea> with <label>"
+snippet check "checkbox <input>"
+<input id="$1" name="${2:$1}" type="checkbox" value="$3" $0/>
+endsnippet
+
+snippet lcheck "checkbox <input> with label"
+<input id="$1" name="${2:$1}" type="checkbox" value="$3" $4/>
+<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+endsnippet
+
+snippet radio "radio <input>"
+<input id="$1" name="${2:$1}" type="radio" value="$3" $0/>
+endsnippet
+
+snippet lradio "radio <input> with label"
+<input id="$1" name="${2:$1}" type="radio" value="$3" $4/>
+<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+endsnippet
+
+snippet text "<textarea>"
+<textarea name="$1">${VISUAL}$0</textarea>
+endsnippet
+
+snippet ltext "<textarea> with <label>"
 <label for="$1">$2</label>
-<textarea id="${3:$1}" name="$4"></textarea>
+<textarea id="$1" name="${3:$1}">$0</textarea>
 endsnippet
 
 snippet select "<select>"
-<select id="$1" name="${2:$1}">
-    ${0:${VISUAL}}
+<select id="$1" name="${2:$1}"$4>
+    ${VISUAL}$0
 </select>
 endsnippet
 
+snippet optgroup "<optgroup>"
+<optgroup label="$1">
+    ${VISUAL}$0
+</optgroup>
+endsnippet
+
 snippet option "<option>"
-<option value="$1">${0:${VISUAL}}</option>
+<option value="$1">${0:`!p snip.rv=readable(t[1])`}</option>
 endsnippet
 
 snippet button "<button>"
-<button type="${1:button}">$0</button>
+<button${1: type="${2:button}"}>$0</button>
 endsnippet
