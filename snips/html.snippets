@@ -12,9 +12,50 @@
 # Functions
 #
 
-#${0:${1/(^[a-z]|(?<=[-_])[a-z])|([A-Z])|([-_])/(?1:\u$1)(?2: $2)(?3: )/g}}
-
 global !p
+
+def getAttr(string):
+    idAttr    = getIdAttr(string)
+    classAttr = getClassAttr(string)
+    return idAttr + classAttr
+
+def getIdAttr(string):
+    value = getId(string)
+    return ' id="' + value + '"' if value else ''
+
+def getClassAttr(string):
+    value = getClass(string)
+    return ' class="' + value + '"' if value else ''
+
+def getId(string):
+    match = re.match('#([^#.]+)', string)
+    return match.group(1) if match else ''
+
+def getClass(string):
+    array   = list( filter( None, re.split( '((?:#|\.)[^#.]+)', string ) ) )
+    classes = []
+
+    for substring in array:
+        match = re.match('\.([^#.]+)', substring)
+        if match: classes.append( match.group(1) )
+
+    return ' '.join( classes ) if classes else ''
+
+def expandSymbol(symbol):
+    if symbol == '#':
+        return 'id'
+    elif symbol == '.':
+        return 'class'
+
+def getClassOrId(symbol, string):
+    if not string:
+        return ''
+    elif symbol == '#':
+        match = re.match("(?:#)([^.]+)", string)
+        return match.group(1)
+    elif symbol == '.':
+        match = re.match("(?:.)([^#]+)", string)
+        return match.group(1)
 
 def readable(var):
     var = re.sub('[-_]', ' ', var)
@@ -47,6 +88,7 @@ snippet meta "meta tags"
 <meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie-edge" />
 <meta name="viewport" content="width=device-width,intial-scale=1" />
+<meta name="description" content="" />
 <title>$0</title>
 endsnippet
 
@@ -61,244 +103,216 @@ snippet title "<title>"
 endsnippet
 
 snippet link "<link>"
-<link type="$1" rel="$2" href="$0" />
-endsnippet
-
-snippet stylesheet "<link> stylesheet"
-<link type="text/css" rel="stlesheet" href="$0" />
+<link rel="${2:stylesheet}" href="$0" />
 endsnippet
 
 snippet style "<style>"
-<style type="text/css">
+<style>
     ${VISUAL}$0
 </style>
 endsnippet
 
-snippet script/ "<script> include"
-<script type="text/javascript" src="$0"></script>
-endsnippet
-
 snippet script "<script>"
-<script type="text/javascript">
+<script>
     ${VISUAL}$0
 </script>
+endsnippet
+
+snippet script/ "<script> include"
+<script src="$0"></script>
 endsnippet
 
 #
 # Outline
 #
 
-snippet div "<div>"
-<div>
+snippet "(?:^|\s)div(.*)" "<div>" r
+<div`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </div>
 endsnippet
 
-snippet div# "<div> with id"
-<div id="$1">
-    ${VISUAL}$0
-</div>
-endsnippet
-
-snippet div. "<div> with class"
-<div class="$1">
-    ${VISUAL}$0
-</div>
-endsnippet
-
-snippet header "<header>"
-<header>
+snippet "(?:^|\s)header(.*)" "<header>" r
+<header`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </header>
 endsnippet
 
-snippet footer "<footer>"
-<footer>
+snippet "(?:^|\s)footer(.*)" "<footer>" r
+<footer`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </footer>
 endsnippet
 
-snippet main "<main>"
-<main>
+snippet "(?:^|\s)main(.*)" "<main>" r
+<main`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </main>
 endsnippet
 
-snippet nav "<nav>"
-<nav>
+snippet "(?:^|\s)nav(.*)" "<nav>" r
+<nav`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </nav>
 endsnippet
 
-snippet section "<section>"
-<section>
+snippet "(?:^|\s)section(.*)" "<section>" r
+<section`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </section>
 endsnippet
 
-snippet article "<article>"
-<article>
+snippet "(?:^|\s)article(.*)" "<article>" r
+<article`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </article>
 endsnippet
 
-snippet aside "<aside>"
-<aside>
+snippet "(?:^|\s)aside(.*)" "<aside>" r
+<aside`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </aside>
 endsnippet
 
-snippet h1 "<h1>"
-<h1>$0</h1>
+snippet "(?:^|\s)h1(.*)" "<h1>" r
+<h1`!p snip.rv=getAttr(match.group(1))`>$0</h1>
 endsnippet
 
-snippet h2 "<h2>"
-<h2>$0</h2>
+snippet "(?:^|\s)h2(.*)" "<h2>" r
+<h2`!p snip.rv=getAttr(match.group(1))`>$0</h2>
 endsnippet
 
-snippet h3 "<h3>"
-<h3>$0</h3>
+snippet "(?:^|\s)h3(.*)" "<h3>" r
+<h3`!p snip.rv=getAttr(match.group(1))`>$0</h3>
 endsnippet
 
-snippet h4 "<h4>"
-<h4>$0</h4>
+snippet "(?:^|\s)h4(.*)" "<h4>" r
+<h4`!p snip.rv=getAttr(match.group(1))`>$0</h4>
 endsnippet
 
-snippet h5 "<h5>"
-<h5>$0</h5>
+snippet "(?:^|\s)h5(.*)" "<h5>" r
+<h5`!p snip.rv=getAttr(match.group(1))`>$0</h5>
 endsnippet
 
-snippet h6 "<h6>"
-<h6>$0</h6>
+snippet "(?:^|\s)h6(.*)" "<h6>" r
+<h6`!p snip.rv=getAttr(match.group(1))`>$0</h6>
 endsnippet
 
-snippet p "<p>"
-<p>${VISUAL}$0
+snippet "(?:^|\s)p(.*)" "<p>" r
+<p`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</p>
 endsnippet
 
 #
 # Inline
 #
 
-snippet span "<span>"
-<span>$0<span>
+snippet "(?:^|\s)span(.*)" "<span>" r
+<span`!p snip.rv=getAttr(match.group(1))`>$0<span>
 endsnippet
 
-snippet span# "<span>"
-<span id="$1">$0</span>
+snippet "(?:^|\s)a(.*)" "<a>" r
+<a`!p snip.rv=getAttr(match.group(1))` href="$1">${VISUAL}$0</a>
 endsnippet
 
-snippet span. "<span> with class"
-<span class="$1">$0</span>
+snippet "(?:^|\s)img(.*)" "<img>" r
+<img`!p snip.rv=getAttr(match.group(1))` src="$1" alt="$0" />
 endsnippet
 
-snippet a "<a>"
-<a href="$1">${VISUAL}$0</a>
-endsnippet
-
-snippet img "<img>"
-<img src="$1" alt="$0" />
-endsnippet
-
-snippet ul "<ul>"
-<ul>
+snippet "(?:^|\s)ul(.*)" "<ul>" r
+<ul`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </ul>
 endsnippet
 
-snippet li "<li>"
-<li>${VISUAL}$0</li>
+snippet "(?:^|\s)li\b(.*)" "<li>" r
+<li`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</li>
 endsnippet
 
-snippet address "<address>"
-<address>
+snippet "(?:^|\s)address(.*)" "<address>" r
+<address`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </address>
 endsnippet
 
-snippet small "<small>"
-<small>${VISUAL}$0</small>
+snippet "(?:^|\s)small(.*)" "<small>" r
+<small`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</small>
 endsnippet
 
-snippet strong "<strong>"
-<strong>${VISUAL}$0</strong>
+snippet "(?:^|\s)strong(.*)" "<strong>" r
+<strong`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</strong>
 endsnippet
 
-snippet em "<em>"
-<em>${VISUAL}$0</em>
+snippet "(?:^|\s)em(.*)" "<em>" r
+<em`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</em>
 endsnippet
 
 #
 # Table
 #
 
-snippet table "<table>"
-<table>
+snippet "(?:^|\s)table(.*)" "<table>" r
+<table`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </table>
 endsnippet
 
-snippet thead "<thead>"
-<thead>
+snippet "(?:^|\s)thead(.*)" "<thead>" r
+<thead`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </thead>
 endsnippet
 
-snippet tbody "<tbody>"
-<tbody>
+snippet "(?:^|\s)tbody(.*)" "<tbody>" r
+<tbody`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </tbody>
 endsnippet
 
-snippet tfoot "<tfoot>"
-<tfoot>
+snippet "(?:^|\s)tfoot(.*)" "<tfoot>" r
+<tfoot`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </tfooet>
 endsnippet
 
-snippet th "<th>"
-<th>${VISUAL}$0</th>
+snippet "(?:^|\s)th(.*)" "<th>" r
+<th`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</th>
 endsnippet
 
-snippet td "<td>"
-<td>${VISUAL}$0</td>
+snippet "(?:^|\s)td(.*)" "<td>" r
+<td`!p snip.rv=getAttr(match.group(1))`>${VISUAL}$0</td>
 endsnippet
 
 #
 # Form
 #
 
-snippet form "<form>"
-<form action="$1"${2: method="${3:get}"}>
+snippet "(?:^|\s)form(.*)" "<form>" r
+<form`!p snip.rv=getAttr(match.group(1))` action="$1"${2: method="${3:get}"}>
     ${VISUAL}$0
 </form>
 endsnippet
 
-snippet field "<fieldset>"
-<fieldset>
+snippet "(?:^|\s)field(.*)" "<fieldset>" r
+<fieldset`!p snip.rv=getAttr(match.group(1))`>
     ${VISUAL}$0
 </fieldset>
 endsnippet
 
-snippet label "<label>"
-<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+snippet "(?:^|\s)label(.*)" "<label>" r
+<label`!p snip.rv=getAttr(match.group(1))` for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
 endsnippet
 
-snippet input "<input>"
-<input name"${2:$1}" type="${3}" $0/>
+snippet "(?:^|\s)input(.*)" "<input>" r
+<input`!p snip.rv=getAttr(match.group(1))` name"${2:$1}" type="${3}" $0/>
 endsnippet
 
-snippet linput "<input> with <label>"
-<label for="$1">${2:`!p snip.rv=readable(t[1])`}</label>
-<input id="$1" name="${3:$1}" type="${4:text}" $0/>
+snippet "(?:^|\s)linput(.*)" "<input> with <label>" r
+<label for="${1:`!p snip.rv=getId(match.group(1))`}">${2:`!p snip.rv=readable(t[1])`}</label>
+<input id="$1"`!p snip.rv=getClassAttr(match.group(1))` name="${3:$1}" type="${4:text}" $0/>
 endsnippet
 
-snippet check "checkbox <input>"
-<input id="$1" name="${2:$1}" type="checkbox" value="$3" $0/>
-endsnippet
-
-snippet check "checkbox <input>"
-<input id="$1" name="${2:$1}" type="checkbox" value="$3" $0/>
+snippet "(?:^|\s)check(.*)" "checkbox <input>" r
+<input`!p snip.rv=getAttr(match.group(1))` name="${1:`!p snip.rv=getId(match.group(1))`}" type="checkbox" value="$3" $0/>
 endsnippet
 
 snippet lcheck "checkbox <input> with label"
@@ -315,31 +329,31 @@ snippet lradio "radio <input> with label"
 <label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
 endsnippet
 
-snippet text "<textarea>"
-<textarea name="$1">${VISUAL}$0</textarea>
+snippet "(?:^|\s)text(.*)" "<textarea>" r
+<textarea`!p snip.rv=getAttr(match.group(1))` name="${1:`!p snip.rv=getId(match.group(1))`}">${VISUAL}$0</textarea>
 endsnippet
 
-snippet ltext "<textarea> with <label>"
-<label for="$1">$2</label>
+snippet "(?:^|\s)ltext(.*)" "<textarea> with <label>" r
+<label for="${1:`!p snip.rv=getId(match.group(1))`}">${2:`!p snip.rv=readable(t[1])`}</label>
 <textarea id="$1" name="${3:$1}">$0</textarea>
 endsnippet
 
-snippet select "<select>"
-<select id="$1" name="${2:$1}"$4>
+snippet "(?:^|\s)select(.*)" "<select>" r
+<select`!p snip.rv=getAttr(match.group(1))` name="${2:`!p snip.rv=getId(match.group(1))`}">
     ${VISUAL}$0
 </select>
 endsnippet
 
-snippet optgroup "<optgroup>"
-<optgroup label="$1">
+snippet "(?:^|\s)optgroup(.*)" "<optgroup>" r
+<optgroup`!p snip.rv=getAttr(match.group(1))` label="$1">
     ${VISUAL}$0
 </optgroup>
 endsnippet
 
-snippet option "<option>"
-<option value="$1">${0:`!p snip.rv=readable(t[1])`}</option>
+snippet "(?:^|\s)option(.*)" "<option>" r
+<option`!p snip.rv=getAttr(match.group(1))` value="$1">${0:`!p snip.rv=readable(t[1])`}</option>
 endsnippet
 
-snippet button "<button>"
-<button${1: type="${2:button}"}>$0</button>
+snippet "(?:^|\s)button(.*)" "<button>" r
+<button`!p snip.rv=getAttr(match.group(1))`${1: type="${2:button}"}>$0</button>
 endsnippet

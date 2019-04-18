@@ -1,4 +1,4 @@
-
+"
 " Vim Config
 "
 " :: Settings
@@ -38,6 +38,9 @@ set tabline=%!TabLine()
 set undofile undodir=~/.vim/undodir
 set wildmenu wildignorecase wildmode=list:longest,full
 
+let s:git_branch       = substitute( system( 'git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD' ), '\n', '', 'g' )
+let s:file_permissions = substitute( system( 'ls -la ' . expand( '%:h' ) . ' | grep ' . expand( '%:t' ) . ' | cut -d " " -f1' ), '\n', '', 'g' )
+
 augroup Formatting
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
@@ -68,21 +71,10 @@ function! TabLine() abort
 endfunction
 
 function! StatusLine() abort
-    let dir    = expand( '%:h' )
-    let file   = expand( '%:t' )
-    let path   = expand( '%:p' )
-    let mode   = system( 'ls -la ' . dir . ' | grep ' . file . ' | cut -d " " -f1' )
     let output = ' '
-
-    if !empty(globpath(&runtimepath, '*/vim-fugitive')) && !empty(fugitive#head())
-        let output .= fugitive#head() . ' '
-    endif
-
+    let output .= !empty(s:git_branch) ? s:git_branch . ' ' : ''
     let output .= '%f%m%=%{&ff}'
-
-    if filereadable( path )
-        let output .= ' %{&fenc} ' . substitute( mode, '\n', '', 'g' )
-    endif
+    let output .= filereadable( expand( '%:p' ) ) ? ' %{&fenc} ' . s:file_permissions : ''
 
     return output . ' '
 endfunction
@@ -101,7 +93,7 @@ nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
-nnoremap gs :s//g<left><left>
+nnoremap gs :%s//g<left><left>
 xnoremap gs :s//g<left><left>
 xnoremap gr y:%s/<c-r>"//g<left><left>
 
@@ -157,6 +149,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'michaeljsmith/vim-indent-object'
 Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
 Plug 'sirver/ultisnips'
