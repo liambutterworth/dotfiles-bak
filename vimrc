@@ -46,6 +46,11 @@ augroup Formatting
     autocmd bufenter * setlocal formatoptions-=o
 augroup END
 
+augroup FileTypes
+    autocmd!
+    autocmd bufnewfile,bufread *.vue setlocal filetype=html.vue
+augroup END
+
 augroup Completion
     autocmd!
     autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags

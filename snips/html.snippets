@@ -17,7 +17,9 @@ global !p
 def getAttr(string):
     idAttr    = getIdAttr(string)
     classAttr = getClassAttr(string)
-    return idAttr + classAttr
+    otherAttr = getOtherAttr(string)
+
+    return idAttr + classAttr + otherAttr
 
 def getIdAttr(string):
     value = getId(string)
@@ -26,6 +28,17 @@ def getIdAttr(string):
 def getClassAttr(string):
     value = getClass(string)
     return ' class="' + value + '"' if value else ''
+
+def getOtherAttr(string):
+    match = re.match( '(?:\:)([^#.]+)', string )
+    array = list( filter( None, re.split( ',', match.group(1) ) ) )
+    attrs = []
+
+    for substring in array:
+        key, value = substring.split( '=' )
+        attrs.append( f'{key}="{value}"' )
+
+    return ' ' + ' '.join( attrs ) if attrs else ''
 
 def getId(string):
     match = re.match('#([^#.]+)', string)
@@ -125,6 +138,12 @@ endsnippet
 #
 # Outline
 #
+
+snippet "(?:^|\s)t\b(.*)" "<tag>" r
+<${1:tag}`!p snip.rv=getAttr(match.group(1))`>
+    ${VISUAL}$0
+</$1>
+endsnippet
 
 snippet "(?:^|\s)div(.*)" "<div>" r
 <div`!p snip.rv=getAttr(match.group(1))`>
