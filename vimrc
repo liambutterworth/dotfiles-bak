@@ -108,10 +108,10 @@ nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
 nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
 vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
 vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
-vnoremap ;; :s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>
-vnoremap ,, :s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>
-inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>``a
-inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>``a
+vnoremap ;; :s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>
+vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
+inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
+inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``a
 
 nnoremap <leader>s :so ~/.vimrc<cr>
 nnoremap <leader>e :e<cr>
