@@ -99,30 +99,28 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 nnoremap gs :%s//g<left><left>
-xnoremap gs :s//g<left><left>
-xnoremap gr y:%s/<c-r>"//g<left><left>
+vnoremap gs :s//g<left><left>
+vnoremap gr y:%s/<c-r>"//g<left><left>
+vnoremap ;; :s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>
+vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
+inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
+inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``a
 
 nnoremap <bs> <c-^>
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprevious<cr>
-nnoremap ]B :blast<cr>
-nnoremap [B :bfirst<cr>
+nnoremap ]<bs> :bnext<cr>
+nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
 nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
 vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
 vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
-vnoremap ;; :s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>
-vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
-inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
-inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``a
 
 nnoremap <leader>s :so ~/.vimrc<cr>
-nnoremap <leader>e :e<cr>
-nnoremap <leader>E :e!<cr>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wq<cr>
+nnoremap <leader>e :e<cr>
+nnoremap <leader>E :e!<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 nnoremap <leader>n :tabn<cr>
@@ -133,7 +131,6 @@ nnoremap <leader>h <c-w>10<
 nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
-
 nnoremap <leader>oh :set hlsearch!<cr>
 nnoremap <leader>or :set relativenumber!<cr>
 nnoremap <leader>os :set spell!<cr>
