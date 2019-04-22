@@ -1,6 +1,7 @@
 #
 # CSS Snippets
 #
+# :: Comments
 # :: At Rules
 # :: Selectors
 # :: Pseudo
@@ -14,14 +15,32 @@
 # :: Misc
 
 #
-# At
+# Comments
+#
+
+snippet / "comment block"
+/**
+ * $0
+ */
+endsnippet
+
+snippet // "comment block with index"
+/**
+ * ${1:title}
+ *
+ * :: ${0:index}
+ */
+endsnippet
+
+#
+# At Rules
 #
 
 snippet @ff "@font-face"
 @font-face {
     font-family: ${1:'font'};
     src: url('${2:file}.${3:woff2}') format('$3');
-	url('$2.${4:woff}') format('$4');
+         url('$2.${4:woff}') format('$4');
     font-weight: ${5:normal};
     font-style: ${6:normal};
 }
