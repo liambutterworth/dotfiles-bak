@@ -14,65 +14,50 @@
 
 global !p
 
-def getAttr(string):
-    idAttr    = getIdAttr(string)
-    classAttr = getClassAttr(string)
-    otherAttr = getOtherAttr(string)
+def getAttr( string ):
+    attributes  = ''
+    attributes += getIdAttr( string )
+    attributes += getClassAttr( string )
+    attributes += getOtherAttr( string )
 
-    return idAttr + classAttr + otherAttr
+    return attributes
 
-def getIdAttr(string):
-    value = getId(string)
-    return ' id="' + value + '"' if value else ''
+def getId( string ):
+    result = re.search( r'#([^#.:]+)', string )
+    return result.group( 1 ) if result else ''
 
-def getClassAttr(string):
-    value = getClass(string)
-    return ' class="' + value + '"' if value else ''
+def getIdAttr( string ):
+    value = getId( string )
+    return f' id="{value}"' if value else ''
 
-def getOtherAttr(string):
-    match = re.match( '(?:\:)([^#.]+)', string )
-    array = list( filter( None, re.split( ',', match.group(1) ) ) )
-    attrs = []
-
-    for substring in array:
-        key, value = substring.split( '=' )
-        attrs.append( f'{key}="{value}"' )
-
-    return ' ' + ' '.join( attrs ) if attrs else ''
-
-def getId(string):
-    match = re.match('#([^#.]+)', string)
-    return match.group(1) if match else ''
-
-def getClass(string):
-    array   = list( filter( None, re.split( '((?:#|\.)[^#.]+)', string ) ) )
+def getClass( string ):
     classes = []
 
-    for substring in array:
-        match = re.match('\.([^#.]+)', substring)
-        if match: classes.append( match.group(1) )
+    for result in re.finditer( r'\.([^#.:]+)', string ):
+        classes.append( result.group( 1 ))
 
     return ' '.join( classes ) if classes else ''
 
-def expandSymbol(symbol):
-    if symbol == '#':
-        return 'id'
-    elif symbol == '.':
-        return 'class'
+def getClassAttr( string ):
+    value = getClass( string )
+    return f' class="{ value }"' if value else ''
 
-def getClassOrId(symbol, string):
-    if not string:
-        return ''
-    elif symbol == '#':
-        match = re.match("(?:#)([^.]+)", string)
-        return match.group(1)
-    elif symbol == '.':
-        match = re.match("(?:.)([^#]+)", string)
-        return match.group(1)
+def getOther( string ):
+    result = re.search( '(?::)([^#.]+)', string )
+    return list(filter(None, re.split(',', result.group( 1 )))) if result else []
 
-def readable(var):
-    var = re.sub('[-_]', ' ', var)
-    var = re.sub('([A-Z])', r' \1', var)
+def getOtherAttr( otherString ):
+    attrs = []
+
+    for attr in getOther( otherString ):
+        key, value = attr.split( '=' )
+        attrs.append( f'{ key }="{ value }"' )
+
+    return ' ' + ' '.join( attrs ) if attrs else ''
+
+def readable( var ):
+    var = re.sub( '[-_]', ' ', var )
+    var = re.sub( '([A-Z])', r' \1', var )
     return var.title()
 
 endglobal
