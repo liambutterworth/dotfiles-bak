@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function truncate-string() {
-    [ $(echo -n $1 | wc -m) -ge 20 ] && echo "$(echo -n $1 | cut -c -20).." || echo $1
+    [ $(echo -n $1 | wc -m) -ge 15 ] && echo "$(echo -n $1 | cut -c -15).." || echo $1
 }
 
 function spotify-info() {
