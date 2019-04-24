@@ -15,43 +15,25 @@ set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
+set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
 set foldenable foldmethod=indent foldlevelstart=99
 set hidden
-set history=1000
 set incsearch
 set ignorecase smartcase
 set laststatus=2
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
-set nobackup noswapfile
-set nocursorline
-set noerrorbells novisualbell
+set noswapfile
+set nojoinspaces
 set nowrap
 set number relativenumber
-set shiftwidth=4 softtabstop=4 expandtab
-set showmatch
 set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
-set undofile undodir=~/.vim/undodir
-set wildmenu wildignorecase wildmode=list:longest,full
-
-let s:git_branch       = substitute(system('git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'), '\n', '', 'g')
-let s:file_permissions = substitute(system('ls -la ' . expand('%:h') . ' | grep ' . expand('%:t') . ' | cut -d " " -f1'), '\n', '', 'g')
-
-augroup Formatting
-    autocmd!
-    autocmd bufenter * setlocal formatoptions-=o
-augroup END
-
-augroup FileTypes
-    autocmd!
-    autocmd bufnewfile,bufread *.scss setlocal filetype=css.scss
-    autocmd bufnewfile,bufread *.vue setlocal filetype=html.vue
-    autocmd bufnewfile,bufread *.blade.php setlocal filetype=html.blade
-augroup END
+set undofile undodir=/tmp//,.
+set wildmenu wildignorecase wildmode=full
 
 augroup Completion
     autocmd!
@@ -60,6 +42,18 @@ augroup Completion
     autocmd filetype javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
+
+let s:git_branch       = substitute(system('git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'), '\n', '', 'g')
+let s:file_permissions = substitute(system('ls -la ' . expand('%:h') . ' | grep ' . expand('%:t') . ' | cut -d " " -f1'), '\n', '', 'g')
+
+function! StatusLine() abort
+    let output  = ' '
+    let output .= !empty(s:git_branch) ? s:git_branch . ' ' : ''
+    let output .= '%f%m%=%{&ff}'
+    let output .= filereadable(expand('%:p')) ? ' %{&fenc} ' . s:file_permissions : ''
+
+    return output . ' '
+endfunction
 
 function! TabLine() abort
     let output = ''
@@ -70,20 +64,10 @@ function! TabLine() abort
         let winnr          = tabpagewinnr(tab_index)
         let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
         let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-
-        let output .= tab_highlight . ' ' . tab_name . ' '
+        let output        .= tab_highlight . ' ' . tab_name . ' '
     endfor
 
     return output . '%#TabLineFill#%T'
-endfunction
-
-function! StatusLine() abort
-    let output = ' '
-    let output .= !empty(s:git_branch) ? s:git_branch . ' ' : ''
-    let output .= '%f%m%=%{&ff}'
-    let output .= filereadable(expand('%:p')) ? ' %{&fenc} ' . s:file_permissions : ''
-
-    return output . ' '
 endfunction
 
 "
@@ -95,6 +79,7 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
+nnoremap <bs> <c-^>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
@@ -108,7 +93,6 @@ vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
 inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
 inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``a
 
-nnoremap <bs> <c-^>
 nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
@@ -134,10 +118,10 @@ nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
 nnoremap <leader>oh :set hlsearch!<cr>
+nnoremap <leader>ol :set list!<cr>
 nnoremap <leader>or :set relativenumber!<cr>
 nnoremap <leader>os :set spell!<cr>
 nnoremap <leader>ow :set wrap!<cr>
-nnoremap <leader>ol :set list!<cr>
 
 "
 " Plugins
