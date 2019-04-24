@@ -38,8 +38,8 @@ set tabline=%!TabLine()
 set undofile undodir=~/.vim/undodir
 set wildmenu wildignorecase wildmode=list:longest,full
 
-let s:git_branch       = substitute( system( 'git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD' ), '\n', '', 'g' )
-let s:file_permissions = substitute( system( 'ls -la ' . expand( '%:h' ) . ' | grep ' . expand( '%:t' ) . ' | cut -d " " -f1' ), '\n', '', 'g' )
+let s:git_branch       = substitute(system('git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'), '\n', '', 'g')
+let s:file_permissions = substitute(system('ls -la ' . expand('%:h') . ' | grep ' . expand('%:t') . ' | cut -d " " -f1'), '\n', '', 'g')
 
 augroup Formatting
     autocmd!
@@ -48,7 +48,9 @@ augroup END
 
 augroup FileTypes
     autocmd!
+    autocmd bufnewfile,bufread *.scss setlocal filetype=css.scss
     autocmd bufnewfile,bufread *.vue setlocal filetype=html.vue
+    autocmd bufnewfile,bufread *.blade.php setlocal filetype=html.blade
 augroup END
 
 augroup Completion
@@ -62,12 +64,12 @@ augroup END
 function! TabLine() abort
     let output = ''
 
-    for index in range( tabpagenr( '$' ) )
+    for index in range(tabpagenr('$'))
         let tab_index      = index + 1
-        let buflist        = tabpagebuflist( tab_index )
-        let winnr          = tabpagewinnr( tab_index )
-        let tab_name       = fnamemodify( bufname( buflist[ winnr - 1 ] ), ':t' )
-        let tab_highlight  = ( tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#' )
+        let buflist        = tabpagebuflist(tab_index)
+        let winnr          = tabpagewinnr(tab_index)
+        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
+        let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
 
         let output .= tab_highlight . ' ' . tab_name . ' '
     endfor
@@ -79,7 +81,7 @@ function! StatusLine() abort
     let output = ' '
     let output .= !empty(s:git_branch) ? s:git_branch . ' ' : ''
     let output .= '%f%m%=%{&ff}'
-    let output .= filereadable( expand( '%:p' ) ) ? ' %{&fenc} ' . s:file_permissions : ''
+    let output .= filereadable(expand('%:p')) ? ' %{&fenc} ' . s:file_permissions : ''
 
     return output . ' '
 endfunction

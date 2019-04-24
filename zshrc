@@ -119,15 +119,6 @@ zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 
 zplug load
 
-# Autosuggestions
-
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
-
-# History Substring Search
-
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-
 # FZF
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
@@ -139,3 +130,12 @@ export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
 export FZF_TMUX=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Autosuggestions
+
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
+
+# History Substring Search
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
