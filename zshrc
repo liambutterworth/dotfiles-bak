@@ -31,6 +31,15 @@ zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' formats '%b%c%u'
 
+function precmd {
+    vcs_info;
+    print;
+}
+
+function preexec {
+    print;
+}
+
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
     [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
@@ -47,9 +56,6 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-precmd() { vcs_info; print }
-preexec() { print }
 
 #
 # Aliases
