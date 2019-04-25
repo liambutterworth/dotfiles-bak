@@ -35,6 +35,11 @@ set tabline=%!TabLine()
 set undofile undodir=/tmp//,.
 set wildmenu wildignorecase wildmode=full
 
+augroup Formatting
+    autocmd!
+    autocmd bufenter * setlocal formatoptions-=o
+augroup END
+
 augroup Completion
     autocmd!
     autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
@@ -43,27 +48,34 @@ augroup Completion
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
 
-let s:git_branch       = substitute(system('git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'), '\n', '', 'g')
-let s:file_permissions = substitute(system('ls -la ' . expand('%:h') . ' | grep ' . expand('%:t') . ' | cut -d " " -f1'), '\n', '', 'g')
+let s:git_branch = substitute( system(
+            \ 'git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'
+            \ ), '\n', '', 'g' )
+
+let s:file_permissions = substitute( system(
+            \ 'ls -la ' . expand( '%:h' ) .
+            \ ' | grep ' . expand( '%:t' ) .
+            \ ' | cut -d " " -f1'
+            \ ), '\n', '', 'g' )
 
 function! StatusLine() abort
     let output  = ' '
-    let output .= !empty(s:git_branch) ? s:git_branch . ' ' : ''
-    let output .= '%f%m%=%{&ff}'
-    let output .= filereadable(expand('%:p')) ? ' %{&fenc} ' . s:file_permissions : ''
-
+    let output .= !empty( s:git_branch ) ? s:git_branch . ' ' : ''
+    let output .= '%f%m%=%c:%l|%L %{&ff}'
+    let output .= filereadable( expand( '%:p' ) ) ? ' %{&fenc}' : ''
+    let output .= !empty( s:file_permissions ) ? ' ' . s:file_permissions : ''
     return output . ' '
 endfunction
 
 function! TabLine() abort
     let output = ''
 
-    for index in range(tabpagenr('$'))
+    for index in range( tabpagenr( '$' ) )
         let tab_index      = index + 1
-        let buflist        = tabpagebuflist(tab_index)
-        let winnr          = tabpagewinnr(tab_index)
-        let tab_name       = fnamemodify(bufname(buflist[winnr - 1]), ':t')
-        let tab_highlight  = (tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+        let buflist        = tabpagebuflist( tab_index )
+        let winnr          = tabpagewinnr( tab_index )
+        let tab_name       = fnamemodify( bufname( buflist[ winnr - 1 ] ), ':t' )
+        let tab_highlight  = ( tab_index == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#' )
         let output        .= tab_highlight . ' ' . tab_name . ' '
     endfor
 
@@ -98,9 +110,9 @@ nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . ( v:count1 + 1 ) . '<cr>=='
 vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . ( v:count1 + 1 ) . '<cr>gv=gv'
 
 nnoremap <leader>s :so ~/.vimrc<cr>
 nnoremap <leader>w :w<cr>
@@ -193,17 +205,20 @@ colorscheme nord
 
 set runtimepath+=~/.zplug/repos/junegunn/fzf
 
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+let git_commit_format         = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
+let rg_command = 'rg --column --line-number --no-heading --color=always --smart-case'
+let g:fzf_commits_log_options = '--graph --color=always --format="' . git_commit_format . '"'
 let g:fzf_tags_command        = 'ctags -R'
 
-command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files( <q-args>, { 'options': [ '--preview', system( 'echo $FZF_PREVIEW_OPTS' ) ] }, <bang>0 )
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files( <q-args>, { 
+            \ 'options': [ '--preview', system( 'echo $FZF_PREVIEW_OPTS' ) ]
+            \ }, <bang>0 )
 
-command! -bang -nargs=* Rg
-            \ call fzf#vim#grep(
-            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape( <q-args> ), 1,
-            \   <bang>0 ? fzf#vim#with_preview( 'up:60%' ) : fzf#vim#with_preview( 'right:50%:hidden', '?' ), <bang>0
-            \ )
+command! -bang -nargs=* Rg call fzf#vim#grep( rg_command . ' ' . shellescape( <q-args> ), 1,
+            \ <bang>0
+            \ ? fzf#vim#with_preview( 'up:60%' )
+            \ : fzf#vim#with_preview( 'right:50%:hidden', '?' ),
+            \ <bang>0 )
 
 nnoremap <leader><space> :Files<cr>
 nnoremap <leader><bs> :Buffers<cr>
