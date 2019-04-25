@@ -59,11 +59,13 @@ let s:file_permissions = substitute( system(
             \ ), '\n', '', 'g' )
 
 function! StatusLine() abort
-    let output  = ' '
+    let output = ' '
+
     let output .= !empty( s:git_branch ) ? s:git_branch . ' ' : ''
     let output .= '%f%m%=%c:%l|%L %{&ff}'
     let output .= filereadable( expand( '%:p' ) ) ? ' %{&fenc}' : ''
     let output .= !empty( s:file_permissions ) ? ' ' . s:file_permissions : ''
+
     return output . ' '
 endfunction
 
@@ -206,7 +208,7 @@ colorscheme nord
 set runtimepath+=~/.zplug/repos/junegunn/fzf
 
 let git_commit_format         = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
-let rg_command = 'rg --column --line-number --no-heading --color=always --smart-case'
+let rg_command                = 'rg --column --line-number --no-heading --color=always --smart-case'
 let g:fzf_commits_log_options = '--graph --color=always --format="' . git_commit_format . '"'
 let g:fzf_tags_command        = 'ctags -R'
 
@@ -267,14 +269,16 @@ let g:UltiSnipsSnippetDirectories  = [ $HOME.'/.dotfiles/snips' ]
 let g:UltiSnipsExpandTrigger       = '<tab>'
 let g:UltiSnipsJumpForwardTrigger  = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsEditSplit           = 'horizontal'
 
 nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+inoremap <c-j> <nop>
 
 " Commentary
 
-nnoremap gp mmyyP:Commentary<cr>`m
-xnoremap gp ygv:Commentary<cr>`>p
+nnoremap gcp mmyyp:Commentary<cr>`m
+nnoremap gcP mmyyP:Commentary<cr>`m
+vnoremap gcp ygv:Commentary<cr>`>p
+vnoremap gcP ygv:Commentary<cr>`<P
 
 " Fugitive
 
