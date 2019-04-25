@@ -14,56 +14,59 @@
 
 global !p
 
-id_char    = re.escape('#')
-class_char = re.escape('.')
-other_char = re.escape(':')
+id_char    = re.escape( '#' )
+class_char = re.escape( '.' )
+other_char = re.escape( ':' )
 
 def readable( string ):
-    string = re.sub('([A-Z])', r' \1', string)
-    string = re.sub('[-_]', ' ', string)
+    string = re.sub( '( [A-Z] )', r' \1', string )
+    string = re.sub(  '[-_]', ' ', string  )
 
     return string.title()
 
-def get_id(string):
-    regex  = re.compile('{}([^{}{}]+)'.format(id_char, class_char, other_char))
+def get_id( string ):
+    regex  = re.compile( '{}([^{}{}]+)'.format( id_char, class_char, other_char ) )
+    result = re.search( regex, string )
+
+    return result.group( 1 ) if result else ''
+
+def get_class( string ):
+    regex   = re.compile( '{}([^{}{}]+)'.format( class_char, id_char, other_char ) )
+    result  = re.search( regex, string )
+
+    return re.sub( '\.', ' ', result.group( 1 ) ) if result else ''
+
+def get_others( string ):
+    regex  = re.compile( '(?:{})(.+)'.format( other_char ) )
     result = re.search(regex, string)
-    return result.group(1) if result else ''
 
-def get_class(string):
-    regex   = re.compile('{}([^{}{}]+)'.format(class_char, id_char, other_char))
-    result  = re.search(regex, string)
-    return re.sub('\.', ' ', result.group(1)) if result else ''
+    return re.split( ',', result.group( 1 ) ) if result else []
 
-def get_others(string):
-    regex  = re.compile('(?:{})(.+)'.format(other_char))
-    result = re.search(regex, string)
-    return list(filter(None, re.split(',', result.group(1)))) if result else []
+def get_id_attr( string ):
+    value = get_id( string )
+    return f' id="{ value }"' if value else ''
 
-def get_id_attr(string):
-    value = get_id(string)
-    return f' id="{value}"' if value else ''
+def get_class_attr( string ):
+    value = get_class( string )
+    return f' class="{ value }"' if value else ''
 
-def get_class_attr(string):
-    value = get_class(string)
-    return f' class="{value}"' if value else ''
-
-def get_other_attrs(string):
-    key_values = get_others(string)
-    attrs = []
+def get_other_attrs( string ):
+    key_values = get_others( string )
+    attrs      = []
 
     for key_value in key_values:
         if '=' in key_value:
-            key, value = key_value.split('=')
-            attrs.append(f'{key}="{value}"')
+            key, value = key_value.split( '=' )
+            attrs.append( f'{ key }="{ value }"' )
         else:
-            attrs.append(key_value)
+            attrs.append( key_value )
 
-    return ' ' + ' '.join(attrs) if attrs else ''
+    return ' ' + ' '.join( attrs ) if attrs else ''
 
-def get_attrs(string):
-    id_attr     = get_id_attr(string)
-    class_attr  = get_class_attr(string)
-    other_attrs = get_other_attrs(string)
+def get_attrs( string ):
+    id_attr     = get_id_attr( string )
+    class_attr  = get_class_attr( string )
+    other_attrs = get_other_attrs( string )
 
     return id_attr + class_attr + other_attrs
 
@@ -132,85 +135,85 @@ endsnippet
 #
 
 snippet "(?:^|\s)t\b(.*)" "<tag>" r
-<${1:tag}`!p snip.rv=get_attrs(match.group(1))`>
+<${1:tag}`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </$1>
 endsnippet
 
 snippet "(?:^|\s)div(.*)" "<div>" r
-<div`!p snip.rv=get_attrs(match.group(1))`>
+<div`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </div>
 endsnippet
 
 snippet "(?:^|\s)header(.*)" "<header>" r
-<header`!p snip.rv=get_attrs(match.group(1))`>
+<header`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </header>
 endsnippet
 
 snippet "(?:^|\s)footer(.*)" "<footer>" r
-<footer`!p snip.rv=get_attrs(match.group(1))`>
+<footer`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </footer>
 endsnippet
 
 snippet "(?:^|\s)main(.*)" "<main>" r
-<main`!p snip.rv=get_attrs(match.group(1))`>
+<main`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </main>
 endsnippet
 
 snippet "(?:^|\s)nav(.*)" "<nav>" r
-<nav`!p snip.rv=get_attrs(match.group(1))`>
+<nav`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </nav>
 endsnippet
 
 snippet "(?:^|\s)section(.*)" "<section>" r
-<section`!p snip.rv=get_attrs(match.group(1))`>
+<section`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </section>
 endsnippet
 
 snippet "(?:^|\s)article(.*)" "<article>" r
-<article`!p snip.rv=get_attrs(match.group(1))`>
+<article`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </article>
 endsnippet
 
 snippet "(?:^|\s)aside(.*)" "<aside>" r
-<aside`!p snip.rv=get_attrs(match.group(1))`>
+<aside`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </aside>
 endsnippet
 
 snippet "(?:^|\s)h1(.*)" "<h1>" r
-<h1`!p snip.rv=get_attrs(match.group(1))`>$0</h1>
+<h1`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h1>
 endsnippet
 
 snippet "(?:^|\s)h2(.*)" "<h2>" r
-<h2`!p snip.rv=get_attrs(match.group(1))`>$0</h2>
+<h2`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h2>
 endsnippet
 
 snippet "(?:^|\s)h3(.*)" "<h3>" r
-<h3`!p snip.rv=get_attrs(match.group(1))`>$0</h3>
+<h3`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h3>
 endsnippet
 
 snippet "(?:^|\s)h4(.*)" "<h4>" r
-<h4`!p snip.rv=get_attrs(match.group(1))`>$0</h4>
+<h4`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h4>
 endsnippet
 
 snippet "(?:^|\s)h5(.*)" "<h5>" r
-<h5`!p snip.rv=get_attrs(match.group(1))`>$0</h5>
+<h5`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h5>
 endsnippet
 
 snippet "(?:^|\s)h6(.*)" "<h6>" r
-<h6`!p snip.rv=get_attrs(match.group(1))`>$0</h6>
+<h6`!p snip.rv = get_attrs( match.group( 1 ) )`>$0</h6>
 endsnippet
 
 snippet "(?:^|\s)p(.*)" "<p>" r
-<p`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</p>
+<p`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</p>
 endsnippet
 
 #
@@ -218,43 +221,43 @@ endsnippet
 #
 
 snippet "(?:^|\s)span(.*)" "<span>" r
-<span`!p snip.rv=get_attrs(match.group(1))`>$0<span>
+<span`!p snip.rv = get_attrs( match.group( 1 ) )`>$0<span>
 endsnippet
 
 snippet "(?:^|\s)a(.*)" "<a>" r
-<a`!p snip.rv=get_attrs(match.group(1))` href="$1">${VISUAL}$0</a>
+<a`!p snip.rv = get_attrs( match.group( 1 ) )` href="$1">${VISUAL}$0</a>
 endsnippet
 
 snippet "(?:^|\s)img(.*)" "<img>" r
-<img`!p snip.rv=get_attrs(match.group(1))` src="$1" alt="$0" />
+<img`!p snip.rv = get_attrs( match.group( 1 ) )` src="$1" alt="$0" />
 endsnippet
 
 snippet "(?:^|\s)ul(.*)" "<ul>" r
-<ul`!p snip.rv=get_attrs(match.group(1))`>
+<ul`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </ul>
 endsnippet
 
 snippet "(?:^|\s)li\b(.*)" "<li>" r
-<li`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</li>
+<li`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</li>
 endsnippet
 
 snippet "(?:^|\s)address(.*)" "<address>" r
-<address`!p snip.rv=get_attrs(match.group(1))`>
+<address`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </address>
 endsnippet
 
 snippet "(?:^|\s)small(.*)" "<small>" r
-<small`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</small>
+<small`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</small>
 endsnippet
 
 snippet "(?:^|\s)strong(.*)" "<strong>" r
-<strong`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</strong>
+<strong`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</strong>
 endsnippet
 
 snippet "(?:^|\s)em(.*)" "<em>" r
-<em`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</em>
+<em`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</em>
 endsnippet
 
 #
@@ -262,35 +265,35 @@ endsnippet
 #
 
 snippet "(?:^|\s)table(.*)" "<table>" r
-<table`!p snip.rv=get_attrs(match.group(1))`>
+<table`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </table>
 endsnippet
 
 snippet "(?:^|\s)thead(.*)" "<thead>" r
-<thead`!p snip.rv=get_attrs(match.group(1))`>
+<thead`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </thead>
 endsnippet
 
 snippet "(?:^|\s)tbody(.*)" "<tbody>" r
-<tbody`!p snip.rv=get_attrs(match.group(1))`>
+<tbody`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </tbody>
 endsnippet
 
 snippet "(?:^|\s)tfoot(.*)" "<tfoot>" r
-<tfoot`!p snip.rv=get_attrs(match.group(1))`>
+<tfoot`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </tfooet>
 endsnippet
 
 snippet "(?:^|\s)th(.*)" "<th>" r
-<th`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</th>
+<th`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</th>
 endsnippet
 
 snippet "(?:^|\s)td(.*)" "<td>" r
-<td`!p snip.rv=get_attrs(match.group(1))`>${VISUAL}$0</td>
+<td`!p snip.rv = get_attrs( match.group( 1 ) )`>${VISUAL}$0</td>
 endsnippet
 
 #
@@ -298,37 +301,37 @@ endsnippet
 #
 
 snippet "(?:^|\s)form(.*)" "<form>" r
-<form`!p snip.rv=get_attrs(match.group(1))` action="$1"${2: method="${3:get}"}>
+<form`!p snip.rv = get_attrs( match.group( 1 ) )` action="$1"${2: method="${3:get}"}>
     ${VISUAL}$0
 </form>
 endsnippet
 
 snippet "(?:^|\s)field(.*)" "<fieldset>" r
-<fieldset`!p snip.rv=get_attrs(match.group(1))`>
+<fieldset`!p snip.rv = get_attrs( match.group( 1 ) )`>
     ${VISUAL}$0
 </fieldset>
 endsnippet
 
 snippet "(?:^|\s)label(.*)" "<label>" r
-<label`!p snip.rv=get_attrs(match.group(1))` for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+<label`!p snip.rv = get_attrs( match.group( 1 ) )` for="$1">${0:`!p snip.rv = readable( t[ 1 ] )`}</label>
 endsnippet
 
 snippet "(?:^|\s)input(.*)" "<input>" r
-<input`!p snip.rv=get_attrs(match.group(1))` name"${2:$1}" type="${3}" $0/>
+<input`!p snip.rv = get_attrs( match.group( 1 ) )` name"${2:$1}" type="${3}" $0/>
 endsnippet
 
 snippet "(?:^|\s)linput(.*)" "<input> with <label>" r
-<label for="${1:`!p snip.rv=get_id(match.group(1))`}">${2:`!p snip.rv=readable(t[1])`}</label>
-<input id="$1"`!p snip.rv=get_classAttr(match.group(1))` name="${3:$1}" type="${4:text}" $0/>
+<label for="${1:`!p snip.rv = get_id( match.group( 1 ) )`}">${2:`!p snip.rv = readable( t[ 1 ] )`}</label>
+<input id="$1"`!p snip.rv = get_class_attr( match.group( 1 ) )` name="${3:$1}" type="${4:text}" $0/>
 endsnippet
 
 snippet "(?:^|\s)check(.*)" "checkbox <input>" r
-<input`!p snip.rv=get_attrs(match.group(1))` name="${1:`!p snip.rv=get_id(match.group(1))`}" type="checkbox" value="$3" $0/>
+<input`!p snip.rv = get_attrs( match.group( 1 ) )` name="${1:`!p snip.rv = get_id( match.group( 1 ) )`}" type="checkbox" value="$3" $0/>
 endsnippet
 
 snippet lcheck "checkbox <input> with label"
 <input id="$1" name="${2:$1}" type="checkbox" value="$3" $4/>
-<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+<label for="$1">${0:`!p snip.rv = readable( t[ 1 ] )`}</label>
 endsnippet
 
 snippet radio "radio <input>"
@@ -337,34 +340,34 @@ endsnippet
 
 snippet lradio "radio <input> with label"
 <input id="$1" name="${2:$1}" type="radio" value="$3" $4/>
-<label for="$1">${0:`!p snip.rv=readable(t[1])`}</label>
+<label for="$1">${0:`!p snip.rv = readable( t[ 1 ] )`}</label>
 endsnippet
 
 snippet "(?:^|\s)text(.*)" "<textarea>" r
-<textarea`!p snip.rv=get_attrs(match.group(1))` name="${1:`!p snip.rv=get_id(match.group(1))`}">${VISUAL}$0</textarea>
+<textarea`!p snip.rv = get_attrs( match.group( 1 ) )` name="${1:`!p snip.rv = get_id(match.group(1))`}">${VISUAL}$0</textarea>
 endsnippet
 
 snippet "(?:^|\s)ltext(.*)" "<textarea> with <label>" r
-<label for="${1:`!p snip.rv=get_id(match.group(1))`}">${2:`!p snip.rv=readable(t[1])`}</label>
+<label for="${1:`!p snip.rv = get_id( match.group( 1 ) )`}">${2:`!p snip.rv = readable( t[ 1 ] )`}</label>
 <textarea id="$1" name="${3:$1}">$0</textarea>
 endsnippet
 
 snippet "(?:^|\s)select(.*)" "<select>" r
-<select`!p snip.rv=get_attrs(match.group(1))` name="${2:`!p snip.rv=get_id(match.group(1))`}">
+<select`!p snip.rv = get_attrs( match.group( 1 ) )` name="${2:`!p snip.rv = get_id( match.group( 1 ) )`}">
     ${VISUAL}$0
 </select>
 endsnippet
 
 snippet "(?:^|\s)optgroup(.*)" "<optgroup>" r
-<optgroup`!p snip.rv=get_attrs(match.group(1))` label="$1">
+<optgroup`!p snip.rv = get_attrs( match.group( 1 ) )` label="$1">
     ${VISUAL}$0
 </optgroup>
 endsnippet
 
 snippet "(?:^|\s)option(.*)" "<option>" r
-<option`!p snip.rv=get_attrs(match.group(1))` value="$1">${0:`!p snip.rv=readable(t[1])`}</option>
+<option`!p snip.rv = get_attrs( match.group( 1 ) )` value="$1">${0:`!p snip.rv = readable( t[ 1 ] )`}</option>
 endsnippet
 
 snippet "(?:^|\s)button(.*)" "<button>" r
-<button`!p snip.rv=get_attrs(match.group(1))`${1: type="${2:button}"}>$0</button>
+<button`!p snip.rv = get_attrs( match.group( 1 ) )`${1: type="${2:button}"}>$0</button>
 endsnippet
