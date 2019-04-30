@@ -106,25 +106,25 @@ alias gwh='git whoami'
 # Plugins
 #
 
-if [ -d "/usr/share/zsh/plugins/zsh-autosuggestions" ]; then
+if [ -d "$SHARE_PATH/zsh/plugins/zsh-autosuggestions" ]; then
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
-    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source "$SHARE_PATH/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
-if [ -d "/usr/share/zsh/plugins/zsh-history-substring-search" ]; then
-    source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [ -d "$SHARE_PATH/zsh/plugins/zsh-history-substring-search" ]; then
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
+    source "$SHARE_PATH/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
 fi
 
-if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -d "$SHARE_PATH/zsh/plugins/zsh-syntax-highlighting" ]; then
+    source "$SHARE_PATH/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
-if [ -d "/usr/share/fzf" ]; then
+if [ -d "$SHARE_PATH/fzf" ]; then
     if [ -x /usr/bin/rg ]; then
         export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     fi
 
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
@@ -133,6 +133,6 @@ if [ -d "/usr/share/fzf" ]; then
     export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
     export FZF_TMUX=1
 
-    source /usr/share/fzf/completion.zsh
-    source /usr/share/fzf/key-bindings.zsh
+    source "$SHARE_PATH/fzf/completion.zsh"
+    source "$SHARE_PATH/fzf/key-bindings.zsh"
 fi

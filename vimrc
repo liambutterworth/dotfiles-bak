@@ -15,11 +15,11 @@ syntax enable
 
 set autoread
 set autoindent
-set backup backupdir=/tmp,.
+set backup backupdir=$HOME/.vim/backup//
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=/tmp,.
+set directory=$HOME/.vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -37,7 +37,7 @@ set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
-set undofile undodir=/tmp,.
+set undofile undodir=$HOME/.vim/undo//
 set wildmenu wildignorecase wildmode=full
 
 augroup Formatting
