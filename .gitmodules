@@ -46,6 +46,9 @@
 [submodule "plugs/vim/vim-vinegar"]
 	path = plugs/vim/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "plugs/vim/fzf.vim"]
+	path = plugs/vim/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
 [submodule "plugs/zsh/zsh-autosuggestions"]
 	path = plugs/zsh/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
@@ -58,6 +61,3 @@
 [submodule "plugs/zsh/fzf"]
 	path = plugs/zsh/fzf
 	url = https://github.com/junegunn/fzf
-[submodule "plugs/vim/fzf.vim"]
-	path = plugs/vim/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
