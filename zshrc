@@ -71,6 +71,7 @@ fi
 alias la='ls -A'
 alias ll='la -l'
 
+alias vr='vim -r'
 alias vd='vim -d'
 alias vt='vim -p'
 alias vs='vim -o'

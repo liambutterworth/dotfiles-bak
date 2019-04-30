@@ -1,3 +1,3 @@
 #!/bin/bash
-rm -rf ~/.vim/{autoload,swap,backup,undo}
+rm ~/.vim/autoload/pathogen.vim
 rm ~/.{ctags,vimrc,zshrc,tmux.conf,gitconfig}

@@ -61,3 +61,6 @@
 [submodule "plugs/zsh/fzf"]
 	path = plugs/zsh/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "plugs/vim/vim-easy-align"]
+	path = plugs/vim/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align

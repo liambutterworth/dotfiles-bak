@@ -54,6 +54,8 @@ augroup Completion
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
 
+let g:netrw_home = $HOME . '/.cache/vim'
+
 let s:git_branch = substitute( system(
             \ 'git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'
             \ ), '\n', '', 'g' )
@@ -141,7 +143,6 @@ if &runtimepath =~ 'fzf.vim'
     set runtimepath+=$HOME/.dotfiles/plugs/zsh/fzf
 
     let git_commit_format         = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
-    let rg_command                = 'rg --column --line-number --no-heading --color=always --smart-case'
     let g:fzf_commits_log_options = '--graph --color=always --format="' . git_commit_format . '"'
     let g:fzf_tags_command        = 'ctags -R'
 
@@ -213,4 +214,9 @@ if &runtimepath =~ 'ultisnips'
 
     nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
     inoremap <c-j> <nop>
+endif
+
+if &runtimepath =~ 'vim-easy-align'
+    nmap ga <plug>(EasyAlign)
+    xmap ga <plug>(EasyAlign)
 endif
