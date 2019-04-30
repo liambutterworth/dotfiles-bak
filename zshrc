@@ -14,11 +14,6 @@ autoload -Uz colors && colors
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
-bindkey -v
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
 zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' format 'Completing %d'
@@ -30,6 +25,11 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' formats '%b%c%u'
+
+bindkey -v
+bindkey '^w' backward-kill-word
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
 
 function precmd {
     vcs_info;
@@ -46,7 +46,7 @@ function set-prompt {
     [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%m'
     PROMPT+=$'\n''%(?.%F{5}.%F{1})'
     [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
-    PROMPT+=' '
+    PROMPT+='%F{7} '
 }
 
 function zle-line-init zle-keymap-select {
@@ -61,17 +61,8 @@ zle -N zle-keymap-select
 # Aliases
 #
 
-alias /='cd /'
-alias ~='cd ~'
-alias ..='cd ..'
-alias -- -='cd -'
-alias src='source ~/.zshrc; echo source ~/.zshrc'
-
-alias ea='exa --all --group-directories-first'
-alias el='ea --long --git --time-style="iso"'
-alias et='ea --tree --ignore-glob=".git|node_modules|vendor"'
-alias ep="echo '${PATH//:/\n}'"
-alias ef="echo '${fpath// /\n}'"
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -lA'
 
 alias vc='vim --clean'
 alias vd='vim -d'
@@ -115,33 +106,33 @@ alias gwh='git whoami'
 # Plugins
 #
 
-source ~/.zplug/init.zsh
+if [ -d "/usr/share/zsh/plugins/zsh-autosuggestions" ]; then
+    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
-zplug 'junegunn/fzf', hook-build:'./install --all --no-bash'
-zplug 'zsh-users/zsh-autosuggestions'
-zplug 'zsh-users/zsh-completions'
-zplug 'zsh-users/zsh-history-substring-search'
-zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+if [ -d "/usr/share/zsh/plugins/zsh-history-substring-search" ]; then
+    source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    bindkey '^P' history-substring-search-up
+    bindkey '^N' history-substring-search-down
+fi
 
-zplug load
+if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
-# FZF
+if [ -d "/usr/share/fzf" ]; then
+    if [ -x /usr/bin/rg ]; then
+        export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+        export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+    fi
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
-export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
-export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-export FZF_TMUX=1
+    export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+    export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
+    export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+    export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+    export FZF_TMUX=1
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Autosuggestions
-
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
-
-# History Substring Search
-
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+    source /usr/share/fzf/completion.zsh
+    source /usr/share/fzf/key-bindings.zsh
+fi

@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -rf ~/.vim/autoload
+rm ~/.{ctags,vimrc,zshrc,tmux.conf,gitconfig}

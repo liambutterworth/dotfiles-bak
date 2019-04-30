@@ -1,9 +1,8 @@
 # Install
 
 ```
-    $ brew install vim zsh tmux git ctags ripgrep exa
+    $ sudo pacman -S ctags vim zsh tmux git fzf ripgrep
+    $ sudo pacman -S zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles
-    $ ~/.dotfiles/bin/dotfiles install
+    $ ~/.dotfiles/bin/install
 ```
-
-Add dotfiles bin to $PATH `PATH="$HOME/.dotfiles/bin:$PATH"`

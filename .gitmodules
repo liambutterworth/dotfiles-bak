@@ -1,0 +1,51 @@
+[submodule "plugs/vim-gitgutter"]
+	path = plugs/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "plugs/nord-vim"]
+	path = plugs/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim
+[submodule "plugs/vim-tmux-navigator"]
+	path = plugs/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "plugs/fzf.vim"]
+	path = plugs/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "plugs/vim-gutentags"]
+	path = plugs/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule "plugs/vim-indent-object"]
+	path = plugs/vim-indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object
+[submodule "plugs/delimitmate"]
+	path = plugs/delimitmate
+	url = https://github.com/raimondi/delimitmate
+[submodule "plugs/vim-polyglot"]
+	path = plugs/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
+[submodule "plugs/ultisnips"]
+	path = plugs/ultisnips
+	url = https://github.com/sirver/ultisnips
+[submodule "plugs/vim-context-commentstring"]
+	path = plugs/vim-context-commentstring
+	url = https://github.com/suy/vim-context-commentstring
+[submodule "plugs/matchit"]
+	path = plugs/matchit
+	url = https://github.com/tmhedberg/matchit
+[submodule "plugs/vim-commentary"]
+	path = plugs/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "plugs/vim-endwise"]
+	path = plugs/vim-endwise
+	url = https://github.com/tpope/vim-endwise
+[submodule "plugs/vim-fugitive"]
+	path = plugs/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "plugs/vim-repeat"]
+	path = plugs/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "plugs/vim-surround"]
+	path = plugs/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "plugs/vim-vinegar"]
+	path = plugs/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar
