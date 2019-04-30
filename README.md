@@ -7,3 +7,5 @@ ZSH Plugins: `zsh-autosuggestions zsh-history-substring-search zsh-syntax-highli
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles
     $ ~/.dotfiles/bin/install
 ```
+
+If using Homebrew: `echo "export SHARE_PATH='/usr/local/share'" > ~/.zshenv`

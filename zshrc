@@ -9,7 +9,7 @@
 # Settings
 #
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -d ~/.cache/zsh/zcompdump
 autoload -Uz colors && colors
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
@@ -61,10 +61,16 @@ zle -N zle-keymap-select
 # Aliases
 #
 
-alias ls='ls --color=auto --group-directories-first'
-alias ll='ls -lA'
 
-alias vc='vim --clean'
+if [[ `uname` = 'Linux' ]]; then
+    alias ls='ls --color=auto --group-directories-first'
+else
+    alias ls='ls -G'
+fi
+
+alias la='ls -A'
+alias ll='la -l'
+
 alias vd='vim -d'
 alias vt='vim -p'
 alias vs='vim -o'
@@ -106,33 +112,31 @@ alias gwh='git whoami'
 # Plugins
 #
 
-if [ -d "$SHARE_PATH/zsh/plugins/zsh-autosuggestions" ]; then
+export ZSH_PLUGS_DIR="$HOME/.dotfiles/plugs/zsh"
+
+if [ -d "$ZSH_PLUGS_DIR/zsh-autosuggestions" ]; then
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
-    source "$SHARE_PATH/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    source "$ZSH_PLUGS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
-if [ -d "$SHARE_PATH/zsh/plugins/zsh-history-substring-search" ]; then
+if [ -d "$ZSH_PLUGS_DIR/zsh-history-substring-search" ]; then
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
-    source "$SHARE_PATH/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+    source "$ZSH_PLUGS_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh"
 fi
 
-if [ -d "$SHARE_PATH/zsh/plugins/zsh-syntax-highlighting" ]; then
-    source "$SHARE_PATH/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -d "$ZSH_PLUGS_DIR/zsh-syntax-highlighting" ]; then
+    source "$ZSH_PLUGS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
-if [ -d "$SHARE_PATH/fzf" ]; then
-    if [ -x /usr/bin/rg ]; then
-        export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    fi
-
+if [ -d "$ZSH_PLUGS_DIR/fzf" ]; then
+    export PATH="$PATH:$HOME/.dotfiles/plugs/zsh/fzf/bin"
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
     export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
     export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
     export FZF_TMUX=1
 
-    source "$SHARE_PATH/fzf/completion.zsh"
-    source "$SHARE_PATH/fzf/key-bindings.zsh"
+    source "$ZSH_PLUGS_DIR/fzf/shell/completion.zsh"
+    source "$ZSH_PLUGS_DIR/fzf/shell/key-bindings.zsh"
 fi

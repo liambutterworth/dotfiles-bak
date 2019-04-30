@@ -9,17 +9,17 @@
 " Settings
 "
 
-execute pathogen#infect( $HOME . '/.dotfiles/plugs/{}' )
+execute pathogen#infect( $HOME . '/.dotfiles/plugs/vim/{}' )
 filetype plugin indent on
 syntax enable
 
 set autoread
 set autoindent
-set backup backupdir=$HOME/.vim/backup//
+set backup backupdir=$HOME/.cache/vim/backup//
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=$HOME/.vim/swap//
+set directory=$HOME/.cache/vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -37,7 +37,8 @@ set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
-set undofile undodir=$HOME/.vim/undo//
+set undofile undodir=$HOME/.cache/vim/undo//
+set viminfo+=n$HOME/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
 augroup Formatting
@@ -103,10 +104,6 @@ nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
-nnoremap g= mmgg=G`m
-nnoremap gs :%s//g<left><left>
-vnoremap gs :s//g<left><left>
-vnoremap gr y:%s/<c-r>"//<left><left>
 
 nnoremap <leader>n :tabn<cr>
 nnoremap <leader>p :tabp<cr>
@@ -140,8 +137,8 @@ if &runtimepath =~ 'delimitmate'
     let g:delimitMate_expand_space = 1
 endif
 
-if &runtimepath =~ 'fzf'
-    set runtimepath+=~/.zplug/repos/junegunn/fzf
+if &runtimepath =~ 'fzf.vim'
+    set runtimepath+=$HOME/.dotfiles/plugs/zsh/fzf
 
     let git_commit_format         = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
     let rg_command                = 'rg --column --line-number --no-heading --color=always --smart-case'
@@ -160,11 +157,9 @@ if &runtimepath =~ 'fzf'
 
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Rg<cr>
+    nnoremap <leader><cr> :Commits<cr>
     nnoremap <leader><tab> :Snippets<cr>
-    nnoremap <leader>gf :GFiles?<cr>
-    nnoremap <leader>gc :Commits<cr>
-    nnoremap <leader>G :BLines<cr>
+    nnoremap <leader>G :Lines<cr>
     nnoremap <leader>h :Helptags<cr>
     nnoremap <leader>] :Tags<cr>
     nnoremap <leader>: :History:<cr>
