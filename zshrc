@@ -130,7 +130,7 @@ if [ -d "$ZSH_PLUGS_DIR/zsh-syntax-highlighting" ]; then
     source "$ZSH_PLUGS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
-if [ -d "$ZSH_PLUGS_DIR/fzf" ]; then
+if [ -f "$ZSH_PLUGS_DIR/fzf/bin/fzf" ]; then
     export PATH="$PATH:$HOME/.dotfiles/plugs/zsh/fzf/bin"
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
