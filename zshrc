@@ -68,8 +68,8 @@ else
     alias ls='ls -G'
 fi
 
-alias la='ls -A'
-alias ll='la -l'
+alias la='ls -lA'
+alias ll='ls -l'
 
 alias vr='vim -r'
 alias vd='vim -d'
