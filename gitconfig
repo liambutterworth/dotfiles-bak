@@ -1,6 +1,6 @@
 [user]
     name = Liam Butterworth
-    email = account@liambutterworth.me
+    email = dev@liambutterworth.me
 [credential]
     helper = cache --timeout=3600
 [core]
