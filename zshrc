@@ -43,7 +43,7 @@ function preexec {
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
     [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%m'
+    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%M'
     PROMPT+=$'\n''%(?.%F{5}.%F{1})'
     [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
     PROMPT+='%F{7} '
@@ -108,6 +108,17 @@ alias gr='cd $(git root)'
 alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
+
+alias db='docker build'
+alias dr='docker run'
+alias dc='docker container'
+alias di='docker image'
+alias dlc="docker container ls --all --format='table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}'"
+alias dli="docker image ls --all --format='table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}'"
+alias dqc='docker container ls -aq'
+alias dqi='docker image ls -aq'
+alias drc='docker rm'
+alias dri='docker rmi'
 
 #
 # Plugins

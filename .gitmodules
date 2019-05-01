@@ -25,9 +25,6 @@
 [submodule "plugs/vim/vim-context-commentstring"]
 	path = plugs/vim/vim-context-commentstring
 	url = https://github.com/suy/vim-context-commentstring
-[submodule "plugs/vim/matchit"]
-	path = plugs/vim/matchit
-	url = https://github.com/tmhedberg/matchit
 [submodule "plugs/vim/vim-commentary"]
 	path = plugs/vim/vim-commentary
 	url = https://github.com/tpope/vim-commentary

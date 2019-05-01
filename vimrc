@@ -11,6 +11,7 @@
 
 execute pathogen#infect( $HOME . '/.dotfiles/plugs/vim/{}' )
 filetype plugin indent on
+runtime macros/matchit.vim
 syntax enable
 
 set autoread
