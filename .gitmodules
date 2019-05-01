@@ -61,3 +61,9 @@
 [submodule "plugs/vim/vim-easy-align"]
 	path = plugs/vim/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align
+[submodule "plugs/vim/sideways.vim"]
+	path = plugs/vim/sideways.vim
+	url = https://github.com/andrewradev/sideways.vim
+[submodule "plugs/vim/splitjoin.vim"]
+	path = plugs/vim/splitjoin.vim
+	url = https://github.com/andrewradev/splitjoin.vim

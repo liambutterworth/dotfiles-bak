@@ -11,7 +11,6 @@
 
 execute pathogen#infect( $HOME . '/.dotfiles/plugs/vim/{}' )
 filetype plugin indent on
-runtime macros/matchit.vim
 syntax enable
 
 set autoread
@@ -102,7 +101,6 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
-nnoremap J Jx
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
@@ -205,6 +203,22 @@ if &runtimepath =~'polyglot'
     let g:jsx_ext_required        = 0
 
     autocmd filetype vue syntax sync fromstart
+endif
+
+if &runtimepath =~ 'sideways.vim'
+    nnoremap [a :SidewaysLeft<cr>
+    nnoremap ]a :SidewaysRight<cr>
+
+    omap aa <Plug>SidewaysArgumentTextobjA
+    xmap aa <Plug>SidewaysArgumentTextobjA
+    omap ia <Plug>SidewaysArgumentTextobjI
+    xmap ia <Plug>SidewaysArgumentTextobjI
+endif
+
+if &runtimepath =~ 'splitjoin.vim'
+    let g:splitjoin_trailing_comma                    = 1
+    let g:splitjoin_curly_brace_padding               = 1
+    let g:splitjoin_html_attributes_brack_on_new_line = 1
 endif
 
 if &runtimepath =~ 'ultisnips'
