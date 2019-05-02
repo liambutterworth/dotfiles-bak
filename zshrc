@@ -119,6 +119,10 @@ alias dqc='docker container ls -aq'
 alias dqi='docker image ls -aq'
 alias drc='docker rm'
 alias dri='docker rmi'
+alias d-c='docker-compose'
+alias d-cu='docker-compose up'
+alias d-cd='docker-compose down'
+alias d-cb='docker-compose build'
 
 #
 # Plugins
