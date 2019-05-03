@@ -31,15 +31,6 @@ bindkey '^w' backward-kill-word
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 
-function precmd {
-    vcs_info;
-    print;
-}
-
-function preexec {
-    print;
-}
-
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
     [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
@@ -56,6 +47,9 @@ function zle-line-init zle-keymap-select {
 
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+function precmd { vcs_info; print }
+function preexec { print }
 
 #
 # Aliases

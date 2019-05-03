@@ -54,7 +54,8 @@ augroup Completion
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
 
-let g:netrw_home = $HOME . '/.cache/vim'
+let g:netrw_home      = $HOME . '/.cache/vim'
+let g:netrw_liststyle = 0
 
 let s:git_branch = substitute( system(
             \ 'git rev-parse --git-dir > /dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'
@@ -156,9 +157,9 @@ if &runtimepath =~ 'fzf.vim'
                 \ <bang>0 )
 
     nnoremap <leader><space> :Files<cr>
+    nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
     nnoremap <leader><cr> :Commits<cr>
-    nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader>G :Lines<cr>
     nnoremap <leader>h :Helptags<cr>
     nnoremap <leader>] :Tags<cr>
