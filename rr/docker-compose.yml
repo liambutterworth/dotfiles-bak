@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - ./trucker-classifieds-laravel:/home/app/src
+      - ~/.ssh:/home/app/.ssh
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "cms2.db:10.42.50.59"
+      - "recruiting0.db:10.42.37.158"
+    command:
+      - /home/app/docker-command.sh
