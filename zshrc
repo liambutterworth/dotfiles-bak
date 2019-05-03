@@ -113,6 +113,7 @@ alias db='docker build'
 alias dr='docker run'
 alias dc='docker container'
 alias di='docker image'
+alias dp='docker system prune'
 alias dlc="docker container ls --all --format='table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}'"
 alias dli="docker image ls --all --format='table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}'"
 alias dqc='docker container ls -aq'
