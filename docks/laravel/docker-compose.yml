@@ -5,7 +5,7 @@ services:
     build:
       context: .
     volumes:
-      - ./DIRECTORY:/home/app/src
+      - ./PROJECT_DIRECTORY:/var/www
       - ~/.ssh:/home/app/.ssh
     ports:
       - "8000:8000"
