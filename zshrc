@@ -55,18 +55,14 @@ function preexec { print }
 # Aliases
 #
 
-case `uname` in
-    Linux)
-        lsopts='--color=auto --group-directories-first'
-        ;;
-
-    Darwin)
-        lsopts='-G'
-        ;;
-esac
+if [[ `uname` = 'Linux' ]]; then
+    alias ls='ls --color=auto --group-directories-first'
+else
+    alias ls='ls -G'
+fi
 
 alias grep='grep --color=always --exclude-dir=.git'
-alias ls="ls $lsopts"
+alias less='less --raw-control-chars'
 
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
@@ -112,8 +108,6 @@ alias dli="docker image ls --all --format='table {{.ID}}\t{{.Repository}}\t{{.Ta
 alias dqc='docker container ls -aq'
 alias dqi='docker image ls -aq'
 alias drc='docker rm'
-alias dri='docker rmi'
-alias d-c='docker-compose'
 alias d-cu='docker-compose up'
 alias d-cd='docker-compose down'
 alias d-cb='docker-compose build'

@@ -71,9 +71,9 @@ let s:file_permissions = substitute( system(
 function! StatusLine() abort
     let output = ' '
 
-    let output .= '%F%m'
+    let output .= '%f%m'
     let output .= !empty( s:git_branch ) ? ' ' . s:git_branch : ''
-    let output .= '%=%{&fileformat}'
+    let output .= '%=%c:%l|%L %{&fileformat}'
     let output .= filereadable( expand( '%:p' ) ) ? ' %{&fileencoding}' : ''
     let output .= !empty( s:file_permissions ) ? ' ' . s:file_permissions : ''
 
