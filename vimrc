@@ -44,7 +44,7 @@ set wildmenu wildignorecase wildmode=full
 augroup Formatting
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
-    autocmd filetype text,markdown setlocal wrap
+    autocmd filetype text,markdown setlocal wrap linebreak
 augroup END
 
 augroup Completion
