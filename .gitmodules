@@ -67,3 +67,6 @@
 [submodule "plugs/vim/splitjoin.vim"]
 	path = plugs/vim/splitjoin.vim
 	url = https://github.com/andrewradev/splitjoin.vim
+[submodule "plugs/vim/vim-eunuch"]
+	path = plugs/vim/vim-eunuch
+	url = http://github.com/tpope/vim-eunuch
