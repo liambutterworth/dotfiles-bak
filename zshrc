@@ -55,27 +55,25 @@ function preexec { print }
 # Aliases
 #
 
+case `uname` in
+    Linux)
+        lsopts='--color=auto --group-directories-first'
+        ;;
 
-if [[ `uname` = 'Linux' ]]; then
-    alias ls='ls --color=auto --group-directories-first'
-else
-    alias ls='ls -G'
-fi
+    Darwin)
+        lsopts='-G'
+        ;;
+esac
 
-alias la='ls -lA'
-alias ll='ls -l'
+alias grep='grep --color=always --exclude-dir=.git'
+alias ls="ls $lsopts"
 
-alias vr='vim -r'
-alias vd='vim -d'
-alias vt='vim -p'
-alias vs='vim -o'
-alias vv='vim -O'
-
+alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
-alias tc='clear && tmux clear-history'
 alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
+alias tc='clear && tmux clear-history'
 
 alias gcl='git clone'
 alias ga='git add'

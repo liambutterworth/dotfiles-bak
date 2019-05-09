@@ -70,9 +70,10 @@ let s:file_permissions = substitute( system(
 function! StatusLine() abort
     let output = ' '
 
-    let output .= !empty( s:git_branch ) ? s:git_branch . ' ' : ''
-    let output .= '%f%m%=%c:%l|%L %{&ff}'
-    let output .= filereadable( expand( '%:p' ) ) ? ' %{&fenc}' : ''
+    let output .= '%F%m'
+    let output .= !empty( s:git_branch ) ? ' ' . s:git_branch : ''
+    let output .= '%=%{&fileformat}'
+    let output .= filereadable( expand( '%:p' ) ) ? ' %{&fileencoding}' : ''
     let output .= !empty( s:file_permissions ) ? ' ' . s:file_permissions : ''
 
     return output . ' '
@@ -102,23 +103,27 @@ let mapleader = ' '
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
+nnoremap <bs> <c-^>
+nnoremap g= mmgg=G`m
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 
-nnoremap <leader>n :tabn<cr>
+nnoremap <leader>r :source ~/.vimrc<cr>
+nnoremap <leader>x :close<cr>
+nnoremap <leader>c :tabe %<cr>
+nnoremap <leader>s :split<cr>
+nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>p :tabp<cr>
-nnoremap <leader>N :tabm +1<cr>
+nnoremap <leader>n :tabn<cr>
 nnoremap <leader>P :tabm -1<cr>
+nnoremap <leader>N :tabm +1<cr>
 nnoremap <leader>h <c-w>10<
 nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
 
-nnoremap <bs> <c-^>
-nnoremap ]<bs> :bnext<cr>
-nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
@@ -134,10 +139,14 @@ inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``
 " Plugins
 "
 
+" Delimit Mate
+
 if &runtimepath =~ 'delimitmate'
     let g:delimitMate_expand_cr    = 1
     let g:delimitMate_expand_space = 1
 endif
+
+" FZF
 
 if &runtimepath =~ 'fzf.vim'
     set runtimepath+=$HOME/.dotfiles/plugs/zsh/fzf
@@ -173,6 +182,8 @@ if &runtimepath =~ 'fzf.vim'
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
+" Git Gutter
+
 if &runtimepath =~ 'gitgutter'
     let g:gitgutter_map_keys = 0
 
@@ -185,11 +196,15 @@ if &runtimepath =~ 'gitgutter'
     xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
+" Gutentags
+
 if &runtimepath =~ 'gutentags'
     let g:gutentags_enabled       = system( 'command -v ctags' )
     let g:gutentags_project_root  = [ '.git' ]
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
+
+" Nord
 
 if &runtimepath =~ 'nord'
     let g:nord_italic                  = 1
@@ -199,12 +214,16 @@ if &runtimepath =~ 'nord'
     colorscheme nord
 endif
 
+" Polyglot
+
 if &runtimepath =~'polyglot'
     let g:javascript_plugin_jsdoc = 1
     let g:jsx_ext_required        = 0
 
     autocmd filetype vue syntax sync fromstart
 endif
+
+" Sideways
 
 if &runtimepath =~ 'sideways.vim'
     nnoremap [a :SidewaysLeft<cr>
@@ -216,11 +235,15 @@ if &runtimepath =~ 'sideways.vim'
     xmap ia <Plug>SidewaysArgumentTextobjI
 endif
 
+" Split Join
+
 if &runtimepath =~ 'splitjoin.vim'
     let g:splitjoin_trailing_comma                    = 1
     let g:splitjoin_curly_brace_padding               = 1
     let g:splitjoin_html_attributes_brack_on_new_line = 1
 endif
+
+" Ulti Snips
 
 if &runtimepath =~ 'ultisnips'
     let g:UltiSnipsSnippetDirectories  = [ $HOME.'/.dotfiles/snips' ]
