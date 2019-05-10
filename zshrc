@@ -14,12 +14,10 @@ autoload -Uz colors && colors
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
-zstyle ':completion:*' auto-description 'Specify: %d'
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' completer _complete _correct _approximate
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*' verbose true
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-dirs-first true
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' completer _complete _correct _ignored _approximate
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '*'
@@ -30,6 +28,7 @@ bindkey -v
 bindkey '^w' backward-kill-word
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
+bindkey '^[[Z' reverse-menu-complete
 
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
@@ -55,12 +54,7 @@ function preexec { print }
 # Aliases
 #
 
-if [[ `uname` = 'Linux' ]]; then
-    alias ls='ls --color=auto --group-directories-first'
-else
-    alias ls='ls -G'
-fi
-
+alias ls='ls --color=auto --group-directories-first'
 alias grep='grep --color=always --exclude-dir=.git'
 alias less='less --raw-control-chars'
 
@@ -96,6 +90,8 @@ alias gr='cd $(git root)'
 alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
+alias gsa='git submodule add'
+# alias gsr='git sumodule remove'
 
 alias db='docker build'
 alias dr='docker run'
