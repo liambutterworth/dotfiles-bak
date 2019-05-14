@@ -55,6 +55,8 @@ function preexec { print }
 #
 
 alias ls='ls --color=auto --group-directories-first'
+alias la='ls -A'
+alias ll='la -l'
 alias grep='grep --color=always --exclude-dir=.git'
 alias less='less --raw-control-chars'
 
