@@ -97,6 +97,7 @@ alias gsa='git submodule add'
 
 alias db='docker build'
 alias dr='docker run'
+alias de='docker exec'
 alias dc='docker container'
 alias di='docker image'
 alias dp='docker system prune'
