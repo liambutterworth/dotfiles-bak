@@ -73,7 +73,7 @@ function! StatusLine() abort
 
     let output .= '%f%m'
     let output .= !empty( s:git_branch ) ? ' ' . s:git_branch : ''
-    let output .= '%=%c:%l|%L %{&fileformat}'
+    let output .= '%=%{&fileformat}'
     let output .= filereadable( expand( '%:p' ) ) ? ' %{&fileencoding}' : ''
     let output .= !empty( s:file_permissions ) ? ' ' . s:file_permissions : ''
 
@@ -110,6 +110,12 @@ nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
+
+nnoremap <leader>e :e %<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
 
 nnoremap <leader>r :source ~/.vimrc<cr>
 nnoremap <leader>x :close<cr>
