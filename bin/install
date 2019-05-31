@@ -1,8 +1,15 @@
 #!/bin/bash
+
 git -C ~/.dotfiles submodule update --init
 mkdir -p ~/.cache/vim/{swap,backup,undo} ~/.cache/zsh
-curl -LSso ~/.vim/autoload/pathogen.vim --create-dirs https://tpo.pe/pathogen.vim
-~/.dotfiles/plugs/zsh/fzf/install --bin
+export ZPLUG_HOME="$HOME/.zsh/plugs"
+
+curl -sL --proto-redir -all,https \
+    https://raw.githubusercontent.com/zplug/installer/.zsh | zsh
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 ln -sf ~/.dotfiles/ctags ~/.ctags
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/zshrc ~/.zshrc

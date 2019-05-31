@@ -56,8 +56,8 @@ function preexec { print }
 
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
-alias ll='la -l'
-alias grep='grep --color=always --exclude-dir=.git'
+alias ll='ls -lA'
+alias grep='grep --color=always --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules'
 alias less='less --raw-control-chars'
 
 alias ts='tmux new -s'
@@ -75,7 +75,7 @@ alias gsh='git show'
 alias gs='git status'
 alias gb='git branch'
 alias gco='git checkout'
-alias gc='git commit -m'
+alias gc='git commit'
 alias gd='git diff'
 alias gt='git tag'
 alias gf='git fetch'
@@ -92,8 +92,6 @@ alias gr='cd $(git root)'
 alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
-alias gsa='git submodule add'
-# alias gsr='git sumodule remove'
 
 alias db='docker build'
 alias dr='docker run'
@@ -116,31 +114,44 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
-export ZSH_PLUGS_DIR="$HOME/.dotfiles/plugs/zsh"
+if [ -f "$HOME/.zsh/plugs/init.zsh" ]; then
+    source "$HOME/.zsh/plugs/init.zsh"
 
-if [ -d "$ZSH_PLUGS_DIR/zsh-autosuggestions" ]; then
-    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
-    source "$ZSH_PLUGS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    zplug 'zsh-users/zsh-completions'
+    zplug 'zsh-users/zsh-autosuggestions'
+    zplug 'zsh-users/zsh-history-substring-search'
+    zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+    zplug 'junegunn/fzf', as:command, hook-build:'./install --bin', use:'bin/{fzf,fzf-tmux}'
+
+    zplug load
 fi
 
-if [ -d "$ZSH_PLUGS_DIR/zsh-history-substring-search" ]; then
+# Autosuggestions
+
+if [ -d "$HOME/.zsh/plugs/repos/zsh-users/zsh-autosuggestions" ]; then
+    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
+fi
+
+# History Substring Search
+
+if [ -d "$HOME/.zsh/plugs/repos/zsh-users/zsh-history-substring-search" ]; then
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
-    source "$ZSH_PLUGS_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh"
 fi
 
-if [ -d "$ZSH_PLUGS_DIR/zsh-syntax-highlighting" ]; then
-    source "$ZSH_PLUGS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
+# FZF
 
-if [ -f "$ZSH_PLUGS_DIR/fzf/bin/fzf" ]; then
-    export PATH="$PATH:$HOME/.dotfiles/plugs/zsh/fzf/bin"
+if [ -d "$HOME/.zsh/plugs/repos/junegunn/fzf" ]; then
+    source "$HOME/.zsh/plugs/repos/junegunn/fzf/shell/completion.zsh"
+    source "$HOME/.zsh/plugs/repos/junegunn/fzf/shell/key-bindings.zsh"
+
+    if command -v rg >/dev/null; then
+        export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow'
+    fi
+
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
     export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
     export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
     export FZF_TMUX=1
-
-    source "$ZSH_PLUGS_DIR/fzf/shell/completion.zsh"
-    source "$ZSH_PLUGS_DIR/fzf/shell/key-bindings.zsh"
 fi
