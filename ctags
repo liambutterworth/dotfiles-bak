@@ -1,10 +1,18 @@
 -f .git/tags
---tag-relative=yes
+
 --recurse=yes
---fields=+l
+--tag-relative=yes
+--fields=+aimlS
+
+--exclude=.svn
 --exclude=.git
 --exclude=node_modules
 --exclude=vendor
 --exclude=public
---langmap=javascript:.js.jsx
---langmap=php:.php
+
+--PHP-kinds=+cfi
+--exclude=*Test.php
+--regex-PHP=/abstract class ([^ ]*)/\1/c/
+--regex-PHP=/interface ([^ ]*)/\1/c/
+--regex-PHP=/trait ([^ ]*)/\1/c/
+--regex-PHP=/(public |static |abstract |protected |private )+ function +([^ \(]*)/\2/f/

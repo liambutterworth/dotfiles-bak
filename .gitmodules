@@ -1,0 +1,63 @@
+[submodule "plugs/zsh/zsh-autosuggestions"]
+	path = plugs/zsh/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "plugs/zsh/zsh-history-substring-search"]
+	path = plugs/zsh/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "plugs/zsh/zsh-syntax-highlighting"]
+	path = plugs/zsh/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "plugs/zsh/fzf"]
+	path = plugs/zsh/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "plugs/vim/vim-gitgutter"]
+	path = plugs/vim/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "plugs/vim/nord-vim"]
+	path = plugs/vim/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim
+[submodule "plugs/vim/vim-tmux-navigator"]
+	path = plugs/vim/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "plugs/vim/fzf.vim"]
+	path = plugs/vim/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "plugs/vim/vim-gutentags"]
+	path = plugs/vim/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule "plugs/vim/vim-indent-object"]
+	path = plugs/vim/vim-indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object
+[submodule "plugs/vim/delimitmate"]
+	path = plugs/vim/delimitmate
+	url = https://github.com/raimondi/delimitmate
+[submodule "plugs/vim/vim-polyglot"]
+	path = plugs/vim/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot
+[submodule "plugs/vim/ultisnips"]
+	path = plugs/vim/ultisnips
+	url = https://github.com/sirver/ultisnips
+[submodule "plugs/vim/vim-context-commentstring"]
+	path = plugs/vim/vim-context-commentstring
+	url = https://github.com/suy/vim-context-commentstring
+[submodule "plugs/vim/vim-commentary"]
+	path = plugs/vim/vim-commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "plugs/vim/vim-eunuch"]
+	path = plugs/vim/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch
+[submodule "plugs/vim/vim-endwise"]
+	path = plugs/vim/vim-endwise
+	url = https://github.com/tpope/vim-endwise
+[submodule "plugs/vim/vim-fugitive"]
+	path = plugs/vim/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "plugs/vim/vim-repeat"]
+	path = plugs/vim/vim-repeat
+	url = https://github.com/tpope/vim-repeat
+[submodule "plugs/vim/vim-surround"]
+	path = plugs/vim/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "plugs/vim/vim-vinegar"]
+	path = plugs/vim/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar

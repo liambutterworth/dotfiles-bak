@@ -1,4 +1,4 @@
-
+"
 " Vim Config
 "
 " :: Settings
@@ -10,6 +10,10 @@
 "
 " Settings
 "
+
+execute pathogen#infect($VIM_PLUGS . '/{}')
+filetype plugin indent on
+syntax enable
 
 set autoread
 set autoindent
@@ -147,53 +151,28 @@ inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``
 " Plugins
 "
 
-if filereadable($HOME . '/.vim/autoload/plug.vim')
-    call plug#begin($HOME . '/.vim/plugs')
-
-    Plug 'airblade/vim-gitgutter'
-    Plug 'arcticicestudio/nord-vim'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'junegunn/fzf.vim'
-    Plug 'ludovicchabant/vim-gutentags'
-    Plug 'michaeljsmith/vim-indent-object'
-    Plug 'raimondi/delimitmate'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'sirver/ultisnips'
-    Plug 'suy/vim-context-commentstring'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-eunuch'
-    Plug 'tpope/vim-endwise'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-vinegar'
-
-    call plug#end()
-endif
-
-" DelimitMate
-
 if &runtimepath =~ 'delimitmate'
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
 
-" FZF
-
-if &runtimepath =~ 'fzf.vim'
-    set runtimepath+=$ZPLUG_HOME/repos/junegunn/fzf
-
-    command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+if &runtimepath =~ 'fzf.vim' && !empty(system('command -v fzf'))
+    set runtimepath+=$ZSH_PLUGS/fzf
 
     let git_commit_format = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
     let g:fzf_commits_log_options = '--graph --color=always --format="' . git_commit_format . '"'
     let g:fzf_tags_command = 'ctags -R'
 
+    command! -bang -nargs=? -complete=dir Files
+        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+    nnoremap <expr> <leader><cr> !empty(system('command -v rg'))
+        \ ? ":Rg<cr>"
+        \ : ":Lines<cr>"
+
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Rg<cr>
     nnoremap <leader>\ :Commits<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>/ :History/<cr>
@@ -207,8 +186,6 @@ if &runtimepath =~ 'fzf.vim'
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-" Git Gutter
-
 if &runtimepath =~ 'gitgutter'
     let g:gitgutter_map_keys = 0
 
@@ -221,15 +198,11 @@ if &runtimepath =~ 'gitgutter'
     xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
-" Gutentags
-
 if &runtimepath =~ 'gutentags'
     let g:gutentags_enabled = system('command -v ctags')
     let g:gutentags_project_root = ['.git']
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
-
-" Nord
 
 if &runtimepath =~ 'nord'
     let g:nord_italic = 1
@@ -239,16 +212,12 @@ if &runtimepath =~ 'nord'
     colorscheme nord
 endif
 
-" Polyglot
-
 if &runtimepath =~ 'polyglot'
     let g:javascript_plugin_jsdoc = 1
     let g:jsx_ext_required = 0
 
     autocmd filetype vue syntax sync fromstart
 endif
-
-" UltiSnips
 
 if &runtimepath =~ 'ultisnips'
     let g:UltiSnipsSnippetDirectories = [ $HOME.'/.dotfiles/snips' ]

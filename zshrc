@@ -114,41 +114,41 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
-if [ -f "$HOME/.zsh/plugs/init.zsh" ]; then
-    source "$HOME/.zsh/plugs/init.zsh"
-
-    zplug 'zsh-users/zsh-completions'
-    zplug 'zsh-users/zsh-autosuggestions'
-    zplug 'zsh-users/zsh-history-substring-search'
-    zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-    zplug 'junegunn/fzf', as:command, hook-build:'./install --bin', use:'bin/{fzf,fzf-tmux}'
-
-    zplug load
-fi
+export VIM_PLUGS="$HOME/.dotfiles/plugs/vim"
+export ZSH_PLUGS="$HOME/.dotfiles/plugs/zsh"
 
 # Autosuggestions
 
-if [ -d "$HOME/.zsh/plugs/repos/zsh-users/zsh-autosuggestions" ]; then
+if [ -f "$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
 fi
 
 # History Substring Search
 
-if [ -d "$HOME/.zsh/plugs/repos/zsh-users/zsh-history-substring-search" ]; then
+if [ -f "$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh" ]; then
+    source "$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
+# Syntax Highlighting
+
+if [ -f "$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source "$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
 # FZF
 
-if [ -d "$HOME/.zsh/plugs/repos/junegunn/fzf" ]; then
-    source "$HOME/.zsh/plugs/repos/junegunn/fzf/shell/completion.zsh"
-    source "$HOME/.zsh/plugs/repos/junegunn/fzf/shell/key-bindings.zsh"
+if [ -f "$ZSH_PLUGS/fzf/bin/fzf" ]; then
+    source "$ZSH_PLUGS/fzf/shell/completion.zsh"
+    source "$ZSH_PLUGS/fzf/shell/key-bindings.zsh"
 
     if command -v rg >/dev/null; then
         export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow'
     fi
 
+    export PATH="$PATH:$ZSH_PLUGS/fzf/bin"
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
     export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
