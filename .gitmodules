@@ -31,9 +31,6 @@
 [submodule "plugs/vim/delimitmate"]
 	path = plugs/vim/delimitmate
 	url = https://github.com/raimondi/delimitmate
-[submodule "plugs/vim/vim-polyglot"]
-	path = plugs/vim/vim-polyglot
-	url = https://github.com/sheerun/vim-polyglot
 [submodule "plugs/vim/ultisnips"]
 	path = plugs/vim/ultisnips
 	url = https://github.com/sirver/ultisnips

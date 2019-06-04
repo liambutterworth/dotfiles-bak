@@ -119,36 +119,45 @@ export ZSH_PLUGS="$HOME/.dotfiles/plugs/zsh"
 
 # Autosuggestions
 
-if [ -f "$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    source "$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+auto_suggestions="$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+if [ -f $auto_suggestions ]; then
+    source $auto_suggestions
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
 fi
 
 # History Substring Search
 
-if [ -f "$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh" ]; then
-    source "$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+history_substring_search="$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+if [ -f $history_substring_search ]; then
+    source $history_substring_search
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
 # Syntax Highlighting
 
-if [ -f "$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    source "$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+syntax_highlighting="$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+if [ -f $syntax_highlighting ]; then
+    source $syntax_highlighting
 fi
 
 # FZF
 
-if [ -f "$ZSH_PLUGS/fzf/bin/fzf" ]; then
-    source "$ZSH_PLUGS/fzf/shell/completion.zsh"
-    source "$ZSH_PLUGS/fzf/shell/key-bindings.zsh"
+fzf_bin="$ZSH_PLUGS/fzf/bin"
+fzf_shell="$ZSH_PLUGS/fzf/shell"
+
+if [ -f "$fzf_bin/fzf" ]; then
+    source "$fzf_shell/completion.zsh"
+    source "$fzf_shell/key-bindings.zsh"
 
     if command -v rg >/dev/null; then
         export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow'
     fi
 
-    export PATH="$PATH:$ZSH_PLUGS/fzf/bin"
+    export PATH="$PATH:$fzf_bin"
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
     export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"

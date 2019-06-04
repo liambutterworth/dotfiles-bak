@@ -159,8 +159,8 @@ endif
 if &runtimepath =~ 'fzf.vim' && !empty(system('command -v fzf'))
     set runtimepath+=$ZSH_PLUGS/fzf
 
-    let git_commit_format = '%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr'
-    let g:fzf_commits_log_options = '--graph --color=always --format="' . git_commit_format . '"'
+    let git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
     let g:fzf_tags_command = 'ctags -R'
 
     command! -bang -nargs=? -complete=dir Files
@@ -199,7 +199,7 @@ if &runtimepath =~ 'gitgutter'
 endif
 
 if &runtimepath =~ 'gutentags'
-    let g:gutentags_enabled = system('command -v ctags')
+    let g:gutentags_enabled = !empty(system('command -v ctags'))
     let g:gutentags_project_root = ['.git']
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
@@ -220,7 +220,7 @@ if &runtimepath =~ 'polyglot'
 endif
 
 if &runtimepath =~ 'ultisnips'
-    let g:UltiSnipsSnippetDirectories = [ $HOME.'/.dotfiles/snips' ]
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.dotfiles/snips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
