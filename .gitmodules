@@ -79,3 +79,6 @@
 [submodule "plugs/vim/indentline"]
 	path = plugs/vim/indentline
 	url = https://github.com/yggdroot/indentline
+[submodule "plugs/zsh/zsh-completions"]
+	path = plugs/zsh/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
