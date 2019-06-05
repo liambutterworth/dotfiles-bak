@@ -58,3 +58,24 @@
 [submodule "plugs/vim/vim-vinegar"]
 	path = plugs/vim/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar
+[submodule "plugs/vim/vim-javascript"]
+	path = plugs/vim/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
+[submodule "plugs/vim/vim-blade"]
+	path = plugs/vim/vim-blade
+	url = https://github.com/jwalton512/vim-blade
+[submodule "plugs/vim/php.vim"]
+	path = plugs/vim/php.vim
+	url = https://github.com/stanangeloff/php.vim
+[submodule "plugs/vim/vim-vue"]
+	path = plugs/vim/vim-vue
+	url = https://github.com/posva/vim-vue
+[submodule "plugs/vim/html5.vim"]
+	path = plugs/vim/html5.vim
+	url = https://github.com/othree/html5.vim
+[submodule "plugs/vim/vim-easy-align"]
+	path = plugs/vim/vim-easy-align
+	url = https://github.com/junegunn/vim-easy-align
+[submodule "plugs/vim/indentline"]
+	path = plugs/vim/indentline
+	url = https://github.com/yggdroot/indentline
