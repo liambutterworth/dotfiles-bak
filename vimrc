@@ -20,6 +20,7 @@ set autoindent
 set backup backupdir=$HOME/.cache/vim/backup//
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
+set completeopt-=preview
 set dictionary=/usr/share/dict/words
 set directory=$HOME/.cache/vim/swap//
 set encoding=utf-8
@@ -52,13 +53,18 @@ let g:netrw_fastbrowse = 0
 " Commands
 "
 
-augroup Formatting
+augroup Format
     autocmd!
     autocmd bufenter * setlocal formatoptions-=o
     autocmd filetype text,markdown setlocal wrap linebreak
 augroup END
 
-augroup Completion
+augroup Indent
+    autocmd!
+    autocmd filetype yaml setlocal shiftwidth=2 softtabstop=2
+augroup END
+
+augroup Complete
     autocmd!
     autocmd filetype html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd filetype css setlocal omnifunc=csscomplete#CompleteCSS
@@ -139,9 +145,9 @@ nnoremap <leader>l <c-w>10>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . ( v:count1 + 1 ) . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
 vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . ( v:count1 + 1 ) . '<cr>gv=gv'
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
 vnoremap ;; :s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>
 vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
 inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
@@ -204,6 +210,11 @@ if &runtimepath =~ 'gutentags'
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
+if &runtimepath =~ 'indentline'
+    let g:indentLine_char = '│'
+    let g:indentLine_color_term = 0
+endif
+
 if &runtimepath =~ 'nord'
     let g:nord_italic = 1
     let g:nord_underline = 1
@@ -212,11 +223,13 @@ if &runtimepath =~ 'nord'
     colorscheme nord
 endif
 
-if &runtimepath =~ 'polyglot'
-    let g:javascript_plugin_jsdoc = 1
-    let g:jsx_ext_required = 0
+if &runtimepath =~ 'vim-easy-align'
+    xmap ga <plug>(EasyAlign)
+    nmap ga <plug>(EasyAlign)
+endif
 
-    autocmd filetype vue syntax sync fromstart
+if &runtimepath =~ 'vim-javascript'
+    let g:javascript_plugin_jsdoc = 1
 endif
 
 if &runtimepath =~ 'ultisnips'
