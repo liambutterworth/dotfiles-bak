@@ -9,7 +9,14 @@
 # Settings
 #
 
-autoload -Uz compinit && compinit -d ~/.cache/zsh/zcompdump
+export CACHE="~/.cache"
+export DOTFILES="$HOME/.dotfiles"
+export ZSH_CACHE="$CACHE/zsh"
+export VIM_CACHE="$CACHE/vim"
+export ZSH_PLUGS="$DOTFILES/plugs/zsh"
+export VIM_PLUGS="$DOTFILES/plugs/vim"
+
+autoload -Uz compinit && compinit -d "$ZSH_CACHE/zcompdump"
 autoload -Uz colors && colors
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
@@ -32,8 +39,8 @@ bindkey '^[[Z' reverse-menu-complete
 
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
-    [[ -n "$vcs_info_msg_0_" ]] && PROMPT+=" ${vcs_info_msg_0_}"
-    [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && PROMPT+=' %n@%M'
+    [[ -n $vcs_info_msg_0_ ]] && PROMPT+=" ${vcs_info_msg_0_}"
+    [ -n $SSH_CLIENT ] || [ -n $SSH_TTY ] && PROMPT+=' %n@%M'
     PROMPT+=$'\n''%(?.%F{5}.%F{1})'
     [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
     PROMPT+='%F{7} '
@@ -114,50 +121,56 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
-export VIM_PLUGS="$HOME/.dotfiles/plugs/vim"
-export ZSH_PLUGS="$HOME/.dotfiles/plugs/zsh"
+# Completions
+
+completions_dir="$ZSH_PLUGS/zsh-completions"
+
+if [ -d $completions_dir ]; then
+    fpath=("$completions_dir/src" $fpath)
+    rm -f "$ZSH_CACHE/zcompdump"
+    compinit -d "$ZSH_CACHE/zcompdump"
+fi
 
 # Autosuggestions
 
-auto_suggestions="$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+auto_suggestions_file="$ZSH_PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-if [ -f $auto_suggestions ]; then
-    source $auto_suggestions
+if [ -f $auto_suggestions_file ]; then
+    source $auto_suggestions_file
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=( forward-char end-of-line )
 fi
 
 # History Substring Search
 
-history_substring_search="$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+history_substring_search_file="$ZSH_PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-if [ -f $history_substring_search ]; then
-    source $history_substring_search
+if [ -f $history_substring_search_file ]; then
+    source $history_substring_search_file
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
 # Syntax Highlighting
 
-syntax_highlighting="$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+syntax_highlighting_file="$ZSH_PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-if [ -f $syntax_highlighting ]; then
-    source $syntax_highlighting
+if [ -f $syntax_highlighting_file ]; then
+    source $syntax_highlighting_file
 fi
 
 # FZF
 
-fzf_bin="$ZSH_PLUGS/fzf/bin"
-fzf_shell="$ZSH_PLUGS/fzf/shell"
+fzf_dir="$ZSH_PLUGS/fzf"
 
-if [ -f "$fzf_bin/fzf" ]; then
-    source "$fzf_shell/completion.zsh"
-    source "$fzf_shell/key-bindings.zsh"
+if [ -f "$fzf_dir/bin/fzf" ]; then
+    source "$fzf_dir/shell/completion.zsh"
+    source "$fzf_dir/shell/key-bindings.zsh"
 
     if command -v rg >/dev/null; then
         export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow'
     fi
 
-    export PATH="$PATH:$fzf_bin"
+    export PATH="$PATH:$fzf_dir/bin"
     export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
     export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
