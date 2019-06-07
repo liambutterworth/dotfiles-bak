@@ -2,7 +2,6 @@
 " Vim Config
 "
 " :: Settings
-" :: Commands
 " :: Functions
 " :: Mappings
 " :: Plugins
@@ -11,23 +10,16 @@
 " Settings
 "
 
-let $CACHE = $HOME . '/.cache/vim'
-let $DOTFILES = $HOME . '/.dotfiles'
-let $PLUGS = $DOTFILES . '/plugs/vim'
-let $SNIPS = $DOTFILES . '/snips'
-
-execute pathogen#infect($PLUGS . '/{}')
+execute pathogen#infect($VIM_PLUGINS . '/{}')
 filetype plugin indent on
 syntax enable
 
 set autoread
 set autoindent
-set backup backupdir=$CACHE/backup//
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set completeopt-=preview
 set dictionary=/usr/share/dict/words
-set directory=$CACHE/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -45,18 +37,14 @@ set signcolumn=yes
 set splitbelow splitright
 set statusline=%!StatusLine()
 set tabline=%!TabLine()
-set undofile undodir=$CACHE/undo//
-set viminfo+=n$CACHE/viminfo
 set wildmenu wildignorecase wildmode=full
 
-let mapleader = ' '
-let g:vim_indent_cont = &shiftwidth
-let g:netrw_home = $CACHE
-let g:netrw_fastbrowse = 0
-
-"
-" Commands
-"
+if isdirectory($VIM_CACHE)
+    set backup backupdir=$VIM_CACHE/backup//
+    set directory=$VIM_CACHE/swap//
+    set undofile undodir=$VIM_CACHE/undo//
+    set viminfo+=n$VIM_CACHE/viminfo
+endif
 
 augroup Format
     autocmd!
@@ -66,7 +54,7 @@ augroup END
 
 augroup Indent
     autocmd!
-    autocmd filetype yaml setlocal shiftwidth=2 softtabstop=2
+    autocmd filetype json,yaml setlocal shiftwidth=2 softtabstop=2
 augroup END
 
 augroup Complete
@@ -77,19 +65,24 @@ augroup Complete
     autocmd filetype php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
 
-"
-" Functions
-"
+let mapleader = ' '
+let g:vim_indent_cont = &shiftwidth
+let g:netrw_home = $VIM_CACHE
+let g:netrw_fastbrowse = 0
 
 let s:git_branch = substitute(system(
     \ 'git rev-parse --git-dir >/dev/null 2>&1 && git rev-parse --abbrev-ref HEAD'
     \ ), '\n', '', 'g')
 
 let s:file_permissions = substitute(system(
-    \ 'ls -la ' . expand('%:h') .
-    \ ' | grep ' . expand('%:t') .
-    \ ' | cut -d " " -f1'
+    \ 'ls -la ' . expand('%:h')
+    \ . ' | grep ' . expand('%:t')
+    \ . ' | cut -d " " -f1'
     \ ), '\n', '', 'g')
+
+"
+" Functions
+"
 
 function! StatusLine() abort
     let output = ' '
@@ -119,8 +112,8 @@ function! TabLine() abort
     return output . '%#TabLineFill#%T'
 endfunction
 
-function! PlugExists(plugin) abort
-    return !empty(globpath(&runtimepath, '*/' . a:plugin))
+function! PluginExists(plugin) abort
+    return &runtimepath =~ a:plugin
 endfunction
 
 function! CommandExists(command) abort
@@ -170,17 +163,18 @@ inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``
 " Plugins
 "
 
-if PlugExists('delimitmate')
+if PluginExists('delimitmate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
 
-if PlugExists('fzf.vim') && CommandExists('fzf')
-    set runtimepath+=$DOTFILES/plugs/zsh/fzf
+if PluginExists('fzf.vim') && CommandExists('fzf')
+    set runtimepath+=$ZSH_PLUGINS/fzf
 
-    let git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
-    let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
+    let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_tags_command = 'ctags -R'
+    let g:fzf_prefer_tmux = 1
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -188,10 +182,11 @@ if PlugExists('fzf.vim') && CommandExists('fzf')
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Commits<cr>
-    nnoremap <leader>? :GFiles?<cr>
-    nnoremap <leader>: :History:<cr>
+    nnoremap <leader><cr> :Rg<cr>
+    nnoremap <leader>\ :Commits<cr>
     nnoremap <leader>/ :History/<cr>
+    nnoremap <leader>: :History:<cr>
+    nnoremap <leader>? :GFiles?<cr>
     nnoremap <leader>] :Tags<cr>
     nnoremap <leader>` :Marks<cr>
     nnoremap <leader>G :Lines<cr>
@@ -202,7 +197,7 @@ if PlugExists('fzf.vim') && CommandExists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if PlugExists('gitgutter')
+if PluginExists('gitgutter')
     let g:gitgutter_map_keys = 0
 
     nnoremap ]h <plug>GitGutterNextHunk
@@ -214,18 +209,18 @@ if PlugExists('gitgutter')
     xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
-if PlugExists('gutentags')
+if PluginExists('gutentags')
     let g:gutentags_enabled = CommandExists('ctags')
     let g:gutentags_project_root = ['.git']
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
-if PlugExists('indentline')
+if PluginExists('indentline')
     let g:indentLine_char = '│'
     let g:indentLine_color_term = 0
 endif
 
-if PlugExists('nord-vim')
+if PluginExists('nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
     let g:nord_uniform_diff_background = 1
@@ -233,21 +228,21 @@ if PlugExists('nord-vim')
     colorscheme nord
 endif
 
-if PlugExists('vim-easy-align')
-    xmap ga <plug>(EasyAlign)
-    nmap ga <plug>(EasyAlign)
-endif
-
-if PlugExists('vim-javascript')
-    let g:javascript_plugin_jsdoc = 1
-endif
-
-if PlugExists('ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$SNIPS]
+if PluginExists('ultisnips')
+    let g:UltiSnipsSnippetDirectories = [$DOTFILES . '/ultisnips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
     nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
     inoremap <c-j> <nop>
+endif
+
+if PluginExists('vim-easy-align')
+    xmap ga <plug>(EasyAlign)
+    nmap ga <plug>(EasyAlign)
+endif
+
+if PluginExists('vim-javascript')
+    let g:javascript_plugin_jsdoc = 1
 endif

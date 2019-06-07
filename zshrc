@@ -2,23 +2,32 @@
 # Zsh Config
 #
 # :: Settings
+# :: Functions
 # :: Aliases
 # :: Plugins
+# :: Init
 
 #
 # Settings
 #
 
-export CACHE="$HOME/.cache/zsh"
 export DOTFILES="$HOME/.dotfiles"
-export PLUGS="$DOTFILES/plugs/zsh"
+export CACHE="$HOME/.cache"
+export PLUGINS="$DOTFILES/plugins"
+export VIM_CACHE="$CACHE/vim"
+export VIM_PLUGINS="$PLUGINS/vim"
+export ZSH_CACHE="$CACHE/zsh"
+export ZSH_PLUGINS="$PLUGINS/zsh"
 
-[[ $fpath != *$CACHE* ]] && fpath=($CACHE $fpath)
-
-autoload -Uz compinit && compinit -d "$CACHE/zcompdump"
-autoload -Uz colors && colors
-autoload -Uz edit-command-line
+autoload -Uz compinit
 autoload -Uz vcs_info
+autoload -Uz edit-command-line
+
+bindkey -v
+bindkey '^w' backward-kill-word
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^[[Z' reverse-menu-complete
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-dirs-first true
@@ -30,11 +39,17 @@ zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' formats '%b%c%u'
 
-bindkey -v
-bindkey '^w' backward-kill-word
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^[[Z' reverse-menu-complete
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+function zle-line-init { set-prompt; zle reset-prompt }
+function zle-keymap-select { set-prompt; zle reset-prompt }
+function precmd { vcs_info; print }
+function preexec { print }
+
+#
+# Functions
+#
 
 function set-prompt {
     PROMPT='%F{4}%3~%F{8}'
@@ -45,24 +60,29 @@ function set-prompt {
     PROMPT+='%F{7} '
 }
 
-function zle-line-init zle-keymap-select {
-    set-prompt
-    zle reset-prompt
+function add-to-path {
+    if [[ $PATH != *$1* ]]; then
+        export PATH="$PATH:$1"
+    fi
 }
 
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-function precmd { vcs_info; print }
-function preexec { print }
+function add-to-fpath {
+    if [[ $fpath != *$1* ]]; then
+        fpath=($1 $fpath)
+    fi
+}
 
 #
 # Aliases
 #
 
+# GNU
+
 alias ls='ls --color=auto --group-directories-first'
 alias grep='grep --color=always --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules'
 alias less='less --raw-control-chars'
+
+# Tmux
 
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
@@ -70,6 +90,8 @@ alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
 alias tc='clear && tmux clear-history'
+
+# Git
 
 alias gcl='git clone'
 alias ga='git add'
@@ -97,6 +119,11 @@ alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
 
+# Docker
+
+local docker_container_format='{{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}'
+local docker_image_format='{{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}'
+
 alias db='docker build'
 alias dr='docker run'
 alias de='docker exec'
@@ -104,8 +131,8 @@ alias dc='docker container'
 alias di='docker image'
 alias dp='docker system prune'
 alias dl='docker logs'
-alias dlc="docker container ls --all --format='table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}'"
-alias dli="docker image ls --all --format='table {{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}'"
+alias dlc="docker container ls --all --format='table $docker_container_format'"
+alias dli="docker image ls --all --format='table $docker_image_format'"
 alias dqc='docker container ls -aq'
 alias dqi='docker image ls -aq'
 alias drc='docker rm'
@@ -120,54 +147,63 @@ alias d-cr='docker-compose run'
 
 # Completions
 
-COMPLETIONS_DIR="$PLUGS/zsh-completions"
+local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
 
-if [[ -d $COMPLETIONS_DIR ]] && [[ $fpath != *$COMPLETIONS_DIR* ]]; then
-    fpath=("$COMPLETIONS_DIR/src" $fpath)
-    rm -f "$CACHE/zcompdump"
-    compinit -d "$CACHE/zcompdump"
+if [[ -d $completions_dir ]]; then
+    add-to-fpath $completions_dir
 fi
 
 # Autosuggestions
 
-AUTOSUGGESTIONS_FILE="$PLUGS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-if [[ -f $AUTOSUGGESTIONS_FILE ]]; then
-    source $AUTOSUGGESTIONS_FILE
+if [[ -f $autosuggestions_file ]]; then
+    source $autosuggestions_file
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
 fi
 
 # History Substring Search
 
-HISTORY_SUBSTRING_SEARCH_FILE="$PLUGS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-if [[ -f $HISTORY_SUBSTRING_SEARCH_FILE ]]; then
-    source $HISTORY_SUBSTRING_SEARCH_FILE
+if [[ -f $history_substring_search_file ]]; then
+    source $history_substring_search_file
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
 # Syntax Highlighting
 
-SYNTAX_HIGHLIGHTING_FILE="$PLUGS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-if [[ -f $SYNTAX_HIGHLIGHTING_FILE ]]; then
-    source $SYNTAX_HIGHLIGHTING_FILE
+if [[ -f $syntax_highlighting_file ]]; then
+    source $syntax_highlighting_file
 fi
 
 # FZF
 
-FZF_DIR="$PLUGS/fzf"
+local fzf_dir="$ZSH_PLUGINS/fzf"
 
-if [[ -f "$FZF_DIR/bin/fzf" ]]; then
-    source "$FZF_DIR/shell/completion.zsh"
-    source "$FZF_DIR/shell/key-bindings.zsh"
+if [[ -f "$fzf_dir/bin/fzf" ]]; then
+    source "$fzf_dir/shell/completion.zsh"
+    source "$fzf_dir/shell/key-bindings.zsh"
 
-    [[ $PATH != *$FZF_DIR* ]] && export PATH="$PATH:$FZF_DIR/bin"
+    local fzf_color='bg+:0,pointer:4,info:4,border:0'
+    local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
+    local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
 
-    export FZF_DEFAULT_OPTS='--color bg+:0,pointer:4,info:4,border:0 --bind ctrl-d:preview-page-down,ctrl-u:preview-page-up'
-    export FZF_PREVIEW_OPTS='(cat {} || ls -A {}) 2> /dev/null | head -200'
-    export FZF_CTRL_T_OPTS="--preview '$FZF_PREVIEW_OPTS'"
-    export FZF_ALT_C_OPTS="--preview '$FZF_PREVIEW_OPTS'"
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    export FZF_DEFAULT_OPTS="--color '$fzf_color' --bind '$fzf_bind'"
+    export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
+    export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
+
+    add-to-path "$fzf_dir/bin"
 fi
+
+#
+# Init
+#
+
+add-to-fpath $ZSH_CACHE
+compinit -d "$ZSH_CACHE/zcompdump"
