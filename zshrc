@@ -44,7 +44,7 @@ zle -N zle-keymap-select
 
 function zle-line-init { set-prompt; zle reset-prompt }
 function zle-keymap-select { set-prompt; zle reset-prompt }
-function precmd { vcs_info; print }
+function precmd { print; vcs_info }
 function preexec { print }
 
 #
@@ -145,40 +145,65 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
+function register-plugin {
+    local path_to_plugin="$ZSH_PLUGINS/$1"
+
+    if [[ -f $path_to_plugin ]]; then
+        source $path_to_plugin
+    elif [[ -d $path_to_plugin ]]; then
+        add-to-fpath $path_to_plugin
+    fi
+}
+
+# TODO write plugin exists function; create string for managed plugins to search?
+
 # Completions
 
-local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
+register-plugin 'zsh-completions/src'
 
-if [[ -d $completions_dir ]]; then
-    add-to-fpath $completions_dir
-fi
+# local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
+
+# if [[ -d $completions_dir ]]; then
+#     add-to-fpath $completions_dir
+# fi
 
 # Autosuggestions
 
-local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+register-plugin 'zsh-autosuggestions/zsh-autosuggestions.zsh'
 
-if [[ -f $autosuggestions_file ]]; then
-    source $autosuggestions_file
-    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
-fi
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
+
+# local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# if [[ -f $autosuggestions_file ]]; then
+#     source $autosuggestions_file
+#     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
+# fi
 
 # History Substring Search
 
-local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+register-plugin 'zsh-history-substring-search/zsh-history-substring-search.zsh'
 
-if [[ -f $history_substring_search_file ]]; then
-    source $history_substring_search_file
-    bindkey '^P' history-substring-search-up
-    bindkey '^N' history-substring-search-down
-fi
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+# local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+# if [[ -f $history_substring_search_file ]]; then
+#     source $history_substring_search_file
+#     bindkey '^P' history-substring-search-up
+#     bindkey '^N' history-substring-search-down
+# fi
 
 # Syntax Highlighting
 
-local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+register-plugin 'zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 
-if [[ -f $syntax_highlighting_file ]]; then
-    source $syntax_highlighting_file
-fi
+# local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# if [[ -f $syntax_highlighting_file ]]; then
+#     source $syntax_highlighting_file
+# fi
 
 # FZF
 
