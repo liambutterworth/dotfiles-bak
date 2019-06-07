@@ -197,18 +197,6 @@ if PluginExists('fzf.vim') && CommandExists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if PluginExists('gitgutter')
-    let g:gitgutter_map_keys = 0
-
-    nnoremap ]h <plug>GitGutterNextHunk
-    nnoremap [h <plug>GitGutterPrevHunk
-
-    omap ih <plug>GitGutterTextObjectInnerPending
-    omap ah <plug>GitGutterTextObjectOuterPending
-    xmap ih <plug>GitGutterTextObjectInnerVisual
-    xmap ah <plug>GitGutterTextObjectOuterVisual
-endif
-
 if PluginExists('gutentags')
     let g:gutentags_enabled = CommandExists('ctags')
     let g:gutentags_project_root = ['.git']
@@ -241,6 +229,18 @@ endif
 if PluginExists('vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
+endif
+
+if PluginExists('vim-gitgutter')
+    let g:gitgutter_map_keys = 0
+
+    nnoremap ]h <plug>GitGutterNextHunk
+    nnoremap [h <plug>GitGutterPrevHunk
+
+    omap ih <plug>GitGutterTextObjectInnerPending
+    omap ah <plug>GitGutterTextObjectOuterPending
+    xmap ih <plug>GitGutterTextObjectInnerVisual
+    xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
 if PluginExists('vim-javascript')
