@@ -61,15 +61,19 @@ function set-prompt {
 }
 
 function add-to-path {
-    if [[ $PATH != *$1* ]]; then
-        export PATH="$PATH:$1"
-    fi
+    [[ $PATH != *$1* ]] && export PATH="$PATH:$1"
+}
+
+function list-path {
+    tr ':' '\n' <<< $PATH
 }
 
 function add-to-fpath {
-    if [[ $fpath != *$1* ]]; then
-        fpath=($1 $fpath)
-    fi
+    [[ $fpath != *$1* ]] && fpath=($1 $fpath)
+}
+
+function list-fpath {
+    tr ' ' '\n' <<< $fpath
 }
 
 #
@@ -79,6 +83,10 @@ function add-to-fpath {
 # GNU
 
 alias ls='ls --color=auto --group-directories-first'
+alias la='ls -A'
+alias ll='ls -lA'
+alias lp='list-path'
+alias lfp='list-fpath'
 alias grep='grep --color=always --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules'
 alias less='less --raw-control-chars'
 
@@ -145,65 +153,40 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
-function register-plugin {
-    local path_to_plugin="$ZSH_PLUGINS/$1"
-
-    if [[ -f $path_to_plugin ]]; then
-        source $path_to_plugin
-    elif [[ -d $path_to_plugin ]]; then
-        add-to-fpath $path_to_plugin
-    fi
-}
-
-# TODO write plugin exists function; create string for managed plugins to search?
-
 # Completions
 
-register-plugin 'zsh-completions/src'
+local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
 
-# local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
-
-# if [[ -d $completions_dir ]]; then
-#     add-to-fpath $completions_dir
-# fi
+if [[ -d $completions_dir ]]; then
+    add-to-fpath $completions_dir
+fi
 
 # Autosuggestions
 
-register-plugin 'zsh-autosuggestions/zsh-autosuggestions.zsh'
+local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
-
-# local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-# if [[ -f $autosuggestions_file ]]; then
-#     source $autosuggestions_file
-#     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
-# fi
+if [[ -f $autosuggestions_file ]]; then
+    source $autosuggestions_file
+    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
+fi
 
 # History Substring Search
 
-register-plugin 'zsh-history-substring-search/zsh-history-substring-search.zsh'
+local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-
-# local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
-# if [[ -f $history_substring_search_file ]]; then
-#     source $history_substring_search_file
-#     bindkey '^P' history-substring-search-up
-#     bindkey '^N' history-substring-search-down
-# fi
+if [[ -f $history_substring_search_file ]]; then
+    source $history_substring_search_file
+    bindkey '^P' history-substring-search-up
+    bindkey '^N' history-substring-search-down
+fi
 
 # Syntax Highlighting
 
-register-plugin 'zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# if [[ -f $syntax_highlighting_file ]]; then
-#     source $syntax_highlighting_file
-# fi
+if [[ -f $syntax_highlighting_file ]]; then
+    source $syntax_highlighting_file
+fi
 
 # FZF
 
