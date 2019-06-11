@@ -11,13 +11,13 @@
 # Settings
 #
 
-export DOTFILES="$HOME/.dotfiles"
-export CACHE="$HOME/.cache"
-export PLUGINS="$DOTFILES/plugins"
-export VIM_CACHE="$CACHE/vim"
-export VIM_PLUGINS="$PLUGINS/vim"
-export ZSH_CACHE="$CACHE/zsh"
-export ZSH_PLUGINS="$HOME/.zsh/plugins"
+# source $HOME/.zsh/functions.zsh
+fpath=($HOME/.zsh/functions $fpath)
+autoload -Uz testing
+testing
+
+export CACHE="$HOME/.cache/zsh"
+export PLUGINS="$HOME/.zsh/plugins"
 
 typeset -U path
 typeset -U fpath
@@ -79,6 +79,11 @@ function docker-list-images {
 function docker-list-containers {
     local format="ID\t{{.ID}}\nImage\t{{.Image}}\nName\t{{.Names}}\nStatus\t{{.Status}}\n"
     docker container ls --all --format="$format"
+}
+
+function plugin-exists {
+    local plugin="$PLUGINS/$1"
+    [ "$(ls $plugin)" ]
 }
 
 #
@@ -148,59 +153,28 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
-function plugin-exists {
-    local plugin="$HOME/.zsh/plugins/$1"
-    [[ -f $plugin ]] || [[ -d $plugin ]]
-}
-
-if plugin-exists 'zsh-autosuggestions/zsh-autosuggestions.zsh'; then
-    echo "autosuggestions  exists"
+if plugin-exists 'zsh-completions'; then
+    fpath+="$PLUGINS/zsh-completions/src"
 fi
 
-# plugin-exists
-
-# Completions
-
-local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
-
-if [[ -d $completions_dir ]]; then
-    fpath+=$completions_dir
+if plugin-exists 'zsh-autosuggestions'; then
+    source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(foward-char end-of-line)
 fi
 
-# Autosuggestions
-
-local autosuggestions_file="$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-if [[ -f $autosuggestions_file ]]; then
-    source $autosuggestions_file
-    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(forward-char end-of-line)
-fi
-
-# History Substring Search
-
-local history_substring_search_file="$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
-if [[ -f $history_substring_search_file ]]; then
-    source $history_substring_search_file
+if plugin-exists 'zsh-history-substring-search'; then
+    source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
-# Syntax Highlighting
-
-local syntax_highlighting_file="$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-if [[ -f $syntax_highlighting_file ]]; then
-    source $syntax_highlighting_file
+if plugin-exists 'zsh-syntax-highlighting'; then
+    source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
-# FZF
-
-local fzf_dir="$ZSH_PLUGINS/fzf"
-
-if [[ -f "$fzf_dir/bin/fzf" ]]; then
-    source "$fzf_dir/shell/completion.zsh"
-    source "$fzf_dir/shell/key-bindings.zsh"
+if plugin-exists 'fzf'; then
+    source "$PLUGINS/fzf/shell/completion.zsh"
+    source "$PLUGINS/fzf/shell/key-bindings.zsh"
 
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
     local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
@@ -212,12 +186,12 @@ if [[ -f "$fzf_dir/bin/fzf" ]]; then
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    path+="$fzf_dir/bin"
+    path+="$PLUGINS/fzf/bin"
 fi
 
 #
 # Init
 #
 
-fpath+=$ZSH_CACHE
-compinit -d "$ZSH_CACHE/zcompdump"
+fpath+=$CACHE
+compinit -d "$CACHE/zcompdump"

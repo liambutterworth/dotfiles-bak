@@ -16,9 +16,6 @@
 [submodule "vim/plugins/delimitmate"]
 	path = vim/plugins/delimitmate
 	url = http://github.com/raimondi/delimitmate
-[submodule "vim/plugins/fzf"]
-	path = vim/plugins/fzf
-	url = http://github.com/junegunn/fzf
 [submodule "vim/plugins/html5.vim"]
 	path = vim/plugins/html5.vim
 	url = http://github.com/othree/html5.vim

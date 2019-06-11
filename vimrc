@@ -9,10 +9,9 @@
 " Settings
 "
 
-syntax enable
-filetype plugin indent on
 execute pathogen#infect($HOME . '/.vim/plugins/{}')
-autocmd filetype * set formatoptions-=o
+filetype plugin indent on
+syntax enable
 
 set autoread
 set autoindent
@@ -42,6 +41,12 @@ set tabline=%!functions#TabLine()
 set undofile undodir=$HOME/.cache/vim/undo//
 set viminfo+=n$HOME/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
+
+augroup SETTINGS
+    autocmd!
+    autocmd filetype * set formatoptions-=o
+    autocmd bufread,bufnewfile */zsh/functions/* set syntax=zsh
+augroup END
 
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
