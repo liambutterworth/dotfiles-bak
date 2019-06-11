@@ -1,3 +1,4 @@
 #!/bin/bash
 git -C ~/.dotfiles submodule update --init
+curl -LSs https://tpo.pe/pathogen.vim > ~/.dotfiles/vim/autoload/pathogen.vim
 ~/.dotfiles/plugs/zsh/fzf/install --bin

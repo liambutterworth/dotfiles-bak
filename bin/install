@@ -1,6 +1,5 @@
 #!/bin/bash
-git -C ~/.dotfiles submodule update --init
-curl -LSso ~/.dotfiles/vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+~/.dotfiles/bin/update
 mkdir -p ~/.cache/{vim,zsh} ~/.cache/vim/{swap,backup,undo}
 rm -rf ~/.vim && ln -s ~/.dotfiles/vim ~/.vim
 rm -rf ~/.zsh && ln -s ~/.dotfiles/zsh ~/.zsh
