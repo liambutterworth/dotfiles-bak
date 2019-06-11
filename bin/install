@@ -1,11 +1,11 @@
 #!/bin/bash
-[ -d ~/.vim ] && rm -rf ~/.vim.bak && mv ~/.vim ~/.vim.bak
-[ -d ~/.zsh ] && rm -rf ~/.zsh.bak && mv ~/.zsh ~/.zsh.bak
-mkdir -p ~/.cache/{vim,zsh} ~/.cache/vim/{swap,backup,undo}
 git -C ~/.dotfiles submodule update --init
 curl -LSso ~/.dotfiles/vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-ln -sf ~/.dotfiles/vimrc ~/.vimrc && ln -s ~/.dotfiles/vim ~/.vim
-ln -sf ~/.dotfiles/zshrc ~/.zshrc && ln -s ~/.dotfiles/zsh ~/.zsh
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+mkdir -p ~/.cache/{vim,zsh} ~/.cache/vim/{swap,backup,undo}
+rm -rf ~/.vim && ln -s ~/.dotfiles/vim ~/.vim
+rm -rf ~/.zsh && ln -s ~/.dotfiles/zsh ~/.zsh
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/ctags ~/.ctags
