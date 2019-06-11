@@ -1,0 +1,2 @@
+local format="ID\t{{.ID}}\nImage\t{{.Image}}\nName\t{{.Names}}\nStatus\t{{.Status}}\n"
+docker container ls --all --format="$format"

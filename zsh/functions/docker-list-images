@@ -1,0 +1,2 @@
+local format="ID\t{{.ID}}\nTag\t{{.Tag}}\nRepo\t{{.Repository}}\n"
+docker image ls --format="$format"

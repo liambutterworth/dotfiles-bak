@@ -42,11 +42,11 @@ set undofile undodir=$HOME/.cache/vim/undo//
 set viminfo+=n$HOME/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
-augroup SETTINGS
+augroup settings
     autocmd!
     autocmd filetype * set formatoptions-=o
     autocmd bufread,bufnewfile */zsh/functions/* set syntax=zsh
-augroup END
+augroup end
 
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
@@ -102,12 +102,18 @@ if functions#PluginExists('delimitmate')
 endif
 
 if functions#PluginExists('fzf.vim') && functions#CommandExists('fzf')
-    set runtimepath+=$ZSH_PLUGINS/fzf
+    set runtimepath+=$PLUGINS/fzf
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_tags_command = 'ctags -R'
     let g:fzf_prefer_tmux = 1
+
+    let g:fzf_action = {
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-s': 'split',
+        \ 'ctrl-v': 'vsplit'
+        \ }
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)

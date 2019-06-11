@@ -1,0 +1,1 @@
+path=($path "$PLUGINS/$1")

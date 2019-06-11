@@ -79,3 +79,6 @@
 [submodule "vim/plugins/vim-vue"]
 	path = vim/plugins/vim-vue
 	url = http://github.com/posva/vim-vue
+[submodule "vim/plugins/fzf.vim"]
+	path = vim/plugins/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

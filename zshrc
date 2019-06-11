@@ -2,35 +2,37 @@
 # Zsh Config
 #
 # :: Settings
-# :: Functions
 # :: Aliases
 # :: Plugins
-# :: Init
 
 #
 # Settings
 #
 
-# source $HOME/.zsh/functions.zsh
-fpath=($HOME/.zsh/functions $fpath)
-autoload -Uz testing
-testing
-
 export CACHE="$HOME/.cache/zsh"
 export PLUGINS="$HOME/.zsh/plugins"
+
+fpath=($fpath $CACHE)
+fpath=($HOME/.zsh/functions $fpath)
 
 typeset -U path
 typeset -U fpath
 
-autoload -Uz compinit
-autoload -Uz vcs_info
 autoload -Uz edit-command-line
+autoload -Uz vcs_info precmd preexec
+autoload -Uz docker-list-images docker-list-containers
+autoload -Uz set-prompt zle-keymap-select zle-line-init
+autoload -Uz plugin-exists plugin-source plugin-path plugin-fpath
+autoload -Uz compinit generate-compdump && generate-compdump
 
 bindkey -v
 bindkey '^w' backward-kill-word
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^[[Z' reverse-menu-complete
+
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-dirs-first true
@@ -42,61 +44,13 @@ zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' formats '%b%c%u'
 
-zle -N zle-keymap-select
-zle -N zle-line-init
-
-function zle-keymap-select { set-prompt; zle reset-prompt }
-function zle-line-init { set-prompt; zle reset-prompt }
-function precmd { print; vcs_info }
-function preexec { print }
-
-#
-# Functions
-#
-
-function set-prompt {
-    PROMPT='%F{4}%3~%F{8}'
-    [[ -n $vcs_info_msg_0_ ]] && PROMPT+=" ${vcs_info_msg_0_}"
-    [[ -n $SSH_CLIENT ]] || [[ -n $SSH_TTY ]] && PROMPT+=' %n@%M'
-    PROMPT+=$'\n''%(?.%F{5}.%F{1})'
-    [[ $KEYMAP = 'vicmd' ]] && PROMPT+='❮' || PROMPT+='❯'
-    PROMPT+='%F{7} '
-}
-
-function list-path {
-    tr ' ' '\n' <<< $path
-}
-
-function list-fpath {
-    tr ' ' '\n' <<< $fpath
-}
-
-function docker-list-images {
-    local format="ID\t{{.ID}}\nTag\t{{.Tag}}\nRepo\t{{.Repository}}\n"
-    docker image ls --format="$format"
-}
-
-function docker-list-containers {
-    local format="ID\t{{.ID}}\nImage\t{{.Image}}\nName\t{{.Names}}\nStatus\t{{.Status}}\n"
-    docker container ls --all --format="$format"
-}
-
-function plugin-exists {
-    local plugin="$PLUGINS/$1"
-    [ "$(ls $plugin)" ]
-}
-
 #
 # Aliases
 #
 
 alias ls='ls --color=auto --group-directories-first'
-alias la='ls -A'
-alias ll='ls -lA'
-alias lp='list-path'
-alias lfp='list-fpath'
-alias grep='grep --color=always --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules'
 alias less='less --raw-control-chars'
+alias grep='grep --color=always'
 
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
@@ -154,27 +108,28 @@ alias d-cr='docker-compose run'
 #
 
 if plugin-exists 'zsh-completions'; then
-    fpath+="$PLUGINS/zsh-completions/src"
+    plugin-fpath 'zsh-completions/src'
+    generate-compdump
 fi
 
 if plugin-exists 'zsh-autosuggestions'; then
-    source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    plugin-source 'zsh-autosuggestions/zsh-autosuggestions.zsh'
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(foward-char end-of-line)
 fi
 
 if plugin-exists 'zsh-history-substring-search'; then
-    source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+    plugin-source 'zsh-history-substring-search/zsh-history-substring-search.zsh'
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
 if plugin-exists 'zsh-syntax-highlighting'; then
-    source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    plugin-source 'zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 fi
 
 if plugin-exists 'fzf'; then
-    source "$PLUGINS/fzf/shell/completion.zsh"
-    source "$PLUGINS/fzf/shell/key-bindings.zsh"
+    plugin-source 'fzf/shell/completion.zsh'
+    plugin-source 'fzf/shell/key-bindings.zsh'
 
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
     local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
@@ -186,12 +141,5 @@ if plugin-exists 'fzf'; then
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    path+="$PLUGINS/fzf/bin"
+    plugin-path 'fzf/bin'
 fi
-
-#
-# Init
-#
-
-fpath+=$CACHE
-compinit -d "$CACHE/zcompdump"
