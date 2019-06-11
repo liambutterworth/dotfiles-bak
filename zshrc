@@ -17,7 +17,10 @@ export PLUGINS="$DOTFILES/plugins"
 export VIM_CACHE="$CACHE/vim"
 export VIM_PLUGINS="$PLUGINS/vim"
 export ZSH_CACHE="$CACHE/zsh"
-export ZSH_PLUGINS="$PLUGINS/zsh"
+export ZSH_PLUGINS="$HOME/.zsh/plugins"
+
+typeset -U path
+typeset -U fpath
 
 autoload -Uz compinit
 autoload -Uz vcs_info
@@ -39,11 +42,11 @@ zstyle ':vcs_info:*' unstagedstr '*'
 zstyle ':vcs_info:*' stagedstr '*'
 zstyle ':vcs_info:*' formats '%b%c%u'
 
-zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N zle-line-init
 
-function zle-line-init { set-prompt; zle reset-prompt }
 function zle-keymap-select { set-prompt; zle reset-prompt }
+function zle-line-init { set-prompt; zle reset-prompt }
 function precmd { print; vcs_info }
 function preexec { print }
 
@@ -60,27 +63,27 @@ function set-prompt {
     PROMPT+='%F{7} '
 }
 
-function add-to-path {
-    [[ $PATH != *$1* ]] && export PATH="$PATH:$1"
-}
-
 function list-path {
-    tr ':' '\n' <<< $PATH
-}
-
-function add-to-fpath {
-    [[ $fpath != *$1* ]] && fpath=($1 $fpath)
+    tr ' ' '\n' <<< $path
 }
 
 function list-fpath {
     tr ' ' '\n' <<< $fpath
 }
 
+function docker-list-images {
+    local format="ID\t{{.ID}}\nTag\t{{.Tag}}\nRepo\t{{.Repository}}\n"
+    docker image ls --format="$format"
+}
+
+function docker-list-containers {
+    local format="ID\t{{.ID}}\nImage\t{{.Image}}\nName\t{{.Names}}\nStatus\t{{.Status}}\n"
+    docker container ls --all --format="$format"
+}
+
 #
 # Aliases
 #
-
-# GNU
 
 alias ls='ls --color=auto --group-directories-first'
 alias la='ls -A'
@@ -90,16 +93,12 @@ alias lfp='list-fpath'
 alias grep='grep --color=always --exclude-dir=.git --exclude-dir=vendor --exclude-dir=node_modules'
 alias less='less --raw-control-chars'
 
-# Tmux
-
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
 alias tk='tmux kill-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
 alias tc='clear && tmux clear-history'
-
-# Git
 
 alias gcl='git clone'
 alias ga='git add'
@@ -127,11 +126,6 @@ alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
 
-# Docker
-
-local docker_container_format='{{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}'
-local docker_image_format='{{.ID}}\t{{.Repository}}\t{{.Tag}}\t{{.CreatedAt}}'
-
 alias db='docker build'
 alias dr='docker run'
 alias de='docker exec'
@@ -139,10 +133,11 @@ alias dc='docker container'
 alias di='docker image'
 alias dp='docker system prune'
 alias dl='docker logs'
-alias dlc="docker container ls --all --format='table $docker_container_format'"
-alias dli="docker image ls --all --format='table $docker_image_format'"
+alias dlc='docker-list-containers'
+alias dli='docker-list-images'
 alias dqc='docker container ls -aq'
 alias dqi='docker image ls -aq'
+alias dri='docker rmi'
 alias drc='docker rm'
 alias d-cu='docker-compose up'
 alias d-cd='docker-compose down'
@@ -153,12 +148,23 @@ alias d-cr='docker-compose run'
 # Plugins
 #
 
+function plugin-exists {
+    local plugin="$HOME/.zsh/plugins/$1"
+    [[ -f $plugin ]] || [[ -d $plugin ]]
+}
+
+if plugin-exists 'zsh-autosuggestions/zsh-autosuggestions.zsh'; then
+    echo "autosuggestions  exists"
+fi
+
+# plugin-exists
+
 # Completions
 
 local completions_dir="$ZSH_PLUGINS/zsh-completions/src"
 
 if [[ -d $completions_dir ]]; then
-    add-to-fpath $completions_dir
+    fpath+=$completions_dir
 fi
 
 # Autosuggestions
@@ -206,12 +212,12 @@ if [[ -f "$fzf_dir/bin/fzf" ]]; then
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    add-to-path "$fzf_dir/bin"
+    path+="$fzf_dir/bin"
 fi
 
 #
 # Init
 #
 
-add-to-fpath $ZSH_CACHE
+fpath+=$ZSH_CACHE
 compinit -d "$ZSH_CACHE/zcompdump"
