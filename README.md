@@ -1,6 +1,6 @@
 # Install
 
-Dependencies: `ctags vim zsh tmux git`
+Dependencies: `vim zsh tmux git ctags`
 
 ```
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles

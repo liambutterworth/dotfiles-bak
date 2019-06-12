@@ -36,8 +36,8 @@ set nowrap
 set number relativenumber
 set signcolumn=yes
 set splitbelow splitright
-set statusline=%!functions#StatusLine()
-set tabline=%!functions#TabLine()
+set statusline=%!interface#StatusLine()
+set tabline=%!interface#TabLine()
 set undofile undodir=$HOME/.cache/vim/undo//
 set viminfo+=n$HOME/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
@@ -45,7 +45,7 @@ set wildmenu wildignorecase wildmode=full
 augroup settings
     autocmd!
     autocmd filetype * set formatoptions-=o
-    autocmd bufread,bufnewfile */zsh/functions/* set syntax=zsh
+    autocmd bufread,bufnewfile */zsh/functions/* set filetype=zsh
 augroup end
 
 let mapleader = ' '
@@ -81,6 +81,11 @@ nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
 
+" TODO
+" - write function for exchange line
+" - write function for line ender
+" - write function for next/previous file
+
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
@@ -96,12 +101,12 @@ inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``
 " Plugins
 "
 
-if functions#PluginExists('delimitmate')
+if plugin#exists('delimitmate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
 
-if functions#PluginExists('fzf.vim') && functions#CommandExists('fzf')
+if plugin#exists('fzf.vim') && command#exists('fzf')
     set runtimepath+=$PLUGINS/fzf
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
@@ -136,18 +141,18 @@ if functions#PluginExists('fzf.vim') && functions#CommandExists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if functions#PluginExists('gutentags')
-    let g:gutentags_enabled = functions#CommandExists('ctags')
+if plugin#exists('gutentags')
+    let g:gutentags_enabled = command#exists('ctags')
     let g:gutentags_project_root = ['.git']
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
-if functions#PluginExists('indentline')
+if plugin#exists('indentline')
     let g:indentLine_char = '│'
     let g:indentLine_color_term = 0
 endif
 
-if functions#PluginExists('nord-vim')
+if plugin#exists('nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
     let g:nord_uniform_diff_background = 1
@@ -155,7 +160,7 @@ if functions#PluginExists('nord-vim')
     colorscheme nord
 endif
 
-if functions#PluginExists('ultisnips')
+if plugin#exists('ultisnips')
     let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
@@ -165,12 +170,12 @@ if functions#PluginExists('ultisnips')
     inoremap <c-j> <nop>
 endif
 
-if functions#PluginExists('vim-easy-align')
+if plugin#exists('vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
 
-if functions#PluginExists('vim-gitgutter')
+if plugin#exists('vim-gitgutter')
     let g:gitgutter_map_keys = 0
 
     nnoremap ]h <plug>GitGutterNextHunk
@@ -182,6 +187,6 @@ if functions#PluginExists('vim-gitgutter')
     xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
-if functions#PluginExists('vim-javascript')
+if plugin#exists('vim-javascript')
     let g:javascript_plugin_jsdoc = 1
 endif

@@ -9,21 +9,20 @@
 # Settings
 #
 
-export CACHE="$HOME/.cache/zsh"
-export PLUGINS="$HOME/.zsh/plugins"
-
-fpath=($fpath $CACHE)
-fpath=($HOME/.zsh/functions $fpath)
-
 typeset -U path
 typeset -U fpath
 
+export CACHE="$HOME/.cache/zsh"
+export PLUGINS="$HOME/.zsh/plugins"
+export FUNCTIONS="$HOME/.zsh/functions"
+
+fpath=($CACHE $fpath)
+fpath=($FUNCTIONS $fpath)
+
+autoload -Uz $FUNCTIONS/*
+autoload -Uz vcs_info
 autoload -Uz edit-command-line
-autoload -Uz vcs_info precmd preexec
-autoload -Uz docker-list-images docker-list-containers
-autoload -Uz set-prompt zle-keymap-select zle-line-init
-autoload -Uz plugin-exists plugin-source plugin-path plugin-fpath
-autoload -Uz compinit generate-compdump && generate-compdump
+autoload -Uz compinit && compinit -d "$CACHE/zcompdump"
 
 bindkey -v
 bindkey '^w' backward-kill-word
@@ -55,6 +54,7 @@ alias grep='grep --color=always'
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
 alias tk='tmux kill-session -t'
+alias tK='tmux kill-server'
 alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
 alias tc='clear && tmux clear-history'
@@ -84,6 +84,8 @@ alias gr='cd $(git root)'
 alias gss='git staged'
 alias gun='git unstage'
 alias gwh='git whoami'
+alias gsa='git submodule add'
+alias gsr='git-submodule-remove'
 
 alias db='docker build'
 alias dr='docker run'
@@ -92,12 +94,12 @@ alias dc='docker container'
 alias di='docker image'
 alias dp='docker system prune'
 alias dl='docker logs'
-alias dlc='docker-list-containers'
 alias dli='docker-list-images'
-alias dqc='docker container ls -aq'
-alias dqi='docker image ls -aq'
+alias dlc='docker-list-containers'
+alias dln='docker network ls'
 alias dri='docker rmi'
 alias drc='docker rm'
+alias drn='docker network rm'
 alias d-cu='docker-compose up'
 alias d-cd='docker-compose down'
 alias d-cb='docker-compose build'
@@ -108,28 +110,33 @@ alias d-cr='docker-compose run'
 #
 
 if plugin-exists 'zsh-completions'; then
-    plugin-fpath 'zsh-completions/src'
-    generate-compdump
+    fpath=("$PLUGINS/zsh-completions/src" $fpath)
+    compinit -d "$CACHE/zcompdump"
 fi
 
 if plugin-exists 'zsh-autosuggestions'; then
-    plugin-source 'zsh-autosuggestions/zsh-autosuggestions.zsh'
+    source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
     export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(foward-char end-of-line)
 fi
 
 if plugin-exists 'zsh-history-substring-search'; then
-    plugin-source 'zsh-history-substring-search/zsh-history-substring-search.zsh'
+    source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
 if plugin-exists 'zsh-syntax-highlighting'; then
-    plugin-source 'zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+    source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+if plugin-exists 'nord-dircolors'; then
+    eval "$(dircolors -b $PLUGINS/nord-dircolors/src/dir_colors)"
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
 if plugin-exists 'fzf'; then
-    plugin-source 'fzf/shell/completion.zsh'
-    plugin-source 'fzf/shell/key-bindings.zsh'
+    source "$PLUGINS/fzf/shell/completion.zsh"
+    source "$PLUGINS/fzf/shell/key-bindings.zsh"
 
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
     local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
@@ -141,5 +148,5 @@ if plugin-exists 'fzf'; then
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    plugin-path 'fzf/bin'
+    path=("$PLUGINS/fzf/bin" $path)
 fi
