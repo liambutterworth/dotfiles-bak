@@ -82,3 +82,6 @@
 [submodule "vim/plugins/fzf.vim"]
 	path = vim/plugins/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule "zsh/plugins/nord-dircolors"]
+	path = zsh/plugins/nord-dircolors
+	url = http://github.com/arcticicestudio/nord-dircolors
