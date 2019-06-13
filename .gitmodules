@@ -19,9 +19,6 @@
 [submodule "vim/plugins/html5.vim"]
 	path = vim/plugins/html5.vim
 	url = http://github.com/othree/html5.vim
-[submodule "vim/plugins/indentline"]
-	path = vim/plugins/indentline
-	url = http://github.com/yggdroot/indentline
 [submodule "vim/plugins/nord-vim"]
 	path = vim/plugins/nord-vim
 	url = http://github.com/arcticicestudio/nord-vim

@@ -1,0 +1,1 @@
+[[ ! -z "$(command command -v $1)" ]]

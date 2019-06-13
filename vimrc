@@ -45,7 +45,7 @@ set wildmenu wildignorecase wildmode=full
 augroup settings
     autocmd!
     autocmd filetype * set formatoptions-=o
-    autocmd bufread,bufnewfile */zsh/functions/* set filetype=zsh
+    autocmd bufread,bufnewfile */zsh/* set filetype=zsh
 augroup end
 
 let mapleader = ' '

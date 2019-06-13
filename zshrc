@@ -14,21 +14,25 @@ typeset -U fpath
 
 export CACHE="$HOME/.cache/zsh"
 export PLUGINS="$HOME/.zsh/plugins"
-export FUNCTIONS="$HOME/.zsh/functions"
+export SCRIPTS="$HOME/.zsh/scripts"
 
 fpath=($CACHE $fpath)
-fpath=($FUNCTIONS $fpath)
+fpath=($SCRIPTS $fpath)
 
-autoload -Uz vcs_info
-autoload -Uz edit-command-line
-autoload -Uz $FUNCTIONS/**/*
+autoload -Uz $SCRIPTS/*
 autoload -Uz compinit && compinit -d "$CACHE/zcompdump"
+autoload -Uz edit-command-line
+autoload -Uz vcs_info
 
 bindkey -v
 bindkey '^w' backward-kill-word
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^[[Z' reverse-menu-complete
+
+function zle-keymap-select zle-line-init { set-prompt }
+function precmd { print; vcs_info }
+function preexec { print }
 
 zle -N zle-keymap-select
 zle -N zle-line-init
@@ -137,6 +141,8 @@ if plugin-exists 'nord-dircolors'; then
 fi
 
 if plugin-exists 'fzf'; then
+    bindkey '^E' fzf-cd-widget
+
     source "$PLUGINS/fzf/shell/completion.zsh"
     source "$PLUGINS/fzf/shell/key-bindings.zsh"
 
@@ -144,11 +150,11 @@ if plugin-exists 'fzf'; then
     local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
 
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+    export FZF_DEFAULT_COMMAND='rg --files'
     export FZF_DEFAULT_OPTS="--color '$fzf_color' --bind '$fzf_bind'"
     export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    path=("$PLUGINS/fzf/bin" $path)
+    fpath=("$PLUGINS/fzf/bin" $fpath)
 fi
