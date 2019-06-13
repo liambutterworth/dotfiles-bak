@@ -68,8 +68,8 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 
 nnoremap <leader>r :source ~/.vimrc<cr>
-nnoremap <leader>x :close<cr>
-nnoremap <leader>c :tabe %<cr>
+nnoremap <leader>c :close<cr>
+nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>p :tabp<cr>
@@ -81,11 +81,8 @@ nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
 
-" TODO
-" - write function for exchange line
-" - write function for line ender
-" - write function for next/previous file
-
+nnoremap ]<bs> :bnext<cr>
+nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
 nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='

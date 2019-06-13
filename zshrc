@@ -19,9 +19,9 @@ export FUNCTIONS="$HOME/.zsh/functions"
 fpath=($CACHE $fpath)
 fpath=($FUNCTIONS $fpath)
 
-autoload -Uz $FUNCTIONS/*
 autoload -Uz vcs_info
 autoload -Uz edit-command-line
+autoload -Uz $FUNCTIONS/**/*
 autoload -Uz compinit && compinit -d "$CACHE/zcompdump"
 
 bindkey -v
@@ -50,6 +50,8 @@ zstyle ':vcs_info:*' formats '%b%c%u'
 alias ls='ls --color=auto --group-directories-first'
 alias less='less --raw-control-chars'
 alias grep='grep --color=always'
+alias tree='tree -I ".git|vendor|node_modules"'
+alias rg='rg --hidden'
 
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'

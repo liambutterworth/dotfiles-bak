@@ -1,5 +1,18 @@
+"
+" Interface
+"
+" :: Status Line
+" :: Tab Line
+
+"
+" Status Line
+"
+
 let s:branch = command#branch()
 let s:permissions = command#permissions()
+
+autocmd bufenter * let s:permissions = command#permissions()
+autocmd bufleave * let s:permissions = ""
 
 function! interface#StatusLine()
     let output = ' '
@@ -12,6 +25,10 @@ function! interface#StatusLine()
 
     return output . ' '
 endfunction
+
+"
+" Tab Line
+"
 
 function! interface#TabLine()
     let output = ''
