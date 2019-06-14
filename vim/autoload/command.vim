@@ -52,22 +52,23 @@ function! command#permissions() abort
     endif
 endfunction
 
-" let s:permissions =
+" TODO implement this version of permissions with a cached variable
+"
+" let s:permissions = ""
+" autocmd bufleave * let s:permissions = ""
 
 " function! command#permissions() abort
-"     if empty(s:permissions)
-"         let dir = expand('%:h')
-"         let file = expand('%:t')
+"     let dir = expand('%:h')
+"     let file = expand('%:t')
 
-"         if filereadable(dir . '/' . file)
-"             let permissions = system(
-"                 \ 'ls -la ' . dir .
-"                 \ ' | grep ' . file .
-"                 \ ' | cut -d " " -f1'
-"                 \ )
+"     if empty(s:permissions) && filereadable(dir . '/' . file)
+"         let permissions = system(
+"             \ 'ls -la ' . dir .
+"             \ ' | grep ' . file .
+"             \ ' | cut -d " " -f1'
+"             \ )
 
-"             set s:permissions = command#clean(permissions)
-"         endif
+"         let s:permissions = command#clean(permissions)
 "     endif
 
 "     return s:permissions

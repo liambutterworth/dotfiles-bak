@@ -9,7 +9,7 @@
 " Settings
 "
 
-execute pathogen#infect($HOME . '/.vim/plugins/{}')
+call plugin#load()
 filetype plugin indent on
 syntax enable
 
@@ -51,7 +51,6 @@ augroup end
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
 let g:netrw_home = $HOME . '/.cache/vim'
-let g:netrw_fastbrowse = 0
 
 "
 " Mappings
@@ -68,7 +67,8 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 
 nnoremap <leader>r :source ~/.vimrc<cr>
-nnoremap <leader>c :close<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :qa<cr>
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -120,6 +120,9 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+    command! -bar -bang Helptags
+        \ call fzf#vim#helptags(<bang>0)
+
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
@@ -127,7 +130,7 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     nnoremap <leader>\ :Commits<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
-    nnoremap <leader>? :GFiles?<cr>
+    nnoremap <leader>? :Helptags<cr>
     nnoremap <leader>] :Tags<cr>
     nnoremap <leader>` :Marks<cr>
     nnoremap <leader>G :Lines<cr>

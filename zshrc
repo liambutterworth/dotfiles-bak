@@ -57,6 +57,12 @@ alias grep='grep --color=always'
 alias tree='tree -I ".git|vendor|node_modules"'
 alias rg='rg --hidden'
 
+alias v='vim'
+alias vt='vim -p'
+alias vs='vim -o'
+alias vv='vim -O'
+
+alias t='tmux'
 alias ts='tmux new -s'
 alias ta='tmux attach-session -t'
 alias tk='tmux kill-session -t'
@@ -65,6 +71,7 @@ alias tl='tmux list-sessions'
 alias tn='tmux rename-session'
 alias tc='clear && tmux clear-history'
 
+alias g='git'
 alias gcl='git clone'
 alias ga='git add'
 alias gmv='git mv'
@@ -93,6 +100,7 @@ alias gwh='git whoami'
 alias gsa='git submodule add'
 alias gsr='git-submodule-remove'
 
+alias d='docker'
 alias db='docker build'
 alias dr='docker run'
 alias de='docker exec'
@@ -106,6 +114,7 @@ alias dln='docker network ls'
 alias dri='docker rmi'
 alias drc='docker rm'
 alias drn='docker network rm'
+alias d-c='docker-compose'
 alias d-cu='docker-compose up'
 alias d-cd='docker-compose down'
 alias d-cb='docker-compose build'
@@ -141,7 +150,7 @@ if plugin-exists 'nord-dircolors'; then
 fi
 
 if plugin-exists 'fzf'; then
-    bindkey '^E' fzf-cd-widget
+    bindkey '^G' fzf-cd-widget
 
     source "$PLUGINS/fzf/shell/completion.zsh"
     source "$PLUGINS/fzf/shell/key-bindings.zsh"
@@ -150,11 +159,11 @@ if plugin-exists 'fzf'; then
     local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
 
-    export FZF_DEFAULT_COMMAND='rg --files'
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
     export FZF_DEFAULT_OPTS="--color '$fzf_color' --bind '$fzf_bind'"
     export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
 
-    fpath=("$PLUGINS/fzf/bin" $fpath)
+    path=("$PLUGINS/fzf/bin" $path)
 fi
