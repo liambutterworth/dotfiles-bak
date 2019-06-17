@@ -27,9 +27,8 @@ endfunction
 "
 
 function! command#branch() abort
-    if !empty(system('git rev-parse --git-dir 2>/dev/null'))
-        let branch = system('git rev-parse --abbrev-ref HEAD')
-        return command#clean(branch)
+    if plugin#exists('vim-fugitive')
+        return fugitive#head()
     endif
 endfunction
 
@@ -37,39 +36,19 @@ endfunction
 " Permissions
 "
 
-function! command#permissions() abort
-    let dir = expand('%:h')
-    let file = expand('%:t')
+let s:permissions = ''
+autocmd bufleave * let s:permissions = ''
 
-    if filereadable(dir . '/' . file)
+function! command#permissions() abort
+    if empty(s:permissions) && filereadable(expand('%:p'))
         let permissions = system(
-            \ 'ls -la ' . dir .
-            \ ' | grep ' . file .
+            \ 'ls -la ' . expand('%:h') .
+            \ ' | grep ' . expand('%:t') .
             \ ' | cut -d " " -f1'
             \ )
 
-        return command#clean(permissions)
+        let s:permissions = command#clean(permissions)
     endif
+
+    return s:permissions
 endfunction
-
-" TODO implement this version of permissions with a cached variable
-"
-" let s:permissions = ""
-" autocmd bufleave * let s:permissions = ""
-
-" function! command#permissions() abort
-"     let dir = expand('%:h')
-"     let file = expand('%:t')
-
-"     if empty(s:permissions) && filereadable(dir . '/' . file)
-"         let permissions = system(
-"             \ 'ls -la ' . dir .
-"             \ ' | grep ' . file .
-"             \ ' | cut -d " " -f1'
-"             \ )
-
-"         let s:permissions = command#clean(permissions)
-"     endif
-
-"     return s:permissions
-" endfunction

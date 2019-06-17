@@ -8,19 +8,22 @@
 " Status Line
 "
 
-let s:permissions = command#permissions()
+" let s:permissions = command#permissions()
 
-autocmd bufenter * let s:permissions = command#permissions()
-autocmd bufleave * let s:permissions = ""
+" autocmd bufenter * let s:permissions = command#permissions()
+" autocmd bufleave * let s:permissions = ""
 
 function! interface#StatusLine()
     let output = ' '
+    let branch = command#branch()
+    let permissions = command#permissions()
+    " let branch = fugitive#head()
 
     let output .= '%f%m'
-    let output .= plugin#exists('vim-fugitive') ? ' ' . fugitive#head() : ''
+    let output .= !empty(branch) ? ' ' . branch : ''
     let output .= '%=%c:%l/%L %{&fileformat}'
     let output .= filereadable(expand('%:p')) ? ' %{&fileencoding}' : ''
-    let output .= !empty(s:permissions) ? ' ' . s:permissions : ''
+    let output .= !empty(permissions) ? ' ' . permissions : ''
 
     return output . ' '
 endfunction
