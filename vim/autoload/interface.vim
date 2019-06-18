@@ -8,16 +8,10 @@
 " Status Line
 "
 
-" let s:permissions = command#permissions()
-
-" autocmd bufenter * let s:permissions = command#permissions()
-" autocmd bufleave * let s:permissions = ""
-
 function! interface#StatusLine()
     let output = ' '
     let branch = command#branch()
     let permissions = command#permissions()
-    " let branch = fugitive#head()
 
     let output .= '%f%m'
     let output .= !empty(branch) ? ' ' . branch : ''

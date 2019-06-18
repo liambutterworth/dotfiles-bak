@@ -141,6 +141,10 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
+if plugin#exists('goyo.vim')
+    nnoremap <leader>gg :Goyo<cr>
+endif
+
 if plugin#exists('gutentags')
     let g:gutentags_enabled = command#exists('ctags')
     let g:gutentags_project_root = ['.git']
@@ -190,3 +194,8 @@ endif
 if plugin#exists('vim-javascript')
     let g:javascript_plugin_jsdoc = 1
 endif
+
+" if plugin#exists('vimwiki')
+"     let g:vimwiki_list = [{ 'path': '~/vimwiki', 'path_html': '~/vimwiki-html' }]
+"     nnoremap <leader>w <plug>VimwikiIndex
+" endif

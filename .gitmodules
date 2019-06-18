@@ -82,3 +82,9 @@
 [submodule "zsh/plugins/nord-dircolors"]
 	path = zsh/plugins/nord-dircolors
 	url = http://github.com/arcticicestudio/nord-dircolors
+[submodule "vim/plugins/vimwiki"]
+	path = vim/plugins/vimwiki
+	url = https://github.com/vimwiki/vimwiki
+[submodule "vim/plugins/goyo.vim"]
+	path = vim/plugins/goyo.vim
+	url = https://github.com/junegunn/goyo.vim

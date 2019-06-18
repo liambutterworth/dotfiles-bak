@@ -1,17 +1,17 @@
 "
 " Command
 "
-" :: Clean
+" :: Execute
 " :: Exists
 " :: Branch
 " :: Permissions
 
 "
-" Clean
+" Execute
 "
 
-function! command#clean(output) abort
-    return substitute(a:output, '\n', '', 'g')
+function! command#execute(command) abort
+    return substitute(system(a:command), '\n', '', 'g')
 endfunction
 
 "
@@ -36,19 +36,18 @@ endfunction
 " Permissions
 "
 
-let s:permissions = ''
 autocmd bufleave * let s:permissions = ''
 
 function! command#permissions() abort
-    if empty(s:permissions) && filereadable(expand('%:p'))
-        let permissions = system(
+    if exists('s:permissions') && !empty(s:permissions)
+        return s:permissions
+    elseif filereadable(expand('%:p'))
+        let s:permissions = command#execute(
             \ 'ls -la ' . expand('%:h') .
             \ ' | grep ' . expand('%:t') .
             \ ' | cut -d " " -f1'
             \ )
 
-        let s:permissions = command#clean(permissions)
+        return s:permissions
     endif
-
-    return s:permissions
 endfunction

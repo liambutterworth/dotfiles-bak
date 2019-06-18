@@ -1,0 +1,9 @@
+-f .git/tags
+--recurse=yes
+--tag-relative=yes
+--fields=+aimlS
+--exclude=.svn
+--exclude=.git
+--exclude=node_modules
+--exclude=vendor
+--exclude=public
