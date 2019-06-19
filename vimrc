@@ -85,14 +85,16 @@ nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
-nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
-vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
-vnoremap ;; :s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>
-vnoremap ,, :s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>
-inoremap ;; <esc>m`:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>``a
-inoremap ,, <esc>m`:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>``a
+nnoremap ]e :<c-u>call line#nmovedown(v:count1)<cr>
+nnoremap [e :<c-u>call line#nmoveup(v:count1)<cr>
+vnoremap ]e :<c-u>call line#vmovedown(v:count1)<cr>
+vnoremap [e :<c-u>call line#vmoveup(v:count1)<cr>
+vnoremap ;; :call line#ender(';')<cr>
+vnoremap ,, :call line#ender(',')<cr>
+inoremap ;; <esc>m`:call line#ender(';')<cr>``a
+inoremap ,, <esc>m`:call line#ender(',')<cr>``a
+
+nnoremap <leader>a :call line#exchange(v:count)<cr>
 
 "
 " Plugins
@@ -195,6 +197,8 @@ if plugin#exists('vim-javascript')
     let g:javascript_plugin_jsdoc = 1
 endif
 
+" TODO configure vimwiki
+"
 " if plugin#exists('vimwiki')
 "     let g:vimwiki_list = [{ 'path': '~/vimwiki', 'path_html': '~/vimwiki-html' }]
 "     nnoremap <leader>w <plug>VimwikiIndex
