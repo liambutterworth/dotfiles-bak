@@ -165,7 +165,7 @@ if plugin#exists('nord-vim')
 endif
 
 if plugin#exists('ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/ultisnips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
