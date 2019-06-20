@@ -4,8 +4,8 @@ mkdir -p ~/.cache/{vim,zsh} ~/.cache/vim/{swap,backup,undo}
 rm -rf ~/.vim && ln -s ~/.dotfiles/vim ~/.vim
 rm -rf ~/.zsh && ln -s ~/.dotfiles/zsh ~/.zsh
 rm -rf ~/.ctags.d && ln -s ~/.dotfiles/ctags.d ~/.ctags.d
-ln -sf ~/.dotfiles/vimrc ~/.vimrc
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/ignore ~/.ignore
