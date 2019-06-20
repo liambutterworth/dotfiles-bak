@@ -195,9 +195,10 @@ if plugin#exists('vim-javascript')
     let g:javascript_plugin_jsdoc = 1
 endif
 
-" TODO configure vimwiki
-"
-" if plugin#exists('vimwiki')
-"     let g:vimwiki_list = [{ 'path': '~/vimwiki', 'path_html': '~/vimwiki-html' }]
-"     nnoremap <leader>w <plug>VimwikiIndex
-" endif
+if plugin#exists('vimwiki')
+    let g:vimwiki_list = [{
+        \ 'path': '~/vimwiki',
+        \ 'syntax': 'markdown',
+        \ 'ext': '.md'
+        \ }]
+endif
