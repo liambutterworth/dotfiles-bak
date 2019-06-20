@@ -197,7 +197,7 @@ endif
 
 if plugin#exists('vimwiki')
     let g:vimwiki_list = [{
-        \ 'path': '~/vimwiki',
+        \ 'path': $HOME . '/Dropbox/Notes',
         \ 'syntax': 'markdown',
         \ 'ext': '.md'
         \ }]
