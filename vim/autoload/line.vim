@@ -16,22 +16,12 @@ endfunction
 " Move
 "
 
-function! line#nmoveup(count) abort
-    execute 'm-' . (a:count + 1)
-    normal ==
-endfunction
+function! line#move(mode, direction, count) abort
+    let l:range = a:mode == 'v' ? "'<,'>" : ''
+    let l:method = 'm' . (a:mode == 'v' && a:direction == 'down' ? "'>" : '')
+    let l:symbol = a:direction == 'up' ? '-' : '+'
+    let l:count = (a:count == 0 ? 1 : a:count) + (a:direction == 'up' ? 1 : 0)
 
-function! line#nmovedown(count) abort
-    execute 'm+' . a:count
-    normal ==
-endfunction
-
-function! line#vmoveup(count) abort
-    execute "'<,'>m-" . (a:count + 1)
-    normal gv=gv
-endfunction
-
-function! line#vmovedown(count) abort
-    execute "'<,'>m'>+" . a:count
-    normal gv=gv
+    silent execute l:range . l:method . l:symbol . l:count
+    silent execute 'normal! ' . (a:mode == 'n' ? '==' : 'gv=gv')
 endfunction

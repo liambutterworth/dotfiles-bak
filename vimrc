@@ -85,16 +85,14 @@ nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
-nnoremap ]e :<c-u>call line#nmovedown(v:count1)<cr>
-nnoremap [e :<c-u>call line#nmoveup(v:count1)<cr>
-vnoremap ]e :<c-u>call line#vmovedown(v:count1)<cr>
-vnoremap [e :<c-u>call line#vmoveup(v:count1)<cr>
+nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
+nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
+vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
+vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
 vnoremap ;; :call line#ender(';')<cr>
 vnoremap ,, :call line#ender(',')<cr>
 inoremap ;; <esc>m`:call line#ender(';')<cr>``a
 inoremap ,, <esc>m`:call line#ender(',')<cr>``a
-
-nnoremap <leader>a :call line#exchange(v:count)<cr>
 
 "
 " Plugins
