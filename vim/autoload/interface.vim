@@ -1,12 +1,6 @@
 "
 " Interface
 "
-" :: Status Line
-" :: Tab Line
-
-"
-" Status Line
-"
 
 function! interface#StatusLine()
     let output = ' '
@@ -21,10 +15,6 @@ function! interface#StatusLine()
 
     return output . ' '
 endfunction
-
-"
-" Tab Line
-"
 
 function! interface#TabLine()
     let output = ''

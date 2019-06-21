@@ -9,7 +9,6 @@
 " Settings
 "
 
-call plugin#load()
 filetype plugin indent on
 syntax enable
 
@@ -66,9 +65,6 @@ nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 
-nnoremap <leader>r :source ~/.vimrc<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :qa<cr>
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -89,10 +85,13 @@ nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
 nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
-vnoremap ;; :call line#ender(';')<cr>
-vnoremap ,, :call line#ender(',')<cr>
-inoremap ;; <esc>m`:call line#ender(';')<cr>``a
-inoremap ,, <esc>m`:call line#ender(',')<cr>``a
+
+nnoremap g; :call line#ender(';')<cr>
+nnoremap g, :call line#ender(',')<cr>
+vnoremap g; :call line#ender(';')<cr>gv
+vnoremap g, :call line#ender(',')<cr>gv
+inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
+inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
 
 "
 " Plugins
@@ -119,9 +118,6 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-    command! -bar -bang Helptags
-        \ call fzf#vim#helptags(<bang>0)
 
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
@@ -151,11 +147,6 @@ if plugin#exists('gutentags')
     let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
-if plugin#exists('indentline')
-    let g:indentLine_char = '│'
-    let g:indentLine_color_term = 0
-endif
-
 if plugin#exists('nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
@@ -165,7 +156,7 @@ if plugin#exists('nord-vim')
 endif
 
 if plugin#exists('ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/ultisnips']
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'

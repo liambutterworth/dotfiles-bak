@@ -1,3 +1,8 @@
 #!/bin/bash
-rm -rf ~/.{vim,zsh}
-rm ~/.{vimrc,zshrc,tmux.conf,gitconfig,ctags}
+rm ~/.terminfo
+rm ~/.gitconfig
+rm ~/.tmux.conf
+rm ~/.{zshrc,zsh}
+rm ~/.{vimrc,vim}
+rm ~/.ctags.d
+rm ~/.ignore

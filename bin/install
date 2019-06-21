@@ -1,21 +1,23 @@
 #!/bin/bash
 
-# setup plugins
+# run scripts
+~/.dotfiles/bin/remove
 ~/.dotfiles/bin/update
 
 # create directories
-mkdir -p ~/.cache/{vim,zsh} ~/.cache/vim/{swap,backup,undo}
-
-# symlink directories
-rm -rf ~/.vim && ln -s ~/.dotfiles/vim ~/.vim
-rm -rf ~/.zsh && ln -s ~/.dotfiles/zsh ~/.zsh
-rm -rf ~/.ctags.d && ln -s ~/.dotfiles/ctags.d ~/.ctags.d
+mkdir -p \
+    ~/.terminfo \
+    ~/.cache/{vim,zsh} \
+    ~/.cache/vim/{swap,backup,undo}
 
 # symlink dotfiles
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
+ln -sf ~/.dotfiles/vim ~/.vim
+ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
 ln -sf ~/.dotfiles/ignore ~/.ignore
 
 # update terminfo

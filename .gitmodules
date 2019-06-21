@@ -13,78 +13,78 @@
 [submodule "zsh/plugins/fzf"]
 	path = zsh/plugins/fzf
 	url = http://github.com/junegunn/fzf
-[submodule "vim/plugins/delimitmate"]
-	path = vim/plugins/delimitmate
+[submodule "vim/pack/plugins/start/delimitmate"]
+	path = vim/pack/plugins/start/delimitmate
 	url = http://github.com/raimondi/delimitmate
-[submodule "vim/plugins/html5.vim"]
-	path = vim/plugins/html5.vim
+[submodule "vim/pack/plugins/start/html5.vim"]
+	path = vim/pack/plugins/start/html5.vim
 	url = http://github.com/othree/html5.vim
-[submodule "vim/plugins/nord-vim"]
-	path = vim/plugins/nord-vim
+[submodule "vim/pack/plugins/start/nord-vim"]
+	path = vim/pack/plugins/start/nord-vim
 	url = http://github.com/arcticicestudio/nord-vim
-[submodule "vim/plugins/php.vim"]
-	path = vim/plugins/php.vim
+[submodule "vim/pack/plugins/start/php.vim"]
+	path = vim/pack/plugins/start/php.vim
 	url = http://github.com/stanangeloff/php.vim
-[submodule "vim/plugins/ultisnips"]
-	path = vim/plugins/ultisnips
+[submodule "vim/pack/plugins/start/ultisnips"]
+	path = vim/pack/plugins/start/ultisnips
 	url = http://github.com/sirver/ultisnips
-[submodule "vim/plugins/vim-blade"]
-	path = vim/plugins/vim-blade
+[submodule "vim/pack/plugins/start/vim-blade"]
+	path = vim/pack/plugins/start/vim-blade
 	url = http://github.com/jwalton512/vim-blade
-[submodule "vim/plugins/vim-commentary"]
-	path = vim/plugins/vim-commentary
+[submodule "vim/pack/plugins/start/vim-commentary"]
+	path = vim/pack/plugins/start/vim-commentary
 	url = http://github.com/tpope/vim-commentary
-[submodule "vim/plugins/vim-context-commentstring"]
-	path = vim/plugins/vim-context-commentstring
+[submodule "vim/pack/plugins/start/vim-context-commentstring"]
+	path = vim/pack/plugins/start/vim-context-commentstring
 	url = http://github.com/suy/vim-context-commentstring
-[submodule "vim/plugins/vim-easy-align"]
-	path = vim/plugins/vim-easy-align
+[submodule "vim/pack/plugins/start/vim-easy-align"]
+	path = vim/pack/plugins/start/vim-easy-align
 	url = http://github.com/junegunn/vim-easy-align
-[submodule "vim/plugins/vim-endwise"]
-	path = vim/plugins/vim-endwise
+[submodule "vim/pack/plugins/start/vim-endwise"]
+	path = vim/pack/plugins/start/vim-endwise
 	url = http://github.com/tpope/vim-endwise
-[submodule "vim/plugins/vim-eunuch"]
-	path = vim/plugins/vim-eunuch
+[submodule "vim/pack/plugins/start/vim-eunuch"]
+	path = vim/pack/plugins/start/vim-eunuch
 	url = http://github.com/tpope/vim-eunuch
-[submodule "vim/plugins/vim-fugitive"]
-	path = vim/plugins/vim-fugitive
+[submodule "vim/pack/plugins/start/vim-fugitive"]
+	path = vim/pack/plugins/start/vim-fugitive
 	url = http://github.com/tpope/vim-fugitive
-[submodule "vim/plugins/vim-gutentags"]
-	path = vim/plugins/vim-gutentags
+[submodule "vim/pack/plugins/start/vim-gutentags"]
+	path = vim/pack/plugins/start/vim-gutentags
 	url = http://github.com/ludovicchabant/vim-gutentags
-[submodule "vim/plugins/vim-indent-object"]
-	path = vim/plugins/vim-indent-object
+[submodule "vim/pack/plugins/start/vim-indent-object"]
+	path = vim/pack/plugins/start/vim-indent-object
 	url = http://github.com/michaeljsmith/vim-indent-object
-[submodule "vim/plugins/vim-javascript"]
-	path = vim/plugins/vim-javascript
+[submodule "vim/pack/plugins/start/vim-javascript"]
+	path = vim/pack/plugins/start/vim-javascript
 	url = http://github.com/pangloss/vim-javascript
-[submodule "vim/plugins/vim-repeat"]
-	path = vim/plugins/vim-repeat
+[submodule "vim/pack/plugins/start/vim-repeat"]
+	path = vim/pack/plugins/start/vim-repeat
 	url = http://github.com/tpope/vim-repeat
-[submodule "vim/plugins/vim-sh-indent"]
-	path = vim/plugins/vim-sh-indent
+[submodule "vim/pack/plugins/start/vim-sh-indent"]
+	path = vim/pack/plugins/start/vim-sh-indent
 	url = http://github.com/chrisbra/vim-sh-indent
-[submodule "vim/plugins/vim-surround"]
-	path = vim/plugins/vim-surround
+[submodule "vim/pack/plugins/start/vim-surround"]
+	path = vim/pack/plugins/start/vim-surround
 	url = http://github.com/tpope/vim-surround
-[submodule "vim/plugins/vim-tmux-navigator"]
-	path = vim/plugins/vim-tmux-navigator
+[submodule "vim/pack/plugins/start/vim-tmux-navigator"]
+	path = vim/pack/plugins/start/vim-tmux-navigator
 	url = http://github.com/christoomey/vim-tmux-navigator
-[submodule "vim/plugins/vim-vinegar"]
-	path = vim/plugins/vim-vinegar
+[submodule "vim/pack/plugins/start/vim-vinegar"]
+	path = vim/pack/plugins/start/vim-vinegar
 	url = http://github.com/tpope/vim-vinegar
-[submodule "vim/plugins/vim-vue"]
-	path = vim/plugins/vim-vue
+[submodule "vim/pack/plugins/start/vim-vue"]
+	path = vim/pack/plugins/start/vim-vue
 	url = http://github.com/posva/vim-vue
-[submodule "vim/plugins/fzf.vim"]
-	path = vim/plugins/fzf.vim
+[submodule "vim/pack/plugins/start/fzf.vim"]
+	path = vim/pack/plugins/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule "zsh/plugins/nord-dircolors"]
 	path = zsh/plugins/nord-dircolors
 	url = http://github.com/arcticicestudio/nord-dircolors
-[submodule "vim/plugins/vimwiki"]
-	path = vim/plugins/vimwiki
+[submodule "vim/pack/plugins/start/vimwiki"]
+	path = vim/pack/plugins/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki
-[submodule "vim/plugins/goyo.vim"]
-	path = vim/plugins/goyo.vim
+[submodule "vim/pack/plugins/start/goyo.vim"]
+	path = vim/pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim
