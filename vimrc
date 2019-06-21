@@ -141,7 +141,7 @@ if plugin#exists('goyo.vim')
     nnoremap <leader>gg :Goyo<cr>
 endif
 
-if plugin#exists('gutentags')
+if plugin#exists('vim-gutentags')
     let g:gutentags_enabled = command#exists('ctags')
     let g:gutentags_project_root = ['.git']
     let g:gutentags_ctags_tagfile = '.git/tags'
