@@ -86,10 +86,10 @@ nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
 
-nnoremap g; :call line#ender(';')<cr>
-nnoremap g, :call line#ender(',')<cr>
-vnoremap g; :call line#ender(';')<cr>gv
-vnoremap g, :call line#ender(',')<cr>gv
+nnoremap <c-g>; m`:call line#ender(';')<cr>``
+nnoremap <c-g>, m`:call line#ender(',')<cr>``
+vnoremap <c-g>; :call line#ender(';')<cr>gv
+vnoremap <c-g>, :call line#ender(',')<cr>gv
 inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
 inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
 

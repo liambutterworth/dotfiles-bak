@@ -9,6 +9,8 @@
 # Settings
 #
 
+set -o ignoreeof
+
 typeset -U path
 typeset -U fpath
 
@@ -106,6 +108,7 @@ alias dr='docker run'
 alias de='docker exec'
 alias dc='docker container'
 alias di='docker image'
+alias dn='docker network'
 alias dp='docker system prune'
 alias dl='docker logs'
 alias dli='docker-list-images'
@@ -119,6 +122,14 @@ alias d-cu='docker-compose up'
 alias d-cd='docker-compose down'
 alias d-cb='docker-compose build'
 alias d-cr='docker-compose run'
+alias d-cub='docker-compose up --build'
+
+alias c='composer'
+alias ci='composer install'
+alias cu='composer update'
+alias cs='composer show'
+
+alias pa='php artisan'
 
 #
 # Plugins
