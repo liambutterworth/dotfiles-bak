@@ -111,6 +111,7 @@ alias di='docker image'
 alias dn='docker network'
 alias dp='docker system prune'
 alias dl='docker logs'
+alias ds='docker system'
 alias dli='docker-list-images'
 alias dlc='docker-list-containers'
 alias dln='docker network ls'
@@ -128,8 +129,10 @@ alias c='composer'
 alias ci='composer install'
 alias cu='composer update'
 alias cs='composer show'
+alias cr='composer require'
 
 alias pa='php artisan'
+alias pas='pa serve'
 
 #
 # Plugins

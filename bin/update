@@ -1,3 +1,3 @@
 #!/bin/bash
-git -C ~/.dotfiles submodule update --init
-~/.dotfiles/plugs/zsh/fzf/install --bin
+git -C ~/.dotfiles submodule update --recursive --remote
+~/.dotfiles/zsh/plugins/fzf/install --bin

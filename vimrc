@@ -43,8 +43,8 @@ set wildmenu wildignorecase wildmode=full
 
 augroup settings
     autocmd!
-    autocmd filetype * set formatoptions-=o
-    autocmd bufread,bufnewfile */zsh/* set filetype=zsh
+    autocmd filetype * setlocal formatoptions-=o
+    autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
 augroup end
 
 let mapleader = ' '
@@ -85,6 +85,8 @@ nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
 nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
+nnoremap ]w :set wrap<cr>
+nnoremap [w :set nowrap<cr>
 
 nnoremap <c-g>; m`:call line#ender(';')<cr>``
 nnoremap <c-g>, m`:call line#ender(',')<cr>``

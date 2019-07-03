@@ -24,8 +24,8 @@ function! command#permissions() abort
         return s:permissions
     elseif filereadable(expand('%:p'))
         let s:permissions = command#execute(
-            \ 'ls -la ' . expand('%:h') .
-            \ ' | grep ' . expand('%:t') .
+            \ 'ls -lad ' . expand('%:p:h') . '/*' .
+            \ ' | grep ' . expand('%:p') .
             \ ' | cut -d " " -f1'
             \ )
 

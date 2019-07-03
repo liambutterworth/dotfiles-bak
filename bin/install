@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# run scripts
-~/.dotfiles/bin/remove
-~/.dotfiles/bin/update
+# install submodules
+git submodule update --init --recursive --remote
+~/.dotfiles/zsh/plugins/fzf/install --bin
 
 # create directories
 mkdir -p \
