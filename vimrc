@@ -34,6 +34,7 @@ set nojoinspaces
 set nowrap
 set number relativenumber
 set signcolumn=yes
+set spelllang=en_us
 set splitbelow splitright
 set statusline=%!interface#StatusLine()
 set tabline=%!interface#TabLine()
@@ -77,6 +78,14 @@ nnoremap <leader>j <c-w>10-
 nnoremap <leader>k <c-w>10+
 nnoremap <leader>l <c-w>10>
 
+nnoremap <leader>ow :set wrap!<cr>
+nnoremap <leader>os :set spell!<cr>
+nnoremap <leader>oh :set hlsearch!<cr>
+nnoremap <leader>oi :set ignorecase!<cr>
+nnoremap <leader>or :set relativenumber!<cr>
+nnoremap <leader>ol :set cursorline!<cr>
+nnoremap <leader>oc :set cursorcolumn!<cr>
+
 nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
@@ -85,13 +94,11 @@ nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
 nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
-nnoremap ]w :set wrap<cr>
-nnoremap [w :set nowrap<cr>
 
-nnoremap <c-g>; m`:call line#ender(';')<cr>``
-nnoremap <c-g>, m`:call line#ender(',')<cr>``
-vnoremap <c-g>; :call line#ender(';')<cr>gv
-vnoremap <c-g>, :call line#ender(',')<cr>gv
+nnoremap g; m`:call line#ender(';')<cr>``
+nnoremap g, m`:call line#ender(',')<cr>``
+vnoremap g; :call line#ender(';')<cr>gv
+vnoremap g, :call line#ender(',')<cr>gv
 inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
 inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
 
