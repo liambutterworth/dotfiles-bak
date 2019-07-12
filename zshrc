@@ -170,11 +170,10 @@ if plugin-exists 'fzf'; then
     source "$PLUGINS/fzf/shell/key-bindings.zsh"
 
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
-    local fzf_bind='ctrl-d:preview-page-down,ctrl-u:preview-page-up'
     local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
 
     export FZF_DEFAULT_COMMAND='rg --files --hidden'
-    export FZF_DEFAULT_OPTS="--color '$fzf_color' --bind '$fzf_bind'"
+    export FZF_DEFAULT_OPTS="--color '$fzf_color'"
     export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
