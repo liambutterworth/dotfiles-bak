@@ -54,10 +54,9 @@ zstyle ':vcs_info:*' formats '%b%c%u'
 #
 
 alias ls='ls --color=auto --group-directories-first'
-alias less='less --raw-control-chars'
-alias grep='grep --color=always'
+alias less='less --clear-screen --raw-control-chars'
 alias tree='tree -I ".git|vendor|node_modules"'
-alias rg='rg --hidden'
+alias rg='rg --hidden --follow --pretty'
 
 alias v='vim'
 alias vt='v -p'
@@ -125,14 +124,12 @@ alias d-cr='d-c run'
 alias d-cub='d-c up --build'
 
 alias c='composer'
+alias cr='c require'
 alias ci='c install'
 alias cu='c update'
 alias cs='c show'
-alias cr='c require'
 
 alias pa='php artisan'
-alias pas='pa serve'
-alias pam='pa migrate'
 
 #
 # Plugins
