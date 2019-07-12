@@ -5,10 +5,7 @@ git submodule update --init --recursive --remote
 ~/.dotfiles/zsh/plugins/fzf/install --bin
 
 # create directories
-mkdir -p \
-    ~/.terminfo \
-    ~/.cache/{vim,zsh} \
-    ~/.cache/vim/{swap,backup,undo}
+mkdir -p ~/.terminfo ~/.cache/zsh ~/.cache/vim/{swap,backup,undo}
 
 # symlink dotfiles
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
