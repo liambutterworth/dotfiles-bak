@@ -70,8 +70,6 @@ alias ta='t attach-session -t'
 alias tk='t kill-session -t'
 alias tK='t kill-server'
 alias tl='t list-sessions'
-alias tr='t rename-session'
-alias ts='t source-file ~/.tmux.conf'
 alias tc='clear && t clear-history'
 
 alias g='git'
