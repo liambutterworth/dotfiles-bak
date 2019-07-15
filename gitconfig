@@ -19,3 +19,5 @@
     staged = diff --cached
     unstage = reset --
     whoami = !git config user.name && git config user.email
+    merge-test = merge --no-commit --no-ff
+    merge-abort = merge --abort

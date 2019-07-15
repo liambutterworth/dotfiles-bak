@@ -99,6 +99,8 @@ alias gun='g unstage'
 alias gwh='g whoami'
 alias gsa='g submodule add'
 alias gsr='git-submodule-remove'
+alias gm='git merge'
+alias gmt='g merge-test'
 
 alias d='docker'
 alias db='d build'
