@@ -97,10 +97,13 @@ vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
 
 nnoremap g; m`:call line#ender(';')<cr>``
 nnoremap g, m`:call line#ender(',')<cr>``
+nnoremap g' m`:call line#ender("''")<cr>``
 vnoremap g; :call line#ender(';')<cr>gv
 vnoremap g, :call line#ender(',')<cr>gv
+vnoremap g' :call line#ender("'")<cr>gv
 inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
 inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
+inoremap <c-g>' <esc>m`:call line#ender("'")<cr>``a
 
 "
 " Plugins

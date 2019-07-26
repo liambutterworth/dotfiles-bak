@@ -1,6 +1,6 @@
 [user]
     name = Liam Butterworth
-    email = dev@liambutterworth.me
+    email = liambutterworth@randallreilly.com
 [credential]
     helper = cache --timeout=3600
 [core]
@@ -20,4 +20,3 @@
     unstage = reset --
     whoami = !git config user.name && git config user.email
     merge-test = merge --no-commit --no-ff
-    merge-abort = merge --abort
