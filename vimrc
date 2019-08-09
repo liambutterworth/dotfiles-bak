@@ -177,6 +177,31 @@ if plugin#exists('ultisnips')
     inoremap <c-j> <nop>
 endif
 
+if plugin#exists('vim-context-commentstring')
+    let g:context#commentstring#table = {}
+
+    let g:context#commentstring#table.html = {
+        \ 'javaScript'  : '// %s',
+        \ 'cssStyle'    : '/* %s */',
+        \ }
+
+    let g:context#commentstring#table['javascript.jsx'] = {
+        \ 'jsComment' : '// %s',
+        \ 'jsImport' : '// %s',
+        \ }
+
+    let g:context#commentstring#table.vue = {
+        \ 'javaScript'  : '//%s',
+        \ 'cssStyle'    : '/*%s*/',
+        \ }
+
+    let g:context#commentstring#table.php = {
+        \ 'phpRegion' : '// %s',
+        \ 'phpIdentifier' : '// %s',
+        \ 'phpVarSelector' : '// %s'
+        \ }
+endif
+
 if plugin#exists('vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)

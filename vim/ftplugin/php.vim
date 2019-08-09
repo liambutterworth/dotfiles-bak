@@ -1,1 +1,2 @@
-set omnifunc=phpcomplete#CompletePHP
+setlocal omnifunc=phpcomplete#CompletePHP
+setlocal commentstring=//\ %s
