@@ -9,6 +9,16 @@ function! interface#StatusLine()
 
     let output .= '%f%m'
     let output .= !empty(branch) ? ' ' . branch : ''
+
+    if plugin#exists('ale')
+        let ale = ale#statusline#Count(bufnr(''))
+        let errors = ale.error
+        let warnings = ale.total - errors
+
+        let output .= errors ? ' ' . errors . 'e' : ''
+        let output .= warnings ? ' ' . warnings . 'w' : ''
+    endif
+
     let output .= '%=%c:%l/%L %{&fileformat}'
     let output .= filereadable(expand('%:p')) ? ' %{&fileencoding}' : ''
     let output .= !empty(permissions) ? ' ' . permissions : ''
