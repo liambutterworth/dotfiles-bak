@@ -60,11 +60,30 @@ nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
 nnoremap <bs> <c-^>
-nnoremap g= mmgg=G`m
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
+
+nnoremap g= mmgg=G`m
+nnoremap g; m`:call line#ender(';')<cr>``
+nnoremap g, m`:call line#ender(',')<cr>``
+nnoremap g' m`:call line#ender("''")<cr>``
+vnoremap g; :call line#ender(';')<cr>gv
+vnoremap g, :call line#ender(',')<cr>gv
+vnoremap g' :call line#ender("'")<cr>gv
+inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``
+inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``
+inoremap <c-g>' <esc>m`:call line#ender("''")<cr>``
+
+nnoremap ]<bs> :bnext<cr>
+nnoremap [<bs> :bprevious<cr>
+nnoremap ]<space> o<esc>'[k
+nnoremap [<space> O<esc>j
+nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
+nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
+vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
+vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
@@ -86,28 +105,26 @@ nnoremap <leader>or :set relativenumber!<cr>
 nnoremap <leader>ol :set cursorline!<cr>
 nnoremap <leader>oc :set cursorcolumn!<cr>
 
-nnoremap ]<bs> :bnext<cr>
-nnoremap [<bs> :bprevious<cr>
-nnoremap ]<space> o<esc>'[k
-nnoremap [<space> O<esc>j
-nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
-nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
-vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
-vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
-
-nnoremap g; m`:call line#ender(';')<cr>``
-nnoremap g, m`:call line#ender(',')<cr>``
-nnoremap g' m`:call line#ender("''")<cr>``
-vnoremap g; :call line#ender(';')<cr>gv
-vnoremap g, :call line#ender(',')<cr>gv
-vnoremap g' :call line#ender("'")<cr>gv
-inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
-inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
-inoremap <c-g>' <esc>m`:call line#ender("'")<cr>``a
-
 "
 " Plugins
 "
+
+if plugin#exists('ale')
+    let g:ale_sign_error = '▶'
+    let g:ale_sign_warning = '▶'
+    let g:ale_php_langserver_use_global = 1
+    let g:ale_php_langserver_executable = $HOME . '/.composer/vendor/bin/php-language-server.php'
+
+    let g:ale_linters = {
+        \ 'php': ['langserver'],
+        \ }
+
+    nnoremap ]a :ALENext<cr>
+    nnoremap [a :ALEPrevious<cr>
+    nnoremap ]d :ALEGoToDefinition<cr>
+    nnoremap ]r :ALEFindREferences<cr>
+    nnoremap ]h :ALEHover<cr>
+endif
 
 if plugin#exists('delimitmate')
     let g:delimitMate_expand_cr = 1
@@ -180,7 +197,7 @@ endif
 if plugin#exists('vim-context-commentstring')
     let g:context#commentstring#table = {}
 
-    let g:context#commentstring#table.html = {
+    let g:context#commentstring#table['html'] = {
         \ 'javaScript'  : '// %s',
         \ 'cssStyle'    : '/* %s */',
         \ }
@@ -190,12 +207,12 @@ if plugin#exists('vim-context-commentstring')
         \ 'jsImport' : '// %s',
         \ }
 
-    let g:context#commentstring#table.vue = {
-        \ 'javaScript'  : '//%s',
-        \ 'cssStyle'    : '/*%s*/',
+    let g:context#commentstring#table['vue'] = {
+        \ 'javaScript'  : '// %s',
+        \ 'cssStyle'    : '/* %s */',
         \ }
 
-    let g:context#commentstring#table.php = {
+    let g:context#commentstring#table['php'] = {
         \ 'phpRegion' : '// %s',
         \ 'phpIdentifier' : '// %s',
         \ 'phpVarSelector' : '// %s'
