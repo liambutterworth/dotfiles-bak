@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<ruleset
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="PHP_CodeSniffer"
+    xsi:noNamespaceSchemaLocation="phpcs.xsd"
+>
+    <description>PHP Code Sniffer Config</description>
+
+    <rule ref="Squiz">
+        <exclude name="Generic.Commenting.DocComment.NonParamGroup" />
+        <exclude name="Squiz.Commenting.ClassComment.Missing" />
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing" />
+        <exclude name="Squiz.Commenting.FileComment.Missing" />
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+        <exclude name="Squiz.Files.FileExtension.ClassFound" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst" />
+        <exclude name="Squiz.WhiteSpace.FunctionClosingBraceSpace.SpacingBeforeClose" />
+    </rule>
+</ruleset>

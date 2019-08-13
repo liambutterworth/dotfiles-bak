@@ -15,6 +15,7 @@ ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim ~/.vim
 ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
+ln -sf ~/.dotfiles/phpcs.xml ~/.phpcs.xml
 ln -sf ~/.dotfiles/ignore ~/.ignore
 
 # update terminfo

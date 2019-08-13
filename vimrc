@@ -120,17 +120,22 @@ if plugin#exists('ale')
     let g:ale_sign_error = '▶'
     let g:ale_sign_warning = '▶'
     let g:ale_php_langserver_use_global = 1
-    let g:ale_php_langserver_executable = $HOME . '/.composer/vendor/bin/php-language-server.php'
+
+    let g:ale_php_langserver_executable = 
+        \ $HOME . '/.composer/vendor/bin/php-language-server.php'
 
     let g:ale_linters = {
-        \ 'php': ['langserver'],
+        \ 'php': ['phpcs', 'langserver'],
         \ }
 
     nnoremap ]a :ALENext<cr>
     nnoremap [a :ALEPrevious<cr>
-    nnoremap ]d :ALEGoToDefinition<cr>
-    nnoremap ]r :ALEFindREferences<cr>
-    nnoremap ]h :ALEHover<cr>
+    nnoremap <leader>ag :ALEGoToDefinition<cr>
+    nnoremap <leader>ar :ALEFindReferences<cr>
+    nnoremap <leader>ah :ALEHover<cr>
+    nnoremap <leader>ad :ALEDetail<cr>
+    nnoremap <leader>ai :ALEInfo<cr>
+    nnoremap <leader>oa :ALEToggle<cr>
 endif
 
 if plugin#exists('delimitmate')
