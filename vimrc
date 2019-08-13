@@ -48,6 +48,13 @@ augroup settings
     autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
 augroup end
 
+augroup preview
+    autocmd!
+    autocmd WinEnter * if &previewwindow
+        \ | setlocal norelativenumber nonumber wrap signcolumn=no
+        \ | endif
+augroup end
+
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
 let g:netrw_home = $HOME . '/.cache/vim'
@@ -72,9 +79,9 @@ nnoremap g' m`:call line#ender("''")<cr>``
 vnoremap g; :call line#ender(';')<cr>gv
 vnoremap g, :call line#ender(',')<cr>gv
 vnoremap g' :call line#ender("'")<cr>gv
-inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``
-inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``
-inoremap <c-g>' <esc>m`:call line#ender("''")<cr>``
+inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
+inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
+inoremap <c-g>' <esc>m`:call line#ender("''")<cr>``a
 
 nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
