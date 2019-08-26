@@ -79,6 +79,3 @@
 [submodule "zsh/plugins/nord-dircolors"]
 	path = zsh/plugins/nord-dircolors
 	url = http://github.com/arcticicestudio/nord-dircolors
-[submodule "vim/pack/plugins/start/vimwiki"]
-	path = vim/pack/plugins/start/vimwiki
-	url = https://github.com/vimwiki/vimwiki
