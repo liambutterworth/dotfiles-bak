@@ -116,28 +116,6 @@ nnoremap <leader>oc :set cursorcolumn!<cr>
 " Plugins
 "
 
-if plugin#exists('ale')
-    let g:ale_sign_error = '▶'
-    let g:ale_sign_warning = '▶'
-    let g:ale_php_langserver_use_global = 1
-
-    let g:ale_php_langserver_executable = 
-        \ $HOME . '/.composer/vendor/bin/php-language-server.php'
-
-    let g:ale_linters = {
-        \ 'php': ['phpcs', 'langserver'],
-        \ }
-
-    nnoremap ]a :ALENext<cr>
-    nnoremap [a :ALEPrevious<cr>
-    nnoremap <leader>ag :ALEGoToDefinition<cr>
-    nnoremap <leader>ar :ALEFindReferences<cr>
-    nnoremap <leader>ah :ALEHover<cr>
-    nnoremap <leader>ad :ALEDetail<cr>
-    nnoremap <leader>ai :ALEInfo<cr>
-    nnoremap <leader>oa :ALEToggle<cr>
-endif
-
 if plugin#exists('delimitmate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
@@ -178,10 +156,6 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if plugin#exists('goyo.vim')
-    nnoremap <leader>gg :Goyo<cr>
-endif
-
 if plugin#exists('vim-gutentags')
     let g:gutentags_enabled = command#exists('ctags')
     let g:gutentags_project_root = ['.git']
@@ -194,16 +168,6 @@ if plugin#exists('nord-vim')
     let g:nord_uniform_diff_background = 1
 
     colorscheme nord
-endif
-
-if plugin#exists('ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
-    inoremap <c-j> <nop>
 endif
 
 if plugin#exists('vim-context-commentstring')
@@ -250,14 +214,4 @@ endif
 
 if plugin#exists('vim-javascript')
     let g:javascript_plugin_jsdoc = 1
-endif
-
-if plugin#exists('vimwiki')
-    let g:vimwiki_global_ext = 0
-
-    let g:vimwiki_list = [{
-        \ 'path': $HOME . '/Dropbox/Notes',
-        \ 'syntax': 'markdown',
-        \ 'ext': '.md'
-        \ }]
 endif

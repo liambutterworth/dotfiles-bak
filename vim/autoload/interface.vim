@@ -11,17 +11,6 @@ function! interface#StatusLine()
     let output .= !empty(branch) ? ' ' . branch : ''
     let output .= '%=%c:%l/%L'
 
-    if plugin#exists('ale')
-        let ale = ale#statusline#Count(bufnr(''))
-        let errors = ale.error
-        let warnings = ale.total - errors
-
-        let output .= ' '
-            \ . errors . 'e'
-            \ . ' '
-            \ . warnings . 'w'
-    endif
-
     let output .= !empty(permissions) ? ' ' . permissions : ''
 
     return output . ' '
