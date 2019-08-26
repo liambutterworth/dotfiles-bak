@@ -82,6 +82,3 @@
 [submodule "vim/pack/plugins/start/vimwiki"]
 	path = vim/pack/plugins/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki
-[submodule "vim/pack/plugins/start/goyo.vim"]
-	path = vim/pack/plugins/start/goyo.vim
-	url = https://github.com/junegunn/goyo.vim
