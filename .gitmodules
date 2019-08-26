@@ -25,9 +25,6 @@
 [submodule "vim/pack/plugins/start/php.vim"]
 	path = vim/pack/plugins/start/php.vim
 	url = http://github.com/stanangeloff/php.vim
-[submodule "vim/pack/plugins/start/ultisnips"]
-	path = vim/pack/plugins/start/ultisnips
-	url = http://github.com/sirver/ultisnips
 [submodule "vim/pack/plugins/start/vim-blade"]
 	path = vim/pack/plugins/start/vim-blade
 	url = http://github.com/jwalton512/vim-blade
