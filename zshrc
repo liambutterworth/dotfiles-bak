@@ -98,7 +98,7 @@ alias gss='g staged'
 alias gun='g unstage'
 alias gwh='g whoami'
 alias gsa='g submodule add'
-alias gsr='git-submodule-remove'
+alias gsd='g submodule deinit'
 alias gm='git merge'
 alias gmt='g merge-test'
 
