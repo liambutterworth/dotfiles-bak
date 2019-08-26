@@ -1,0 +1,13 @@
+<ruleset>
+    <rule ref="PSR12">
+        <exclude name="PSR2.ControlStructures.ControlStructureSpacing.SpacingAfterOpenBrace" />
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction" />
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterUse" />
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="80" />
+        </properties>
+    </rule>
+</ruleset>
