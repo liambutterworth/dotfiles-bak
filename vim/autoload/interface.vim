@@ -4,14 +4,12 @@
 
 function! interface#StatusLine()
     let output = ' '
-    let branch = command#branch()
-    let permissions = command#permissions()
 
     let output .= '%f%m'
-    let output .= !empty(branch) ? ' ' . branch : ''
-    let output .= '%=%c:%l/%L'
-
-    let output .= !empty(permissions) ? ' ' . permissions : ''
+    let output .= '%='
+    let output .= '%c:%l/%L'
+    let output .= ' %{&fileencoding}'
+    let output .= ' %{&fileformat}'
 
     return output . ' '
 endfunction
