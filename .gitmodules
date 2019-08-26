@@ -40,9 +40,6 @@
 [submodule "vim/pack/plugins/start/vim-endwise"]
 	path = vim/pack/plugins/start/vim-endwise
 	url = http://github.com/tpope/vim-endwise
-[submodule "vim/pack/plugins/start/vim-eunuch"]
-	path = vim/pack/plugins/start/vim-eunuch
-	url = http://github.com/tpope/vim-eunuch
 [submodule "vim/pack/plugins/start/vim-fugitive"]
 	path = vim/pack/plugins/start/vim-fugitive
 	url = http://github.com/tpope/vim-fugitive
