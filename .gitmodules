@@ -88,6 +88,3 @@
 [submodule "vim/pack/plugins/start/goyo.vim"]
 	path = vim/pack/plugins/start/goyo.vim
 	url = https://github.com/junegunn/goyo.vim
-[submodule "vim/pack/plugins/start/ale"]
-	path = vim/pack/plugins/start/ale
-	url = http://github.com/dense-analysis/ale
