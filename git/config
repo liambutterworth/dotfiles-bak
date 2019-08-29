@@ -3,6 +3,8 @@
     email = liambutterworth@randallreilly.com
 [credential]
     helper = cache --timeout=3600
+[init]
+    templatedir = ~/.dotfiles/git/template
 [core]
     editor = vim
 [diff]
