@@ -43,9 +43,6 @@
 [submodule "vim/pack/plugins/start/vim-fugitive"]
 	path = vim/pack/plugins/start/vim-fugitive
 	url = http://github.com/tpope/vim-fugitive
-[submodule "vim/pack/plugins/start/vim-gutentags"]
-	path = vim/pack/plugins/start/vim-gutentags
-	url = http://github.com/ludovicchabant/vim-gutentags
 [submodule "vim/pack/plugins/start/vim-indent-object"]
 	path = vim/pack/plugins/start/vim-indent-object
 	url = http://github.com/michaeljsmith/vim-indent-object
