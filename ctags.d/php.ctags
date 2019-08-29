@@ -1,2 +1,1 @@
---PHP-kinds=+cfi
---exclude=*Test.php
+--PHP-kinds=cdfint
