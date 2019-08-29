@@ -54,9 +54,9 @@ zstyle ':vcs_info:*' formats '%b%c%u'
 #
 
 alias ls='ls --color=auto --group-directories-first'
-alias less='less --clear-screen --raw-control-chars'
+alias ll='ls -lhAGL --time-style=+'
 alias tree='tree --dirsfirst -I ".git|vendor|node_modules"'
-
+alias less='less --clear-screen --raw-control-chars'
 alias rg='rg --hidden --follow --pretty'
 alias rgf='rg --files | rg'
 
