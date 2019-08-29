@@ -71,18 +71,10 @@ nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
-
 nnoremap g= mmgg=G`m
-nnoremap g; m`:call line#ender(';')<cr>``
-nnoremap g, m`:call line#ender(',')<cr>``
-nnoremap g' m`:call line#ender("''")<cr>``
-vnoremap g; :call line#ender(';')<cr>gv
-vnoremap g, :call line#ender(',')<cr>gv
-vnoremap g' :call line#ender("'")<cr>gv
-inoremap <c-g>; <esc>m`:call line#ender(';')<cr>``a
-inoremap <c-g>, <esc>m`:call line#ender(',')<cr>``a
-inoremap <c-g>' <esc>m`:call line#ender("''")<cr>``a
 
+nnoremap ]t :tnext<cr>
+nnoremap [t :tprevious<cr>
 nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
@@ -96,6 +88,8 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>W :wa<cr>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
+
+nnoremap <leader>r :so ~/.vimrc<cr>
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -115,6 +109,17 @@ nnoremap <leader>oi :set ignorecase!<cr>
 nnoremap <leader>or :set relativenumber!<cr>
 nnoremap <leader>ol :set cursorline!<cr>
 nnoremap <leader>oc :set cursorcolumn!<cr>
+
+nnoremap <c-j>; m`:call line#ender(';')<cr>``
+nnoremap <c-j>, m`:call line#ender(',')<cr>``
+nnoremap <c-j>' m`:call line#ender("''")<cr>``
+vnoremap <c-j>; :call line#ender(';')<cr>gv
+vnoremap <c-j>, :call line#ender(',')<cr>gv
+vnoremap <c-j>' :call line#ender("'")<cr>gv
+inoremap <c-j>; <esc>m`:call line#ender(';')<cr>``a
+inoremap <c-j>, <esc>m`:call line#ender(',')<cr>``a
+inoremap <c-j>' <esc>m`:call line#ender("''")<cr>``a
+inoremap <c-j> <nop>
 
 "
 " Plugins
@@ -160,18 +165,18 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if plugin#exists('vim-gutentags')
-    let g:gutentags_enabled = command#exists('ctags')
-    let g:gutentags_project_root = ['.git']
-    let g:gutentags_ctags_tagfile = '.git/tags'
-endif
-
 if plugin#exists('nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
     let g:nord_uniform_diff_background = 1
 
     colorscheme nord
+endif
+
+if plugin#exists('vim-gutentags')
+    let g:gutentags_enabled = command#exists('ctags')
+    let g:gutentags_project_root = ['.git']
+    let g:gutentags_ctags_tagfile = '.git/tags'
 endif
 
 if plugin#exists('vim-context-commentstring')
