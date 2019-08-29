@@ -5,18 +5,19 @@ git submodule update --init --recursive --remote
 ~/.dotfiles/zsh/plugins/fzf/install --bin
 
 # create directories
-mkdir -p ~/.terminfo ~/.cache/zsh ~/.cache/vim/{swap,backup,undo}
+mkdir -p \
+    ~/.cache/vim/{swap,backup,undo} \
+    ~/.cache/zsh \
+    ~/.terminfo
 
 # symlink dotfiles
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
+ln -sf ~/.dotfiles/git/config ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/vim ~/.vim
-ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
-ln -sf ~/.dotfiles/phpcs.xml ~/.phpcs.xml
-ln -sf ~/.dotfiles/ignore ~/.ignore
 
 # update terminfo
 tic -o $HOME/.terminfo tmux.terminfo
