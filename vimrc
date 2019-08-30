@@ -173,10 +173,14 @@ if plugin#exists('nord-vim')
     colorscheme nord
 endif
 
-if plugin#exists('vim-gutentags')
-    let g:gutentags_enabled = command#exists('ctags')
-    let g:gutentags_project_root = ['.git']
-    let g:gutentags_ctags_tagfile = '.git/tags'
+if plugin#exists('ultisnips')
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+    inoremap <c-j> <nop>
 endif
 
 if plugin#exists('vim-context-commentstring')

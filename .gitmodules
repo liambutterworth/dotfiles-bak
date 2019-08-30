@@ -73,3 +73,6 @@
 [submodule "zsh/plugins/nord-dircolors"]
 	path = zsh/plugins/nord-dircolors
 	url = http://github.com/arcticicestudio/nord-dircolors
+[submodule "vim/pack/plugins/start/ultisnips"]
+	path = vim/pack/plugins/start/ultisnips
+	url = http://github.com/sirver/ultisnips
