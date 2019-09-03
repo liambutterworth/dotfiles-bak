@@ -109,6 +109,7 @@ nnoremap <leader>oi :set ignorecase!<cr>
 nnoremap <leader>or :set relativenumber!<cr>
 nnoremap <leader>ol :set cursorline!<cr>
 nnoremap <leader>oc :set cursorcolumn!<cr>
+nnoremap <leader>om :exec 'set mouse=' . (&mouse == '' ? 'a' : '')<cr>
 
 nnoremap <c-j>; m`:call line#ender(';')<cr>``
 nnoremap <c-j>, m`:call line#ender(',')<cr>``
