@@ -34,6 +34,7 @@ set noswapfile
 set nowrap
 set number relativenumber
 set signcolumn=yes
+set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
 set statusline=%!ui#StatusLine()
@@ -44,7 +45,6 @@ set wildmenu wildignorecase wildmode=full
 
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
-let g:netrw_home = $HOME . '/.cache/vim'
 
 augroup settings
     autocmd!
@@ -115,6 +115,7 @@ inoremap <c-j> <nop>
 
 call plug#begin('~/.vim/plugs')
 
+Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'chrisbra/vim-sh-indent'
 Plug 'christoomey/vim-tmux-navigator'
@@ -143,10 +144,19 @@ if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-html',
         \ 'coc-css',
-        \ 'coc-json',
         \ 'coc-tsserver',
-        \ 'coc-phpls'
+        \ 'coc-vetur',
+        \ 'coc-json',
+        \ 'coc-phpls',
         \ ]
+
+    function! s:show_documentation() abort
+        if &filetype == 'vim'
+            execute 'h ' . expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
 
     nmap <silent> gd <plug>(coc-definition)
     nmap <silent> gy <plug>(coc-type-definition)
@@ -155,6 +165,7 @@ if has_key(g:plugs, 'coc.nvim')
 
     nnoremap ]c <plug>(coc-diagnostic-next)
     nnoremap [c <plug>(coc-diagnostic-prev)
+    nnoremap <silent> K :call <sid>show_documentation()<cr>
 endif
 
 if has_key(g:plugs, 'delimitmate')
@@ -173,11 +184,16 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
         \ 'ctrl-s': 'split',
-        \ 'ctrl-v': 'vsplit'
+        \ 'ctrl-v': 'vsplit',
         \ }
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-j> <plug>(fzf-complete-file)
+    imap <c-x><c-f> <plug>(fzf-complete-path)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
@@ -190,11 +206,6 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>] :Tags<cr>
     nnoremap <leader>` :Marks<cr>
     nnoremap <leader>G :Lines<cr>
-
-    imap <c-x><c-k> <plug>(fzf-complete-word)
-    imap <c-x><c-j> <plug>(fzf-complete-file)
-    imap <c-x><c-f> <plug>(fzf-complete-path)
-    imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
 if has_key(g:plugs, 'nord-vim')
