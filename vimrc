@@ -15,11 +15,9 @@ syntax enable
 set autoread
 set autoindent
 set backspace=indent,eol,start
-set backup backupdir=$HOME/.cache/vim/backup//
 set complete=.,w,b,u,t,k
 set completeopt-=preview
 set dictionary=/usr/share/dict/words
-set directory=$HOME/.cache/vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -30,34 +28,29 @@ set ignorecase smartcase
 set laststatus=2
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
+set nobackup nowritebackup
 set nojoinspaces
+set noswapfile
 set nowrap
 set number relativenumber
 set signcolumn=yes
 set spelllang=en_us
 set splitbelow splitright
-set statusline=%!interface#StatusLine()
-set tabline=%!interface#TabLine()
+set statusline=%!ui#StatusLine()
+set tabline=%!ui#TabLine()
 set undofile undodir=$HOME/.cache/vim/undo//
-set viminfo+=n$HOME/.cache/vim/viminfo
+set updatetime=300
 set wildmenu wildignorecase wildmode=full
+
+let mapleader = ' '
+let g:vim_indent_cont = &shiftwidth
+let g:netrw_home = $HOME . '/.cache/vim'
 
 augroup settings
     autocmd!
     autocmd filetype * setlocal formatoptions-=o
     autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
 augroup end
-
-augroup preview
-    autocmd!
-    autocmd WinEnter * if &previewwindow
-        \ | setlocal norelativenumber nonumber wrap signcolumn=no
-        \ | endif
-augroup end
-
-let mapleader = ' '
-let g:vim_indent_cont = &shiftwidth
-let g:netrw_home = $HOME . '/.cache/vim'
 
 "
 " Mappings
@@ -84,12 +77,6 @@ nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wa<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-
-nnoremap <leader>r :so ~/.vimrc<cr>
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -126,13 +113,57 @@ inoremap <c-j> <nop>
 " Plugins
 "
 
-if plugin#exists('delimitmate')
+call plug#begin('~/.vim/plugs')
+
+Plug 'arcticicestudio/nord-vim'
+Plug 'chrisbra/vim-sh-indent'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'jwalton512/vim-blade'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'raimondi/delimitmate'
+Plug 'sirver/ultisnips'
+Plug 'stanangeloff/php.vim'
+Plug 'suy/vim-context-commentstring'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'posva/vim-vue'
+
+call plug#end()
+
+if has_key(g:plugs, 'coc.nvim')
+    let g:coc_global_extensions = [
+        \ 'coc-html',
+        \ 'coc-css',
+        \ 'coc-json',
+        \ 'coc-tsserver',
+        \ 'coc-phpls'
+        \ ]
+
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
+
+    nnoremap ]c <plug>(coc-diagnostic-next)
+    nnoremap [c <plug>(coc-diagnostic-prev)
+endif
+
+if has_key(g:plugs, 'delimitmate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
 
-if plugin#exists('fzf.vim') && command#exists('fzf')
-    set runtimepath+=$PLUGINS/fzf
+if has_key(g:plugs, 'fzf.vim') && executable('fzf')
+    set runtimepath+=$ZPLUG_HOME/repos/junegunn/fzf
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
@@ -166,7 +197,7 @@ if plugin#exists('fzf.vim') && command#exists('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 endif
 
-if plugin#exists('nord-vim')
+if has_key(g:plugs, 'nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
     let g:nord_uniform_diff_background = 1
@@ -174,17 +205,16 @@ if plugin#exists('nord-vim')
     colorscheme nord
 endif
 
-if plugin#exists('ultisnips')
+if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
     nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
-    inoremap <c-j> <nop>
 endif
 
-if plugin#exists('vim-context-commentstring')
+if has_key(g:plugs, 'vim-context-commentstring')
     let g:context#commentstring#table = {}
 
     let g:context#commentstring#table['html'] = {
@@ -209,12 +239,12 @@ if plugin#exists('vim-context-commentstring')
         \ }
 endif
 
-if plugin#exists('vim-easy-align')
+if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
 
-if plugin#exists('vim-gitgutter')
+if has_key(g:plugs, 'vim-gitgutter')
     let g:gitgutter_map_keys = 0
 
     nnoremap ]h <plug>GitGutterNextHunk
@@ -226,6 +256,6 @@ if plugin#exists('vim-gitgutter')
     xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
-if plugin#exists('vim-javascript')
+if has_key(g:plugs, 'vim-javascript')
     let g:javascript_plugin_jsdoc = 1
 endif

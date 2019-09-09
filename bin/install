@@ -1,25 +1,14 @@
 #!/bin/bash
 
-# install submodules
-git submodule update --init --recursive --remote
-~/.dotfiles/zsh/plugins/fzf/install --bin
-
-# create directories
-mkdir -p \
-    ~/.cache/vim/{swap,backup,undo} \
-    ~/.cache/zsh \
-    ~/.terminfo
-
-# symlink dotfiles
-ln -sf ~/.dotfiles/ctags.d ~/.ctags.d
-ln -sf ~/.dotfiles/git/config ~/.gitconfig
-ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotfiles/zsh ~/.zsh
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
+ln -sf ~/.dotifles/vim ~/.vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
-ln -sf ~/.dotfiles/vim ~/.vim
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 
-# update terminfo
-tic -o $HOME/.terminfo tmux.terminfo
-tic -o $HOME/.terminfo tmux-256color.terminfo
-tic -o $HOME/.terminfo xterm-256color.terminfo
+export ZPLUG_HOME=~/.zsh/zplug
+git clone http://github.com/zplug/zplug $ZPLUG_HOME
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

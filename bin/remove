@@ -1,8 +1,8 @@
 #!/bin/bash
-rm ~/.terminfo
+
+rm -rf ~/.zsh/zplug
+rm -rf ~/.vim/plugs
+rm ~/.{zsh,zshrc}
+rm ~/.{vim,vimrc}
 rm ~/.gitconfig
 rm ~/.tmux.conf
-rm ~/.{zshrc,zsh}
-rm ~/.{vimrc,vim}
-rm ~/.ctags.d
-rm ~/.ignore

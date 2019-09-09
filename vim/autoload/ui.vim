@@ -2,7 +2,7 @@
 " Interface
 "
 
-function! interface#StatusLine()
+function! ui#StatusLine()
     let output = ' '
 
     let output .= '%f%m'
@@ -14,7 +14,7 @@ function! interface#StatusLine()
     return output . ' '
 endfunction
 
-function! interface#TabLine()
+function! ui#TabLine()
     let output = ''
 
     for index in range(tabpagenr('$'))

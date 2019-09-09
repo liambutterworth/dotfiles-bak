@@ -14,15 +14,12 @@ set -o ignoreeof
 typeset -U path
 typeset -U fpath
 
-export CACHE="$HOME/.cache/zsh"
-export PLUGINS="$HOME/.zsh/plugins"
-export SCRIPTS="$HOME/.zsh/scripts"
+export ZSH_DIR="$HOME/.zsh"
+export ZPLUG_HOME=$ZSH_DIR/zplug
 
-fpath=($CACHE $fpath)
-fpath=($SCRIPTS $fpath)
+fpath=($ZSH_DIR/scripts $fpath)
 
-autoload -Uz $SCRIPTS/*
-autoload -Uz compinit && compinit -d "$CACHE/zcompdump"
+autoload -Uz $ZSH_DIR/scripts/*
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
@@ -60,6 +57,11 @@ alias less='less --clear-screen --raw-control-chars'
 alias rg='rg --hidden --follow --pretty'
 alias rgf='rg --files | rg'
 
+alias n='npm'
+alias l='laravel'
+alias c='composer'
+alias a='php artisan'
+
 alias v='vim'
 alias vt='v -p'
 alias vs='v -o'
@@ -71,7 +73,7 @@ alias ta='t attach-session -t'
 alias tk='t kill-session -t'
 alias tK='t kill-server'
 alias tl='t list-sessions'
-alias tc='clear && t clear-history'
+alias tc='clear && tmux clear-history'
 
 alias d='docker'
 alias db='d build'
@@ -123,8 +125,6 @@ alias gr='cd $(git root)'
 alias gss='g staged'
 alias gun='g unstage'
 alias gwh='g whoami'
-alias gsa='g submodule add'
-alias gsd='g submodule deinit'
 alias gm='git merge'
 alias gmt='g merge-test'
 
@@ -132,37 +132,23 @@ alias gmt='g merge-test'
 # Plugins
 #
 
-if plugin-exists 'zsh-completions'; then
-    fpath=("$PLUGINS/zsh-completions/src" $fpath)
-    compinit -d "$CACHE/zcompdump"
-fi
+source $ZPLUG_HOME/init.zsh
 
-if plugin-exists 'zsh-autosuggestions'; then
-    source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(foward-char end-of-line)
-fi
+zplug 'zsh-users/zsh-completions'
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-history-substring-search'
+zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+zplug 'junegunn/fzf', as:command, hook-build:'./install --bin'
+zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
 
-if plugin-exists 'zsh-history-substring-search'; then
-    source "$PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh"
+zplug load
+
+if zplug check 'zsh-users/zsh-history-substring-search'; then
     bindkey '^P' history-substring-search-up
     bindkey '^N' history-substring-search-down
 fi
 
-if plugin-exists 'zsh-syntax-highlighting'; then
-    source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-
-if plugin-exists 'nord-dircolors'; then
-    eval "$(dircolors -b $PLUGINS/nord-dircolors/src/dir_colors)"
-    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-fi
-
-if plugin-exists 'fzf'; then
-    bindkey '^G' fzf-cd-widget
-
-    source "$PLUGINS/fzf/shell/completion.zsh"
-    source "$PLUGINS/fzf/shell/key-bindings.zsh"
-
+if zplug check 'junegunn/fzf'; then
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
     local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
 
@@ -171,6 +157,4 @@ if plugin-exists 'fzf'; then
     export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
-
-    path=("$PLUGINS/fzf/bin" $path)
 fi
