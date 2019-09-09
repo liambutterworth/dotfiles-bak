@@ -150,22 +150,14 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-phpls',
         \ ]
 
-    function! s:show_documentation() abort
-        if &filetype == 'vim'
-            execute 'h ' . expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-
-    nmap <silent> gd <plug>(coc-definition)
-    nmap <silent> gy <plug>(coc-type-definition)
-    nmap <silent> gi <plug>(coc-implementation)
-    nmap <silent> gr <plug>(coc-references)
+    nmap gd <plug>(coc-definition)
+    nmap gy <plug>(coc-type-definition)
+    nmap gi <plug>(coc-implementation)
+    nmap gr <plug>(coc-references)
 
     nnoremap ]c <plug>(coc-diagnostic-next)
     nnoremap [c <plug>(coc-diagnostic-prev)
-    nnoremap <silent> K :call <sid>show_documentation()<cr>
+    nnoremap K :call CocAction('doHover')<cr>
 endif
 
 if has_key(g:plugs, 'delimitmate')
