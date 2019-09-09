@@ -138,7 +138,8 @@ zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-zplug 'junegunn/fzf', as:command, hook-build:'./install --bin'
+zplug 'junegunn/fzf', hook-build: './install --bin'
+zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
 
 zplug load
