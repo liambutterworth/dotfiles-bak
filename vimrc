@@ -46,6 +46,8 @@ set wildmenu wildignorecase wildmode=full
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
 
+" highlight VertSplit ctermfg=0 ctermbg=0
+
 augroup settings
     autocmd!
     autocmd filetype * setlocal formatoptions-=o
@@ -204,6 +206,7 @@ if has_key(g:plugs, 'nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
     let g:nord_uniform_diff_background = 1
+    let g:nord_bold_vertical_split_line = 1
 
     colorscheme nord
 endif
