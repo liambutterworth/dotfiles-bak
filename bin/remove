@@ -6,3 +6,4 @@ rm ~/.{zsh,zshrc}
 rm ~/.{vim,vimrc}
 rm ~/.gitconfig
 rm ~/.tmux.conf
+rm ~/.config/alacritty/alacritty.yml

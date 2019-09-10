@@ -1,11 +1,14 @@
 #!/bin/bash
 
+mkdir -p ~/.config/{alacritty,vim,zsh}
+
 ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
 ln -sf ~/.dotifles/vim ~/.vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 export ZPLUG_HOME=~/.zsh/zplug
 git clone http://github.com/zplug/zplug $ZPLUG_HOME
