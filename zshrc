@@ -52,10 +52,7 @@ zstyle ':vcs_info:*' formats '%b%c%u'
 
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -lhAGL --time-style=+'
-alias tree='tree --dirsfirst -I ".git|vendor|node_modules"'
 alias less='less --clear-screen --raw-control-chars'
-alias rg='rg --hidden --follow --pretty'
-alias rgf='rg --files | rg'
 
 alias n='npm'
 alias l='laravel'
@@ -138,9 +135,10 @@ zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-zplug 'junegunn/fzf', hook-build: './install --bin'
+zplug 'junegunn/fzf', hook-build:'./install --bin'
 zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
+zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
 
 zplug load
 
@@ -158,4 +156,9 @@ if zplug check 'junegunn/fzf'; then
     export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
     export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
     export FZF_TMUX=1
+fi
+
+if zplug check 'BurntSushi/ripgrep'; then
+    alias rg='rg --hidden --follow --pretty'
+    alias rgf='rg --files | rg'
 fi
