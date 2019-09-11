@@ -1,12 +1,45 @@
+#
+# Git Config
+#
+# :: Core
+# :: User
+# :: Diff
+# :: Credential
+# :: Alias
+
+#
+# Core
+#
+
+[core]
+    editor = vim
+
+#
+# User
+#
+
 [user]
     name = Liam Butterworth
     email = liambutterworth@randallreilly.com
-[credential]
-    helper = cache --timeout=3600
-[core]
-    editor = vim
+
+#
+# Diff
+#
+
 [diff]
     tool = vimdiff
+
+#
+# Credential
+#
+
+[credential]
+    helper = cache --timeout=3600
+
+#
+# Alias
+#
+
 [alias]
     ammend = commit --amend
     authors = !sh -c 'git log --format="%aN" | sort -k 2 -u'
