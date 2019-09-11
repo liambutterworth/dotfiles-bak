@@ -21,8 +21,8 @@ export ZPLUG_HOME="$ZSH_DOTDIR/zplug"
 
 fpath=($ZSH_CACHE, $ZSH_SCRIPTS, $fpath)
 
-autoload -Uz "$ZSH_DOTDIR/scripts/*"
-autoload -Uz compinit && compinit -d "$ZSH_CACHE/zcompdump"
+autoload -Uz $ZSH_DOTDIR/scripts/*
+autoload -Uz compinit && compinit -d $ZSH_CACHE/zcompdump
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
