@@ -18,7 +18,7 @@ set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set completeopt-=preview
 set dictionary=/usr/share/dict/words
-set directory=~/.cache/vim/swap//
+set directory=~/.vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -37,14 +37,13 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set undofile undodir=~/.cache/vim/undo//
+set undofile undodir=~/.vim/undo//
 set updatetime=300
-set viminfo+=n~/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
 let g:mapleader = ' '
-let g:netrw_home = $HOME . '/.cache/vim/'
 let g:netrw_altfile = 1
+let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:vim_indent_cont = &shiftwidth
 

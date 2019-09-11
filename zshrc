@@ -15,16 +15,13 @@ typeset -U path
 typeset -U fpath
 
 export ZSH_DOTDIR=$HOME/.zsh
-export ZSH_CACHE=$HOME/.cache/zsh
 export ZSH_SCRIPTS=$ZSH_DOTDIR/scripts
-export ZPLUG_HOME=$ZSH_DOTDIR/zplug
+export ZPLUG_HOME=$ZSH_DOTDIR/plugs/zplug
 
-fpath=($ZSH_CACHE, $ZSH_SCRIPTS, $fpath)
+fpath=($ZSH_SCRIPTS, $fpath)
 
 autoload -Uz $ZSH_DOTDIR/scripts/*
-autoload -Uz compinit && compinit -d $ZSH_CACHE/zcompdump
 autoload -Uz edit-command-line
-autoload -Uz vcs_info
 
 bindkey -v
 bindkey '^w' backward-kill-word
@@ -32,22 +29,10 @@ bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^[[Z' reverse-menu-complete
 
-function zle-keymap-select zle-line-init { set-prompt }
-function precmd { print; vcs_info }
-function preexec { print }
-
-zle -N zle-keymap-select
-zle -N zle-line-init
-
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' completer _complete _correct _ignored _approximate
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '*'
-zstyle ':vcs_info:*' stagedstr '*'
-zstyle ':vcs_info:*' formats '%b%c%u'
 
 #
 # Aliases
@@ -70,6 +55,8 @@ zplug 'junegunn/fzf', hook-build:'./install --bin'
 zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
+zplug 'mafredri/zsh-async', from:github
+zplug 'sindresorhus/pure', use:'pure.zsh', from:github, as:theme
 
 zplug load
 
@@ -91,4 +78,8 @@ if zplug check 'BurntSushi/ripgrep'; then
     alias rg='rg --hidden --follow --pretty'
     alias rgf='rg --files | rg'
     export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+
+if zplug check 'sindresorhus/pure'; then
+    function preexec { print }
 fi
