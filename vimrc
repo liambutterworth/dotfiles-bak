@@ -26,7 +26,7 @@ set foldenable foldmethod=indent foldlevelstart=99
 set hidden
 set incsearch
 set ignorecase smartcase
-set laststatus=2
+set laststatus=0
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
 set nobackup nowritebackup
@@ -42,9 +42,11 @@ set updatetime=300
 set viminfo+=n~/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
-let mapleader = ' '
-let g:vim_indent_cont = &shiftwidth
+let g:mapleader = ' '
 let g:netrw_home = $HOME . '/.cache/vim/'
+let g:netrw_altfile = 1
+let g:netrw_fastbrowse = 0
+let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
@@ -57,60 +59,23 @@ augroup end
 " Mappings
 "
 
-nnoremap j gj
-nnoremap k gk
-nnoremap Y y$
-nnoremap <bs> <c-^>
+nmap j gj
+nmap k gk
+nmap Y y$
+nmap <bs> <c-^>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
-
-nnoremap ]<bs> :bnext<cr>
-nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
 nnoremap [<space> O<esc>j
-nnoremap ]e :<c-u>call line#move('n', 'down', v:count)<cr>
-nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
-vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
-vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
-
-nnoremap <leader>w :w<cr>
-nnoremap <leader>W :wq<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :q!<cr>
-nnoremap <leader>t :tabe %<cr>
-nnoremap <leader>s :split<cr>
-nnoremap <leader>v :vsplit<cr>
-nnoremap <leader>p :tabp<cr>
-nnoremap <leader>n :tabn<cr>
-nnoremap <leader>P :tabm -1<cr>
-nnoremap <leader>N :tabm +1<cr>
-nnoremap <leader>h <c-w>10<
-nnoremap <leader>j <c-w>10-
-nnoremap <leader>k <c-w>10+
-nnoremap <leader>l <c-w>10>
-
-nnoremap <leader>ow :set wrap!<cr>
-nnoremap <leader>os :set spell!<cr>
-nnoremap <leader>oh :set hlsearch!<cr>
-nnoremap <leader>oi :set ignorecase!<cr>
-nnoremap <leader>or :set relativenumber!<cr>
-nnoremap <leader>ol :set cursorline!<cr>
-nnoremap <leader>oc :set cursorcolumn!<cr>
-nnoremap <leader>om :exec 'set mouse=' . (&mouse == '' ? 'n' : '')<cr>
-
-inoremap <c-j> <nop>
-nnoremap <c-j>; m`:call line#ender(';')<cr>``
-nnoremap <c-j>, m`:call line#ender(',')<cr>``
-nnoremap <c-j>' m`:call line#ender("''")<cr>``
-vnoremap <c-j>; :call line#ender(';')<cr>gv
-vnoremap <c-j>, :call line#ender(',')<cr>gv
-vnoremap <c-j>' :call line#ender("'")<cr>gv
-inoremap <c-j>; <esc>m`:call line#ender(';')<cr>``a
-inoremap <c-j>, <esc>m`:call line#ender(',')<cr>``a
-inoremap <c-j>' <esc>m`:call line#ender("''")<cr>``a
+nnoremap <silent> ]<bs> :bnext<cr>
+nnoremap <silent> [<bs> :bprevious<cr>
+nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
+vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
 
 "
 " Plugins
@@ -128,7 +93,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
@@ -136,8 +100,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
@@ -165,7 +128,7 @@ if has_key(g:plugs, 'coc.nvim')
         \ : ":call CocAction('doHover')<cr>"
 endif
 
-if has_key(g:plugs, 'delimitmate')
+if has_key(g:plugs, 'delimitMate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
@@ -205,24 +168,17 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>G :Lines<cr>
 endif
 
-if has_key(g:plugs, 'nerdtree')
-    nnoremap <silent> <c-n> :NERDTreeToggle<cr>:AirlineRefresh<cr>
-
-    augroup nerdtreehidecwd
-        autocmd!
-        autocmd FileType nerdtree
-            \ setlocal conceallevel=3 concealcursor=n
-            \ | syntax match NERDTreeHideCWD #^[</].*$# conceal
-    augroup end
-endif
-
 if has_key(g:plugs, 'nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
-    let g:nord_uniform_diff_background = 1
     let g:nord_bold_vertical_split_line = 1
+    let g:nord_uniform_diff_background = 1
+    let g:nord_uniform_status_lines = 1
 
     colorscheme nord
+
+    highlight StatusLine ctermfg=0 ctermbg=0
+    highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
 if has_key(g:plugs, 'ultisnips')
@@ -232,23 +188,6 @@ if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
     nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
-endif
-
-if has_key(g:plugs, 'vim-airline')
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#show_buffers = 0
-    let g:airline#extensions#tabline#tab_min_count = 2
-    let g:airline#extensions#tabline#show_tab_count = 0
-    let g:airline#extensions#tabline#show_tab_type = 0
-    let g:airline#extensions#tabline#show_tab_nr = 0
-    let g:airline#extensions#tabline#show_splits = 0
-    let g:airline#extensions#tabline#show_close_button = 0
-
-    let g:airline_extensions = ['branch', 'tabline']
-
-    let g:airline_filetype_overrides = {
-        \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERDTree'), '' ]
-        \ }
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
