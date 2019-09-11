@@ -52,6 +52,7 @@ augroup settings
     autocmd!
     autocmd filetype * setlocal formatoptions-=o
     autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
+    autocmd bufread,bufnewfile *gitconfig* setlocal filetype=gitconfig
 augroup end
 
 "
