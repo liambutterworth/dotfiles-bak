@@ -37,8 +37,6 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set statusline=%!ui#statusline()
-set tabline=%!ui#tabline()
 set undofile undodir=~/.cache/vim/undo//
 set updatetime=300
 set viminfo+=n~/.cache/vim/viminfo
@@ -78,6 +76,10 @@ nnoremap [e :<c-u>call line#move('n', 'up', v:count)<cr>
 vnoremap ]e :<c-u>call line#move('v', 'down', v:count)<cr>
 vnoremap [e :<c-u>call line#move('v', 'up', v:count)<cr>
 
+nnoremap <leader>w :w<cr>
+nnoremap <leader>W :wq<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :q!<cr>
 nnoremap <leader>t :tabe %<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -126,6 +128,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
@@ -133,7 +136,8 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+Plug 'vim-airline/vim-airline'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -201,6 +205,17 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>G :Lines<cr>
 endif
 
+if has_key(g:plugs, 'nerdtree')
+    nnoremap <silent> <c-n> :NERDTreeToggle<cr>:AirlineRefresh<cr>
+
+    augroup nerdtreehidecwd
+        autocmd!
+        autocmd FileType nerdtree
+            \ setlocal conceallevel=3 concealcursor=n
+            \ | syntax match NERDTreeHideCWD #^[</].*$# conceal
+    augroup end
+endif
+
 if has_key(g:plugs, 'nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
@@ -217,6 +232,23 @@ if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
     nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+endif
+
+if has_key(g:plugs, 'vim-airline')
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#tab_min_count = 2
+    let g:airline#extensions#tabline#show_tab_count = 0
+    let g:airline#extensions#tabline#show_tab_type = 0
+    let g:airline#extensions#tabline#show_tab_nr = 0
+    let g:airline#extensions#tabline#show_splits = 0
+    let g:airline#extensions#tabline#show_close_button = 0
+
+    let g:airline_extensions = ['branch', 'tabline']
+
+    let g:airline_filetype_overrides = {
+        \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERDTree'), '' ]
+        \ }
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
