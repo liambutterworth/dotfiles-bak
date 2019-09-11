@@ -14,12 +14,15 @@ set -o ignoreeof
 typeset -U path
 typeset -U fpath
 
-export ZSH_DIR="$HOME/.zsh"
-export ZPLUG_HOME=$ZSH_DIR/zplug
+export ZSH_DOTDIR="$HOME/.zsh"
+export ZSH_CACHE="$HOME/.cache/zsh"
+export ZSH_SCRIPTS="$ZSH_DOTDIR/scripts"
+export ZPLUG_HOME="$ZSH_DOTDIR/zplug"
 
-fpath=($ZSH_DIR/scripts $fpath)
+fpath=($ZSH_CACHE, $ZSH_SCRIPTS, $fpath)
 
-autoload -Uz $ZSH_DIR/scripts/*
+autoload -Uz "$ZSH_DOTDIR/scripts/*"
+autoload -Uz compinit && compinit -d "$ZSH_CACHE/zcompdump"
 autoload -Uz edit-command-line
 autoload -Uz vcs_info
 
@@ -129,7 +132,7 @@ alias gmt='g merge-test'
 # Plugins
 #
 
-source $ZPLUG_HOME/init.zsh
+source "$ZPLUG_HOME/init.zsh"
 
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-autosuggestions'
