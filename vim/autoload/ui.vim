@@ -8,11 +8,6 @@
 " Status Line
 "
 
-function! ui#coctest() abort
-    let info = get(b:, 'coc_diagnostic_info', {})
-    return info
-endfunction
-
 function! ui#cocstatus() abort
     let info = get(b:, 'coc_diagnostic_info', {})
     let output = []
@@ -38,8 +33,9 @@ function! ui#statusline() abort
     let output .= '%='
     let output .= ui#cocstatus()
     let output .= ' %c:%l/%L'
+    let output .= ' '
 
-    return output . ' '
+    return output
 endfunction
 
 "

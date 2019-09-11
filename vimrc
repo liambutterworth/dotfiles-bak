@@ -18,6 +18,7 @@ set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set completeopt-=preview
 set dictionary=/usr/share/dict/words
+set directory=~/.cache/vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -30,7 +31,6 @@ set lazyredraw
 set list listchars=tab:│\ ,trail:·
 set nobackup nowritebackup
 set nojoinspaces
-set noswapfile
 set nowrap
 set number relativenumber
 set signcolumn=yes
@@ -39,14 +39,14 @@ set spelllang=en_us
 set splitbelow splitright
 set statusline=%!ui#statusline()
 set tabline=%!ui#tabline()
-set undofile undodir=$HOME/.cache/vim/undo//
+set undofile undodir=~/.cache/vim/undo//
 set updatetime=300
+set viminfo+=n~/.cache/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
 let mapleader = ' '
 let g:vim_indent_cont = &shiftwidth
-
-" highlight VertSplit ctermfg=0 ctermbg=0
+let g:netrw_home = $HOME . '/.cache/vim/'
 
 augroup settings
     autocmd!
@@ -68,8 +68,6 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 
-nnoremap ]t :tnext<cr>
-nnoremap [t :tprevious<cr>
 nnoremap ]<bs> :bnext<cr>
 nnoremap [<bs> :bprevious<cr>
 nnoremap ]<space> o<esc>'[k
@@ -100,6 +98,7 @@ nnoremap <leader>ol :set cursorline!<cr>
 nnoremap <leader>oc :set cursorcolumn!<cr>
 nnoremap <leader>om :exec 'set mouse=' . (&mouse == '' ? 'n' : '')<cr>
 
+inoremap <c-j> <nop>
 nnoremap <c-j>; m`:call line#ender(';')<cr>``
 nnoremap <c-j>, m`:call line#ender(',')<cr>``
 nnoremap <c-j>' m`:call line#ender("''")<cr>``
@@ -109,7 +108,6 @@ vnoremap <c-j>' :call line#ender("'")<cr>gv
 inoremap <c-j>; <esc>m`:call line#ender(';')<cr>``a
 inoremap <c-j>, <esc>m`:call line#ender(',')<cr>``a
 inoremap <c-j>' <esc>m`:call line#ender("''")<cr>``a
-inoremap <c-j> <nop>
 
 "
 " Plugins
@@ -119,18 +117,15 @@ call plug#begin('~/.vim/plugs')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
-Plug 'chrisbra/vim-sh-indent'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'raimondi/delimitmate'
-Plug 'sirver/ultisnips'
-Plug 'stanangeloff/php.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -138,7 +133,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'posva/vim-vue'
 
 call plug#end()
 
