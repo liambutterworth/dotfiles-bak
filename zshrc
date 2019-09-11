@@ -88,7 +88,7 @@ if zplug check 'junegunn/fzf'; then
 fi
 
 if zplug check 'BurntSushi/ripgrep'; then
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
     alias rg='rg --hidden --follow --pretty'
     alias rgf='rg --files | rg'
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
