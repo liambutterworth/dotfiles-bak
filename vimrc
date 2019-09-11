@@ -37,8 +37,8 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set statusline=%!ui#StatusLine()
-set tabline=%!ui#TabLine()
+set statusline=%!ui#statusline()
+set tabline=%!ui#tabline()
 set undofile undodir=$HOME/.cache/vim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=full
@@ -144,6 +144,7 @@ call plug#end()
 
 if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
+        \ 'coc-vimlsp',
         \ 'coc-html',
         \ 'coc-css',
         \ 'coc-tsserver',
@@ -159,7 +160,10 @@ if has_key(g:plugs, 'coc.nvim')
 
     nnoremap ]c <plug>(coc-diagnostic-next)
     nnoremap [c <plug>(coc-diagnostic-prev)
-    nnoremap K :call CocAction('doHover')<cr>
+
+    nnoremap <expr> K index(['vim', 'help'], &filetype) >= 0
+        \ ? ":execute 'help ' . expand('<cword>')<cr>"
+        \ : ":call CocAction('doHover')<cr>"
 endif
 
 if has_key(g:plugs, 'delimitmate')
