@@ -1,6 +1,6 @@
 # Install
 
-Dependencies: [alacritty](https://github.com/jwilm/alacritty), [nerd fonts](http://github.com/ryanoasis/nerd-fonts), [git](https://github.com/git/git), [zsh](https://github.com/zsh-users/zsh), [tmux](https://github.com/tmux/tmux), [vim](https://github.com/vim/vim)
+Dependencies: [alacritty](https://github.com/jwilm/alacritty), [font](https://github.com/adobe-fonts/source-code-pro), [git](https://github.com/git/git), [tmux](https://github.com/tmux/tmux), [vim](https://github.com/vim/vim), [zsh](https://github.com/zsh-users/zsh)
 
 ```
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles

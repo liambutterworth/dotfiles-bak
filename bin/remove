@@ -1,9 +1,6 @@
 #!/bin/bash
 
-rm -rf ~/.zsh/zplug
-rm -rf ~/.vim/plugs
-rm ~/.{zsh,zshrc}
-rm ~/.{vim,vimrc}
-rm ~/.gitconfig
-rm ~/.tmux.conf
+rm -rf ~/.vim/plugs ~/.vim
+rm -rf ~/.zsh/zplug ~/.zsh
 rm ~/.config/alacritty/alacritty.yml
+rm ~/.{gitconfig,tmux.conf,vimrc,zshrc}
