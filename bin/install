@@ -1,6 +1,9 @@
 #!/bin/bash
 
-mkdir -p ~/.config/{alacritty,vim,zsh}
+mkdir -p \
+    ~/.config/alacritty \
+    ~/.cache/{vim,zsh} \
+    ~/.cache/vim/{swap,undo}
 
 ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
