@@ -41,17 +41,19 @@ scrolling:
 #
 
 font:
+  size: 20
   normal:
-    family: SauceCodePro Nerd Font
+    family: Source Code Pro
     style: Light
   bold:
-    family: SauceCodePro Nerd Font
+    family: Source Code Pro
     style: Regular
   italic:
-    family: SauceCodePro Nerd Font
+    family: Source Code Pro
     style: Light Italic
-  size: 20
-
+  bold_italic:
+    family: Source Code Pro
+    style: Italic
   offset:
     x: 1
     y: 30
