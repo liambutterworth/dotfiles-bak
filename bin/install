@@ -1,16 +1,18 @@
 #!/bin/bash
 
-mkdir -p ~/.config/alacritty
-ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
-ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+mkdir -p \
+    ~/.cache/vim/{undo,swap} \
+    ~/.config/alacritty
+
 ln -sf ~/.dotifles/vim ~/.vim
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
-ln -sf ~/.dotfiles/zsh ~/.zsh
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-export ZPLUG_HOME=~/.zsh/zplug
-git clone http://github.com/zplug/zplug $ZPLUG_HOME
+curl -sL --proto-redir -all,https \
+    https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh

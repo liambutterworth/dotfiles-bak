@@ -14,13 +14,7 @@ set -o ignoreeof
 typeset -U path
 typeset -U fpath
 
-export ZSH_DOTDIR=$HOME/.zsh
-export ZSH_SCRIPTS=$ZSH_DOTDIR/scripts
-export ZPLUG_HOME=$ZSH_DOTDIR/plugs/zplug
-
-fpath=($ZSH_SCRIPTS, $fpath)
-
-autoload -Uz $ZSH_SCRIPTS/*
+autoload -Uz compinit && compinit
 autoload -Uz edit-command-line
 
 bindkey -v
@@ -45,7 +39,7 @@ alias less='less --clear-screen --raw-control-chars'
 # Plugins
 #
 
-source $ZPLUG_HOME/init.zsh
+source $HOME/.zplug/init.zsh
 
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
 zplug 'junegunn/fzf', hook-build:'./install --bin'

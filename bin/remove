@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm ~/.config/alacritty/alacritty.yml
-rm ~/.{gitconfig,tmux.conf,vim,vimrc,zsh,zshrc}
+rm ~/.{gitconfig,tmux.conf,zshrc,vimrc,vim}
