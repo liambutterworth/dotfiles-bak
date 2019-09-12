@@ -20,7 +20,7 @@ export ZPLUG_HOME=$ZSH_DOTDIR/plugs/zplug
 
 fpath=($ZSH_SCRIPTS, $fpath)
 
-autoload -Uz $ZSH_DOTDIR/scripts/*
+autoload -Uz $ZSH_SCRIPTS/*
 autoload -Uz edit-command-line
 
 bindkey -v
@@ -53,8 +53,8 @@ zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
 zplug 'mafredri/zsh-async', from:github
 zplug 'sindresorhus/pure', use:'pure.zsh', from:github, as:theme
-zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-autosuggestions'
+zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
 

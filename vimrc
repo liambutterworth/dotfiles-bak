@@ -48,9 +48,9 @@ let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
-    autocmd filetype * setlocal formatoptions-=o
-    autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
     autocmd bufread,bufnewfile *gitconfig* setlocal filetype=gitconfig
+    autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
+    autocmd filetype * setlocal formatoptions-=o
 augroup end
 
 "
