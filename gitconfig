@@ -1,40 +1,11 @@
 #
 # Git Config
 #
-# :: Core
-# :: User
-# :: Diff
-# :: Credential
 # :: Alias
-
-#
-# Core
-#
-
-[core]
-    editor = vim
-
-#
-# User
-#
-
-[user]
-    name = Liam Butterworth
-    email = liambutterworth@randallreilly.com
-
-#
-# Diff
-#
-
-[diff]
-    tool = vimdiff
-
-#
-# Credential
-#
-
-[credential]
-    helper = cache --timeout=3600
+# :: Core
+# :: Credential
+# :: Diff
+# :: User
 
 #
 # Alias
@@ -53,3 +24,32 @@
     unstage = reset --
     whoami = !git config user.name && git config user.email
     merge-test = merge --no-commit --no-ff
+
+#
+# Core
+#
+
+[core]
+    editor = vim
+
+#
+# Credential
+#
+
+[credential]
+    helper = cache --timeout=3600
+
+#
+# Diff
+#
+
+[diff]
+    tool = vimdiff
+
+#
+# User
+#
+
+[user]
+    name = Liam Butterworth
+    email = liambutterworth@randallreilly.com

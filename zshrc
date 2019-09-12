@@ -47,22 +47,23 @@ alias less='less --clear-screen --raw-control-chars'
 
 source $ZPLUG_HOME/init.zsh
 
+zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
+zplug 'junegunn/fzf', hook-build:'./install --bin'
+zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
+zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
+zplug 'mafredri/zsh-async', from:github
+zplug 'sindresorhus/pure', use:'pure.zsh', from:github, as:theme
 zplug 'zsh-users/zsh-completions'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-history-substring-search'
 zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-zplug 'junegunn/fzf', hook-build:'./install --bin'
-zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
-zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
-zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
-zplug 'mafredri/zsh-async', from:github
-zplug 'sindresorhus/pure', use:'pure.zsh', from:github, as:theme
 
 zplug load
 
-if zplug check 'zsh-users/zsh-history-substring-search'; then
-    bindkey '^P' history-substring-search-up
-    bindkey '^N' history-substring-search-down
+if zplug check 'BurntSushi/ripgrep'; then
+    alias rg='rg --hidden --follow --pretty'
+    alias rgf='rg --files | rg'
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
 fi
 
 if zplug check 'junegunn/fzf'; then
@@ -74,12 +75,11 @@ if zplug check 'junegunn/fzf'; then
     export FZF_TMUX=1
 fi
 
-if zplug check 'BurntSushi/ripgrep'; then
-    alias rg='rg --hidden --follow --pretty'
-    alias rgf='rg --files | rg'
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
-fi
-
 if zplug check 'sindresorhus/pure'; then
     function preexec { print }
+fi
+
+if zplug check 'zsh-users/zsh-history-substring-search'; then
+    bindkey '^P' history-substring-search-up
+    bindkey '^N' history-substring-search-down
 fi

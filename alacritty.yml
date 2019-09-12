@@ -1,68 +1,26 @@
 #
 # Alacritty
 #
-# :: Window
-# :: Scrolling
-# :: Font
+# :: Bindings
 # :: Colors
 # :: Cursor
-# :: Selection
-# :: Mouse
-# :: Bindings
 # :: Debug
+# :: Font
+# :: Mouse
+# :: Scrolling
+# :: Selection
+# :: Window
 
 #
-# Window
+# Bindings
 #
 
-window:
-  dimensions:
-    columns: 0
-    lines: 0
-  padding:
-    x: 0
-    y: 0
-  decorations: buttonless
-  startup_mode: SimpleFullscreen
-
-background_opacity: 0.96
-
-#
-# Scrolling
-#
-
-scrolling:
-  history: 10000
-  multiplier: 3
-  faux_multiplier: 3
-
-#
-# Font
-#
-
-font:
-  size: 20
-  normal:
-    family: Source Code Pro
-    style: Light
-  bold:
-    family: Source Code Pro
-    style: Regular
-  italic:
-    family: Source Code Pro
-    style: Light Italic
-  bold_italic:
-    family: Source Code Pro
-    style: Italic
-  offset:
-    x: 1
-    y: 30
-  glyph_offset:
-    x: 0
-    y: 15
-  use_thin_strokes: true
-
-draw_bold_text_with_bright_colors: true
+key_bindings:
+  - { key: V, mods: Command, action: Paste }
+  - { key: C, mods: Command, action: Copy }
+  - { key: Q, mods: Command, action: Quit }
+  - { key: N, mods: Command, action: SpawnNewInstance }
+  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
 
 #
 # Colors
@@ -103,12 +61,41 @@ cursor:
   unfocused_hollow: true
 
 #
-# Selection
+# Debug
 #
 
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-  save_to_clipboard: true
+debug:
+  render_timer: false
+  persistent_logging: false
+  log_level: Warn
+  print_events: false
+  ref_test: false
+
+#
+# Font
+#
+
+font:
+  use_thin_strokes: true
+  size: 20
+  normal:
+    family: Source Code Pro
+    style: Light
+  bold:
+    family: Source Code Pro
+    style: Regular
+  italic:
+    family: Source Code Pro
+    style: Light Italic
+  bold_italic:
+    family: Source Code Pro
+    style: Italic
+  offset:
+    x: 1
+    y: 30
+  glyph_offset:
+    x: 0
+    y: 15
 
 #
 # Mouse
@@ -120,27 +107,34 @@ mouse:
   hide_when_typing: true
 
 #
-# Bindings
+# Scrolling
 #
 
-key_bindings:
-  - { key: V, mods: Command, action: Paste }
-  - { key: C, mods: Command, action: Copy }
-  - { key: Q, mods: Command, action: Quit }
-  - { key: N, mods: Command, action: SpawnNewInstance }
-  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
-
-alt_send_esc: true
+scrolling:
+  history: 10000
+  multiplier: 3
+  faux_multiplier: 3
 
 #
-# Debug
+# Selection
 #
 
-debug:
-  render_timer: false
-  persistent_logging: false
-  log_level: Warn
-  print_events: false
-  ref_test: false
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  save_to_clipboard: true
 
-live_config_reload: true
+#
+# Window
+#
+
+window:
+  dimensions:
+    columns: 0
+    lines: 0
+  padding:
+    x: 0
+    y: 0
+  decorations: buttonless
+  startup_mode: SimpleFullscreen
+
+background_opacity: 0.96

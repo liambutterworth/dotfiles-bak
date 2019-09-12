@@ -16,7 +16,6 @@ set autoread
 set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
-set completeopt-=preview
 set dictionary=/usr/share/dict/words
 set directory=~/.vim/swap//
 set encoding=utf-8
@@ -91,8 +90,8 @@ Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
-Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
+Plug 'raimondi/delimitmate'
+Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -105,13 +104,13 @@ call plug#end()
 
 if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
-        \ 'coc-vimlsp',
-        \ 'coc-html',
         \ 'coc-css',
-        \ 'coc-tsserver',
-        \ 'coc-vetur',
+        \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
+        \ 'coc-tsserver',
+        \ 'coc-vimlsp',
+        \ 'coc-vetur',
         \ ]
 
     nmap gd <plug>(coc-definition)
@@ -127,7 +126,7 @@ if has_key(g:plugs, 'coc.nvim')
         \ : ":call CocAction('doHover')<cr>"
 endif
 
-if has_key(g:plugs, 'delimitMate')
+if has_key(g:plugs, 'delimitmate')
     let g:delimitMate_expand_cr = 1
     let g:delimitMate_expand_space = 1
 endif
@@ -138,7 +137,7 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_tags_command = 'ctags -R'
-    let g:fzf_prefer_tmux = 1
+    let g:fzf_prefer_tmux = exists('$TMUX')
 
     let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
@@ -170,9 +169,8 @@ endif
 if has_key(g:plugs, 'nord-vim')
     let g:nord_italic = 1
     let g:nord_underline = 1
-    let g:nord_bold_vertical_split_line = 1
-    let g:nord_uniform_diff_background = 1
     let g:nord_uniform_status_lines = 1
+    let g:nord_bold_vertical_split_line = 1
 
     colorscheme nord
 
