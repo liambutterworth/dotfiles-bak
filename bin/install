@@ -1,10 +1,6 @@
 #!/bin/bash
 
-mkdir -p \
-    ~/.config/alacritty \
-    ~/.cache/{vim,zsh} \
-    ~/.cache/vim/{swap,undo}
-
+mkdir -p ~/.config/alacritty
 ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
