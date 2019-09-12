@@ -38,18 +38,18 @@ set spelllang=en_us
 set splitbelow splitright
 set undofile undodir=~/.vim/undo//
 set updatetime=300
-set wildmenu wildignorecase wildmode=full
+set wildmenu wildignorecase wildmode=list:longest,list:full
 
-let g:mapleader = ' '
 let g:netrw_altfile = 1
+let g:netrw_keepdir = 0
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
-    autocmd bufread,bufnewfile *gitconfig* setlocal filetype=gitconfig
-    autocmd bufread,bufnewfile */zsh/* setlocal filetype=zsh
+    autocmd bufnewfile,bufread *gitconfig* setlocal filetype=gitconfig
+    autocmd bufnewfile,bufread */zsh/* setlocal filetype=zsh
     autocmd filetype * setlocal formatoptions-=o
 augroup end
 
@@ -136,7 +136,6 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
-    let g:fzf_tags_command = 'ctags -R'
     let g:fzf_prefer_tmux = exists('$TMUX')
 
     let g:fzf_action = {
@@ -153,17 +152,17 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     imap <c-x><c-f> <plug>(fzf-complete-path)
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
-    nnoremap <leader><space> :Files<cr>
-    nnoremap <leader><tab> :Snippets<cr>
-    nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Rg<cr>
-    nnoremap <leader>\ :Commits<cr>
-    nnoremap <leader>/ :History/<cr>
-    nnoremap <leader>: :History:<cr>
-    nnoremap <leader>? :Helptags<cr>
-    nnoremap <leader>] :Tags<cr>
-    nnoremap <leader>` :Marks<cr>
-    nnoremap <leader>G :Lines<cr>
+    nnoremap <space><space> :Files<cr>
+    nnoremap <space><tab> :Snippets<cr>
+    nnoremap <space><bs> :Buffers<cr>
+    nnoremap <space><cr> :Rg<cr>
+    nnoremap <space>\ :Commits<cr>
+    nnoremap <space>/ :History/<cr>
+    nnoremap <space>: :History:<cr>
+    nnoremap <space>? :Helptags<cr>
+    nnoremap <space>] :Tags<cr>
+    nnoremap <space>` :Marks<cr>
+    nnoremap <space>G :Lines<cr>
 endif
 
 if has_key(g:plugs, 'nord-vim')
@@ -183,8 +182,6 @@ if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
