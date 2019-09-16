@@ -12,7 +12,6 @@
 filetype plugin indent on
 syntax enable
 
-set autoread
 set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
@@ -47,9 +46,9 @@ let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
-    autocmd bufnewfile,bufread *gitconfig* setlocal filetype=gitconfig
-    autocmd bufnewfile,bufread */zsh/* setlocal filetype=zsh
-    autocmd filetype * setlocal formatoptions-=o
+    autocmd BufNewFile,BufRead *gitconfig* setlocal filetype=gitconfig
+    autocmd BufNewFile,BufRead */zsh/* setlocal filetype=zsh
+    autocmd FileType * setlocal formatoptions-=o
 
     autocmd BufWinEnter * if &filetype == 'help' || &previewwindow
         \| execute(':resize ' . &lines/2)
