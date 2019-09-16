@@ -32,8 +32,10 @@ zstyle ':completion:*' completer _complete _correct _ignored _approximate
 # Aliases
 #
 
-alias ls='ls --color=auto --group-directories-first'
+alias fuck='killall -9 $1'
 alias less='less --clear-screen --raw-control-chars'
+alias ls='ls --color=auto --group-directories-first'
+alias whoami='whoami && curl ident.me'
 
 #
 # Plugins
@@ -41,7 +43,7 @@ alias less='less --clear-screen --raw-control-chars'
 
 source $HOME/.zplug/init.zsh
 
-zplug 'BurntSushi/ripgrep', from:gh-r, as:command, use:'ripgrep'
+zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:"rg"
 zplug 'junegunn/fzf', hook-build:'./install --bin'
 zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
@@ -70,6 +72,9 @@ if zplug check 'junegunn/fzf'; then
 fi
 
 if zplug check 'sindresorhus/pure'; then
+    zstyle ':prompt:pure:git:branch' color 8
+    zstyle ':prompt:pure:host' color 8
+    zstyle ':prompt:pure:user' color 8
     function preexec { print }
 fi
 
