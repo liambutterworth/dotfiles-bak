@@ -19,11 +19,11 @@
     info = config --list
     log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
     log-graph = log-long --graph
+    merge-test = merge --no-commit --no-ff
     root = rev-parse --show-toplevel
     staged = diff --cached
     unstage = reset --
     whoami = !git config user.name && git config user.email
-    merge-test = merge --no-commit --no-ff
 
 #
 # Core
