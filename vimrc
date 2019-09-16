@@ -41,7 +41,6 @@ set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
 let g:netrw_altfile = 1
-let g:netrw_keepdir = 0
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:vim_indent_cont = &shiftwidth
@@ -119,10 +118,10 @@ if has_key(g:plugs, 'coc.nvim')
     nmap gi <plug>(coc-implementation)
     nmap gr <plug>(coc-references)
 
-    nnoremap ]c <plug>(coc-diagnostic-next)
-    nnoremap [c <plug>(coc-diagnostic-prev)
+    nmap ]g <plug>(coc-diagnostic-next)
+    nmap [g <plug>(coc-diagnostic-prev)
 
-    nnoremap <expr> K index(['vim', 'help'], &filetype) >= 0
+    nnoremap <silent><expr> K index(['vim', 'help'], &filetype) >= 0
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 endif
@@ -148,10 +147,10 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-    imap <c-x><c-k> <plug>(fzf-complete-word)
-    imap <c-x><c-j> <plug>(fzf-complete-file)
-    imap <c-x><c-f> <plug>(fzf-complete-path)
-    imap <c-x><c-l> <plug>(fzf-complete-line)
+    imap <c-f><c-k> <plug>(fzf-complete-word)
+    imap <c-f><c-j> <plug>(fzf-complete-file)
+    imap <c-f><c-p> <plug>(fzf-complete-path)
+    imap <c-f><c-l> <plug>(fzf-complete-line)
 
     nnoremap <space><space> :Files<cr>
     nnoremap <space><tab> :Snippets<cr>
@@ -167,10 +166,10 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
 endif
 
 if has_key(g:plugs, 'nord-vim')
-    let g:nord_italic = 1
-    let g:nord_underline = 1
-    let g:nord_uniform_status_lines = 1
     let g:nord_bold_vertical_split_line = 1
+    let g:nord_italic = 1
+    let g:nord_italic_comments = 1
+    let g:nord_underline = 1
 
     colorscheme nord
 
@@ -213,18 +212,6 @@ endif
 if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
-endif
-
-if has_key(g:plugs, 'vim-gitgutter')
-    let g:gitgutter_map_keys = 0
-
-    nnoremap ]h <plug>GitGutterNextHunk
-    nnoremap [h <plug>GitGutterPrevHunk
-
-    omap ih <plug>GitGutterTextObjectInnerPending
-    omap ah <plug>GitGutterTextObjectOuterPending
-    xmap ih <plug>GitGutterTextObjectInnerVisual
-    xmap ah <plug>GitGutterTextObjectOuterVisual
 endif
 
 if has_key(g:plugs, 'vim-javascript')
