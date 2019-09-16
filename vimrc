@@ -50,6 +50,10 @@ augroup settings
     autocmd bufnewfile,bufread *gitconfig* setlocal filetype=gitconfig
     autocmd bufnewfile,bufread */zsh/* setlocal filetype=zsh
     autocmd filetype * setlocal formatoptions-=o
+
+    autocmd BufWinEnter * if &filetype == 'help' || &previewwindow
+        \| execute(':resize ' . &lines/2)
+        \| endif
 augroup end
 
 "

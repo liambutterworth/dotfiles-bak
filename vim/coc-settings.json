@@ -1,5 +1,6 @@
 {
     "coc.preferences.hoverTarget": "preview",
+    "coc.preferences.previewAutoClose": false,
     "diagnostic.errorSign": "❯",
     "diagnostic.hintSign": "❯",
     "diagnostic.infoSign": "❯",
