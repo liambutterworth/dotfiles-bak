@@ -9,8 +9,6 @@
 # Settings
 #
 
-set -o ignoreeof
-
 typeset -U path
 typeset -U fpath
 
@@ -32,7 +30,6 @@ zstyle ':completion:*' completer _complete _correct _ignored _approximate
 # Aliases
 #
 
-alias fuck='killall -9 $1'
 alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
 alias whoami='whoami && curl ident.me'

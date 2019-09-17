@@ -1,15 +1,6 @@
 #
 # Git Config
 #
-# :: Alias
-# :: Core
-# :: Credential
-# :: Diff
-# :: User
-
-#
-# Alias
-#
 
 [alias]
     ammend = commit --amend
@@ -24,32 +15,12 @@
     staged = diff --cached
     unstage = reset --
     whoami = !git config user.name && git config user.email
-
-#
-# Core
-#
-
 [core]
     editor = vim
-
-#
-# Credential
-#
-
 [credential]
     helper = cache --timeout=3600
-
-#
-# Diff
-#
-
 [diff]
     tool = vimdiff
-
-#
-# User
-#
-
 [user]
     name = Liam Butterworth
     email = liambutterworth@randallreilly.com
