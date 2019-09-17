@@ -30,9 +30,10 @@ zstyle ':completion:*' completer _complete _correct _ignored _approximate
 # Aliases
 #
 
-alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
-alias whoami='whoami && curl ident.me'
+alias less='less --clear-screen --raw-control-chars'
+alias grep='grep --color=auto'
+alias fuck='sudo !!'
 
 #
 # Plugins
@@ -61,10 +62,9 @@ fi
 
 if zplug check 'junegunn/fzf'; then
     bindkey ^g fzf-cd-widget
-    local fzf_color='bg+:0,pointer:4,info:4,border:0'
-    local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
-    export FZF_DEFAULT_OPTS="--color '$fzf_color' --preview '$fzf_preview'"
-    # [ ! -z "$TMUX" ] && export FZF_TMUX=1
+    local fzf_color_opt="--color 'bg+:0,pointer:4,info:4,border:0'"
+    local fzf_preview_opt="--preview '(cat {} || ls -A {}) 2>/dev/null | head -200'"
+    export FZF_DEFAULT_OPTS="$fzf_color_opt $fzf_preview_opt"
 fi
 
 if zplug check 'sindresorhus/pure'; then
