@@ -1,2 +1,4 @@
-vim/autoload/plug.vim
+vim/autoload
 vim/plugs
+vim/swap
+vim/undo

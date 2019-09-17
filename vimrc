@@ -16,7 +16,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=~/.cache/vim/swap//
+set directory=~/.vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -35,7 +35,7 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set undofile undodir=~/.cache/vim/undo//
+set undofile undodir=~/.vim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
