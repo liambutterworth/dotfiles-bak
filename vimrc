@@ -46,11 +46,11 @@ let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
-    autocmd BufNewFile,BufRead *gitconfig* setlocal filetype=gitconfig
-    autocmd BufNewFile,BufRead */zsh/* setlocal filetype=zsh
-    autocmd FileType * setlocal formatoptions-=o
+    autocmd bufnewfile,bufread *gitconfig* setlocal filetype=gitconfig
+    autocmd bufnewfile,bufread */zsh/* setlocal filetype=zsh
+    autocmd filetype * setlocal formatoptions-=o
 
-    autocmd BufWinEnter * if &filetype == 'help' || &previewwindow
+    autocmd bufwinenter * if &filetype == 'help' || &previewwindow
         \| execute(':resize ' . &lines/2)
         \| endif
 augroup end
@@ -68,14 +68,6 @@ nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
-nnoremap ]<space> o<esc>'[k
-nnoremap [<space> O<esc>j
-nnoremap <silent> ]<bs> :bnext<cr>
-nnoremap <silent> [<bs> :bprevious<cr>
-nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
-vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
 
 "
 " Plugins
@@ -101,6 +93,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()

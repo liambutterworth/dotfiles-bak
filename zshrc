@@ -41,7 +41,7 @@ alias whoami='whoami && curl ident.me'
 # Plugins
 #
 
-source $HOME/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:"rg"
 zplug 'junegunn/fzf', hook-build:'./install --bin'
