@@ -38,7 +38,7 @@ alias whoami='whoami && curl ident.me'
 # Plugins
 #
 
-source $ZPLUG_HOME/init.zsh
+source ~/.zplug/init.zsh
 
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:"rg"
 zplug 'junegunn/fzf', hook-build:'./install --bin'
@@ -60,12 +60,11 @@ if zplug check 'BurntSushi/ripgrep'; then
 fi
 
 if zplug check 'junegunn/fzf'; then
+    bindkey ^g fzf-cd-widget
     local fzf_color='bg+:0,pointer:4,info:4,border:0'
     local fzf_preview='(cat {} || ls -A {}) 2>/dev/null | head -200'
-    export FZF_DEFAULT_OPTS="--color '$fzf_color'"
-    export FZF_CTRL_T_OPTS="--preview '$fzf_preview'"
-    export FZF_ALT_C_OPTS="--preview '$fzf_preview'"
-    export FZF_TMUX=1
+    export FZF_DEFAULT_OPTS="--color '$fzf_color' --preview '$fzf_preview'"
+    # [ ! -z "$TMUX" ] && export FZF_TMUX=1
 fi
 
 if zplug check 'sindresorhus/pure'; then
