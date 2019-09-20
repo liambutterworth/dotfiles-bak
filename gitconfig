@@ -4,15 +4,15 @@
 
 [alias]
     a = add
+    c = commit
     ca = commit --amend
-    cm = commit
     co = checkout
     d = diff
     ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
     lg = ll --graph
     m = merge
     mt = merge --no-commit --no-ff
-    r = rev-parse --show-toplevel
+    dir = rev-parse --show-toplevel
     s = status
     st = stash
     un = reset HEAD --
