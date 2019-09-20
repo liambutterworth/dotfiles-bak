@@ -3,18 +3,19 @@
 #
 
 [alias]
-    ammend = commit --amend
-    authors = !sh -c 'git log --format="%aN" | sort -k 2 -u'
-    changed = diff-tree --name-only
-    edits = diff --color-words
-    info = config --list
-    log-long = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
-    log-graph = log-long --graph
-    merge-test = merge --no-commit --no-ff
-    root = rev-parse --show-toplevel
-    staged = diff --cached
-    unstage = reset --
-    whoami = !git config user.name && git config user.email
+    a = add
+    ca = commit --amend
+    cm = commit
+    co = checkout
+    ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
+    lg = ll --graph
+    m = merge
+    mt = merge --no-commit --no-ff
+    r = rev-parse --show-toplevel
+    s = status
+    st = stash
+    un = reset HEAD --
+    who = !git config user.name && git config user.email
 [core]
     editor = vim
 [credential]

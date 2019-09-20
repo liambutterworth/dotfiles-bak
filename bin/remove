@@ -1,2 +1,13 @@
 #!/bin/sh
+
+for arg in $@; do
+    case $arg in
+        --term ) remove_term=true ;;
+    esac
+done
+
 rm ~/.{gitconifg,tmux.conf,vim,vimrc,zshrc}
+
+if [ $remove_term ]; then
+    rm ~/.config/alacritty/alacritty.yml
+fi

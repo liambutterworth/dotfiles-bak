@@ -35,13 +35,23 @@ alias less='less --clear-screen --raw-control-chars'
 alias grep='grep --color=auto'
 alias fuck='sudo !!'
 
+alias a='php artisan'
+alias c='composer'
+alias d='docker'
+alias dc='docker-compose'
+alias g='git'
+alias n='npm'
+alias t='tmux'
+alias v='vim'
+
 #
 # Plugins
 #
 
 source ~/.zplug/init.zsh
 
-zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:"rg"
+zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:'rg'
+zplug 'sharkdp/fd', from:gh-r, as:command, rename-to:'fd'
 zplug 'junegunn/fzf', hook-build:'./install --bin'
 zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
@@ -56,8 +66,12 @@ zplug load
 
 if zplug check 'BurntSushi/ripgrep'; then
     alias rg='rg --hidden --follow --pretty'
-    alias rgf='rg --files | rg'
-    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+
+if zplug check 'sharkdp/fd'; then
+    _fzf_compgen_path() { fd --hidden --folow --exclude '.git' . "$1" }
+    _fzf_compgen_dir() { fd --type d --hidden --folow --exclude '.git' . "$1" }
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 fi
 
 if zplug check 'junegunn/fzf'; then

@@ -39,6 +39,7 @@ set undofile undodir=~/.vim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
+let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
@@ -69,6 +70,39 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 
+nnoremap ]ow :set wrap<cr>
+nnoremap [ow :set nowrap<cr>
+nnoremap ]os :set spell<cr>
+nnoremap [os :set nospell<cr>
+nnoremap ]oh :set hlsearch<cr>
+nnoremap [oh :set nohlsearch<cr>
+nnoremap ]oi :set ignorecase<cr>
+nnoremap [oi :set noignorecase<cr>
+nnoremap ]om :set mouse=n<cr>
+nnoremap [om :set mouse=<cr>
+nnoremap ]<space> o<esc>'[k
+nnoremap [<space> O<esc>j
+nnoremap <silent> ]<bs> :bnext<cr>
+nnoremap <silent> [<bs> :bprevious<cr>
+nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
+vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
+vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
+
+nnoremap <leader>q :close<cr>
+nnoremap <leader>Q :quit<cr>
+nnoremap <leader>t :tabenter<cr>
+nnoremap <leader>s :split<cr>
+nnoremap <leader>v :vsplit<cr>
+nnoremap <leader>p :tabprevious<cr>
+nnoremap <leader>n :tabnext<cr>
+nnoremap <leader>P :-tabmove<cr>
+nnoremap <leader>N :+tabmove<cr>
+nnoremap <leader>h 5<c-w><
+nnoremap <leader>j 5<c-w>-
+nnoremap <leader>k 5<c-w>+
+nnoremap <leader>l 5<c-w>>
+
 "
 " Plugins
 "
@@ -80,12 +114,11 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pangloss/vim-javascript'
 Plug 'raimondi/delimitmate'
 Plug 'sirver/ultisnips'
+Plug 'sheerun/vim-polyglot'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -93,7 +126,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()
@@ -148,17 +180,17 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     imap <c-f><c-p> <plug>(fzf-complete-path)
     imap <c-f><c-l> <plug>(fzf-complete-line)
 
-    nnoremap <space><space> :Files<cr>
-    nnoremap <space><tab> :Snippets<cr>
-    nnoremap <space><bs> :Buffers<cr>
-    nnoremap <space><cr> :Rg<cr>
-    nnoremap <space>\ :Commits<cr>
-    nnoremap <space>/ :History/<cr>
-    nnoremap <space>: :History:<cr>
-    nnoremap <space>? :Helptags<cr>
-    nnoremap <space>] :Tags<cr>
-    nnoremap <space>` :Marks<cr>
-    nnoremap <space>G :Lines<cr>
+    nnoremap <leader><space> :Files<cr>
+    nnoremap <leader><tab> :Snippets<cr>
+    nnoremap <leader><bs> :Buffers<cr>
+    nnoremap <leader><cr> :Rg<cr>
+    nnoremap <leader>\ :Commits<cr>
+    nnoremap <leader>/ :History/<cr>
+    nnoremap <leader>: :History:<cr>
+    nnoremap <leader>? :Helptags<cr>
+    nnoremap <leader>] :Tags<cr>
+    nnoremap <leader>` :Marks<cr>
+    nnoremap <leader>G :Lines<cr>
 endif
 
 if has_key(g:plugs, 'nord-vim')
@@ -210,6 +242,6 @@ if has_key(g:plugs, 'vim-easy-align')
     nmap ga <plug>(EasyAlign)
 endif
 
-if has_key(g:plugs, 'vim-javascript')
+if has_key(g:plugs, 'vim-polyglot')
     let g:javascript_plugin_jsdoc = 1
 endif
