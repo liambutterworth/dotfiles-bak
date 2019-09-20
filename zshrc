@@ -33,16 +33,17 @@ zstyle ':completion:*' completer _complete _correct _ignored _approximate
 alias ls='ls --color=auto --group-directories-first'
 alias less='less --clear-screen --raw-control-chars'
 alias grep='grep --color=auto'
-alias fuck='sudo !!'
 
-alias a='php artisan'
-alias c='composer'
-alias d='docker'
-alias dc='docker-compose'
+alias c='clear'
 alias g='git'
-alias n='npm'
 alias t='tmux'
 alias v='vim'
+alias d='docker'
+alias dc='docker-compose'
+alias so='source'
+alias art='php artisan'
+alias comp='composer'
+alias fuck='sudo !!'
 
 #
 # Plugins
@@ -71,7 +72,7 @@ fi
 if zplug check 'sharkdp/fd'; then
     _fzf_compgen_path() { fd --hidden --folow --exclude '.git' . "$1" }
     _fzf_compgen_dir() { fd --type d --hidden --folow --exclude '.git' . "$1" }
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 fi
 
 if zplug check 'junegunn/fzf'; then
