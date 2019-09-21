@@ -1,5 +1,5 @@
 #
-# Zsh Config
+# Zsh
 #
 # :: Settings
 # :: Aliases
@@ -14,6 +14,10 @@ typeset -U fpath
 
 autoload -Uz compinit && compinit
 autoload -Uz edit-command-line
+
+setopt auto_name_dirs
+setopt cdable_vars
+setopt ignore_eof
 
 bindkey -v
 bindkey '^w' backward-kill-word
@@ -30,20 +34,22 @@ zstyle ':completion:*' completer _complete _correct _ignored _approximate
 # Aliases
 #
 
-alias ls='ls --color=auto --group-directories-first'
-alias less='less --clear-screen --raw-control-chars'
+alias fuck='sudo !!'
 alias grep='grep --color=auto'
+alias less='less --clear-screen --raw-control-chars'
+alias ls='ls --color=auto --group-directories-first'
 
 alias c='clear'
-alias g='git'
-alias t='tmux'
-alias v='vim'
 alias d='docker'
 alias dc='docker-compose'
+alias g='git'
+alias m='mysql'
+alias mc='mysql_config_editor'
+alias pa='php artisan'
+alias pc='composer'
 alias so='source'
-alias art='php artisan'
-alias comp='composer'
-alias fuck='sudo !!'
+alias t='tmux'
+alias v='vim'
 
 #
 # Plugins
@@ -52,11 +58,11 @@ alias fuck='sudo !!'
 source ~/.zplug/init.zsh
 
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:'rg'
-zplug 'sharkdp/fd', from:gh-r, as:command, rename-to:'fd'
 zplug 'junegunn/fzf', hook-build:'./install --bin'
 zplug 'junegunn/fzf', use:'bin/{fzf,fzf-tmux}', as:command
 zplug 'junegunn/fzf', use:'shell/*.zsh', defer:2
 zplug 'mafredri/zsh-async', from:github
+zplug 'sharkdp/fd', from:gh-r, as:command, rename-to:'fd'
 zplug 'sindresorhus/pure', use:'pure.zsh', from:github, as:theme
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'

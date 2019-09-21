@@ -1,28 +1,16 @@
 #!/bin/sh
 
-for arg in $@; do
-    case $arg in
-        --term ) install_term=true ;;
-    esac
-done
+mkdir -p ~/.config/alacritty ~/.vim/{swap,undo}
 
-mkdir ~/.dotfiles/vim/{swap,undo}
-
+ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-ln -sf ~/.dotfiles/tmux.confg ~/.tmux.conf
-ln -sf ~/.dotfiles/vim ~/.vim
+ln -sf ~/.dotfiles/ignore ~/.ignore
+ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/vimrc ~/.vimrc
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 curl -sL --proto-redir -all,https \
     https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
-if [ $install_term ]; then
-    mkdir -p ~/.config/alacritty
-    ln -sf ~/.dotfiles/alacritty/term/alacritty.yml ~/.config/alacritty
-    tic -o ~/.terminfo ~/.dotfiles/term/info/xterm-256color.terminfo
-    tic -o ~/.terminfo ~/.dotfiles/term/info/tmux-256color.terminfo
-    tic -o ~/.terminfo ~/.dotfiles/term/info/tmux.terminfo
-fi

@@ -1,5 +1,5 @@
 "
-" Vim Config
+" Vim
 "
 " :: Settings
 " :: Mappings
@@ -16,7 +16,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=~/.vim/swap//
+set directory=~/.cache/vim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -27,15 +27,17 @@ set ignorecase smartcase
 set laststatus=0
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
+set mouse=n
 set nobackup nowritebackup
 set nojoinspaces
 set nowrap
 set number relativenumber
+set path+=**
 set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set undofile undodir=~/.vim/undo//
+set undofile undodir=~/.cache/vim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
@@ -47,13 +49,12 @@ let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
-    autocmd bufnewfile,bufread *gitconfig* setlocal filetype=gitconfig
-    autocmd bufnewfile,bufread */zsh/* setlocal filetype=zsh
-    autocmd filetype * setlocal formatoptions-=o
+    autocmd FileType * setlocal formatoptions-=o
+    autocmd BufWinLeave * let b:winview = winsaveview()
 
-    autocmd bufwinenter * if &filetype == 'help' || &previewwindow
-        \| execute(':resize ' . &lines/2)
-        \| endif
+    autocmd BufWinEnter * if exists('b:winview')
+        \| call winrestview(b:winview)
+        \| unlet b:winview
 augroup end
 
 "
@@ -70,28 +71,9 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 
-nnoremap ]ow :set wrap<cr>
-nnoremap [ow :set nowrap<cr>
-nnoremap ]os :set spell<cr>
-nnoremap [os :set nospell<cr>
-nnoremap ]oh :set hlsearch<cr>
-nnoremap [oh :set nohlsearch<cr>
-nnoremap ]oi :set ignorecase<cr>
-nnoremap [oi :set noignorecase<cr>
-nnoremap ]om :set mouse=n<cr>
-nnoremap [om :set mouse=<cr>
-nnoremap ]<space> o<esc>'[k
-nnoremap [<space> O<esc>j
-nnoremap <silent> ]<bs> :bnext<cr>
-nnoremap <silent> [<bs> :bprevious<cr>
-nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
-vnoremap <silent><expr> ]e ":<c-u>'<,'>m'>+" . v:count1 . '<cr>gv=gv'
-vnoremap <silent><expr> [e ":<c-u>'<,'>m-" . (v:count1 + 1) . '<cr>gv=gv'
-
-nnoremap <leader>q :close<cr>
-nnoremap <leader>Q :quit<cr>
-nnoremap <leader>t :tabenter<cr>
+nnoremap <leader>q :quit<cr>
+nnoremap <leader>Q :quit!<cr>
+nnoremap <leader>t :tabedit<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
 nnoremap <leader>p :tabprevious<cr>
@@ -107,7 +89,7 @@ nnoremap <leader>l 5<c-w>>
 " Plugins
 "
 
-call plug#begin('~/.vim/plugs')
+call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -115,16 +97,18 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'raimondi/delimitmate'
-Plug 'sirver/ultisnips'
 Plug 'sheerun/vim-polyglot'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 
@@ -145,7 +129,6 @@ if has_key(g:plugs, 'coc.nvim')
     nmap gy <plug>(coc-type-definition)
     nmap gi <plug>(coc-implementation)
     nmap gr <plug>(coc-references)
-
     nmap ]g <plug>(coc-diagnostic-next)
     nmap [g <plug>(coc-diagnostic-prev)
 
@@ -175,22 +158,23 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-    imap <c-f><c-k> <plug>(fzf-complete-word)
-    imap <c-f><c-j> <plug>(fzf-complete-file)
-    imap <c-f><c-p> <plug>(fzf-complete-path)
-    imap <c-f><c-l> <plug>(fzf-complete-line)
+    imap <c-x><c-k> <plug>(fzf-complete-word)
+    imap <c-x><c-j> <plug>(fzf-complete-file)
+    imap <c-x><c-p> <plug>(fzf-complete-path)
+    imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader><space> :Files<cr>
-    nnoremap <leader><tab> :Snippets<cr>
+    nnoremap <leader><tab> :Commits<cr>
+    nnoremap <leader><s-tab> :BCommits<cr>
     nnoremap <leader><bs> :Buffers<cr>
     nnoremap <leader><cr> :Rg<cr>
-    nnoremap <leader>\ :Commits<cr>
+    nnoremap <leader>\ :Maps<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
-    nnoremap <leader>] :Tags<cr>
     nnoremap <leader>` :Marks<cr>
-    nnoremap <leader>G :Lines<cr>
+    nnoremap <leader>g :Lines<cr>
+    nnoremap <leader>G :BLines<cr>
 endif
 
 if has_key(g:plugs, 'nord-vim')
@@ -203,13 +187,6 @@ if has_key(g:plugs, 'nord-vim')
 
     highlight StatusLine ctermfg=0 ctermbg=0
     highlight StatusLineNC ctermfg=0 ctermbg=0
-endif
-
-if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.vim/snips']
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
@@ -240,8 +217,4 @@ endif
 if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
-endif
-
-if has_key(g:plugs, 'vim-polyglot')
-    let g:javascript_plugin_jsdoc = 1
 endif
