@@ -33,7 +33,6 @@ set nohlsearch
 set nojoinspaces
 set nowrap
 set number relativenumber
-set path+=**
 set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
@@ -44,6 +43,7 @@ set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
 let g:mapleader = "\<space>"
+let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
@@ -92,11 +92,16 @@ nnoremap <leader>j 5<c-w>-
 nnoremap <leader>k 5<c-w>+
 nnoremap <leader>l 5<c-w>>
 
+nnoremap <silent> [<bs> :bprevious<cr>
+nnoremap <silent> ]<bs> :bnext<cr>
+nnoremap <silent> [<space> O<esc>j
+nnoremap <silent> ]<space> o<esc>'[k
+
 "
 " Plugins
 "
 
-call plug#begin()
+call plug#begin('~/.config/nvim/plugs')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -105,21 +110,26 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'raimondi/delimitmate'
 Plug 'sheerun/vim-polyglot'
+Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
-Plug 'tpope/vim-abolish'
+Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
+
 call plug#end()
+
+if has_key(g:plugs, 'pear-tree')
+    let g:pear_tree_repeatable_expand = 0
+    let g:pear_tree_smart_openers = 1
+    let g:pear_tree_smart_closers = 1
+    let g:pear_tree_smart_backspace = 1
+endif
 
 if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
@@ -131,13 +141,6 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ ]
-
-    call coc#config('diagnostic', {
-        \ 'errorSign': '❯',
-        \ 'hintSign': '❯',
-        \ 'infoSign': '❯',
-        \ 'warningSign': '❯',
-        \ })
 
     nmap gd <plug>(coc-definition)
     nmap gy <plug>(coc-type-definition)
@@ -158,17 +161,11 @@ if has_key(g:plugs, 'coc.nvim')
     nnoremap <expr><c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
 endif
 
-if has_key(g:plugs, 'delimitmate')
-    let g:delimitMate_expand_cr = 1
-    let g:delimitMate_expand_space = 1
-endif
-
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     set runtimepath+=$ZPLUG_HOME/repos/junegunn/fzf
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
-    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
     let g:fzf_prefer_tmux = exists('$TMUX')
 
     let g:fzf_action = {
@@ -176,24 +173,6 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
         \ 'ctrl-s': 'split',
         \ 'ctrl-v': 'vsplit',
         \ }
-
-    function! FloatingFZF()
-        let buf = nvim_create_buf(v:false, v:true)
-        let height = float2nr(&lines * 0.8)
-        let width = float2nr(&columns * 0.8)
-        let horizontal = float2nr((&columns - width) / 2)
-        let vertical = 1
-
-        let opts = {
-            \ 'relative': 'editor',
-            \ 'row': vertical,
-            \ 'col': horizontal,
-            \ 'height': height,
-            \ 'width': width,
-            \ }
-
-        call nvim_open_win(buf, v:true, opts)
-    endfunction
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -204,11 +183,10 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader><space> :Files<cr>
-    nnoremap <leader><tab> :Commits<cr>
-    nnoremap <leader><s-tab> :BCommits<cr>
+    nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
     nnoremap <leader><cr> :Rg<cr>
-    nnoremap <leader>\ :Maps<cr>
+    nnoremap <leader>\ :Commits<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
@@ -227,6 +205,17 @@ if has_key(g:plugs, 'nord-vim')
 
     highlight StatusLine ctermfg=0 ctermbg=0
     highlight StatusLineNC ctermfg=0 ctermbg=0
+endif
+
+if has_key(g:plugs, 'ultisnips')
+    " let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']
+    let g:UltiSnipsSnippetDirectories = ['snips']
+    let g:UltiSnipsSnippetExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
+    inoremap <c-j> <nop>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
