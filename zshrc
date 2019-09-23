@@ -43,19 +43,19 @@ alias c='clear'
 alias d='docker'
 alias dc='docker-compose'
 alias g='git'
+alias n='nvim'
 alias m='mysql'
 alias mc='mysql_config_editor'
 alias pa='php artisan'
 alias pc='composer'
 alias so='source'
 alias t='tmux'
-alias v='vim'
 
 #
 # Plugins
 #
 
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 zplug 'BurntSushi/ripgrep', from:gh-r, as:command, rename-to:'rg'
 zplug 'junegunn/fzf', hook-build:'./install --bin'
@@ -83,9 +83,10 @@ fi
 
 if zplug check 'junegunn/fzf'; then
     bindkey ^g fzf-cd-widget
-    local fzf_color_opt="--color 'bg+:0,pointer:4,info:4,border:0'"
-    local fzf_preview_opt="--preview '(cat {} || ls -A {}) 2>/dev/null | head -200'"
-    export FZF_DEFAULT_OPTS="$fzf_color_opt $fzf_preview_opt"
+    local fzf_layout_opt='--layout=reverse'
+    local fzf_color_opt='--color "bg+:0,pointer:4,info:4,border:0"'
+    local fzf_preview_opt='--preview "(cat {} || ls -A {}) 2>/dev/null | head -200"'
+    export FZF_DEFAULT_OPTS="$fzf_layout_opt $fzf_color_opt $fzf_preview_opt"
 fi
 
 if zplug check 'sindresorhus/pure'; then
