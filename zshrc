@@ -9,6 +9,8 @@
 # Settings
 #
 
+export ZPLUG_HOME=$HOME/.zplug
+
 typeset -U path
 typeset -U fpath
 
@@ -49,7 +51,7 @@ alias mc='mysql_config_editor'
 alias pa='php artisan'
 alias pc='composer'
 alias so='source'
-alias t='tmux'
+alias t='tmux -f ~/.config/tmux/tmux.conf'
 
 #
 # Plugins

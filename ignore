@@ -1,9 +1,0 @@
-#
-# Ignore
-#
-
-.git
-swap
-undo
-node_modules
-vendor

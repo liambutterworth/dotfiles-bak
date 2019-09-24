@@ -16,7 +16,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=~/.cache/vim/swap//
+set directory=~/.cache/nvim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -37,16 +37,15 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
-set tags^=./.git/tags;
-set undofile undodir=~/.cache/vim/undo//
+set undofile undodir=~/.cache/nvim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
 let g:mapleader = "\<space>"
-let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
+let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
 
 augroup settings
@@ -55,12 +54,6 @@ augroup settings
 
     autocmd BufWinEnter * if &filetype == 'help' || &previewwindow
         \| execute(':resize ' . &lines / 2)
-        \| endif
-
-    autocmd BufWinLeave * let b:winview = winsaveview()
-    autocmd BufWinEnter * if exists('b:winview')
-        \| call winrestview(b:winview)
-        \| unlet b:winview
         \| endif
 augroup end
 
@@ -71,6 +64,7 @@ augroup end
 nmap j gj
 nmap k gk
 nmap Y y$
+nmap Q @q
 nmap <bs> <c-^>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
@@ -137,17 +131,18 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
+        \ 'coc-snippets',
         \ 'coc-tsserver',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ ]
 
-    nmap gd <plug>(coc-definition)
-    nmap gy <plug>(coc-type-definition)
-    nmap gi <plug>(coc-implementation)
-    nmap gr <plug>(coc-references)
-    nmap ]g <plug>(coc-diagnostic-next)
-    nmap [g <plug>(coc-diagnostic-prev)
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
+    nmap <silent> ]g <plug>(coc-diagnostic-next)
+    nmap <silent> [g <plug>(coc-diagnostic-prev)
 
     nnoremap <silent><expr> K index(['vim', 'help'], &filetype) >= 0
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
@@ -162,7 +157,7 @@ if has_key(g:plugs, 'coc.nvim')
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
-    set runtimepath+=$ZPLUG_HOME/repos/junegunn/fzf
+    set runtimepath+=$PACKAGES/fzf
 
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
@@ -208,14 +203,10 @@ if has_key(g:plugs, 'nord-vim')
 endif
 
 if has_key(g:plugs, 'ultisnips')
-    " let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']
     let g:UltiSnipsSnippetDirectories = ['snips']
     let g:UltiSnipsSnippetExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <leader><s-tab> :UltiSnipsEdit<cr>
-    inoremap <c-j> <nop>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
