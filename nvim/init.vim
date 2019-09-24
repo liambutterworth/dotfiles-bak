@@ -203,7 +203,7 @@ if has_key(g:plugs, 'nord-vim')
 endif
 
 if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = ['snips']
+    let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/snips']
     let g:UltiSnipsSnippetExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
