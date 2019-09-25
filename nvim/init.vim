@@ -144,12 +144,12 @@ if has_key(g:plugs, 'coc.nvim')
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 
-    nnoremap <expr><c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
-    nnoremap <expr><c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
-    nnoremap <expr><c-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-d>"
-    nnoremap <expr><c-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-u>"
-    nnoremap <expr><c-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-f>"
-    nnoremap <expr><c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
+    nnoremap <expr> <c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
+    nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
+    nnoremap <expr> <c-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-d>"
+    nnoremap <expr> <c-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-u>"
+    nnoremap <expr> <c-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-f>"
+    nnoremap <expr> <c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
@@ -240,4 +240,11 @@ endif
 if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
+endif
+
+if has_key(g:plugs, 'vim-fugitive')
+    nnoremap \\ :Git<cr>
+    nnoremap \b :Git blame<cr>
+    nnoremap \l :Gclog<cr>
+    nnoremap \r :Gcd<cr>
 endif
