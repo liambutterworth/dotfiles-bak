@@ -5,7 +5,6 @@
 # :: Aliases
 # :: Bindings
 # :: Colors
-# :: Commands
 # :: Environment
 
 #
@@ -88,7 +87,7 @@ set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
 
 #
-# Commands
+# Environment
 #
 
 switch (uname)
@@ -107,11 +106,12 @@ if type -q fd
 end
 
 if type -q fzf
-    bind -M insert \cg fzf-cd-widget
     set fzf_color_opt '--color "bg+:0,pointer:4,info:4,border:0"'
     set fzf_preview_opt '--preview "(cat () || ls -A ()) 2>/dev/null | head -200"'
     set -gx FZF_DEFAULT_OPTS $fzf_color_opt $fzf_preview_opt
     set -gx FZF_TMUX 1
+
+    bind -M insert \cg fzf-cd-widget
 end
 
 if type -q rg

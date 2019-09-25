@@ -27,7 +27,6 @@ set ignorecase smartcase
 set laststatus=0
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
-set mouse=n
 set nobackup nowritebackup
 set nohlsearch
 set nojoinspaces
@@ -47,14 +46,12 @@ let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
+let &helpheight = &lines / 2
+let &previewheight = &lines / 2
 
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
-
-    autocmd BufWinEnter * if &filetype == 'help' || &previewwindow
-        \| execute(':resize ' . &lines / 2)
-        \| endif
 augroup end
 
 "
@@ -72,8 +69,7 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 
-nnoremap <leader>q :quit<cr>
-nnoremap <leader>Q :quit!<cr>
+nnoremap <leader>q :bdelete<cr>
 nnoremap <leader>t :tabedit<cr>
 nnoremap <leader>s :split<cr>
 nnoremap <leader>v :vsplit<cr>
@@ -86,10 +82,18 @@ nnoremap <leader>j 5<c-w>-
 nnoremap <leader>k 5<c-w>+
 nnoremap <leader>l 5<c-w>>
 
+nnoremap <silent> [ow :set nowrap<cr>
+nnoremap <silent> ]ow :set wrap<cr>
+nnoremap <silent> [os :set nospell<cr>
+nnoremap <silent> ]os :set spell<cr>
+nnoremap <silent> [oh :set nohlsearch<cr>
+nnoremap <silent> [oh :set hlsearch<cr>
 nnoremap <silent> [<bs> :bprevious<cr>
 nnoremap <silent> ]<bs> :bnext<cr>
 nnoremap <silent> [<space> O<esc>j
 nnoremap <silent> ]<space> o<esc>'[k
+nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
+nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
 
 "
 " Plugins
@@ -115,15 +119,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 
-
 call plug#end()
-
-if has_key(g:plugs, 'pear-tree')
-    let g:pear_tree_repeatable_expand = 0
-    let g:pear_tree_smart_openers = 1
-    let g:pear_tree_smart_closers = 1
-    let g:pear_tree_smart_backspace = 1
-endif
 
 if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
@@ -137,14 +133,14 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-vetur',
         \ ]
 
-    nmap <silent> gd <plug>(coc-definition)
-    nmap <silent> gy <plug>(coc-type-definition)
-    nmap <silent> gi <plug>(coc-implementation)
-    nmap <silent> gr <plug>(coc-references)
-    nmap <silent> ]g <plug>(coc-diagnostic-next)
-    nmap <silent> [g <plug>(coc-diagnostic-prev)
+    nmap <silent> <cr>d <plug>(coc-definition)
+    nmap <silent> <cr>y <plug>(coc-type-definition)
+    nmap <silent> <cr>i <plug>(coc-implementation)
+    nmap <silent> <cr>r <plug>(coc-references)
+    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
+    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
 
-    nnoremap <silent><expr> K index(['vim', 'help'], &filetype) >= 0
+    nnoremap <silent><expr> <cr><cr> index(['vim', 'help'], &filetype) >= 0
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 
@@ -186,8 +182,6 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
     nnoremap <leader>` :Marks<cr>
-    nnoremap <leader>g :Lines<cr>
-    nnoremap <leader>G :BLines<cr>
 endif
 
 if has_key(g:plugs, 'nord-vim')
@@ -202,11 +196,20 @@ if has_key(g:plugs, 'nord-vim')
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
+if has_key(g:plugs, 'pear-tree')
+    let g:pear_tree_smart_openers = 1
+    let g:pear_tree_smart_closers = 1
+    let g:pear_tree_smart_backspace = 2
+    let g:pear_tree_repeatable_expand = 0
+endif
+
 if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/snips']
-    let g:UltiSnipsSnippetExpandTrigger = '<tab>'
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']
+    let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
