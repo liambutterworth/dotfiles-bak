@@ -6,6 +6,7 @@
 # :: Bindings
 # :: Colors
 # :: Environment
+# :: Fisher
 
 #
 # Settings
@@ -102,13 +103,19 @@ set -gx PATH "$PACKAGES/php@7.2/sbin" $PATH
 set -gx EDITOR 'nvim'
 
 if type -q fd
-    set -g FZF_DEFAULT_COMMAND 'fd --type f --hidden --follow'
+    set fd_options '--hidden --follow'
+    set -gx FZF_CTRL_T_COMMAND "fd --type f $fd_options"
+    set -gx FZF_ALT_C_COMMAND "fd --type d $fd_options"
 end
 
 if type -q fzf
-    set fzf_color_opt '--color "bg+:0,pointer:4,info:4,border:0"'
-    set fzf_preview_opt '--preview "(cat () || ls -A ()) 2>/dev/null | head -200"'
-    set -gx FZF_DEFAULT_OPTS $fzf_color_opt $fzf_preview_opt
+    set fzf_color "--color 'bg+:0,pointer:4,info:4,border:0'"
+    set fzf_preview_bind "--bind 'ctrl-d:half-page-down,ctrl-u:half-page-up'"
+    set fzf_preview_files "--preview 'cat {}' $fzf_preview_bind"
+    set fzf_preview_dirs "--preview 'ls -A {}' $fzf_preview_bind"
+    set -gx FZF_DEFAULT_OPTS $fzf_color
+    set -gx FZF_CTRL_T_OPTS $fzf_preview_files
+    set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
     set -gx FZF_TMUX 1
 
     bind -M insert \cg fzf-cd-widget

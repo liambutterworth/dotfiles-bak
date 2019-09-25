@@ -3,5 +3,7 @@
     "diagnostic.hintSign": "❯",
     "diagnostic.infoSign": "❯",
     "diagnostic.warningSign": "❯",
-    "snippets.userSnippetsDirectory": "~/.config/nvim/snips"
+    "suggest.maxPreviewWidth": 40,
+    "suggest.labelMaxLength": 80,
+    "suggest.detailMaxLength": 40
 }

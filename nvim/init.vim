@@ -92,8 +92,15 @@ nnoremap <silent> [<bs> :bprevious<cr>
 nnoremap <silent> ]<bs> :bnext<cr>
 nnoremap <silent> [<space> O<esc>j
 nnoremap <silent> ]<space> o<esc>'[k
-nnoremap <silent><expr> ]e ':<c-u>m+' . v:count1 . '<cr>=='
-nnoremap <silent><expr> [e ':<c-u>m-' . (v:count1 + 1) . '<cr>=='
+
+nnoremap <silent> ]e :<c-u>call line#move('n', 'down', v:count)<cr>
+nnoremap <silent> [e :<c-u>call line#move('n', 'up', v:count)<cr>
+vnoremap <silent> ]e :<c-u>call line#move('v', 'down', v:count)<cr>
+vnoremap <silent> [e :<c-u>call line#move('v', 'up', v:count)<cr>
+vnoremap <silent> <c-x>; :call line#ender(';')<cr>
+vnoremap <silent> <c-x>, :call line#ender(',')<cr>
+inoremap <silent> <c-x>; <esc>mm:call line#ender(';')<cr>`ma
+inoremap <silent> <c-x>, <esc>mm:call line#ender(',')<cr>`ma
 
 "
 " Plugins
@@ -104,6 +111,7 @@ call plug#begin('~/.config/nvim/plugs')
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'cohama/lexima.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
@@ -111,7 +119,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
 Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
-Plug 'tmsvg/pear-tree'
+" Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -127,8 +135,8 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
-        \ 'coc-snippets',
         \ 'coc-tsserver',
+        \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ ]
@@ -196,12 +204,12 @@ if has_key(g:plugs, 'nord-vim')
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if has_key(g:plugs, 'pear-tree')
-    let g:pear_tree_smart_openers = 1
-    let g:pear_tree_smart_closers = 1
-    let g:pear_tree_smart_backspace = 2
-    let g:pear_tree_repeatable_expand = 0
-endif
+" if has_key(g:plugs, 'pear-tree')
+"     let g:pear_tree_smart_openers = 1
+"     let g:pear_tree_smart_closers = 1
+"     let g:pear_tree_smart_backspace = 2
+"     let g:pear_tree_repeatable_expand = 0
+" endif
 
 if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']
