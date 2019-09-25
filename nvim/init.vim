@@ -119,7 +119,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
 Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
-" Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -203,13 +202,6 @@ if has_key(g:plugs, 'nord-vim')
     highlight StatusLine ctermfg=0 ctermbg=0
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
-
-" if has_key(g:plugs, 'pear-tree')
-"     let g:pear_tree_smart_openers = 1
-"     let g:pear_tree_smart_closers = 1
-"     let g:pear_tree_smart_backspace = 2
-"     let g:pear_tree_repeatable_expand = 0
-" endif
 
 if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']

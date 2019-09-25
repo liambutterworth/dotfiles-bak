@@ -96,11 +96,11 @@ switch (uname)
         set -gx PACKAGES '/usr/local/opt'
 end
 
+set -gx EDITOR 'nvim'
 set -gx PATH "$PACKAGES/mysql@5.7/bin" $PATH
 set -gx PATH "$PACKAGES/node@10/bin" $PATH
 set -gx PATH "$PACKAGES/php@7.2/bin" $PATH
 set -gx PATH "$PACKAGES/php@7.2/sbin" $PATH
-set -gx EDITOR 'nvim'
 
 if type -q fd
     set fd_options '--hidden --follow'
