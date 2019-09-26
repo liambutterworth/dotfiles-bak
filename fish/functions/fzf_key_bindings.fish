@@ -1,1 +1,1 @@
-/usr/local/opt/fzf/shell/key-bindings.fish
+/Users/liambutterworth/.dotfiles/nvim/plugged/fzf/shell/key-bindings.fish

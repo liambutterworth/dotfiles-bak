@@ -18,6 +18,10 @@ set fish_greeting
 # Aliases
 #
 
+alias grep='grep --color=auto'
+alias less='less --clear-screen --raw-control-chars'
+alias ls='ls --color=auto --group-directories-first'
+
 alias b='bash'
 alias c='clear'
 alias d='docker'
@@ -91,21 +95,21 @@ set fish_pager_color_secondary $nord1
 # Environment
 #
 
-switch (uname)
-    case Darwin
-        set -gx PACKAGES '/usr/local/opt'
-end
-
 set -gx EDITOR 'nvim'
-set -gx PATH "$PACKAGES/mysql@5.7/bin" $PATH
-set -gx PATH "$PACKAGES/node@10/bin" $PATH
-set -gx PATH "$PACKAGES/php@7.2/bin" $PATH
-set -gx PATH "$PACKAGES/php@7.2/sbin" $PATH
 
-if type -q fd
-    set fd_options '--hidden --follow'
-    set -gx FZF_CTRL_T_COMMAND "fd --type f $fd_options"
-    set -gx FZF_ALT_C_COMMAND "fd --type d $fd_options"
+if test (uname) = Darwin
+    set -gx PATH '/usr/local/opt/coreutils/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/findutils/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/grep/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gnu-sed/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gnu-tar/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gawk/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/ed/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/make/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/mysql@5.7/bin' $PATH
+    set -gx PATH '/usr/local/opt/node@10/bin' $PATH
+    set -gx PATH '/usr/local/opt/php@7.2/bin' $PATH
+    set -gx PATH '/usr/local/opt/php@7.2/sbin' $PATH
 end
 
 if type -q fzf
@@ -113,14 +117,13 @@ if type -q fzf
     set fzf_preview_bind "--bind 'ctrl-d:half-page-down,ctrl-u:half-page-up'"
     set fzf_preview_files "--preview 'cat {}' $fzf_preview_bind"
     set fzf_preview_dirs "--preview 'ls -A {}' $fzf_preview_bind"
+
     set -gx FZF_DEFAULT_OPTS $fzf_color
+    set -gx FZF_CTRL_T_COMMAND 'find -type f'
     set -gx FZF_CTRL_T_OPTS $fzf_preview_files
+    set -gx FZF_ALC_C_COMMAND 'find -type d'
     set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
     set -gx FZF_TMUX 1
 
     bind -M insert \cg fzf-cd-widget
-end
-
-if type -q rg
-    alias rg='rg --hidden --follow --pretty'
 end

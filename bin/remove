@@ -1,5 +1,3 @@
 #!/bin/sh
 
-rm -rf \
-    ~/.config/{alacritty,git,fish,nvim,tmux} \
-    ~/.cache/nvim
+rm -rf ~/.config/{alacritty,git,fish,nvim,tmux} ~/.cache/nvim

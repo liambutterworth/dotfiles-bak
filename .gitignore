@@ -1,5 +1,4 @@
 .DS_Store
 fish/fish_variables
-fish/fisher
 nvim/autoload/plug.vim
-nvim/plugs
+nvim/plugged

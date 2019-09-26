@@ -44,7 +44,7 @@ let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
-let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
+let g:python3_host_prog = command#execute('which python3')
 let g:vim_indent_cont = &shiftwidth
 let &helpheight = &lines / 2
 let &previewheight = &lines / 2
@@ -69,18 +69,18 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 
-nnoremap <leader>q :bdelete<cr>
-nnoremap <leader>t :tabedit<cr>
-nnoremap <leader>s :split<cr>
-nnoremap <leader>v :vsplit<cr>
-nnoremap <leader>p :tabprevious<cr>
-nnoremap <leader>n :tabnext<cr>
-nnoremap <leader>P :-tabmove<cr>
-nnoremap <leader>N :+tabmove<cr>
-nnoremap <leader>h 5<c-w><
-nnoremap <leader>j 5<c-w>-
-nnoremap <leader>k 5<c-w>+
-nnoremap <leader>l 5<c-w>>
+nnoremap <silent> <leader>q :bdelete<cr>
+nnoremap <silent> <leader>t :tabedit<cr>
+nnoremap <silent> <leader>s :split<cr>
+nnoremap <silent> <leader>v :vsplit<cr>
+nnoremap <silent> <leader>p :tabprevious<cr>
+nnoremap <silent> <leader>n :tabnext<cr>
+nnoremap <silent> <leader>P :-tabmove<cr>
+nnoremap <silent> <leader>N :+tabmove<cr>
+nnoremap <silent> <leader>h 5<c-w><
+nnoremap <silent> <leader>j 5<c-w>-
+nnoremap <silent> <leader>k 5<c-w>+
+nnoremap <silent> <leader>l 5<c-w>>
 
 nnoremap <silent> [ow :set nowrap<cr>
 nnoremap <silent> ]ow :set wrap<cr>
@@ -92,7 +92,6 @@ nnoremap <silent> [<bs> :bprevious<cr>
 nnoremap <silent> ]<bs> :bnext<cr>
 nnoremap <silent> [<space> O<esc>j
 nnoremap <silent> ]<space> o<esc>'[k
-
 nnoremap <silent> ]e :<c-u>call line#move('n', 'down', v:count)<cr>
 nnoremap <silent> [e :<c-u>call line#move('n', 'up', v:count)<cr>
 vnoremap <silent> ]e :<c-u>call line#move('v', 'down', v:count)<cr>
@@ -106,18 +105,18 @@ inoremap <silent> <c-x>, <esc>mm:call line#ender(',')<cr>`ma
 " Plugins
 "
 
-call plug#begin('~/.config/nvim/plugs')
+call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
-Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -128,26 +127,25 @@ Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
-if has_key(g:plugs, 'coc.nvim')
+if plugin#exists('coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
         \ 'coc-tsserver',
-        \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ ]
 
-    nmap <silent> <cr>d <plug>(coc-definition)
-    nmap <silent> <cr>y <plug>(coc-type-definition)
-    nmap <silent> <cr>i <plug>(coc-implementation)
-    nmap <silent> <cr>r <plug>(coc-references)
-    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
-    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
+    nmap <silent> ]g <plug>(coc-diagnostic-next)
+    nmap <silent> [g <plug>(coc-diagnostic-prev)
 
-    nnoremap <silent><expr> <cr><cr> index(['vim', 'help'], &filetype) >= 0
+    nnoremap <silent><expr> K index(['vim', 'help'], &filetype) >= 0
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 
@@ -159,9 +157,7 @@ if has_key(g:plugs, 'coc.nvim')
     nnoremap <expr> <c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
 endif
 
-if has_key(g:plugs, 'fzf.vim') && executable('fzf')
-    set runtimepath+=$PACKAGES/fzf
-
+if plugin#exists('fzf') && command#exists('fzf')
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
@@ -181,17 +177,15 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader><space> :Files<cr>
-    nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Rg<cr>
-    nnoremap <leader>\ :Commits<cr>
+    nnoremap <leader><cr> :Commits<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
     nnoremap <leader>` :Marks<cr>
 endif
 
-if has_key(g:plugs, 'nord-vim')
+if plugin#exists('nord-vim')
     let g:nord_bold_vertical_split_line = 1
     let g:nord_italic = 1
     let g:nord_italic_comments = 1
@@ -203,16 +197,7 @@ if has_key(g:plugs, 'nord-vim')
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/snips']
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <s-tab> :UltiSnipsEdit<cr>
-endif
-
-if has_key(g:plugs, 'vim-context-commentstring')
+if plugin#exists('vim-context-commentstring')
     let g:context#commentstring#table = {}
 
     let g:context#commentstring#table['html'] = {
@@ -237,14 +222,7 @@ if has_key(g:plugs, 'vim-context-commentstring')
         \ }
 endif
 
-if has_key(g:plugs, 'vim-easy-align')
+if plugin#exists('vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
-endif
-
-if has_key(g:plugs, 'vim-fugitive')
-    nnoremap \\ :Git<cr>
-    nnoremap \b :Git blame<cr>
-    nnoremap \l :Gclog<cr>
-    nnoremap \r :Gcd<cr>
 endif

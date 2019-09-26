@@ -1,20 +1,10 @@
 "
 " Line
 "
-" :: Ender
-" :: Move
-
-"
-" Ender
-"
 
 function! line#ender(char) abort
     s/\v(.)$/\=submatch(1) == a:char ? '' : submatch(1) . a:char
 endfunction
-
-"
-" Move
-"
 
 function! line#move(mode, direction, count) abort
     let l:range = a:mode == 'v' ? "'<,'>" : ''
