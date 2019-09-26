@@ -40,14 +40,14 @@ set undofile undodir=~/.cache/nvim/undo//
 set updatetime=300
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
-let g:mapleader = "\<space>"
+let &helpheight = &lines / 2
+let &previewheight = &lines / 2
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:python3_host_prog = command#execute('which python3')
 let g:vim_indent_cont = &shiftwidth
-let &helpheight = &lines / 2
-let &previewheight = &lines / 2
+let mapleader = "\<space>"
 
 augroup settings
     autocmd!
@@ -82,24 +82,11 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-nnoremap <silent> [ow :set nowrap<cr>
-nnoremap <silent> ]ow :set wrap<cr>
-nnoremap <silent> [os :set nospell<cr>
-nnoremap <silent> ]os :set spell<cr>
-nnoremap <silent> [oh :set nohlsearch<cr>
-nnoremap <silent> [oh :set hlsearch<cr>
-nnoremap <silent> [<bs> :bprevious<cr>
-nnoremap <silent> ]<bs> :bnext<cr>
-nnoremap <silent> [<space> O<esc>j
-nnoremap <silent> ]<space> o<esc>'[k
-nnoremap <silent> ]e :<c-u>call line#move('n', 'down', v:count)<cr>
-nnoremap <silent> [e :<c-u>call line#move('n', 'up', v:count)<cr>
-vnoremap <silent> ]e :<c-u>call line#move('v', 'down', v:count)<cr>
-vnoremap <silent> [e :<c-u>call line#move('v', 'up', v:count)<cr>
-vnoremap <silent> <c-x>; :call line#ender(';')<cr>
-vnoremap <silent> <c-x>, :call line#ender(',')<cr>
-inoremap <silent> <c-x>; <esc>mm:call line#ender(';')<cr>`ma
-inoremap <silent> <c-x>, <esc>mm:call line#ender(',')<cr>`ma
+inoremap <silent> <c-x>; <esc>mm:s/\v(.)$/\=submatch(1) == ';'
+    \ ? '' : submatch(1) . ';'<cr>`ma
+
+inoremap <silent> <c-x>, <esc>mm:s/\v(.)$/\=submatch(1) == ','
+    \ ? '' : submatch(1) . ','<cr>`ma
 
 "
 " Plugins
@@ -111,7 +98,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cohama/lexima.vim'
-Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': './install --all --xdg' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
@@ -123,6 +110,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
 call plug#end()

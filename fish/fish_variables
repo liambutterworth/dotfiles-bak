@@ -1,9 +1,0 @@
-# This file contains fish universal variable definitions.
-# VERSION: 3.0
-SETUVAR __fish_init_2_3_0:\x1d
-SETUVAR fish_color_cwd_root:red
-SETUVAR fish_color_history_current:\x2d\x2dbold
-SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
-SETUVAR fish_color_valid_path:\x2d\x2dunderline
-SETUVAR fish_key_bindings:fish_vi_key_bindings
-SETUVAR fish_user_paths:/Users/liambutterworth/\x2edotfiles/nvim/plugged/fzf/bin
