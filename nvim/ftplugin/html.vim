@@ -1,4 +1,4 @@
-if has_key(g:plugs, 'lexima.vim')
+if g:vim_plugged && has_key(g:plugs, 'lexima.vim')
     call lexima#add_rule({
         \'char': '<', 
         \ 'input_after': '>'

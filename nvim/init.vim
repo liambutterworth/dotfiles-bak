@@ -45,8 +45,9 @@ let &previewheight = &lines / 2
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
-let g:python3_host_prog = command#execute('which python3')
+let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
+let g:vim_plugged = isdirectory($HOME . '/.config/nvim/plugged')
 let mapleader = "\<space>"
 
 augroup settings
@@ -115,7 +116,7 @@ Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
-if plugin#exists('coc.nvim')
+if g:vim_plugged && has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-html',
@@ -145,7 +146,7 @@ if plugin#exists('coc.nvim')
     nnoremap <expr> <c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
 endif
 
-if plugin#exists('fzf') && command#exists('fzf')
+if g:vim_plugged && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
@@ -173,7 +174,7 @@ if plugin#exists('fzf') && command#exists('fzf')
     nnoremap <leader>` :Marks<cr>
 endif
 
-if plugin#exists('nord-vim')
+if g:vim_plugged && has_key(g:plugs, 'nord-vim')
     let g:nord_bold_vertical_split_line = 1
     let g:nord_italic = 1
     let g:nord_italic_comments = 1
@@ -185,7 +186,7 @@ if plugin#exists('nord-vim')
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if plugin#exists('vim-context-commentstring')
+if g:vim_plugged && has_key(g:plugs, 'vim-context-commentstring')
     let g:context#commentstring#table = {}
 
     let g:context#commentstring#table['html'] = {
@@ -210,7 +211,7 @@ if plugin#exists('vim-context-commentstring')
         \ }
 endif
 
-if plugin#exists('vim-easy-align')
+if g:vim_plugged && has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
