@@ -18,7 +18,7 @@ set fish_greeting
 # Aliases
 #
 
-alias grep='grep --color=auto'
+alias grep='grep --color=auto --perl-regexp'
 alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
 
@@ -119,10 +119,10 @@ if type -q fzf
     set fzf_preview_dirs "--preview 'ls -A {}' $fzf_preview_bind"
 
     set -gx FZF_DEFAULT_OPTS $fzf_color
-    set -gx FZF_CTRL_T_COMMAND 'find -type f'
     set -gx FZF_CTRL_T_OPTS $fzf_preview_files
-    set -gx FZF_ALC_C_COMMAND 'find -type d'
+    set -gx FZF_CTRL_T_COMMAND 'find -type f'
     set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
+    set -gx FZF_ALC_C_COMMAND 'find -type d'
     set -gx FZF_TMUX 1
 
     bind -M insert \cg fzf-cd-widget

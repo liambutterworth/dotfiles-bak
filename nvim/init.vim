@@ -105,6 +105,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
+" Plug 'jwalton512/vim-blade'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -140,13 +141,9 @@ if g:vim_plugged && has_key(g:plugs, 'coc.nvim')
 
     nnoremap <expr> <c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
     nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
-    nnoremap <expr> <c-d> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-d>"
-    nnoremap <expr> <c-u> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-u>"
-    nnoremap <expr> <c-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-f>"
-    nnoremap <expr> <c-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-b>"
 endif
 
-if g:vim_plugged && has_key(g:plugs, 'fzf.vim') && executable('fzf')
+if g:vim_plugged && has_key(g:plugs, 'fzf.vim')
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
@@ -172,6 +169,37 @@ if g:vim_plugged && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
     nnoremap <leader>` :Marks<cr>
+endif
+
+if g:vim_plugged && has_key(g:plugs, 'lexima.vim')
+    call lexima#add_rule({
+        \ 'char': '>',
+        \ 'at': '<.*\%#',
+        \ 'input': '><esc>F<"hye%"hpa><esc>bi/<esc>F<i',
+        \ 'except': '".*\%#.*"',
+        \ 'filetype': ['html', 'xml', 'blade'],
+        \ })
+
+    call lexima#add_rule({
+        \ 'char': '<cr>',
+        \ 'at': '>\%#<',
+        \ 'input': '<cr><esc>O',
+        \ 'filetype': ['html', 'xml', 'blade'],
+        \ })
+
+    call lexima#add_rule({
+        \ 'char': '<bs>',
+        \ 'at': '<.*>\%#</.*>',
+        \ 'input': '<esc>cf>',
+        \ 'filetype': ['html', 'xml', 'blade'],
+        \ })
+
+    call lexima#add_rule({
+        \ 'char': '<bs>',
+        \ 'at': '<.*>\s*\n^\%#\s*$',
+        \ 'input': '<esc>ddd0i<bs>',
+        \ 'filetype': ['html', 'xml', 'blade'],
+        \ })
 endif
 
 if g:vim_plugged && has_key(g:plugs, 'nord-vim')

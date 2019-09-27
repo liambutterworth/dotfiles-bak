@@ -1,60 +1,26 @@
-if g:vim_plugged && has_key(g:plugs, 'lexima.vim')
-    call lexima#add_rule({
-        \'char': '<', 
-        \ 'input_after': '>'
-        \ })
+" if g:vim_plugged && has_key(g:plugs, 'lexima.vim')
+"     call lexima#add_rule({
+"         \ 'char': '>',
+"         \ 'at': '<.*\%#',
+"         \ 'input': '></><esc>2T<yef/pF>a',
+"         \ 'except': '".*\%#.*"'
+"         \ })
 
-    call lexima#add_rule({
-        \ 'char': '>',
-        \ 'at': '\%#>',
-        \ 'leave': 1
-        \ })
+"     call lexima#add_rule({
+"         \ 'char': '<cr>',
+"         \ 'at': '>\%#<',
+"         \ 'input': '<cr><esc>O'
+"         \ })
 
-    call lexima#add_rule({
-        \ 'char': '<BS>',
-        \ 'at': '<.*>\%#',
-        \ 'input': '<BS>',
-        \ 'input_after': '>'
-        \ })
+"     call lexima#add_rule({
+"         \ 'char': '<bs>',
+"         \ 'at': '<.*>\%#\s*</.*>',
+"         \ 'input': '<esc>df>a'
+"         \ })
 
-    call lexima#add_rule({
-        \ 'char': '<BS>',
-        \ 'at': '<.*/>\%#',
-        \ 'input': '<BS><BS>',
-        \ 'input_after': '/>',
-        \ 'priority': 1
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '/',
-        \ 'leave': 2,
-        \ 'at': '^\s*<.*\%#\s*/>'
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<BS>',
-        \ 'delete': 1,
-        \ 'at': '<\%#>'
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<BS>',
-        \ 'delete': 2,
-        \ 'at': '<\%#/>',
-        \ 'priority': 1
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '/',
-        \ 'delete': 1,
-        \ 'input': '/>',
-        \ 'at': '<[^>]\+\%#>'
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<CR>',
-        \ 'input': '<CR>',
-        \ 'input_after': '<CR>',
-        \ 'at': '>\%#</'
-        \ })
-endif
+"     call lexima#add_rule({
+"         \ 'char': '<bs>',
+"         \ 'at': '<.*>\n\%#',
+"         \ 'input': '<esc>ddd0i<bs>'
+"         \ })
+" endif
