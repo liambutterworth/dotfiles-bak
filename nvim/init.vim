@@ -223,3 +223,10 @@ if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
+
+if has_key(g:plugs, 'vim-fugitive')
+    nnoremap <cr>s :Gstatus<cr>
+    nnoremap <cr>b :Gblame<cr>
+    nnoremap <cr>l :Glog<cr>
+    nnoremap <cr>d :Gdiffsplit<cr>
+endif
