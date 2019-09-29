@@ -1,6 +1,6 @@
 # Install
 
-Dependencies: [alacritty](https://github.com/jwilm/alacritty), [font](https://github.com/adobe-fonts/source-code-pro), [fish](https://github.com/fish-shell/fish-shell), [git](https://github.com/git/git), [neovim](https://github.com/neovim/neovim), [tmux](https://github.com/tmux/tmux)
+Dependencies: [Alacritty](https://github.com/jwilm/alacritty), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro), [Fish](https://github.com/fish-shell/fish-shell), [Git](https://github.com/git/git), [NeoVim](https://github.com/neovim/neovim), [Tmux](https://github.com/tmux/tmux)
 
 ### Mac
 
