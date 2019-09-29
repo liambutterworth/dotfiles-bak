@@ -5,8 +5,7 @@
 # :: Aliases
 # :: Bindings
 # :: Colors
-# :: Environment
-# :: Fisher
+# :: Env
 
 #
 # Settings
@@ -92,7 +91,7 @@ set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
 
 #
-# Environment
+# Env
 #
 
 set -gx EDITOR 'nvim'
@@ -110,6 +109,7 @@ if test (uname) = Darwin
     set -gx PATH '/usr/local/opt/node@10/bin' $PATH
     set -gx PATH '/usr/local/opt/php@7.2/bin' $PATH
     set -gx PATH '/usr/local/opt/php@7.2/sbin' $PATH
+    set -gx PATH '/usr/local/opt/ruby/bin' $PATH
 end
 
 if type -q fzf
@@ -120,9 +120,9 @@ if type -q fzf
 
     set -gx FZF_DEFAULT_OPTS $fzf_color
     set -gx FZF_CTRL_T_OPTS $fzf_preview_files
-    set -gx FZF_CTRL_T_COMMAND 'find -type f'
+    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
     set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
-    set -gx FZF_ALC_C_COMMAND 'find -type d'
+    set -gx FZF_ALT_C_COMMAND 'find -L type d'
     set -gx FZF_TMUX 1
 
     bind -M insert \cg fzf-cd-widget

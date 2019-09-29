@@ -2,4 +2,4 @@
 fish/fish_variables
 fish/functions/fzf_key_bindings.fish
 nvim/autoload/plug.vim
-nvim/plugged
+nvim/plugs

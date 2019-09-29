@@ -42,13 +42,16 @@ set wildmenu wildignorecase wildmode=list:longest,list:full
 
 let &helpheight = &lines / 2
 let &previewheight = &lines / 2
+let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
+let g:python_host_prog = substitute(system('which python'), '\n', '', 'g')
 let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
+let g:ruby_host_prog = substitute(system('which ruby'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
-let g:vim_plugged = isdirectory($HOME . '/.config/nvim/plugged')
-let mapleader = "\<space>"
+let g:vim_plugs = $HOME . '/.config/nvim/plugs'
+let g:vim_snips = $HOME . '/.config/nvim/snips'
 
 augroup settings
     autocmd!
@@ -83,29 +86,26 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-inoremap <silent> <c-x>; <esc>mm:s/\v(.)$/\=submatch(1) == ';'
-    \ ? '' : submatch(1) . ';'<cr>`ma
-
-inoremap <silent> <c-x>, <esc>mm:s/\v(.)$/\=submatch(1) == ','
-    \ ? '' : submatch(1) . ','<cr>`ma
+inoremap <silent> <c-b>\ <esc>mm:s/\v(\S)/\=submatch(1) == '\' ? '' : '\ ' . submatch(1)<cr>==`ma
+inoremap <silent> <c-e>; <esc>mm:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>`ma
+inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>`ma
 
 "
 " Plugins
 "
 
-call plug#begin()
+call plug#begin(g:vim_plugs)
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'cohama/lexima.vim'
 Plug 'junegunn/fzf', { 'do': './install --all --xdg' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
-" Plug 'jwalton512/vim-blade'
+Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -117,12 +117,13 @@ Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
-if g:vim_plugged && has_key(g:plugs, 'coc.nvim')
+if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
+        \ 'coc-ultisnips',
         \ 'coc-tsserver',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
@@ -143,7 +144,7 @@ if g:vim_plugged && has_key(g:plugs, 'coc.nvim')
     nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
 endif
 
-if g:vim_plugged && has_key(g:plugs, 'fzf.vim')
+if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
@@ -163,6 +164,7 @@ if g:vim_plugged && has_key(g:plugs, 'fzf.vim')
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
     nnoremap <leader><space> :Files<cr>
+    nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
     nnoremap <leader><cr> :Commits<cr>
     nnoremap <leader>/ :History/<cr>
@@ -171,38 +173,7 @@ if g:vim_plugged && has_key(g:plugs, 'fzf.vim')
     nnoremap <leader>` :Marks<cr>
 endif
 
-if g:vim_plugged && has_key(g:plugs, 'lexima.vim')
-    call lexima#add_rule({
-        \ 'char': '>',
-        \ 'at': '<.*\%#',
-        \ 'input': '><esc>F<"hye%"hpa><esc>bi/<esc>F<i',
-        \ 'except': '".*\%#.*"',
-        \ 'filetype': ['html', 'xml', 'blade'],
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<cr>',
-        \ 'at': '>\%#<',
-        \ 'input': '<cr><esc>O',
-        \ 'filetype': ['html', 'xml', 'blade'],
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<bs>',
-        \ 'at': '<.*>\%#</.*>',
-        \ 'input': '<esc>cf>',
-        \ 'filetype': ['html', 'xml', 'blade'],
-        \ })
-
-    call lexima#add_rule({
-        \ 'char': '<bs>',
-        \ 'at': '<.*>\s*\n^\%#\s*$',
-        \ 'input': '<esc>ddd0i<bs>',
-        \ 'filetype': ['html', 'xml', 'blade'],
-        \ })
-endif
-
-if g:vim_plugged && has_key(g:plugs, 'nord-vim')
+if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs) 
     let g:nord_bold_vertical_split_line = 1
     let g:nord_italic = 1
     let g:nord_italic_comments = 1
@@ -214,7 +185,16 @@ if g:vim_plugged && has_key(g:plugs, 'nord-vim')
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if g:vim_plugged && has_key(g:plugs, 'vim-context-commentstring')
+if has_key(g:plugs, 'ultisnips')
+    let g:UltiSnipsSnippetsDir = g:vim_snips
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <s-tab> :UltiSnipsEdit<cr>
+endif
+
+if has_key(g:plugs, 'vim-context-commentstring')
     let g:context#commentstring#table = {}
 
     let g:context#commentstring#table['html'] = {
@@ -222,7 +202,7 @@ if g:vim_plugged && has_key(g:plugs, 'vim-context-commentstring')
         \ 'cssStyle'    : '/* %s */',
         \ }
 
-    let g:context#commentstring#table['javascript.jsx'] = {
+    let g:context#commentstring#table['javascript'] = {
         \ 'jsComment' : '// %s',
         \ 'jsImport' : '// %s',
         \ }
@@ -239,7 +219,7 @@ if g:vim_plugged && has_key(g:plugs, 'vim-context-commentstring')
         \ }
 endif
 
-if g:vim_plugged && has_key(g:plugs, 'vim-easy-align')
+if has_key(g:plugs, 'vim-easy-align')
     xmap ga <plug>(EasyAlign)
     nmap ga <plug>(EasyAlign)
 endif
