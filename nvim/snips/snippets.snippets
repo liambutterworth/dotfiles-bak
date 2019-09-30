@@ -1,0 +1,19 @@
+snippet snip "snippet" b
+`!p snip.rv = 'snippet'` ${1:name} "${2:description}" ${3:b}
+${4:${VISUAL}}
+`!p snip.rv = 'endsnippet'`$0
+endsnippet
+
+snippet global "Global snippet" b
+`!p snip.rv = "global"` !p
+${0:${VISUAL}}
+`!p snip.rv = "endglobal"`
+endsnippet
+
+snippet vis "${VISUAL}" i
+\$\{VISUAL\}
+endsnippet
+
+snippet 0 "${0:${VISUAL}}" i
+\$\{0:$\{VISUAL\}\}
+endsnippet

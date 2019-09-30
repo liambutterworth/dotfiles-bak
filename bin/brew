@@ -1,0 +1,13 @@
+#!/bin/sh
+
+brew tap caskroom/fonts
+brew cask install alacritty font-source-code-pro
+
+brew install \
+    coreutils findutils grep gnu-sed gnu-tar gawk ed make \
+    fish git neovim tmux \
+    mysql$MYSQL_VERSION \
+    node$NODE_VERSION \
+    php$PHP_VERSION \
+    ruby$RUBY_VERSION
+

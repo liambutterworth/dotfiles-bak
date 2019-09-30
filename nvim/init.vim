@@ -50,8 +50,8 @@ let g:python_host_prog = substitute(system('which python'), '\n', '', 'g')
 let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
 let g:ruby_host_prog = substitute(system('which ruby'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
-let g:vim_plugs = $HOME . '/.config/nvim/plugs'
-let g:vim_snips = $HOME . '/.config/nvim/snips'
+let g:vim_plugs_dir = $HOME . '/.config/nvim/plugs'
+let g:vim_snips_dir = $HOME . '/.config/nvim/snips'
 
 augroup settings
     autocmd!
@@ -69,11 +69,11 @@ nmap k gk
 nmap Y y$
 nmap Q @q
 nmap <bs> <c-^>
-nnoremap c* *``cgn
-nnoremap c# #``cgN
-nnoremap d* *``dgn
-nnoremap d# #``dgN
-nnoremap g= mmgg=G`m
+nmap c* *``cgn
+nmap c# #``cgN
+nmap d* *``dgn
+nmap d# #``dgN
+nmap g= mmgg=G`m
 
 nnoremap <silent> <leader>q :bdelete<cr>
 nnoremap <silent> <leader>t :tabedit<cr>
@@ -88,20 +88,16 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-inoremap <silent> <c-x><cr> <cr><esc>O
-inoremap <silent> <c-x><bs> <esc>ddkJciw
-
-inoremap <silent> <c-x>; <esc>mm:s/\v(.)$/\=submatch(1) == ';'
-    \ ? '' : submatch(1) . ';'<cr>`ma
-
-inoremap <silent> <c-x>, <esc>mm:s/\v(.)$/\=submatch(1) == ','
-    \ ? '' : submatch(1) . ','<cr>`ma
+inoremap <silent> <c-e><cr> <cr><esc>O
+inoremap <silent> <c-e><bs> <esc>ddkJciw
+inoremap <silent> <c-e>; <esc>mm:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>`ma
+inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>`ma
 
 "
 " Plugins
 "
 
-call plug#begin(g:vim_plugs)
+call plug#begin(g:vim_plugs_dir)
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -185,7 +181,7 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>` :Marks<cr>
 endif
 
-if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs) 
+if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs_dir) 
     let g:nord_bold_vertical_split_line = 1
     let g:nord_italic = 1
     let g:nord_italic_comments = 1
@@ -197,8 +193,8 @@ if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs)
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if has_key(g:plugs, 'ultisnips') && isdirectory(g:vim_snips)
-    let g:UltiSnipsSnippetDirectories = [g:vim_snips]
+if has_key(g:plugs, 'ultisnips') && isdirectory(g:vim_snips_dir)
+    let g:UltiSnipsSnippetDirectories = [g:vim_snips_dir]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
@@ -237,10 +233,8 @@ if has_key(g:plugs, 'vim-easy-align')
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
-    nnoremap <cr>b :Gblame<cr>
-    nnoremap <cr>c :Gcommit<cr>
-    nnoremap <cr>d :Gdiffsplit<cr>
-    nnoremap <cr>s :Gstatus<cr>
-    nnoremap <cr>l :Glog<cr>
-    nnoremap <cr>w :Gwrite<cr>
+    nnoremap <silent> <cr>b :Gblame<cr>
+    nnoremap <silent> <cr>d :Ghdiffsplit<cr>
+    nnoremap <silent> <cr>s :Gstatus<cr>
+    nnoremap <silent> <cr>q :diffoff!<cr><c-w>j<c-w>o
 endif

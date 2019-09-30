@@ -5,13 +5,49 @@
 # :: Aliases
 # :: Bindings
 # :: Colors
-# :: Env
 
 #
 # Settings
 #
 
 set fish_greeting
+
+set -gx BROWSER 'chrome'
+set -gx EDITOR 'nvim'
+set -gx MYSQL_VERSION '@7.2'
+set -gx NODE_VERSION '@10'
+set -gx PHP_VERSION '@7.2'
+set -gx RUBY_VERSION ''
+
+if test (uname) = Darwin
+    set -gx PATH '/usr/local/opt/coreutils/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/findutils/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/grep/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gnu-sed/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gnu-tar/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/gawk/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/ed/libexec/gnubin' $PATH
+    set -gx PATH '/usr/local/opt/make/libexec/gnubin' $PATH
+    set -gx PATH "/usr/local/opt/mysql$MYSQL_VERSION/bin" $PATH
+    set -gx PATH "/usr/local/opt/node$NODE_VERSION/bin" $PATH
+    set -gx PATH "/usr/local/opt/php$PHP_VERSION/bin" $PATH
+    set -gx PATH "/usr/local/opt/php$PHP_VERSION/sbin" $PATH
+    set -gx PATH "/usr/local/opt/ruby$RUBY_VERSION/bin" $PATH
+end
+
+if type -q fzf
+    set fzf_color "--color 'bg+:0,pointer:4,info:4,border:0'"
+    set fzf_preview_bind "--bind 'ctrl-d:half-page-down,ctrl-u:half-page-up'"
+    set fzf_preview_files "--preview 'cat {}' $fzf_preview_bind"
+    set fzf_preview_dirs "--preview 'ls -A {}' $fzf_preview_bind"
+
+    set -gx FZF_DEFAULT_OPTS $fzf_color
+    set -gx FZF_CTRL_T_OPTS $fzf_preview_files
+    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
+    set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
+    set -gx FZF_ALT_C_COMMAND 'find -L -type d'
+    set -gx FZF_TMUX 1
+end
 
 #
 # Aliases
@@ -28,6 +64,7 @@ alias dc='docker-compose'
 alias e='exit'
 alias g='git'
 alias n='nvim'
+alias nt='n -c\ q --startuptime /dev/stdout | tail -n1'
 alias m='mysql'
 alias mc='mysql_config_editor'
 alias pa='php artisan'
@@ -45,6 +82,10 @@ bind -M insert \cf accept-autosuggestion
 bind -M insert \cx accept-autosuggestion execute
 bind -M insert \cp history-search-backward
 bind -M insert \cn history-search-forward
+
+if type -q fzf
+    bind -M insert \cg fzf-cd-widget
+end
 
 #
 # Colors
@@ -89,41 +130,3 @@ set fish_pager_color_completion $nord6
 set fish_pager_color_description $nord10
 set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
-
-#
-# Env
-#
-
-set -gx EDITOR 'nvim'
-
-if test (uname) = Darwin
-    set -gx PATH '/usr/local/opt/coreutils/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/findutils/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/grep/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/gnu-sed/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/gnu-tar/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/gawk/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/ed/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/make/libexec/gnubin' $PATH
-    set -gx PATH '/usr/local/opt/mysql@5.7/bin' $PATH
-    set -gx PATH '/usr/local/opt/node@10/bin' $PATH
-    set -gx PATH '/usr/local/opt/php@7.2/bin' $PATH
-    set -gx PATH '/usr/local/opt/php@7.2/sbin' $PATH
-    set -gx PATH '/usr/local/opt/ruby/bin' $PATH
-end
-
-if type -q fzf
-    set fzf_color "--color 'bg+:0,pointer:4,info:4,border:0'"
-    set fzf_preview_bind "--bind 'ctrl-d:half-page-down,ctrl-u:half-page-up'"
-    set fzf_preview_files "--preview 'cat {}' $fzf_preview_bind"
-    set fzf_preview_dirs "--preview 'ls -A {}' $fzf_preview_bind"
-
-    set -gx FZF_DEFAULT_OPTS $fzf_color
-    set -gx FZF_CTRL_T_OPTS $fzf_preview_files
-    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
-    set -gx FZF_ALT_C_OPTS $fzf_preview_dirs
-    set -gx FZF_ALT_C_COMMAND 'find -L type d'
-    set -gx FZF_TMUX 1
-
-    bind -M insert \cg fzf-cd-widget
-end
