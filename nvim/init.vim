@@ -56,6 +56,8 @@ let g:vim_snips = $HOME . '/.config/nvim/snips'
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
+    autocmd BufLeave * let b:winview = winsaveview()
+    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
 augroup end
 
 "
@@ -86,9 +88,14 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-inoremap <silent> <c-b>\ <esc>mm:s/\v(\S)/\=submatch(1) == '\' ? '' : '\ ' . submatch(1)<cr>==`ma
-inoremap <silent> <c-e>; <esc>mm:s/\v(.)$/\=submatch(1) == ';' ? '' : submatch(1) . ';'<cr>`ma
-inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1) == ',' ? '' : submatch(1) . ','<cr>`ma
+inoremap <silent> <c-x><cr> <cr><esc>O
+inoremap <silent> <c-x><bs> <esc>ddkJciw
+
+inoremap <silent> <c-x>; <esc>mm:s/\v(.)$/\=submatch(1) == ';'
+    \ ? '' : submatch(1) . ';'<cr>`ma
+
+inoremap <silent> <c-x>, <esc>mm:s/\v(.)$/\=submatch(1) == ','
+    \ ? '' : submatch(1) . ','<cr>`ma
 
 "
 " Plugins
@@ -120,13 +127,15 @@ call plug#end()
 if has_key(g:plugs, 'coc.nvim')
     let g:coc_global_extensions = [
         \ 'coc-css',
+        \ 'coc-docker',
         \ 'coc-html',
         \ 'coc-json',
         \ 'coc-phpls',
-        \ 'coc-ultisnips',
         \ 'coc-tsserver',
+        \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
+        \ 'coc-yaml',
         \ ]
 
     nmap <silent> gd <plug>(coc-definition)
@@ -140,8 +149,11 @@ if has_key(g:plugs, 'coc.nvim')
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 
-    nnoremap <expr> <c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
-    nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
+    nnoremap <silent><expr> <c-e> coc#util#has_float() 
+        \ ? coc#util#float_scroll(1) : "\<c-e>"
+
+    nnoremap <silent><expr> <c-y> coc#util#has_float() 
+        \ ? coc#util#float_scroll(0) : "\<c-y>"
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
@@ -185,8 +197,8 @@ if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs)
     highlight StatusLineNC ctermfg=0 ctermbg=0
 endif
 
-if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetsDir = g:vim_snips
+if has_key(g:plugs, 'ultisnips') && isdirectory(g:vim_snips)
+    let g:UltiSnipsSnippetDirectories = [g:vim_snips]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
@@ -225,8 +237,10 @@ if has_key(g:plugs, 'vim-easy-align')
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
-    nnoremap <cr>s :Gstatus<cr>
     nnoremap <cr>b :Gblame<cr>
-    nnoremap <cr>l :Glog<cr>
+    nnoremap <cr>c :Gcommit<cr>
     nnoremap <cr>d :Gdiffsplit<cr>
+    nnoremap <cr>s :Gstatus<cr>
+    nnoremap <cr>l :Glog<cr>
+    nnoremap <cr>w :Gwrite<cr>
 endif
