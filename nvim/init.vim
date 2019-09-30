@@ -37,7 +37,7 @@ set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
 set undofile undodir=~/.cache/nvim/undo//
-set updatetime=300
+set updatetime=100
 set wildmenu wildignorecase wildmode=list:longest,list:full
 
 let &helpheight = &lines / 2
@@ -46,12 +46,7 @@ let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
-let g:python_host_prog = substitute(system('which python'), '\n', '', 'g')
-let g:python3_host_prog = substitute(system('which python3'), '\n', '', 'g')
-let g:ruby_host_prog = substitute(system('which ruby'), '\n', '', 'g')
 let g:vim_indent_cont = &shiftwidth
-let g:vim_plugs_dir = $HOME . '/.config/nvim/plugs'
-let g:vim_snips_dir = $HOME . '/.config/nvim/snips'
 
 augroup settings
     autocmd!
@@ -88,8 +83,7 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-inoremap <silent> <c-e><cr> <cr><esc>O
-inoremap <silent> <c-e><bs> <esc>ddkJciw
+inoremap <silent> <c-e><cr> <space><esc>ciw<cr><esc>O
 inoremap <silent> <c-e>; <esc>mm:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>`ma
 inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>`ma
 
@@ -97,7 +91,7 @@ inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<
 " Plugins
 "
 
-call plug#begin(g:vim_plugs_dir)
+call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -108,7 +102,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
-Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -128,7 +121,6 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-json',
         \ 'coc-phpls',
         \ 'coc-tsserver',
-        \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ 'coc-yaml',
@@ -181,25 +173,16 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>` :Marks<cr>
 endif
 
-if has_key(g:plugs, 'nord-vim') && isdirectory(g:vim_plugs_dir) 
+if has_key(g:plugs, 'nord-vim')
     let g:nord_bold_vertical_split_line = 1
     let g:nord_italic = 1
     let g:nord_italic_comments = 1
     let g:nord_underline = 1
 
-    colorscheme nord
+    silent! colorscheme nord
 
     highlight StatusLine ctermfg=0 ctermbg=0
     highlight StatusLineNC ctermfg=0 ctermbg=0
-endif
-
-if has_key(g:plugs, 'ultisnips') && isdirectory(g:vim_snips_dir)
-    let g:UltiSnipsSnippetDirectories = [g:vim_snips_dir]
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')

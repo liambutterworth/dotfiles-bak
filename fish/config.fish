@@ -12,19 +12,22 @@
 
 set fish_greeting
 
-set -gx BROWSER 'chrome'
-set -gx EDITOR 'nvim'
+set -U BROWSER 'chrome'
+set -U EDITOR 'nvim'
 
 if test (uname) = Darwin
-    set -U fish_user_paths "$HOME/.config/nvim/plugs/fzf/bin" $fish_user_path
-    set -U fish_user_paths (brew --prefix)'/opt/coreutils/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/findutils/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/grep/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/gnu-sed/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/gnu-tar/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/gawk/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/ed/libexec/gnubin' $fish_user_paths
-    set -U fish_user_paths (brew --prefix)'/opt/make/libexec/gnubin' $fish_user_paths
+    set -U BREW (brew --prefix)
+
+    set -U fish_user_paths \
+        "$BREW/opt/coreutils/libexec/gnubin" \
+        "$BREW/opt/findutils/libexec/gnubin" \
+        "$BREW/local/opt/grep/libexec/gnubin" \
+        "$BREW/opt/gnu-sed/libexec/gnubin" \
+        "$BREW/opt/gnu-tar/libexec/gnubin" \
+        "$BREW/opt/gawk/libexec/gnubin" \
+        "$BREW/opt/ed/libexec/gnubin" \
+        "$BREW/opt/ruby/bin" \
+        "$HOME/.config/nvim/plugs/fzf/bin"
 end
 
 if type -q fzf
@@ -51,7 +54,6 @@ alias dc='docker-compose'
 alias e='exit'
 alias g='git'
 alias n='nvim'
-alias ns='n -c\ q --startuptime /dev/stdout | tail -n1'
 alias m='mysql'
 alias mc='mysql_config_editor'
 alias pa='php artisan'
