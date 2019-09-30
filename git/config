@@ -4,18 +4,22 @@
 
 [alias]
     a = add
+    b = branch
     c = commit -m
     ca = commit --amend
     co = checkout
     d = diff
-    ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
-    lg = ll --graph
-    m = merge
-    mt = merge --no-commit --no-ff
     dir = rev-parse --show-toplevel
+    f = fetch
+    g = grep
+    lg = ll --graph
+    ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
+    m = merge
+    mn = merge --no-commit --no-ff
+    re = reset HEAD --
     s = status
     st = stash
-    un = reset HEAD --
+    t = tag
     who = !git config user.name && git config user.email
 [core]
     editor = nvim

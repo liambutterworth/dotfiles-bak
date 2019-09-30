@@ -57,7 +57,7 @@ augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
     autocmd BufLeave * let b:winview = winsaveview()
-    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
+    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview) | endif
 augroup end
 
 "

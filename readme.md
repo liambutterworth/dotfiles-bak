@@ -4,8 +4,6 @@ Packages: [Alacritty](https://github.com/jwilm/alacritty), [Source Code Pro](htt
 
 ### Mac
 
-- Install [Homebrew](https://brew.sh)
-
 ```
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles
     $ ~/.dotfiles/bin/brew && ~/.dotfiles/bin/install
