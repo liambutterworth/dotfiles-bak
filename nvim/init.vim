@@ -102,7 +102,7 @@ call plug#begin(g:vim_plugs_dir)
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'do': './install --all --xdg' }
+Plug 'junegunn/fzf', { 'do': './install --all --xdg --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
