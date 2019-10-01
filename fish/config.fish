@@ -12,7 +12,7 @@
 #
 
 if status is-interactive; and not set -q TMUX
-    exec tmux attach || tmux new
+    exec tmux -f ~/.config/tmux/tmux.conf attach
 end
 
 #
@@ -45,9 +45,9 @@ end
 if type -q fzf
     set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
     set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-    set -gx FZF_CTRL_T_COMMAND 'find -type f'
+    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
     set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
-    set -gx FZF_ALT_C_COMMAND 'find -type d'
+    set -gx FZF_ALT_C_COMMAND 'find -L -type d'
     set -gx FZF_TMUX 1
 end
 
@@ -58,6 +58,7 @@ end
 alias grep='grep --color=auto --perl-regexp'
 alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 alias b='bash'
 alias c='clear'
@@ -71,7 +72,7 @@ alias mc='mysql_config_editor'
 alias pa='php artisan'
 alias pc='composer'
 alias so='source'
-alias t='tmux -f ~/.config/tmux/tmux.conf'
+alias t='tmux'
 
 #
 # Bindings

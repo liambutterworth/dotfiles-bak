@@ -55,7 +55,7 @@ augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
     autocmd BufLeave * let b:winview = winsaveview()
-    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview) | endif
+    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
 augroup end
 
 "
@@ -86,15 +86,22 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-inoremap <silent> <c-e><cr> <space><esc>ciw<cr><esc>O
-inoremap <silent> <c-e>; <esc>mm:s/\v(.)$/\=submatch(1)==';'?'':submatch(1).';'<cr>`ma
-inoremap <silent> <c-e>, <esc>mm:s/\v(.)$/\=submatch(1)==','?'':submatch(1).','<cr>`ma
+function Puncuate(char) abort
+    s/\v(.)$/\=submatch(1) == a:char ? '' : submatch(1) . a:char
+endfunction
+
+inoremap <silent> <c-x><cr> <space><esc>ciw<cr><esc>O
+inoremap <silent> <c-x>; <esc>mm:call Puncuate(';')<cr>`ma
+inoremap <silent> <c-x>, <esc>mm:call Puncuate(',')<cr>`ma
+inoremap <silent> <c-x>. <esc>mm:call Puncuate('.')<cr>`ma
+inoremap <silent> <c-x>! <esc>mm:call Puncuate('!')<cr>`ma
+inoremap <silent> <c-x>\ <esc>mm:call Puncuate('\')<cr>`ma
 
 "
 " Plugins
 "
 
-call plug#begin()
+call plug#begin($HOME . '/.config/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -138,32 +145,30 @@ if has_key(g:plugs, 'coc.nvim')
     nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
     nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
 
-    nnoremap <silent><expr> <cr><cr> index(['vim', 'help'], &filetype) >= 0
-        \ ? ":execute 'help ' . expand('<cword>')<cr>"
-        \ : ":call CocAction('doHover')<cr>"
+    function! ShowDocumentation() abort
+        if (index(['vim', 'help'], &filetype) >= 0)
+            execute 'h ' . expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
 
-    nnoremap <silent><expr> <c-e> coc#util#has_float() 
-        \ ? coc#util#float_scroll(1) : "\<c-e>"
-
-    nnoremap <silent><expr> <c-y> coc#util#has_float() 
-        \ ? coc#util#float_scroll(0) : "\<c-y>"
+    nnoremap <silent> K :call ShowDocumentation()<cr>
+    nnoremap <expr> <c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
+    nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
-    let s:git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
-    let g:fzf_commits_log_options = '--graph --color=always ' . s:git_commit_format
+    let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
+    let git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
-
-    let g:fzf_action = {
-        \ 'ctrl-t': 'tab split',
-        \ 'ctrl-s': 'split',
-        \ 'ctrl-v': 'vsplit',
-        \ }
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
+    command! -bang BCommits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
@@ -174,6 +179,8 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
     nnoremap <leader>\ :Commits<cr>
+    nnoremap <leader>\| :BCommits<cr>
+    nnoremap <leader>- :History<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
@@ -214,15 +221,15 @@ if has_key(g:plugs, 'vim-context-commentstring')
         \ 'jsImport' : '// %s',
         \ }
 
-    let g:context#commentstring#table['vue'] = {
-        \ 'javaScript'  : '// %s',
-        \ 'cssStyle'    : '/* %s */',
-        \ }
-
     let g:context#commentstring#table['php'] = {
         \ 'phpRegion' : '// %s',
         \ 'phpIdentifier' : '// %s',
         \ 'phpVarSelector' : '// %s',
+        \ }
+
+    let g:context#commentstring#table['vue'] = {
+        \ 'javaScript'  : '// %s',
+        \ 'cssStyle'    : '/* %s */',
         \ }
 endif
 
