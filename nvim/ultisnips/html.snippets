@@ -28,6 +28,12 @@ snippet script/ "<script> include"
 <script src="$0"></script>
 endsnippet
 
+snippet < "<tag>" b
+<${1:tag}>
+    ${0:${VISUAL}}
+<${1/(\w+)\s.*/\(?1:$1)/}>
+endsnippet
+
 snippet a "<a>" b
 <a href="$1">${0:${VISUAL}}</a>
 endsnippet

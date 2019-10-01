@@ -95,7 +95,7 @@ inoremap <silent> <c-x>; <esc>mm:call Puncuate(';')<cr>`ma
 inoremap <silent> <c-x>, <esc>mm:call Puncuate(',')<cr>`ma
 inoremap <silent> <c-x>. <esc>mm:call Puncuate('.')<cr>`ma
 inoremap <silent> <c-x>! <esc>mm:call Puncuate('!')<cr>`ma
-inoremap <silent> <c-x>\ <esc>mm:call Puncuate('\')<cr>`ma
+inoremap <silent> <c-x>\ <esc>mm:call Puncuate(' \')<cr>`ma
 
 "
 " Plugins
@@ -178,8 +178,8 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader>\ :Commits<cr>
-    nnoremap <leader>\| :BCommits<cr>
+    nnoremap <leader>\ :Commits!<cr>
+    nnoremap <leader>\| :BCommits!<cr>
     nnoremap <leader>- :History<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
