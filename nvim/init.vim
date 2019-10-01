@@ -86,17 +86,6 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 5<c-w>>
 
-function Puncuate(char) abort
-    s/\v(.)$/\=submatch(1) == a:char ? '' : submatch(1) . a:char
-endfunction
-
-inoremap <silent> <c-x><cr> <space><esc>ciw<cr><esc>O
-inoremap <silent> <c-x>; <esc>mm:call Puncuate(';')<cr>`ma
-inoremap <silent> <c-x>, <esc>mm:call Puncuate(',')<cr>`ma
-inoremap <silent> <c-x>. <esc>mm:call Puncuate('.')<cr>`ma
-inoremap <silent> <c-x>! <esc>mm:call Puncuate('!')<cr>`ma
-inoremap <silent> <c-x>\ <esc>mm:call Puncuate(' \')<cr>`ma
-
 "
 " Plugins
 "
