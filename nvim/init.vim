@@ -46,6 +46,9 @@ let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
+let g:python_host_prog = $PYTHON_HOST_PROG
+let g:python3_host_prog = $PYTHON3_HOST_PROG
+let g:ruby_host_prog = $RUBY_HOST_PROG
 let g:vim_indent_cont = &shiftwidth
 
 augroup settings
@@ -96,12 +99,13 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'do': './install --all --xdg --no-bash --no-zsh' }
+Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'sheerun/vim-polyglot'
+Plug 'sirver/ultisnips'
 Plug 'suy/vim-context-commentstring'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -121,19 +125,20 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-json',
         \ 'coc-phpls',
         \ 'coc-tsserver',
+        \ 'coc-ultisnips',
         \ 'coc-vimlsp',
         \ 'coc-vetur',
         \ 'coc-yaml',
         \ ]
 
-    nmap <silent> gd <plug>(coc-definition)
-    nmap <silent> gy <plug>(coc-type-definition)
-    nmap <silent> gi <plug>(coc-implementation)
-    nmap <silent> gr <plug>(coc-references)
-    nmap <silent> ]g <plug>(coc-diagnostic-next)
-    nmap <silent> [g <plug>(coc-diagnostic-prev)
+    nmap <silent> <cr>d <plug>(coc-definition)
+    nmap <silent> <cr>y <plug>(coc-type-definition)
+    nmap <silent> <cr>i <plug>(coc-implementation)
+    nmap <silent> <cr>r <plug>(coc-references)
+    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
+    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
 
-    nnoremap <silent><expr> K index(['vim', 'help'], &filetype) >= 0
+    nnoremap <silent><expr> <cr><cr> index(['vim', 'help'], &filetype) >= 0
         \ ? ":execute 'help ' . expand('<cword>')<cr>"
         \ : ":call CocAction('doHover')<cr>"
 
@@ -158,6 +163,8 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+    command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
+
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
     imap <c-x><c-p> <plug>(fzf-complete-path)
@@ -166,7 +173,7 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
-    nnoremap <leader><cr> :Commits<cr>
+    nnoremap <leader>\ :Commits<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
@@ -183,6 +190,15 @@ if has_key(g:plugs, 'nord-vim')
 
     highlight StatusLine ctermfg=0 ctermbg=0
     highlight StatusLineNC ctermfg=0 ctermbg=0
+endif
+
+if has_key(g:plugs, 'ultisnips')
+    let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/ultisnips']
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
 if has_key(g:plugs, 'vim-context-commentstring')
@@ -216,8 +232,19 @@ if has_key(g:plugs, 'vim-easy-align')
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
-    nnoremap <silent> <cr>b :Gblame<cr>
-    nnoremap <silent> <cr>d :Ghdiffsplit<cr>
-    nnoremap <silent> <cr>s :Gstatus<cr>
-    nnoremap <silent> <cr>q :diffoff!<cr><c-w>j<c-w>o
+    nnoremap <silent> \b :Gblame<cr>
+    nnoremap <silent> \c :Gcommit<cr>
+    nnoremap <silent> \d :Ghdiffsplit<cr>
+    nnoremap <silent> \e :Gedit<cr>
+    nnoremap <silent> \l :0Glog<cr>
+    nnoremap <silent> \r :Gcd<cr>
+    nnoremap <silent> \s :Gstatus<cr>
+    nnoremap <silent> \w :Gwrite<cr>
+endif
+
+if has_key(g:plugs, 'vim-unimpaired')
+    nnoremap ]b <nop>
+    nnoremap [b <nop>
+    nnoremap ]<bs> :bnext<cr>
+    nnoremap [<bs> :bprevious<cr>
 endif

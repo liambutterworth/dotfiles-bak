@@ -1,10 +1,19 @@
 #
 # Fish Config
 #
+# :: Startup
 # :: Settings
 # :: Aliases
 # :: Bindings
 # :: Colors
+
+#
+# Startup
+#
+
+if status is-interactive; and not set -q TMUX
+    exec tmux attach || tmux new
+end
 
 #
 # Settings
@@ -14,28 +23,31 @@ set fish_greeting
 
 set -U BROWSER 'chrome'
 set -U EDITOR 'nvim'
+set -U TERMINAL 'alacritty'
 
 if test (uname) = Darwin
-    set -U BREW (brew --prefix)
+    set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
+    set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
+    set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
 
     set -U fish_user_paths \
-        "$BREW/opt/coreutils/libexec/gnubin" \
-        "$BREW/opt/findutils/libexec/gnubin" \
-        "$BREW/local/opt/grep/libexec/gnubin" \
-        "$BREW/opt/gnu-sed/libexec/gnubin" \
-        "$BREW/opt/gnu-tar/libexec/gnubin" \
-        "$BREW/opt/gawk/libexec/gnubin" \
-        "$BREW/opt/ed/libexec/gnubin" \
-        "$BREW/opt/ruby/bin" \
-        "$HOME/.config/nvim/plugs/fzf/bin"
+        "$HOME/.config/nvim/plugged/fzf/bin" \
+        '/usr/local/opt/coreutils/libexec/gnubin' \
+        '/usr/local/opt/findutils/libexec/gnubin' \
+        '/usr/local/opt/grep/libexec/gnubin' \
+        '/usr/local/opt/gnu-sed/libexec/gnubin' \
+        '/usr/local/opt/gnu-tar/libexec/gnubin' \
+        '/usr/local/opt/gawk/libexec/gnubin' \
+        '/usr/local/opt/ed/libexec/gnubin' \
+        '/usr/local/opt/ruby/bin'
 end
 
 if type -q fzf
     set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
     set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
+    set -gx FZF_CTRL_T_COMMAND 'find -type f'
     set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
-    set -gx FZF_ALT_C_COMMAND 'find -L -type d'
+    set -gx FZF_ALT_C_COMMAND 'find -type d'
     set -gx FZF_TMUX 1
 end
 

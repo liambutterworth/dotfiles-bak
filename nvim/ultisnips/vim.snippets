@@ -1,0 +1,22 @@
+#
+# Vim Snippets
+#
+
+snippet if "if" b
+if ${1:condition}
+    ${0:${VISUAL}}
+endif
+endsnippet
+
+snippet fun "function" b
+function ${1:Name}($2)
+    ${0:${VISUAL}}
+endfunction
+endsnippet
+
+snippet aug "augroup" b
+augroup ${1:name}
+    autocmd!
+    ${0:${VISUAL}}
+augroupd end
+endsnippet
