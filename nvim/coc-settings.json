@@ -1,8 +1,8 @@
 {
-    "diagnostic.errorSign": "❯",
-    "diagnostic.hintSign": "❯",
-    "diagnostic.infoSign": "❯",
-    "diagnostic.warningSign": "❯",
+    "diagnostic.errorSign": "▸",
+    "diagnostic.hintSign": "▸",
+    "diagnostic.infoSign": "▸",
+    "diagnostic.warningSign": "▸",
     "suggest.maxPreviewWidth": 40,
     "suggest.labelMaxLength": 80,
     "suggest.detailMaxLength": 40
