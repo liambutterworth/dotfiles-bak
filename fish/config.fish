@@ -1,19 +1,11 @@
 #
 # Fish Config
 #
-# :: Startup
 # :: Settings
 # :: Aliases
 # :: Bindings
 # :: Colors
-
-#
-# Startup
-#
-
-if status is-interactive; and not set -q TMUX
-    exec tmux -f ~/.config/tmux/tmux.conf attach
-end
+# :: Startup
 
 #
 # Settings
@@ -31,6 +23,7 @@ if test (uname) = Darwin
     set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
 
     set -U fish_user_paths \
+        "$HOME/.composer/vendor/bin" \
         "$HOME/.config/nvim/plugged/fzf/bin" \
         '/usr/local/opt/coreutils/libexec/gnubin' \
         '/usr/local/opt/findutils/libexec/gnubin' \
@@ -43,11 +36,12 @@ if test (uname) = Darwin
 end
 
 if type -q fzf
+    set -gx FZF_IGNORE '-path ./.git -o -path ./node_modules -o -path ./vendor'
     set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
-    set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-    set -gx FZF_CTRL_T_COMMAND 'find -L -type f'
     set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
-    set -gx FZF_ALT_C_COMMAND 'find -L -type d'
+    set -gx FZF_ALT_C_COMMAND "find -type d \( $FZF_IGNORE \) -prune -o -print"
+    set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
+    set -gx FZF_CTRL_T_COMMAND "find -type f \( $FZF_IGNORE \) -prune -o -print"
     set -gx FZF_TMUX 1
 end
 
@@ -60,19 +54,18 @@ alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
+alias a='php artisan'
 alias b='bash'
-alias c='clear'
+alias c='composer'
 alias d='docker'
+alias e='nvim'
 alias dc='docker-compose'
-alias e='exit'
 alias g='git'
-alias n='nvim'
+alias l='laravel'
 alias m='mysql'
-alias mc='mysql_config_editor'
-alias pa='php artisan'
-alias pc='composer'
-alias so='source'
+alias n='npm'
 alias t='tmux'
+alias v='vue'
 
 #
 # Bindings
@@ -132,3 +125,11 @@ set fish_pager_color_completion $nord6
 set fish_pager_color_description $nord10
 set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
+
+#
+# Startup
+#
+
+if status is-interactive; and not set -q TMUX
+    eval 'tmux attach || tmux new'
+end
