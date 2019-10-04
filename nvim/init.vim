@@ -54,8 +54,6 @@ let g:vim_indent_cont = &shiftwidth
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
-    autocmd BufLeave * let b:winview = winsaveview()
-    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
 augroup end
 
 "
@@ -73,7 +71,10 @@ nmap d* *``dgn
 nmap d# #``dgN
 nmap g= mmgg=G`m
 
-nnoremap <silent> <leader>q :bdelete<cr>
+nnoremap <silent> <leader>w :write<cr>
+nnoremap <silent> <leader>W :wall<cr>
+nnoremap <silent> <leader>Q :quit<cr>
+nnoremap <silent> <leader>q :close<cr>
 nnoremap <silent> <leader>t :tabedit<cr>
 nnoremap <silent> <leader>s :split<cr>
 nnoremap <silent> <leader>v :vsplit<cr>
@@ -81,10 +82,10 @@ nnoremap <silent> <leader>p :tabprevious<cr>
 nnoremap <silent> <leader>n :tabnext<cr>
 nnoremap <silent> <leader>P :-tabmove<cr>
 nnoremap <silent> <leader>N :+tabmove<cr>
-nnoremap <silent> <leader>h 5<c-w><
-nnoremap <silent> <leader>j 5<c-w>-
-nnoremap <silent> <leader>k 5<c-w>+
-nnoremap <silent> <leader>l 5<c-w>>
+nnoremap <silent> <leader>h 20<c-w><
+nnoremap <silent> <leader>j 20<c-w>-
+nnoremap <silent> <leader>k 20<c-w>+
+nnoremap <silent> <leader>l 20<c-w>>
 
 "
 " Plugins
@@ -127,12 +128,12 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-yaml',
         \ ]
 
+    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
+    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
     nmap <silent> <cr>d <plug>(coc-definition)
     nmap <silent> <cr>y <plug>(coc-type-definition)
     nmap <silent> <cr>i <plug>(coc-implementation)
     nmap <silent> <cr>r <plug>(coc-references)
-    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
-    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
 
     function! ShowDocumentation() abort
         if (index(['vim', 'help'], &filetype) >= 0)
@@ -153,11 +154,11 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
 
-    command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
     command! -bang BCommits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
+
+    command! -bang -nargs=? -complete=dir Files
+        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
@@ -236,6 +237,17 @@ if has_key(g:plugs, 'vim-fugitive')
     nnoremap <silent> \r :Gcd<cr>
     nnoremap <silent> \s :Gstatus<cr>
     nnoremap <silent> \w :Gwrite<cr>
+endif
+
+if has_key(g:plugs, 'vim-gitgutter')
+    let g:gitgutter_map_keys = 0
+
+    nmap ]c <plug>(GitGutterNextHunk)
+    nmap [c <plug>(GitGutterPrevHunk)
+    omap ic <plug>(GitGutterTextObjectInnerPending)
+    omap ac <plug>(GitGutterTextObjectOuterPending)
+    xmap ic <plug>(GitGutterTextObjectInnerVisual)
+    xmap ac <plug>(GitGutterTextObjectInnerVisual)
 endif
 
 if has_key(g:plugs, 'vim-unimpaired')
