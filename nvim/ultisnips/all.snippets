@@ -20,6 +20,12 @@ snippet {; "expanded braces with semicolon" i
 };
 endsnippet
 
+snippet {) "expand braces and append parenthesis" i
+{
+    ${0:${VISUAL}}
+});
+endsnippet
+
 snippet [ "expanded bracket" i
 [
     ${0:${VISUAL}}
@@ -36,6 +42,12 @@ snippet [; "expanded bracket with semicolon" i
 [
     ${0:${VISUAL}}
 ];
+endsnippet
+
+snippet [) "expand bracket and append parenthesis" i
+[
+    ${0:${VISUAL}}
+]);
 endsnippet
 
 snippet ( "expanded parenthesis" i
@@ -56,14 +68,29 @@ snippet (; "expanded parenthesis with semicolon" i
 );
 endsnippet
 
-snippet `; "expanded tick marks with semicolon" i
-`
+snippet ({ "expanded parenthesis braces" i
+({
     ${0:${VISUAL}}
-`;
+});
 endsnippet
 
-snippet ``` "triple tick mark block" b
-```
+snippet ([ "expanded parenthesis bracket" i
+([
     ${0:${VISUAL}}
-```
+]);
+endsnippet
+
+snippet lorems "placeholder sentence" i
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+endsnippet
+
+snippet loremp "placeholder paragraph" b
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem
+mollis. Fringilla est ullamcorper eget nulla facilisi etiam. Interdum varius
+sit amet mattis vulputate enim nulla aliquet porttitor. Faucibus nisl
+tincidunt eget nullam non nisi. Et pharetra pharetra massa massa. Semper
+viverra nam libero justo. Vitae aliquet nec ullamcorper sit. Iaculis nunc sed
+augue lacus viverra vitae congue eu. Purus in mollis nunc sed id semper.
+Egestas congue quisque egestas diam. Quis auctor elit sed vulputate.
 endsnippet
