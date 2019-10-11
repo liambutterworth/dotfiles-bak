@@ -127,12 +127,12 @@ if has_key(g:plugs, 'coc.nvim')
         \ 'coc-yaml',
         \ ]
 
-    nmap <silent> ]<cr> <plug>(coc-diagnostic-next)
-    nmap <silent> [<cr> <plug>(coc-diagnostic-prev)
-    nmap <silent> <cr>d <plug>(coc-definition)
-    nmap <silent> <cr>y <plug>(coc-type-definition)
-    nmap <silent> <cr>i <plug>(coc-implementation)
-    nmap <silent> <cr>r <plug>(coc-references)
+    nmap <silent> ]g <plug>(coc-diagnostic-next)
+    nmap <silent> [g <plug>(coc-diagnostic-prev)
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
 
     function! ShowDocumentation() abort
         if (index(['vim', 'help'], &filetype) >= 0)
@@ -167,13 +167,18 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader><space> :Files<cr>
     nnoremap <leader><tab> :Snippets<cr>
     nnoremap <leader><bs> :Buffers<cr>
+    nnoremap <leader><cr> :GFiles<cr>
     nnoremap <leader>\ :Commits!<cr>
     nnoremap <leader>\| :BCommits!<cr>
     nnoremap <leader>- :History<cr>
     nnoremap <leader>/ :History/<cr>
     nnoremap <leader>: :History:<cr>
     nnoremap <leader>? :Helptags<cr>
+    nnoremap <leader>] :Tags<cr>
+    nnoremap <leader>} :BTags<cr>
     nnoremap <leader>` :Marks<cr>
+    nnoremap <leader>g :Lines<cr>
+    nnoremap <leader>G :BLines<cr>
 endif
 
 if has_key(g:plugs, 'nord-vim')
@@ -226,9 +231,4 @@ if has_key(g:plugs, 'vim-gitgutter')
     omap ac <plug>(GitGutterTextObjectOuterPending)
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
-endif
-
-if has_key(g:plugs, 'vim-unimpaired')
-    nnoremap ]<bs> :bnext<cr>
-    nnoremap [<bs> :bprevious<cr>
 endif
