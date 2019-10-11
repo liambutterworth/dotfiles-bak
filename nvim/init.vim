@@ -47,7 +47,7 @@ let g:netrw_altfile = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:python_host_prog = $PYTHON_HOST_PROG
-let g:python3_host_prog = $PYTHON3_HOST_PROG
+let g:python4_host_prog = $PYTHON3_HOST_PROG
 let g:ruby_host_prog = $RUBY_HOST_PROG
 let g:vim_indent_cont = &shiftwidth
 
@@ -64,17 +64,14 @@ nmap j gj
 nmap k gk
 nmap Y y$
 nmap Q @q
-nmap <bs> <c-^>
 nmap c* *``cgn
 nmap c# #``cgN
 nmap d* *``dgn
 nmap d# #``dgN
 nmap g= mmgg=G`m
+nmap <bs> <c-^>
 
-nnoremap <silent> <leader>w :write<cr>
-nnoremap <silent> <leader>W :wall<cr>
-nnoremap <silent> <leader>Q :quit<cr>
-nnoremap <silent> <leader>q :close<cr>
+nnoremap <silent> <leader>q :call close#smart()<cr>
 nnoremap <silent> <leader>t :tabedit<cr>
 nnoremap <silent> <leader>s :split<cr>
 nnoremap <silent> <leader>v :vsplit<cr>
@@ -96,21 +93,23 @@ call plug#begin($HOME . '/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dag/vim-fish'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-dirvish'
+Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'sheerun/vim-polyglot'
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
-Plug 'suy/vim-context-commentstring'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
@@ -149,8 +148,8 @@ if has_key(g:plugs, 'coc.nvim')
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
-    let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
     let git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
     let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
     let g:fzf_prefer_tmux = exists('$TMUX')
 
@@ -198,29 +197,8 @@ if has_key(g:plugs, 'ultisnips')
     nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
-if has_key(g:plugs, 'vim-context-commentstring')
-    let g:context#commentstring#table = {}
-
-    let g:context#commentstring#table['html'] = {
-        \ 'javaScript'  : '// %s',
-        \ 'cssStyle'    : '/* %s */',
-        \ }
-
-    let g:context#commentstring#table['javascript'] = {
-        \ 'jsComment' : '// %s',
-        \ 'jsImport' : '// %s',
-        \ }
-
-    let g:context#commentstring#table['php'] = {
-        \ 'phpRegion' : '// %s',
-        \ 'phpIdentifier' : '// %s',
-        \ 'phpVarSelector' : '// %s',
-        \ }
-
-    let g:context#commentstring#table['vue'] = {
-        \ 'javaScript'  : '// %s',
-        \ 'cssStyle'    : '/* %s */',
-        \ }
+if has_key(g:plugs, 'vim-dirvish')
+    let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
 endif
 
 if has_key(g:plugs, 'vim-easy-align')
@@ -251,8 +229,6 @@ if has_key(g:plugs, 'vim-gitgutter')
 endif
 
 if has_key(g:plugs, 'vim-unimpaired')
-    nnoremap ]b <nop>
-    nnoremap [b <nop>
     nnoremap ]<bs> :bnext<cr>
     nnoremap [<bs> :bprevious<cr>
 endif
