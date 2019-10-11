@@ -2,28 +2,16 @@
 # Vim Snippets
 #
 
-snippet { "expanded braces" i
-{
-    \ ${0:${VISUAL}}
-    \ }
-endsnippet
-
-snippet [ "expanded bracket" i
-[
-    \ ${0:${VISUAL}}
-    \ ]
+snippet fun "function" b
+function! ${1:Name}($2) abort
+    ${0:${VISUAL}}
+endfunction
 endsnippet
 
 snippet if "if" b
 if ${1:condition}
     ${0:${VISUAL}}
 endif
-endsnippet
-
-snippet fun "function" b
-function! ${1:Name}($2) abort
-    ${0:${VISUAL}}
-endfunction
 endsnippet
 
 snippet aug "augroup" b

@@ -11,9 +11,13 @@
 # Comments
 #
 
-snippet / "comment block"
+snippet / "comment inline"
+/** ${0:${VISUAL}} */
+endsnippet
+
+snippet // "comment block"
 /**
- * ${VISUAL}$0
+ * ${0:${VISUAL}}
  */
 endsnippet
 
@@ -21,37 +25,41 @@ endsnippet
 # Selectors
 #
 
-snippet :a ":after"
-::after
+snippet :a ":after" i
+::after 
 endsnippet
 
-snippet :b ":before"
-::before
+snippet :b ":before" i
+::before 
 endsnippet
 
-snippet :fc ":first-child"
-:first-child
+snippet :fc ":first-child" i
+:first-child 
 endsnippet
 
-snippet :lc ":last-child"
-:last-child
+snippet :lc ":last-child" i
+:last-child 
 endsnippet
 
-snippet :nc ":nth-child"
+snippet :nc ":nth-child" i
 :nth-child(
 endsnippet
 
-snippet :nlc "nth-last-child"
+snippet :nlc "nth-last-child" i
 :nth-last-child(
 endsnippet
 
-snippet :oc ":only-child"
+snippet :oc ":only-child" i
 :only-child
 endsnippet
 
 #
 # Properties
 #
+
+snippet : "property"
+${1:property}: ${2:value};
+endsnippet
 
 snippet ! "!important"
 !important
@@ -217,6 +225,6 @@ endsnippet
 
 snippet @mq "@media-query"
 @media ${1:screen} and (${2:max-width}: ${3:600px}) {
-    $1
+    ${4:${VISUAL}}
 }
 endsnippet

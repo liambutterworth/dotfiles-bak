@@ -8,6 +8,16 @@ snippet { "expanded braces" i
 }
 endsnippet
 
+snippet {} "double braces" i
+{{ ${0:${VISUAL}} }}
+endsnippet
+
+snippet {\ "expanded braces with slash" i
+{
+    \ ${0:${VISUAL}}
+    \ }
+endsnippet
+
 snippet {, "expanded braces with semicolon" i
 {
     ${0:${VISUAL}}
@@ -38,16 +48,16 @@ snippet {); "expand braces and append parenthesis with semicolon" i
 });
 endsnippet
 
-snippet {\ "expanded braces with slash" i
-{
-    \ ${0:${VISUAL}}
-    \ }
-endsnippet
-
 snippet [ "expanded bracket" i
 [
     ${0:${VISUAL}}
 ]
+endsnippet
+
+snippet [\ "expanded bracket with slash" i
+[
+    \ ${0:${VISUAL}}
+    \ ]
 endsnippet
 
 snippet [, "expanded bracket with semicolon" i
@@ -92,13 +102,13 @@ snippet (; "expanded parenthesis with semicolon" i
 );
 endsnippet
 
-snippet slorem "sentence of lorem ipsum" i
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+snippet lorem "paragraph of lorem ipsum" b
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
 endsnippet
 
-snippet plorem "paragraph of lorem ipsum" b
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem
-mollis. Fringilla est ullamcorper eget nulla facilisi etiam. Interdum varius
-sit amet mattis vulputate enim nulla aliquet porttitor.
+snippet slorem "sentence of lorem ipsum" i
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 endsnippet

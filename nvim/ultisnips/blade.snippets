@@ -4,40 +4,22 @@
 
 extends html
 
-snippet @ "blade directive" b
-@${1:if}
-    ${2:${VISUAL}}
+snippet !! "unescaped output" i
+{!! ${0:${VISUAL}} !!}
+endsnippet
+
+snippet @ "blade inline direction" b
+@${1:extends}('$2')
+endsnippet
+
+snippet @@ "blade block directive" b
+@${1:section}($2)
+    ${3:${VISUAL}}
 @end${1/^([a-zA-Z\-]*)\s*.*/$1/}
 endsnippet
 
-snippet if "@if" b
-@if ($1)
-    ${2:${VISUAL}}
-@endif
-endsnippet
-
-snippet sw "@switch" b
-@switch($1)
-    @case($2)
-        ${3:${VISUAL}}
-        @break$0
-@endswitch
-endsnippet
-
-snippet ca "@case" b
-@case($1)
-    ${2:${VISUAL}}
-    @break$0
-endsnippet
-
 snippet for "@for" b
-@for (${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}}) {
+@for(${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}}) {
     ${0:${VISUAL}}
 @endfor
-endsnippet
-
-snippet fore "@foreach" b
-@foreach (${1:$array as $key => $value})
-    ${2:${VISUAL}}
-@endforeach
 endsnippet

@@ -7,15 +7,17 @@ extends html, css, javascript
 snippet <sc "vue <script>" b
 <script>
 
+${1:import ${2:ClassName} from '${3:./path}';}
+
 export default {
-    ${0:${VISUAL}}
+    $0
 }
 
 </script>
 endsnippet
 
 snippet <st "vue <style>" b
-<style ${1: lang="scss"} scoped>
+<style scoped${1: lang="scss"}>
 
 ${0:${VISUAL}}
 
