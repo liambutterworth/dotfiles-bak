@@ -2,10 +2,9 @@
 # Vue Snippets
 #
 
-extends html
-extends javascript
+extends html, css, javascript
 
-snippet vs "vue <script>" b
+snippet <sc "vue <script>" b
 <script>
 
 export default {
@@ -13,4 +12,12 @@ export default {
 }
 
 </script>
+endsnippet
+
+snippet <st "vue <style>" b
+<style ${1: lang="scss"} scoped>
+
+${0:${VISUAL}}
+
+</style>
 endsnippet

@@ -1,6 +1,14 @@
 #
 # JS Snippets
 #
+# :: Comments
+# :: Logging
+# :: Classes
+# :: Structures
+
+#
+# Comments
+#
 
 snippet / "doc block" b
 /**
@@ -8,13 +16,25 @@ snippet / "doc block" b
  */
 endsnippet
 
+snippet /- "inline doc block" b
+/** $0 */
+endsnippet
+
+#
+# Logging
+#
+
 snippet log "console log" b
 console.log(${0:${VISUAL}});
 endsnippet
 
+#
+# Classes
+#
+
 snippet class "class" b
-class ${1:`!p snip.rv = snip.basename`} {
-    ${0:${VISUAL}}
+class ${1:`!p snip.rv=snip.basename`} {
+    $0
 }
 endsnippet
 
@@ -22,16 +42,20 @@ snippet new "new instance" b
 const ${1:class} = new ${1/\w+\s*/\u$0/}($2);
 endsnippet
 
+#
+# Structures
+#
+
 snippet if "if" b
 if ($1) {
     ${2:${VISUAL}}
-}$0
+}
 endsnippet
 
-snippet (fun "description" i
-(function($1) {
-    ${2:${VISUAL}}
-});$0
+snippet for "for loop" b
+for (${1:${2:i}=${3:1}; $2<=${4:3}; $2${5:++}}) {
+    ${0:${VISUAL}}
+}
 endsnippet
 
 snippet sw "switch conditional" bm
@@ -42,14 +66,26 @@ switch ($1) {
 }
 endsnippet
 
-snippet case "switch case" b
+snippet ca "switch case" b
 case $1:
     ${2:${VISUAL}}
     break;$0
 endsnippet
 
-snippet for "for loop" b
-for (${1:${2:i}=${3:1}; $2<=${4:3}; $2${5:++}}) {
-    ${0:${VISUAL}}
+snippet fun "function" w
+function ${1:name}($2) {
+    ${3:${VISUAL}}
 }
+endsnippet
+
+snippet (fun "function callback" i
+(function($1) {
+    ${2:${VISUAL}}
+}$0);
+endsnippet
+
+snippet (fun) "immediately invoked function" b
+(function(${1:window}) {
+    ${2:${VISUAL}}
+}($3));
 endsnippet

@@ -1,6 +1,14 @@
 #
 # PHP Snippets
 #
+# :: Tags
+# :: Comments
+# :: Classes
+# :: Structures
+
+#
+# Tags
+#
 
 snippet ? "php tags" b
 <?php
@@ -22,6 +30,10 @@ snippet ?= "inline tags echo" b
 <?php echo ${0:${VISUAL}}; ?>
 endsnippet
 
+#
+# Comments
+#
+
 post_expand "vim.command('let b:PHP_InsideMultilineComment = 1')"
 snippet / "doc block" b
 /**
@@ -33,10 +45,14 @@ snippet /- "inline doc block" b
 /** $0 */
 endsnippet
 
+#
+# Classes
+#
+
 snippet class "class" b
 class ${1:`!p snip.rv=snip.basename`}
 {
-    ${VISUAL}$0
+    $0
 }
 endsnippet
 
@@ -61,62 +77,72 @@ endsnippet
 snippet pub "public method" b
 public function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet pro "protected method" b
 protected function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet pri "private method" b
 private function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet pubs "public static method" b
 public static function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet pros "protected static method" b
 protected static function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet pris "private static method" b
 private static function ${1:name}($2)
 {
-    ${VISUAL}$0
+    ${3:${VISUAL}}
+}
+endsnippet
+
+#
+# Structures
+#
+
+snippet fun "function" b
+function ${1:name}($2) {
+    ${3:${VISUAL}}
 }
 endsnippet
 
 snippet if "if" b
 if ($1) {
-    ${0:${VISUAL}}
+    ${2:${VISUAL}}
 }
 endsnippet
 
 snippet sw "switch conditional" bm
 switch ($1) {
     case $2:
-        ${0:${VISUAL}}
+        ${3:${VISUAL}}
         break;
 }
 endsnippet
 
-snippet case "switch case" b
+snippet ca "switch case" b
 case $1:
-    ${0:${VISUAL}}
+    ${2:${VISUAL}}
     break;
 endsnippet
 
