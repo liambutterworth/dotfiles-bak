@@ -34,7 +34,7 @@ snippet html "html boilerplate" b
 </html>
 endsnippet
 
-snippet meta "meta info" b
+snippet meta "comman <meta> tags" b
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 <title>${1:title}</title>
@@ -53,15 +53,6 @@ snippet linput "<input> with <label>" b
 <input type="${3:text}" id="$2" name="$2" $4/>
 endsnippet
 
-snippet text "<textarea>" b
-<textarea id="${1:name}" name="$1"></textarea>
-endsnippet
-
-snippet ltext "<textarea> with <label>" b
-<label for="${2:${1/(.)(\s*)/\l$1(?2:-)/g}}">$1</label>
-<textarea id="$2" name="$2"$3></textarea>
-endsnippet
-
 snippet sel "<select>" b
 <select id="${1:name}" name="$1">
     $2
@@ -74,4 +65,13 @@ snippet lsel "<select> with <label>" b
 <select id="$2" name="$2">
     $3
 </select>
+endsnippet
+
+snippet text "<textarea>" b
+<textarea id="${1:name}" name="$1"></textarea>
+endsnippet
+
+snippet ltext "<textarea> with <label>" b
+<label for="${2:${1/(.)(\s*)/\l$1(?2:-)/g}}">$1</label>
+<textarea id="$2" name="$2"$3></textarea>
 endsnippet
