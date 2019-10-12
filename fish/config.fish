@@ -16,6 +16,7 @@ set fish_greeting
 set -U BROWSER 'chrome'
 set -U EDITOR 'nvim'
 set -U TERMINAL 'alacritty'
+set -U CDPATH '.:~:~/dev/rr'
 
 if test (uname) = Darwin
     set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
@@ -36,12 +37,11 @@ if test (uname) = Darwin
 end
 
 if type -q fzf
-    set -gx FZF_IGNORE '-path ./.git -o -path ./node_modules -o -path ./vendor'
     set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
     set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
-    set -gx FZF_ALT_C_COMMAND "find -type d \( $FZF_IGNORE \) -prune -o -print"
+    set -gx FZF_ALT_C_COMMAND "find -type d"
     set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-    set -gx FZF_CTRL_T_COMMAND "find -type f \( $FZF_IGNORE \) -prune -o -print"
+    set -gx FZF_CTRL_T_COMMAND "find -type f"
     set -gx FZF_TMUX 1
 end
 
