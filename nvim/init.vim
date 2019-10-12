@@ -36,9 +36,10 @@ set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
+set tags=.git/tags;
 set undofile undodir=~/.cache/nvim/undo//
 set updatetime=100
-set wildmenu wildignorecase wildmode=list:longest,list:full
+set wildmenu wildignorecase wildmode=full
 
 let &helpheight = &lines / 2
 let &previewheight = &lines / 2
@@ -100,6 +101,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim/' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
@@ -148,9 +150,9 @@ if has_key(g:plugs, 'coc.nvim')
 endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
-    let git_commit_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
-    let g:fzf_commits_log_options = '--graph --color=always ' . git_commit_format
+    let g:fzf_commits_log_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
 
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
@@ -194,7 +196,7 @@ if has_key(g:plugs, 'nord-vim')
 endif
 
 if has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/ultisnips']
+    let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/nvim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
