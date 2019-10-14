@@ -1,57 +1,11 @@
 #
 # Fish Config
 #
-# :: Settings
 # :: Aliases
 # :: Bindings
 # :: Colors
+# :: Exports
 # :: Startup
-
-#
-# Settings
-#
-
-set fish_greeting
-
-set -gx BROWSER 'chrome'
-set -gx CDPATH '.:~:~/dev/rr'
-set -gx EDITOR 'nvim'
-set -gx TERMINAL 'alacritty'
-
-switch (uname)
-    case Darwin
-        set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
-        set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
-        set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
-
-        set -gx fish_user_paths \
-            "$HOME/.composer/vendor/bin" \
-            "$HOME/.config/nvim/plugged/fzf/bin" \
-            '/usr/local/opt/coreutils/libexec/gnubin' \
-            '/usr/local/opt/findutils/libexec/gnubin' \
-            '/usr/local/opt/grep/libexec/gnubin' \
-            '/usr/local/opt/gnu-sed/libexec/gnubin' \
-            '/usr/local/opt/gnu-tar/libexec/gnubin' \
-            '/usr/local/opt/gawk/libexec/gnubin' \
-            '/usr/local/opt/ed/libexec/gnubin' \
-            '/usr/local/opt/ruby/bin'
-
-    case Linux
-        # todo
-end
-
-if type -q docker
-    set -gx DOCKER_CONFIG "$HOME/.config/docker"
-end
-
-if type -q fzf
-    set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
-    set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
-    set -gx FZF_ALT_C_COMMAND "find -type d"
-    set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-    set -gx FZF_CTRL_T_COMMAND "find -type f"
-    set -gx FZF_TMUX 1
-end
 
 #
 # Aliases
@@ -79,8 +33,6 @@ alias v='vue'
 #
 # Bindings
 #
-
-fish_vi_key_bindings
 
 bind -M insert \cf accept-autosuggestion
 bind -M insert \cx accept-autosuggestion execute
@@ -134,6 +86,42 @@ set fish_pager_color_completion $nord6
 set fish_pager_color_description $nord10
 set fish_pager_color_progress $nord12
 set fish_pager_color_secondary $nord1
+
+#
+# Exports
+#
+
+set -gx CDPATH '.:~:~/dev/rr'
+set -gx DOCKER_CONFIG "$HOME/.config/docker"
+set -gx EDITOR 'nvim'
+set -gx FZF_ALT_C_COMMAND "find -type d"
+set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
+set -gx FZF_CTRL_T_COMMAND "find -type f"
+set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
+set -gx FZF_DEFAULT_OPTS "--color 'bg+:0,pointer:4,info:4,border:0'"
+set -gx FZF_TMUX 1
+
+switch (uname)
+    case Darwin
+        set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
+        set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
+        set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
+
+        set -gx fish_user_paths \
+            "$HOME/.composer/vendor/bin" \
+            "$HOME/.config/nvim/plugged/fzf/bin" \
+            '/usr/local/opt/coreutils/libexec/gnubin' \
+            '/usr/local/opt/findutils/libexec/gnubin' \
+            '/usr/local/opt/grep/libexec/gnubin' \
+            '/usr/local/opt/gnu-sed/libexec/gnubin' \
+            '/usr/local/opt/gnu-tar/libexec/gnubin' \
+            '/usr/local/opt/gawk/libexec/gnubin' \
+            '/usr/local/opt/ed/libexec/gnubin' \
+            '/usr/local/opt/ruby/bin'
+
+    case Linux
+        # todo
+end
 
 #
 # Startup
