@@ -106,6 +106,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
+Plug 'stanangeloff/php.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
