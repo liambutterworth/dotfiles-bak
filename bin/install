@@ -1,6 +1,7 @@
 #!/bin/sh
 
-mkdir -p ~/.config/{alacritty,git,fish,nvim,tmux} ~/.cache/nvim/{swap,undo}
+mkdir -p ~/.config ~/.cache/nvim/{swap,undo}
+ln -sf ~/.config{alacritty,docker,git,fish,nvim,tmux}
 
 curl -fLo ~/.config/neovim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
