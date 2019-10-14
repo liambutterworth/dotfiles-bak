@@ -78,8 +78,8 @@ nnoremap <silent> <leader>s :split<cr>
 nnoremap <silent> <leader>v :vsplit<cr>
 nnoremap <silent> <leader>p :tabprevious<cr>
 nnoremap <silent> <leader>n :tabnext<cr>
-nnoremap <silent> <leader>P :-tabmove<cr>
-nnoremap <silent> <leader>N :+tabmove<cr>
+nnoremap <silent> <leader>P :tabmove -1<cr>
+nnoremap <silent> <leader>N :tabmove +1<cr>
 nnoremap <silent> <leader>h 20<c-w><
 nnoremap <silent> <leader>j 20<c-w>-
 nnoremap <silent> <leader>k 20<c-w>+
