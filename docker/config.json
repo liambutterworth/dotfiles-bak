@@ -3,5 +3,6 @@
     "imagesFormat": "ID\t{{.ID}}\nTag\t{{.Tag}}\nRepo\t{{.Repository}}\n",
     "psFormat": "ID\t{{.ID}}\nImage\t{{.Image}}\nName\t{{.Names}}\nStatus\t{{.Status}}\n",
     "servicesFormat": "ID\t{{.ID}}\nName\t{{.Name}}\nMode\t{{.Mode}}\n",
-    "secretFormat": "ID\t{{.ID}}\nName\t{{.Name}}\nCreated\t{{.CreatedAt}}\nUpdated\t{{.UpdatedAt}}"
+    "secretFormat": "ID\t{{.ID}}\nName\t{{.Name}}\nCreated\t{{.CreatedAt}}\nUpdated\t{{.UpdatedAt}}",
+    "detachKeys": "ctrl-q,q"
 }
