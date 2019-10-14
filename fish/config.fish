@@ -13,27 +13,35 @@
 
 set fish_greeting
 
-set -U BROWSER 'chrome'
-set -U EDITOR 'nvim'
-set -U TERMINAL 'alacritty'
-set -U CDPATH '.:~:~/dev/rr'
+set -gx BROWSER 'chrome'
+set -gx CDPATH '.:~:~/dev/rr'
+set -gx EDITOR 'nvim'
+set -gx TERMINAL 'alacritty'
 
-if test (uname) = Darwin
-    set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
-    set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
-    set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
+switch (uname)
+    case Darwin
+        set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
+        set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
+        set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
 
-    set -U fish_user_paths \
-        "$HOME/.composer/vendor/bin" \
-        "$HOME/.config/nvim/plugged/fzf/bin" \
-        '/usr/local/opt/coreutils/libexec/gnubin' \
-        '/usr/local/opt/findutils/libexec/gnubin' \
-        '/usr/local/opt/grep/libexec/gnubin' \
-        '/usr/local/opt/gnu-sed/libexec/gnubin' \
-        '/usr/local/opt/gnu-tar/libexec/gnubin' \
-        '/usr/local/opt/gawk/libexec/gnubin' \
-        '/usr/local/opt/ed/libexec/gnubin' \
-        '/usr/local/opt/ruby/bin'
+        set -gx fish_user_paths \
+            "$HOME/.composer/vendor/bin" \
+            "$HOME/.config/nvim/plugged/fzf/bin" \
+            '/usr/local/opt/coreutils/libexec/gnubin' \
+            '/usr/local/opt/findutils/libexec/gnubin' \
+            '/usr/local/opt/grep/libexec/gnubin' \
+            '/usr/local/opt/gnu-sed/libexec/gnubin' \
+            '/usr/local/opt/gnu-tar/libexec/gnubin' \
+            '/usr/local/opt/gawk/libexec/gnubin' \
+            '/usr/local/opt/ed/libexec/gnubin' \
+            '/usr/local/opt/ruby/bin'
+
+    case Linux
+        # todo
+end
+
+if type -q docker
+    set -gx DOCKER_CONFIG "$HOME/.config/docker"
 end
 
 if type -q fzf
