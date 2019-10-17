@@ -72,17 +72,20 @@ nmap d# #``dgN
 nmap g= mmgg=G`m
 nmap <bs> <c-^>
 
+nnoremap <silent> <leader>r :so $MYVIMRC<cr>
+nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :call close#smart()<cr>
-nnoremap <silent> <leader>t :tabedit<cr>
+nnoremap <silent> <leader>o :only<cr>
 nnoremap <silent> <leader>s :split<cr>
 nnoremap <silent> <leader>v :vsplit<cr>
+nnoremap <silent> <leader>t :tabedit<cr>
 nnoremap <silent> <leader>p :tabprevious<cr>
 nnoremap <silent> <leader>n :tabnext<cr>
 nnoremap <silent> <leader>P :tabmove -1<cr>
 nnoremap <silent> <leader>N :tabmove +1<cr>
 nnoremap <silent> <leader>h 20<c-w><
-nnoremap <silent> <leader>j 20<c-w>-
-nnoremap <silent> <leader>k 20<c-w>+
+nnoremap <silent> <leader>j 5<c-w>-
+nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w>>
 
 "
@@ -152,7 +155,9 @@ endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
-    let g:fzf_commits_log_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    " ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
+    " let g:fzf_commits_log_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
+    let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
 
@@ -215,13 +220,13 @@ if has_key(g:plugs, 'vim-easy-align')
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
+    nnoremap <silent> \\ :Gstatus<cr>
     nnoremap <silent> \b :Gblame<cr>
     nnoremap <silent> \c :Gcommit<cr>
     nnoremap <silent> \d :Ghdiffsplit<cr>
     nnoremap <silent> \e :Gedit<cr>
     nnoremap <silent> \l :0Glog<cr>
     nnoremap <silent> \r :Gcd<cr>
-    nnoremap <silent> \s :Gstatus<cr>
     nnoremap <silent> \w :Gwrite<cr>
 endif
 

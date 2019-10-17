@@ -14,7 +14,7 @@
     f = fetch
     g = grep
     lg = ll --graph
-    ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
+    ll = log --pretty=format:"%C(red)%h\\ %C(white)%s\\ %C(green)%ad\\ %C(blue)%an" --date=relative
     m = merge
     mn = merge --no-commit --no-ff
     re = reset HEAD --
