@@ -155,8 +155,6 @@ endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
-    " ll = log --pretty=format:"%C(red)%h%C(yellow)%d\\ %C(green)%ad\\ %C(blue)<%an>%n%C(white)%s%n" --date=relative
-    " let g:fzf_commits_log_format = '--format="%C(red)%C(bold)%h%d%C(reset) %s %C(blue)%cr"'
     let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
