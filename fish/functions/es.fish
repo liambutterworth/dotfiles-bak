@@ -1,34 +1,23 @@
 function es -a action
-    set -e argv[1]
+    set -l dir "$HOME/.config/es"
+    set -l query_dir "$dir/query"
+    set -l output "$dir/results.json"
+    set -l header 'Content-Type:application/json'
     set -l options
 
-    set options $options (fish_opt --short c --long connection --required-val)
-    set options $options (fish_opt --short d --long delete)
-    set options $options (fish_opt --short H --long header --required-val)
-    set options $options (fish_opt --short i --long index --required-val)
-    set options $options (fish_opt --short p --long params --required-val)
-    set options $options (fish_opt --short P --long print)
-    set options $options (fish_opt --short r --long results)
+    set options $options (fish_opt -s c -l connection -r)
+    set options $options (fish_opt -s d -l delete)
+    set options $options (fish_opt -s e -l edit)
+    set options $options (fish_opt -s i -l index -r)
+    set options $options (fish_opt -s p -l params -r)
 
     argparse $options -- $argv
 
-    set -l dir "$HOME/.config/es"
-    set -l query_dir "$dir/query"
-    set -l results_dir "$dir/results"
+    set -l connection (set -q _flag_c; and echo $_flag_c; or echo 'local')
+    set -l index (set -q _flag_i; and echo $_flag_i; or echo 'jobs/item')
+    set -l params (set -q _flag_p; and echo $_flag_p; or echo 'pretty')
 
-    if not test -d $dir
-        mkdir -p $query_dir $results_dir
-    end
-
-    set -l connection (
-        if set -q _flag_connection
-            echo $_flag_connection
-        else
-            echo 'local'
-        end
-    )
-
-    set -l host (
+    set -l host 'http://'(
         switch $connection
             case 'live'
                 echo 'host:port'
@@ -37,9 +26,8 @@ function es -a action
         end
     )
 
-    if test -z "$action"
-        set action 'health'
-    end
+    set -e argv[1]
+    mkdir -p $query_dir
 
     switch $action
         case 'cd'
@@ -50,64 +38,40 @@ function es -a action
             _es_indices $argv
         case 'query' 'q'
             _es_query $argv
-        case 'search' 's'
-            _es_search $argv
+        case 'results' 'r'
+            _es_results $argv
     end
 end
 
 function _es_cd -S
-    eval "cd $dir"
+    cd $dir
 end
 
 function _es_health -S
-    eval "curl -X GET '$host/_cat/health'"
+    curl -XGET $host/_cat/health
 end
 
 function _es_indices -S
-    eval "curl -X GET '$host/_cat/indices'"
-end
-
-function _es_results -S -a name
-    eval "$EDITOR $results_dir/$name-$connection.json"
+    curl -XGET $host/_cat/indices
 end
 
 function _es_query -S -a name
-    if set -q _flag_delete
-        eval "rm $query_dir/$name.json"
-    else if set -q _flag_results
-        _es_results $name
-    else if [ "$name" = "ls" ]
-        eval "ls $query_dir | sed 's/\.json//'"
+    set -l query "$query_dir/$name.json"
+
+    if set -q _flag_edit
+        $EDITOR $query
+    else if set -q _flag_delete
+        rm $query
+    else if [ $name = 'ls' ]
+        ls $query_dir | sed 's/\.json//'
+    else if not test -f $query
+        printf "query $name does not exist\n"
     else
-        eval "$EDITOR $query_dir/$name.json"
+        curl -XGET $host/$index/_search?$params -H $header -d @$query -o $output
+        _es_results
     end
 end
 
-function _es_search -S -a query
-    set -l params (
-        if set -q _flag_params
-            echo $_flag_params
-        else
-            echo 'pretty'
-        end
-    )
-
-    set -l header (
-        if set -q _flag_header
-            echo $_flag_header
-        else
-            echo 'Content-Type:application/json'
-        end
-    )
-
-    set -l data "$query_dir/$query.json"
-    set -l output "$results_dir/$query-$connection.json"
-    set -l command "curl -X GET '$host/$index/_search?$params' -H $header -d @$data -o $output"
-
-    if set -q _flag_print
-        printf "$command\n"
-    else
-        eval $command
-        _es_results $query
-    end
+function _es_results -S
+    $EDITOR $output
 end
