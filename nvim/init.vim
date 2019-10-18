@@ -20,7 +20,7 @@ set directory=~/.cache/nvim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
-set foldenable foldmethod=indent foldlevelstart=99
+set foldenable foldmethod=indent foldlevelstart=10
 set hidden
 set incsearch
 set ignorecase smartcase
@@ -34,6 +34,7 @@ set nowrap
 set number relativenumber
 set signcolumn=yes
 set shortmess+=c
+set showmatch
 set spelllang=en_us
 set splitbelow splitright
 set tags=.git/tags;
@@ -45,8 +46,10 @@ let &helpheight = &lines / 2
 let &previewheight = &lines / 2
 let g:mapleader = "\<space>"
 let g:netrw_altfile = 1
+let g:netrw_altv = 1
 let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
+let g:netrw_winsize = 20
 let g:python_host_prog = $PYTHON_HOST_PROG
 let g:python4_host_prog = $PYTHON3_HOST_PROG
 let g:ruby_host_prog = $RUBY_HOST_PROG
@@ -61,16 +64,21 @@ augroup end
 " Mappings
 "
 
-nmap j gj
-nmap k gk
-nmap Y y$
-nmap Q @q
-nmap c* *``cgn
-nmap c# #``cgN
-nmap d* *``dgn
-nmap d# #``dgN
-nmap g= mmgg=G`m
-nmap <bs> <c-^>
+nnoremap j gj
+nnoremap k gk
+nnoremap Y y$
+nnoremap Q @q
+nnoremap <bs> <c-^>
+nnoremap c* *``cgn
+nnoremap c# #``cgN
+nnoremap d* *``dgn
+nnoremap d# #``dgN
+nnoremap g= mmgg=G`m
+nnoremap gQ mmgggq`m
+nnoremap gs yiw:%s/<c-r>"//g<left><left>
+xnoremap gs y:%s/<c-r>"//g<left><left>
+nnoremap g/ yiw/<c-r>"<cr>
+xnoremap g/ y/<c-r>"<cr>
 
 nnoremap <silent> <leader>r :so $MYVIMRC<cr>
 nnoremap <silent> <leader>w :write<cr>
