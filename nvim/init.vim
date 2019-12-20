@@ -33,6 +33,7 @@ set nohlsearch
 set nojoinspaces
 set nowrap
 set number relativenumber
+set omnifunc=syntaxcomplete#Complete
 set signcolumn=yes
 set shortmess+=c
 set spelllang=en_us
