@@ -9,6 +9,7 @@
     ca = commit --amend
     cl = clone
     co = checkout
+    ct = !.git/hooks/ctags
     d = diff
     dir = rev-parse --show-toplevel
     f = fetch
@@ -28,6 +29,8 @@
     helper = cache --timeout=3600
 [diff]
     tool = nvim -d
+[init]
+    templatedir = ~/.config/git/template
 [user]
     name = Liam Butterworth
     email = liambutterworth@randallreilly.com

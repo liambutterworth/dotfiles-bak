@@ -93,7 +93,6 @@ set fish_pager_color_secondary $nord1
 # Exports
 #
 
-set -gx CDPATH '.:~:~/dev/rr'
 set -gx DOCKER_CONFIG "$HOME/.config/docker"
 set -gx EDITOR 'nvim'
 set -gx FZF_ALT_C_COMMAND "find -type d"
@@ -130,5 +129,5 @@ end
 #
 
 if status is-interactive; and not set -q TMUX
-    eval 'tmux attach || tmux new'
+   eval 'tmux attach || tmux new'
 end

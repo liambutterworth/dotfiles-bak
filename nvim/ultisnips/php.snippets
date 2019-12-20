@@ -73,6 +73,19 @@ private static function ${1:name}($2)
 }
 endsnippet
 
+snippet name "description" b
+foreach ($status as $indexStatus) {
+
+}
+endsnippet
+
+snippet if "conditional" b
+if ($1) {
+    ${2:${VISUAL}}
+}
+endsnippet
+
+
 snippet for "for loop" b
 for (${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}}) {
     ${0:${VISUAL}}

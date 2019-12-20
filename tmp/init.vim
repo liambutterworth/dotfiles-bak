@@ -66,11 +66,6 @@ augroup end
 " Mappings
 "
 
-nnoremap <up> <c-u>
-nnoremap <down> <c-d>
-nnoremap <left> {zz
-nnoremap <right> }zz
-
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
@@ -84,6 +79,13 @@ nnoremap g= mmgg=G`m
 nnoremap gQ mmgggq`m
 nnoremap gs yiw:%s/<c-r>"//g<left><left>
 xnoremap gs y:%s/<c-r>"//g<left><left>
+
+" singke handed
+nnoremap <up> <c-u>
+nnoremap <down> <c-d>
+nnoremap <left> ^
+nnoremap <right> $
+inoremap jj <esc>
 
 nnoremap <silent> <leader>r :so $MYVIMRC<cr>
 nnoremap <silent> <leader>e :e<cr>
@@ -119,6 +121,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim/' }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
@@ -131,6 +134,40 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 call plug#end()
+
+if has_key(g:plugs, 'coc.nvim')
+    let g:coc_global_extensions = [
+        \ 'coc-css',
+        \ 'coc-docker',
+        \ 'coc-html',
+        \ 'coc-json',
+        \ 'coc-phpls',
+        \ 'coc-tsserver',
+        \ 'coc-ultisnips',
+        \ 'coc-vimlsp',
+        \ 'coc-vetur',
+        \ 'coc-yaml',
+        \ ]
+
+    nmap <silent> ]g <plug>(coc-diagnostic-next)
+    nmap <silent> [g <plug>(coc-diagnostic-prev)
+    nmap <silent> gd <plug>(coc-definition)
+    nmap <silent> gy <plug>(coc-type-definition)
+    nmap <silent> gi <plug>(coc-implementation)
+    nmap <silent> gr <plug>(coc-references)
+
+    function! ShowDocumentation() abort
+        if (index(['vim', 'help'], &filetype) >= 0)
+            execute 'h ' . expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    nnoremap <silent> K :call ShowDocumentation()<cr>
+    nnoremap <expr> <c-e> coc#util#has_float() ? coc#util#float_scroll(1) : "\<c-e>"
+    nnoremap <expr> <c-y> coc#util#has_float() ? coc#util#float_scroll(0) : "\<c-y>"
+endif
 
 if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }

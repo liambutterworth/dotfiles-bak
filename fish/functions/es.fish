@@ -58,14 +58,14 @@ end
 function _es_query -S -a name
     set -l query "$query_dir/$name.json"
 
-    if set -q _flag_edit
-        $EDITOR $query
-    else if set -q _flag_delete
-        rm $query
-    else if [ $name = 'ls' ]
+    if [ $name = 'ls' ]
         ls $query_dir | sed 's/\.json//'
+    else if set -q _flag_edit
+        $EDITOR $query
     else if not test -f $query
         printf "query $name does not exist\n"
+    else if set -q _flag_delete
+        rm $query
     else
         curl -XGET $host/$index/_search?$params -H $header -d @$query -o $output
         _es_results

@@ -13,7 +13,7 @@ snippet < "<tag>" w
 endsnippet
 
 snippet <> "<tag> inline" i
-<${1:tag}>${0:${VISUAL}}</${1/^([a-zA-Z\-]*)\s*.*/$1/}>
+<${1:tag}>${0:${VISUAL}}</${1/^([a-zA-Z0-9\-]*)\s*.*/$1/}>
 endsnippet
 
 snippet </ "<tag> self closing" i
