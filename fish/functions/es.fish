@@ -1,3 +1,17 @@
+#
+# Elasticsearch
+#
+# :: ES
+# :: CD
+# :: Health
+# :: Indices
+# :: Query
+# :: Results
+
+#
+# ES
+#
+
 function es -a action
     set -l dir "$HOME/.config/es"
     set -l query_dir "$dir/query"
@@ -43,17 +57,33 @@ function es -a action
     end
 end
 
+#
+# CD
+#
+
 function _es_cd -S
     cd $dir
 end
+
+#
+# Health
+#
 
 function _es_health -S
     curl -XGET $host/_cat/health
 end
 
+#
+# Indices
+#
+
 function _es_indices -S
     curl -XGET $host/_cat/indices
 end
+
+#
+# Query
+#
 
 function _es_query -S -a name
     set -l query "$query_dir/$name.json"
@@ -71,6 +101,10 @@ function _es_query -S -a name
         _es_results
     end
 end
+
+#
+# Results
+#
 
 function _es_results -S
     $EDITOR $output

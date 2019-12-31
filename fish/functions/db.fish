@@ -1,7 +1,15 @@
-function db -a action
-    # set cmd (commandline -opc)
-    # echo $cmd
+#
+# Database
+#
+# :: DB
+# :: CD
+# :: Query
 
+#
+# DB
+#
+
+function db -a action
     set -l dir "$HOME/.config/db"
     set -l query_dir "$dir/query"
     set -l options
@@ -28,9 +36,17 @@ function db -a action
     end
 end
 
+#
+# CD
+#
+
 function _db_cd -S
     cd $dir
 end
+
+#
+# Query
+#
 
 function _db_query -S -a name
     set -l query $query_dir/$name.sql

@@ -67,6 +67,7 @@ augroup end
 " Mappings
 "
 
+nnoremap <bs> <c-^>
 nnoremap <up> <c-u>
 nnoremap <down> <c-d>
 nnoremap <left> {zz
@@ -76,7 +77,6 @@ nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
 nnoremap Q @q
-nnoremap <bs> <c-^>
 nnoremap c* *``cgn
 nnoremap c# #``cgN
 nnoremap d* *``dgn
