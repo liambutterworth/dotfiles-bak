@@ -52,7 +52,7 @@ let g:netrw_dirhistmax = 0
 let g:netrw_fastbrowse = 0
 let g:netrw_winsize = 20
 let g:python_host_prog = $PYTHON_HOST_PROG
-let g:python4_host_prog = $PYTHON3_HOST_PROG
+let g:python3_host_prog = $PYTHON3_HOST_PROG
 let g:ruby_host_prog = $RUBY_HOST_PROG
 let g:vim_indent_cont = &shiftwidth
 
@@ -70,8 +70,8 @@ augroup end
 nnoremap <bs> <c-^>
 nnoremap <up> <c-u>
 nnoremap <down> <c-d>
-nnoremap <left> {zz
-nnoremap <right> }zz
+nnoremap <left> <c-e>
+nnoremap <right> <c-y>
 
 nnoremap j gj
 nnoremap k gk
@@ -119,7 +119,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim/' }
+Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'

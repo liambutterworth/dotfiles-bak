@@ -21,6 +21,7 @@
     re = reset HEAD --
     s = status
     st = stash
+    sh = show
     t = tag
     who = !git config user.name && git config user.email
 [core]
