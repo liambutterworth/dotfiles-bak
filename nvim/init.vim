@@ -115,7 +115,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
@@ -190,11 +189,6 @@ endif
 
 if has_key(g:plugs, 'vim-dirvish')
     let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
-endif
-
-if has_key(g:plugs, 'vim-easy-align')
-    xmap ga <plug>(EasyAlign)
-    nmap ga <plug>(EasyAlign)
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
