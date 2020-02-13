@@ -18,6 +18,7 @@
     ll = log --pretty=format:"%C(red)%h\\ %C(white)%s\\ %C(green)%ad\\ %C(blue)%an" --date=relative
     m = merge
     mn = merge --no-commit --no-ff
+    mb = merge-base
     re = reset HEAD --
     s = status
     st = stash

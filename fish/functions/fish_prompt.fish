@@ -3,13 +3,13 @@
 #
 
 function fish_prompt
-    set_color $nord9
+    set_color $blue
     echo -n (prompt_pwd)
     echo -n ' '
-    set_color $nord3
+    set_color $bg3
     echo -n (git branch ^/dev/null | sed -n '/\* /s///p')
     echo
-    set_color $nord15
+    set_color $purple
 
     if [ $fish_bind_mode = 'insert' ]
         echo '❯ '

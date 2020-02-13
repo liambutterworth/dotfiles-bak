@@ -70,8 +70,8 @@ augroup end
 nnoremap <bs> <c-^>
 nnoremap <up> <c-u>
 nnoremap <down> <c-d>
-nnoremap <left> <c-e>
-nnoremap <right> <c-y>
+nnoremap <left> <c-y>
+nnoremap <right> <c-e>
 
 nnoremap j gj
 nnoremap k gk
@@ -110,7 +110,6 @@ nnoremap <silent> <leader>l 20<c-w><
 call plug#begin($HOME . '/.config/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-Plug 'arcticicestudio/nord-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
@@ -119,6 +118,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim' }
+Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
@@ -164,6 +164,17 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>` :Marks<cr>
     nnoremap <leader>g :Lines<cr>
     nnoremap <leader>G :BLines<cr>
+endif
+
+if has_key(g:plugs, 'gruvbox')
+    silent! colorscheme gruvbox
+    highlight Normal ctermbg=none
+    highlight CursorLineNr ctermbg=none
+    highlight SignColumn ctermbg=none
+    highlight GitGutterAdd ctermbg=none ctermfg=green
+    highlight GitGutterChange ctermbg=none ctermfg=yellow
+    highlight GitGutterDelete ctermbg=none ctermfg=red
+    highlight GitGutterChangeDelete ctermbg=none ctermfg=yellow
 endif
 
 if has_key(g:plugs, 'nord-vim')
