@@ -55,13 +55,22 @@ theme_gruvbox
 # Exports
 #
 
+set -gx FZF_COLORS "\
+fg:#fbf1c7,\
+bg:#282828,\
+fg+:#fabd2f,\
+bg+:#282828,\
+info:#b8bb26,\
+border:#282828,\
+prompt:#83a598,\
+pointer:#fb4934"
+
 set -gx DOCKER_CONFIG "$HOME/.config/docker"
 set -gx EDITOR 'nvim'
 set -gx FZF_ALT_C_COMMAND "find -type d"
 set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
 set -gx FZF_CTRL_T_COMMAND "find -type f"
 set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
-set -gx FZF_COLORS 'bg:#282828,bg+:#282828,fg:#ebdbb2,fg+:#fabd2f,pointer:#fb4934,info:#b8bb26,border:#282828,prompt:#83a598'
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
 

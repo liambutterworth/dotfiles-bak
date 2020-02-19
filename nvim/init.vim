@@ -32,6 +32,7 @@ set nobackup nowritebackup
 set nohlsearch
 set nojoinspaces
 set nowrap
+set noshowmode
 set number relativenumber
 set omnifunc=syntaxcomplete#Complete
 set signcolumn=yes
@@ -112,13 +113,13 @@ call plug#begin($HOME . '/.config/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
+Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim' }
-Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
@@ -129,6 +130,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -168,6 +171,7 @@ endif
 
 if has_key(g:plugs, 'gruvbox')
     silent! colorscheme gruvbox
+    unlet g:fzf_colors
     highlight Normal ctermbg=none
     highlight CursorLineNr ctermbg=none
     highlight SignColumn ctermbg=none
@@ -177,18 +181,6 @@ if has_key(g:plugs, 'gruvbox')
     highlight GitGutterChangeDelete ctermbg=none ctermfg=yellow
 endif
 
-if has_key(g:plugs, 'nord-vim')
-    let g:nord_bold_vertical_split_line = 1
-    let g:nord_italic = 1
-    let g:nord_italic_comments = 1
-    let g:nord_underline = 1
-
-    silent! colorscheme nord
-
-    highlight StatusLine ctermfg=0 ctermbg=0
-    highlight StatusLineNC ctermfg=0 ctermbg=0
-endif
-
 if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/nvim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
@@ -196,6 +188,10 @@ if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
     nnoremap <s-tab> :UltiSnipsEdit<cr>
+endif
+
+if has_key(g:plugs, 'vim-airline-themes')
+    let g:airline_theme = 'gruvbox'
 endif
 
 if has_key(g:plugs, 'vim-dirvish')
