@@ -24,7 +24,6 @@ set foldenable foldmethod=indent foldlevelstart=10
 set hidden
 set incsearch
 set ignorecase smartcase
-set laststatus=0
 set lazyredraw
 set list listchars=tab:│\ ,trail:·
 set mouse=n
@@ -119,7 +118,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'moby/moby' , { 'rtp': '/contrib/syntax/vim' }
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'sirver/ultisnips'
@@ -131,7 +129,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -190,12 +187,18 @@ if has_key(g:plugs, 'ultisnips')
     nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
-if has_key(g:plugs, 'vim-airline-themes')
-    let g:airline_theme = 'gruvbox'
+if has_key(g:plugs, 'vim-airline')
+    let g:airline#extensions#fugitiveline#enabled = 1
+    let g:airline#extensions#whitespace#checks = []
+    nnoremap <silent> <leader>r :so $MYVIMRC<cr>:AirlineToggle<cr>:AirlineToggle<cr>
 endif
 
 if has_key(g:plugs, 'vim-dirvish')
     let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
+
+    command! -nargs=? -complete=dir Explore Dirvish <args>
+    command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
+    command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
 endif
 
 if has_key(g:plugs, 'vim-fugitive')

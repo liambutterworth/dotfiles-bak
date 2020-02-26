@@ -4,11 +4,9 @@
 
 function fish_prompt
     set_color $blue
-    echo -n (prompt_pwd)
-    echo -n ' '
+    echo -n (prompt_pwd)' '
     set_color $bg3
-    echo -n (git branch ^/dev/null | sed -n '/\* /s///p')
-    echo
+    echo -n (git branch ^/dev/null | sed -n '/\* /s///p')\n
     set_color $purple
 
     if [ $fish_bind_mode = 'insert' ]

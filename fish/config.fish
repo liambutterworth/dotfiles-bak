@@ -103,3 +103,5 @@ end
 if status is-interactive; and not set -q TMUX
    eval 'tmux attach || tmux new'
 end
+
+function fish_vi_cursor; end
