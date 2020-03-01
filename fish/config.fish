@@ -65,7 +65,7 @@ set -g yellow fabd2f
 set -g blue 83a598
 set -g purple d3869b
 set -g orange fe8019
-set -g aqua 8ec07c
+set -g cyan 8ec07c
 set -g grey 928374
 
 set -g fish_color_normal $fg
@@ -92,6 +92,11 @@ set -g fish_pager_color_progress $yellow
 set -g fish_pager_color_secondary $bg3
 
 set pure_color_primary $blue
+set pure_color_mute $bg3
+set pure_color_info $cyan
+set pure_color_success $purple
+set pure_color_warning $yellow
+set pure_color_danger $red
 
 #
 # Exports
@@ -141,11 +146,6 @@ end
 #
 # Startup
 #
-
-if not functions -q fisher
-    curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
-    fish -c fisher
-end
 
 if status is-interactive; and not set -q TMUX
    eval 'tmux attach || tmux new'
