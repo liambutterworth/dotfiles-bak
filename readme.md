@@ -1,8 +1,12 @@
-## Dotfiles
+# Dotfiles
 
-Packages: [Fish](https://github.com/fish-shell/fish-shell), [Git](https://github.com/git/git), [NeoVim](https://github.com/neovim/neovim), [Tmux](https://github.com/tmux/tmux)
+Packages: [ctags](https://github.com/universal-ctags/ctags), [fish](https://github.com/fish-shell/fish-shell), [git](https://github.com/git/git), [neovim](https://github.com/neovim/neovim), [tmux](https://github.com/tmux/tmux)
 
-### Mac
+## Mac
+
+- Setup iTerm
+- Install [devicons](https://github.com/ryanoasis/vim-devicons) font
+- Run commands:
 
 ```
     $ git clone https://github.com/liambutterworth/dotfiles ~/.dotfiles

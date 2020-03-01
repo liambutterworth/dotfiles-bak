@@ -172,7 +172,9 @@ endif
 
 if has_key(g:plugs, 'gruvbox')
     silent! colorscheme gruvbox
+
     unlet g:fzf_colors
+
     highlight Normal ctermbg=none
     highlight CursorLineNr ctermbg=none
     highlight SignColumn ctermbg=none
@@ -198,6 +200,7 @@ endif
 if has_key(g:plugs, 'nerdtree')
     let g:NERDTreeWinSize = 35
     let g:NERDTreeShowLineNumbers = 1
+
     nnoremap - :NERDTreeToggle<cr>
 endif
 
