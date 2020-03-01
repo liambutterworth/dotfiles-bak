@@ -82,6 +82,8 @@ nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
+nnoremap gj :!jq .<cr>
+xnoremap gj :'<,'>!jq<cr>
 nnoremap gQ mmgggq`m
 nnoremap gs yiw:%s/<c-r>"//g<left><left>
 xnoremap gs y:%s/<c-r>"//g<left><left>
@@ -115,11 +117,12 @@ Plug 'dag/vim-fish'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-dirvish'
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sirver/ultisnips'
 Plug 'stanangeloff/php.vim'
 Plug 'tomtom/tcomment_vim'
@@ -129,6 +132,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
+Plug 'xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -178,6 +182,10 @@ if has_key(g:plugs, 'gruvbox')
     highlight GitGutterChangeDelete ctermbg=none ctermfg=yellow
 endif
 
+if has_key(g:plugs, 'php.vim')
+    let php_var_selector_is_identifier = 1
+endif
+
 if has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/nvim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
@@ -187,18 +195,24 @@ if has_key(g:plugs, 'ultisnips')
     nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
-if has_key(g:plugs, 'vim-airline')
-    let g:airline#extensions#fugitiveline#enabled = 1
-    let g:airline#extensions#whitespace#checks = []
-    nnoremap <silent> <leader>r :so $MYVIMRC<cr>:AirlineToggle<cr>:AirlineToggle<cr>
+if has_key(g:plugs, 'nerdtree')
+    let g:NERDTreeWinSize = 35
+    let g:NERDTreeShowLineNumbers = 1
+    nnoremap - :NERDTreeToggle<cr>
 endif
 
-if has_key(g:plugs, 'vim-dirvish')
-    let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
+if has_key(g:plugs, 'vim-airline')
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline#extensions#fugitiveline#enabled = 1
+    let g:airline#extensions#whitespace#checks = []
 
-    command! -nargs=? -complete=dir Explore Dirvish <args>
-    command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>
-    command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>
+    let g:airline_filetype_overrides = {
+        \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
+        \ }
+
+    nnoremap <silent> <leader>r :so $MYVIMRC<cr>:AirlineToggle<cr>:AirlineToggle<cr>
 endif
 
 if has_key(g:plugs, 'vim-fugitive')
