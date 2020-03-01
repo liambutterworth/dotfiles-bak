@@ -1,6 +1,6 @@
 ## Dotfiles
 
-Packages: [Alacritty](https://github.com/jwilm/alacritty), [Source Code Pro](https://github.com/adobe-fonts/source-code-pro), [Fish](https://github.com/fish-shell/fish-shell), [Git](https://github.com/git/git), [NeoVim](https://github.com/neovim/neovim), [Tmux](https://github.com/tmux/tmux)
+Packages: [Fish](https://github.com/fish-shell/fish-shell), [Git](https://github.com/git/git), [NeoVim](https://github.com/neovim/neovim), [Tmux](https://github.com/tmux/tmux)
 
 ### Mac
 
