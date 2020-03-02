@@ -105,6 +105,11 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
 
+" echo the highlight region name under cursor
+map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 "
 " Plugins
 "
@@ -132,7 +137,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
-Plug 'xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
 
@@ -239,3 +243,7 @@ if has_key(g:plugs, 'vim-gitgutter')
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
 endif
+
+if has_key(g:plugs, 'vim-javasript')
+    let g:javascript_plugin_doc = 1
+end
