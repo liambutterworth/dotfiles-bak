@@ -9,5 +9,5 @@ highlight link phpIdentifierComplex GruvboxOrange
 highlight link phpInclude GruvboxRed
 highlight link phpMemberSelector GruvboxOrange
 highlight link phpOperator GruvboxOrange
-highlight link phpStaticClasses GruvboxAqua
+highlight link phpStaticClasses GruvboxYellow
 highlight link phpUseFunction GruvboxYellow
