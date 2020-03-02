@@ -1,0 +1,3 @@
+highlight link jsonBraces GruvboxOrange
+highlight link jsonKeywordMatch GruvboxOrange
+highlight link jsonNoise GruvboxOrange

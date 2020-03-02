@@ -15,6 +15,7 @@ alias grep='grep --color=auto --exclude-dir={.git,node_modules,vendor}'
 alias less='less --clear-screen --raw-control-chars'
 alias ls='ls --color=auto --group-directories-first'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+alias tree="tree -a -I '.git|.DS_Store|node_modules|vendor|functions|plugged'"
 alias ssh='env TERM=xterm ssh'
 
 alias a='php artisan'
