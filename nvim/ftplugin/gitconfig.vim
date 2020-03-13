@@ -1,2 +1,2 @@
-highlight link gitConfigNone GruvboxOrange
-highlight link gitConfigVariable GruvboxAqua
+" highlight link gitConfigNone GruvboxOrange
+" highlight link gitConfigVariable GruvboxAqua

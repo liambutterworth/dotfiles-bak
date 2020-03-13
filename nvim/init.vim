@@ -39,6 +39,7 @@ set shortmess+=c
 set spelllang=en_us
 set splitbelow splitright
 set tags=./.git/tags;
+set termguicolors
 set undofile undodir=~/.cache/nvim/undo//
 set updatetime=100
 set wildmenu wildignorecase wildmode=full
@@ -118,8 +119,9 @@ map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 call plug#begin($HOME . '/.config/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dag/vim-fish'
+Plug 'georgewitteman/vim-fish'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
@@ -138,6 +140,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -180,13 +183,14 @@ if has_key(g:plugs, 'gruvbox')
 
     unlet g:fzf_colors
 
-    highlight Normal ctermbg=none
-    highlight CursorLineNr ctermbg=none
-    highlight SignColumn ctermbg=none
-    highlight GitGutterAdd ctermbg=none ctermfg=green
-    highlight GitGutterChange ctermbg=none ctermfg=yellow
-    highlight GitGutterDelete ctermbg=none ctermfg=red
-    highlight GitGutterChangeDelete ctermbg=none ctermfg=yellow
+    highlight CursorLineNr guibg=none
+    highlight GitGutterAdd guibg=none guifg=#fabd2f
+    highlight GitGutterChange guibg=none guifg=#fabd2f
+    highlight GitGutterDelete guibg=none guifg=#fb4934
+    highlight GitGutterChangeDelete guibg=none guifg=#fabd2f
+    highlight Normal guibg=none
+    highlight SignColumn guibg=none
+    highlight VertSplit guibg=#3c3836
 endif
 
 if has_key(g:plugs, 'php.vim')
@@ -203,10 +207,22 @@ if has_key(g:plugs, 'ultisnips')
 endif
 
 if has_key(g:plugs, 'nerdtree')
-    let g:NERDTreeWinSize = 35
+    let g:NERDTreeWinSize = 35 
     let g:NERDTreeShowLineNumbers = 1
 
-    nnoremap - :NERDTreeToggle<cr>
+    nnoremap <cr><cr> :NERDTreeToggle<cr>
+    nnoremap <cr>g :NERDTreeVCS<cr>
+    nnoremap <cr>r :NERDTreeRefreshRoot<cr>
+
+    nnoremap <expr> <cr>f exists('b:NERDTree')
+        \ ? '<c-w><c-p>:NERDTreeFind<cr>'
+        \ : ':NERDTreeFind<cr>'
+
+    autocmd BufEnter * if (
+        \ winnr("$") == 1 &&
+        \ exists("b:NERDTree") &&
+        \ b:NERDTree.isTabTree()
+        \ ) | q | endif
 endif
 
 if has_key(g:plugs, 'vim-airline')

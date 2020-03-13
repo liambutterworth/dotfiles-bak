@@ -1,3 +1,7 @@
-highlight link vueSurroundingTag htmlTagName
+" highlight link vueSurroundingTag htmlTagName
 
-runtime! ftplugin/html.vim ftplugin/css.vim ftplugin/javascript.vim
+runtime!
+    \ ftplugin/html.vim
+    \ ftplugin/css.vim
+    \ ftplugin/scss.vim
+    \ ftplugin/javascript.vim

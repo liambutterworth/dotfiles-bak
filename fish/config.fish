@@ -149,11 +149,11 @@ end
 #
 
 if status is-interactive; and not set -q TMUX
-   eval 'tmux attach || tmux new'
+  eval 'tmux attach || tmux new'
 end
 
 function pad_prompt --on-event fish_preexec
-    echo
+   echo
 end
 
 function fish_greeting; end

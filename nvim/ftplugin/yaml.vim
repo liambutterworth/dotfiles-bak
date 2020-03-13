@@ -1,2 +1,2 @@
-highlight link yamlBlockMappingKey GruvboxRed
+" highlight link yamlBlockMappingKey GruvboxRed
 highlight link yamlBlockCollectionItemStart GruvboxOrange
