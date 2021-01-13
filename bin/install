@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir -p ~/.config ~/.cache/nvim/{swap,undo}
+mkdir -p ~/.config ~/.cache/nvim/undo
 ln -sf ~/.dotfiles/{ctags,docker,git,fish,nvim,tmux} ~/.config
 
 curl https://git.io/fisher --create-dirs -sLo \

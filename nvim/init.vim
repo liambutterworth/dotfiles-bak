@@ -16,7 +16,6 @@ set autoindent
 set backspace=indent,eol,start
 set complete=.,w,b,u,t,k
 set dictionary=/usr/share/dict/words
-set directory=~/.cache/nvim/swap//
 set encoding=utf-8
 set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
@@ -32,6 +31,7 @@ set nohlsearch
 set nojoinspaces
 set nowrap
 set noshowmode
+set noswapfile
 set number relativenumber
 set omnifunc=syntaxcomplete#Complete
 set signcolumn=yes
@@ -72,8 +72,8 @@ augroup end
 nnoremap <bs> <c-^>
 nnoremap <up> <c-u>
 nnoremap <down> <c-d>
-nnoremap <left> <c-y>
-nnoremap <right> <c-e>
+nnoremap <left> 3<c-y>
+nnoremap <right> 3<c-e>
 
 nnoremap j gj
 nnoremap k gk
@@ -140,7 +140,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -149,6 +148,7 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
+    let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
 
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
     command! -bang BCommits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
@@ -211,16 +211,21 @@ if has_key(g:plugs, 'nerdtree')
     let g:NERDTreeShowLineNumbers = 1
 
     nnoremap <cr><cr> :NERDTreeToggle<cr>
+    nnoremap <cr>c :NERDTreeClose<cr>
     nnoremap <cr>g :NERDTreeVCS<cr>
     nnoremap <cr>r :NERDTreeRefreshRoot<cr>
+
+    nnoremap <expr> <cr>w exists('b:NERDTree')
+        \ ? '<c-w><c-p>'
+        \ : ':NERDTreeFocus'
 
     nnoremap <expr> <cr>f exists('b:NERDTree')
         \ ? '<c-w><c-p>:NERDTreeFind<cr>'
         \ : ':NERDTreeFind<cr>'
 
     autocmd BufEnter * if (
-        \ winnr("$") == 1 &&
-        \ exists("b:NERDTree") &&
+        \ winnr('$') == 1 &&
+        \ exists('b:NERDTree') &&
         \ b:NERDTree.isTabTree()
         \ ) | q | endif
 endif

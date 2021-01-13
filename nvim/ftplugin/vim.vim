@@ -1,12 +1,10 @@
-" highlight link vimContinue GruvboxOrange
-" highlight link vimBracket GruvboxAqua
-" highlight link vimEnvVar GruvboxBlue
-" highlight link vimHiCtermColor GruvboxAqua
-" highlight link vimIsCommand GruvboxAqua
-" highlight link vimFuncName GruvboxYellow
-" highlight link vimMapMod GruvboxAqua
-" highlight link vimMapModKey GruvboxAqua
-" highlight link vimNotation GruvboxAqua
-" highlight link vimOper GruvboxOrange
-" highlight link vimSep GruvboxOrange
-" highlight link vimSetSep GruvboxFg1
+highlight link vimContinue GruvboxOrange
+highlight link vimBracket GruvboxOrange
+highlight link vimEnvVar GruvboxBlue
+highlight link vimHiCtermColor GruvboxAqua
+highlight link vimIsCommand GruvboxFg1
+highlight link vimFuncName GruvboxYellow
+highlight link vimMapMod GruvboxOrange
+highlight link vimOper GruvboxOrange
+highlight link vimSep GruvboxOrange
+highlight link vimSetSep GruvboxFg1

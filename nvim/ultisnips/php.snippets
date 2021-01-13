@@ -25,6 +25,14 @@ snippet // "doc block" b
  */
 endsnippet
 
+snippet d "dump" b
+dump($0);
+endsnippet
+
+snippet dd "die and dump" b
+dd($0);
+endsnippet
+
 snippet fun "function" b
 function ${1:name}($2) {
     ${3:${VISUAL}}
@@ -85,9 +93,21 @@ if ($1) {
 }
 endsnippet
 
-
 snippet for "for loop" b
 for (${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}}) {
     ${0:${VISUAL}}
 }
+endsnippet
+
+snippet scope "laravel scope" b
+public function scope${1:Name}(Builder $query): Builder
+{
+    return $query->${2:CLAUSE};
+}
+endsnippet
+
+snippet (fun "closure function" i
+(function($1) {
+    ${0:${VISUAL}}
+});
 endsnippet

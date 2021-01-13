@@ -121,6 +121,8 @@ set -gx FZF_CTRL_T_COMMAND "find -type f"
 set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
+set -gx GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/google-cloud-sdk-auth/job-interview-2fa38-1041bf89ab68.json"
+set -gx GOOGLE_AUTH_FILE "/$HOME/.config/google-cloud-sdk-auth/google_auth.txt"
 
 switch (uname)
     case Darwin
@@ -131,6 +133,7 @@ switch (uname)
         set -gx fish_user_paths \
             "$HOME/.composer/vendor/bin" \
             "$HOME/.config/nvim/plugged/fzf/bin" \
+            "$HOME/.config/google-cloud-sdk/bin" \
             '/usr/local/opt/coreutils/libexec/gnubin' \
             '/usr/local/opt/findutils/libexec/gnubin' \
             '/usr/local/opt/grep/libexec/gnubin' \
@@ -138,7 +141,10 @@ switch (uname)
             '/usr/local/opt/gnu-tar/libexec/gnubin' \
             '/usr/local/opt/gawk/libexec/gnubin' \
             '/usr/local/opt/ed/libexec/gnubin' \
-            '/usr/local/opt/ruby/bin'
+            '/usr/local/opt/ruby/bin' \
+            '/usr/local/opt/php/bin' \
+            '/usr/local/opt/php/sbin' \
+            '/usr/local/opt/node@10/bin'
 
     case Linux
         # todo
