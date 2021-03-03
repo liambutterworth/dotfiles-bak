@@ -31,7 +31,7 @@ alias mc='mysql_config_editor'
 alias n='npm'
 alias r='source ~/.config/fish/config.fish'
 alias t='tmux'
-alias v='vue'
+alias v='valet'
 
 #
 # Bindings
@@ -123,6 +123,7 @@ set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
 set -gx GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/google-cloud-sdk-auth/job-interview-2fa38-1041bf89ab68.json"
 set -gx GOOGLE_AUTH_FILE "/$HOME/.config/google-cloud-sdk-auth/google_auth.txt"
+set -gx CLOUDSDK_PYTHON python2
 
 switch (uname)
     case Darwin
@@ -142,9 +143,9 @@ switch (uname)
             '/usr/local/opt/gawk/libexec/gnubin' \
             '/usr/local/opt/ed/libexec/gnubin' \
             '/usr/local/opt/ruby/bin' \
-            '/usr/local/opt/php/bin' \
-            '/usr/local/opt/php/sbin' \
-            '/usr/local/opt/node@10/bin'
+            '/usr/local/opt/php@7.4/bin' \
+            '/usr/local/opt/php@7.4/sbin' \
+            '/usr/local/opt/node@12/bin'
 
     case Linux
         # todo

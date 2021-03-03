@@ -125,6 +125,7 @@ Plug 'georgewitteman/vim-fish'
 Plug 'gruvbox-community/gruvbox'
 Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align',
 Plug 'jwalton512/vim-blade'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'pangloss/vim-javascript'
@@ -148,7 +149,8 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
-    let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+    " let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+    let g:fzf_layout = { 'down': '40%' }
 
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
     command! -bang BCommits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
@@ -176,6 +178,11 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>` :Marks<cr>
     nnoremap <leader>g :Lines<cr>
     nnoremap <leader>G :BLines<cr>
+endif
+
+if has_key(g:plugs, 'vim-easy-align')
+    nmap ga <Plug>(EasyAlign)
+    xmap ga <Plug>(EasyAlign)
 endif
 
 if has_key(g:plugs, 'gruvbox')
