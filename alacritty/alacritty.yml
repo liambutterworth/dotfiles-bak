@@ -1,6 +1,7 @@
 #
 # Alacritty
 #
+# :: Global
 # :: Bindings
 # :: Colors
 # :: Cursor
@@ -12,21 +13,23 @@
 # :: Window
 
 #
+# Global
+#
+
+background_opacity: 0.99
+
+#
 # Bindings
 #
 
-# key_bindings:
-#   - { key: V, mods: Command, action: Paste }
-#   - { key: C, mods: Command, action: Copy }
-#   - { key: Q, mods: Command, action: Quit }
-#   - { key: N, mods: Command, action: SpawnNewInstance }
-#   - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
+key_bindings:
+  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
 
 #
 # Colors
 #
 
-colors: # Gruvbox - Dark
+colors:
   primary:
     background: '0x282828'
     foreground: '0xebdbb2'
@@ -74,13 +77,13 @@ debug:
 #
 
 font:
-  size: 12
+  size: 16
   normal:
     family: Source Code Pro
-    style: Regular
+    style: Light
   bold:
     family: Source Code Pro
-    style: Bold
+    style: Regular
   italic:
     family: Source Code Pro
     style: Light Italic
@@ -121,4 +124,8 @@ selection:
 # Window
 #
 
-background_opacity: 0.99
+window:
+  dynamic_padding: true
+  padding:
+    x: 24
+    y: 24

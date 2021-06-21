@@ -112,49 +112,44 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
 
-" echo the highlight region name under cursor
-"map <leader>H :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-"    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-"    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
 "
 " Plugins
 "
 
-call plug#begin($XDG_CONFIG_HOME . '/vim/plugged')
+if filereadable(expand("$XDG_CONFIG_HOME/vim/autoload/plug.vim"))
+    call plug#begin("$XDG_CONFIG_HOME/vim/plugged")
 
-Plug 'airblade/vim-gitgutter'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'georgewitteman/vim-fish'
-Plug 'gruvbox-community/gruvbox'
-Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align',
-Plug 'jwalton512/vim-blade'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'sirver/ultisnips'
-Plug 'stanangeloff/php.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'cakebaker/scss-syntax.vim'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'georgewitteman/vim-fish'
+    Plug 'gruvbox-community/gruvbox'
+    Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/vim-easy-align',
+    Plug 'jwalton512/vim-blade'
+    Plug 'michaeljsmith/vim-indent-object'
+    Plug 'pangloss/vim-javascript'
+    Plug 'posva/vim-vue'
+    Plug 'preservim/nerdtree'
+    Plug 'sirver/ultisnips'
+    Plug 'stanangeloff/php.vim'
+    Plug 'tomtom/tcomment_vim'
+    Plug 'tpope/vim-eunuch'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-unimpaired'
+    Plug 'vim-airline/vim-airline'
 
-call plug#end()
+    call plug#end()
+end
 
-if has_key(g:plugs, 'fzf.vim') && executable('fzf')
+if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
     let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
     let g:fzf_prefer_tmux = exists('$TMUX')
-    " let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
     let g:fzf_layout = { 'down': '40%' }
 
     command! -bang Commits call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
@@ -185,15 +180,15 @@ if has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>G :BLines<cr>
 endif
 
-if has_key(g:plugs, 'vim-easy-align')
+if exists('g:plugs') && has_key(g:plugs, 'vim-easy-align')
     nmap ga <Plug>(EasyAlign)
     xmap ga <Plug>(EasyAlign)
 endif
 
-if has_key(g:plugs, 'gruvbox')
+if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
     colorscheme gruvbox
 
-    if exists("g:fzf_colors")
+    if exists('g:fzf_colors')
         unlet g:fzf_colors
     endif
 
@@ -207,11 +202,11 @@ if has_key(g:plugs, 'gruvbox')
     highlight VertSplit guibg=#3c3836
 endif
 
-if has_key(g:plugs, 'php.vim')
+if exists('g:plugs') && has_key(g:plugs, 'php.vim')
     let php_var_selector_is_identifier = 1
 endif
 
-if has_key(g:plugs, 'ultisnips')
+if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
     let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/nvim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
@@ -220,7 +215,7 @@ if has_key(g:plugs, 'ultisnips')
     nnoremap <s-tab> :UltiSnipsEdit<cr>
 endif
 
-if has_key(g:plugs, 'nerdtree')
+if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
     let g:NERDTreeWinSize = 35 
     let g:NERDTreeShowLineNumbers = 1
 
@@ -244,7 +239,7 @@ if has_key(g:plugs, 'nerdtree')
         \ ) | q | endif
 endif
 
-if has_key(g:plugs, 'vim-airline')
+if exists('g:plugs') && has_key(g:plugs, 'vim-airline')
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
@@ -258,7 +253,7 @@ if has_key(g:plugs, 'vim-airline')
     nnoremap <silent> <leader>r :so $MYVIMRC<cr>:AirlineToggle<cr>:AirlineToggle<cr>
 endif
 
-if has_key(g:plugs, 'vim-fugitive')
+if exists('g:plugs') && has_key(g:plugs, 'vim-fugitive')
     nnoremap <silent> \\ :Gstatus<cr>
     nnoremap <silent> \b :Gblame<cr>
     nnoremap <silent> \c :Gcommit<cr>
@@ -269,7 +264,7 @@ if has_key(g:plugs, 'vim-fugitive')
     nnoremap <silent> \w :Gwrite<cr>
 endif
 
-if has_key(g:plugs, 'vim-gitgutter')
+if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     let g:gitgutter_map_keys = 0
 
     nmap ]c <plug>(GitGutterNextHunk)
@@ -280,6 +275,6 @@ if has_key(g:plugs, 'vim-gitgutter')
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
 endif
 
-if has_key(g:plugs, 'vim-javasript')
+if exists('g:plugs') && has_key(g:plugs, 'vim-javasript')
     let g:javascript_plugin_doc = 1
 end

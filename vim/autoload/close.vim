@@ -11,14 +11,15 @@ function! close#smart() abort
     endif
 
     if winnr('$') > 1 || tabpagenr() > 1
-        exec buffer_name() ? 'bwipeout' : 'close'
+        execute buffer_name() ? 'bwipeout' : 'close'
     elseif len(getbufinfo({ 'buflisted': 1 })) > 1 || &filetype == 'help'
-        exec 'bwipeout'
+        execute 'bwipeout'
     else
-        exec 'quit'
+        execute 'quit'
     endif
 
     if using_nerd_tree
         execute 'NERDTreeToggle'
+        call feedkeys("\<C-w>p")
     endif
 endfunction
