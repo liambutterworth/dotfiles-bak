@@ -5,7 +5,7 @@
 # :: Bindings
 # :: Colors
 # :: Exports
-# :: Startup
+# :: Prompt
 
 #
 # Aliases
@@ -23,7 +23,6 @@ alias b='bash'
 alias c='composer'
 alias d='docker'
 alias dc='docker-compose'
-alias e='nvim'
 alias g='git'
 alias l='laravel'
 alias m='mysql'
@@ -31,7 +30,7 @@ alias mc='mysql_config_editor'
 alias n='npm'
 alias r='source ~/.config/fish/config.fish'
 alias t='tmux'
-alias v='valet'
+alias v='vim'
 
 #
 # Bindings
@@ -92,13 +91,6 @@ set -g fish_pager_color_description $fg
 set -g fish_pager_color_progress $yellow
 set -g fish_pager_color_secondary $bg3
 
-set pure_color_primary $blue
-set pure_color_mute $bg3
-set pure_color_info $cyan
-set pure_color_success $purple
-set pure_color_warning $yellow
-set pure_color_danger $red
-
 #
 # Exports
 #
@@ -113,24 +105,29 @@ border:#282828,\
 prompt:#83a598,\
 pointer:#fb4934"
 
-set -gx DOCKER_CONFIG "$HOME/.config/docker"
-set -gx EDITOR 'nvim'
+# TODO customize LS_COLORS or dircolors
+
+set -gx TERM "xterm-256color"
+set -gx EDITOR "vim"
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
+set -gx MYVIMRC "$XDG_CONFIG_HOME/vim/vimrc"
+set -gx MYVIMRC "$XDG_CONFIG_HOME/vim/vimrc"
+set -gx VIMINIT 'let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+set -gx VIMDOTDIR "$XDG_CONFIG_HOME/vim"
 set -gx FZF_ALT_C_COMMAND "find -type d"
 set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
 set -gx FZF_CTRL_T_COMMAND "find -type f"
 set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
-set -gx GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/google-cloud-sdk-auth/job-interview-2fa38-1041bf89ab68.json"
-set -gx GOOGLE_AUTH_FILE "/$HOME/.config/google-cloud-sdk-auth/google_auth.txt"
-set -gx CLOUDSDK_PYTHON python2
+
+#set -gx GOOGLE_APPLICATION_CREDENTIALS "$HOME/.config/google-cloud-sdk-auth/job-interview-2fa38-1041bf89ab68.json"
+#set -gx GOOGLE_AUTH_FILE "/$HOME/.config/google-cloud-sdk-auth/google_auth.txt"
+#set -gx CLOUDSDK_PYTHON python2
 
 switch (uname)
     case Darwin
-        set -gx PYTHON_HOST_PROG '/usr/local/bin/python'
-        set -gx PYTHON3_HOST_PROG '/usr/local/bin/python3'
-        set -gx RUBY_HOST_PROG '/usr/local/opt/ruby/bin/ruby'
-
         set -gx fish_user_paths \
             "$HOME/.composer/vendor/bin" \
             "$HOME/.config/nvim/plugged/fzf/bin" \
@@ -148,21 +145,35 @@ switch (uname)
             '/usr/local/opt/node@12/bin'
 
     case Linux
-        # todo
+        # 
 end
 
 #
-# Startup
+# Prompt
 #
 
-if status is-interactive; and not set -q TMUX
-  eval 'tmux attach || tmux new'
-end
-
-function pad_prompt --on-event fish_preexec
-   echo
-end
+fish_vi_key_bindings
 
 function fish_greeting; end
 function fish_mode_prompt; end
 function fish_vi_cursor; end
+
+function fish_prompt
+    set_color $blue
+    echo -n (prompt_pwd)' '
+    set_color $bg3
+    echo -n (git branch ^/dev/null | sed -n '/\* /s///p')
+    set_color $purple
+
+    if [ $fish_bind_mode = 'insert' ]
+        echo \n'> '
+    else
+        ecoo \n'< '
+    end
+end
+
+function pad_prompt \
+    --on-event fish_preexec \
+    --on-event fish_postexec
+    echo
+end

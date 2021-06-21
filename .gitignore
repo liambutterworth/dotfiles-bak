@@ -5,5 +5,5 @@ fish/conf.d
 fish/completions
 fish/fish_variables
 fish/functions
-nvim/autoload/plug.vim
-nvim/plugged
+vim/autoload/plug.vim
+vim/plugged
