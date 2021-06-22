@@ -1,8 +1,8 @@
-fg:#fbf1c7,
-bg:#282828,
-fg+:#fabd2f,
-bg+:#282828,
-info:#b8bb26,
-border:#282828,
-prompt:#83a598,
+fg:#fbf1c7
+bg:#282828
+fg+:#fabd2f
+bg+:#282828
+info:#b8bb26
+border:#282828
+prompt:#83a598
 pointer:#fb4934

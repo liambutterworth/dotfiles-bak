@@ -42,8 +42,9 @@ set shell=/bin/sh
 set spelllang=en_us
 set splitbelow splitright
 set tags=./.git/tags;
-set undofile undodir=~/.cache/nvim/undo//
+set undofile undodir=$XDG_CACHE_HOME/nvim/undo//
 set updatetime=100
+set viminfofile=$XDG_CACHE_HOME/vim/viminfo
 set wildmenu wildignorecase wildmode=full
 
 let &helpheight = &lines / 2

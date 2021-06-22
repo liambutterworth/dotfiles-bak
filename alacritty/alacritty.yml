@@ -22,8 +22,8 @@ background_opacity: 0.99
 # Bindings
 #
 
-key_bindings:
-  - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
+# key_bindings:
+#   - { key: Return, mods: Command, action: ToggleSimpleFullscreen }
 
 #
 # Colors
@@ -77,7 +77,7 @@ debug:
 #
 
 font:
-  size: 16
+  size: 14
   normal:
     family: Source Code Pro
     style: Light

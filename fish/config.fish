@@ -93,11 +93,15 @@ set -g fish_pager_color_secondary $bg3
 set -gx TERM "xterm-256color"
 set -gx EDITOR "vim"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
-set -gx MYVIMRC "$XDG_CONFIG_HOME/vim/vimrc"
+set -gx FISH_CONFIG "$XDG_CONFIG_HOME/fish"
+set -gx VIM_CONFIG "$XDG_CONFIG_HOME/vim"
+set -gx MYVIMRC "$VIM_CONFIG/vimrc"
 set -gx VIMINIT "source $MYVIMRC"
-set -gx VIMDOTDIR "$XDG_CONFIG_HOME/vim"
-set -gx FZF_COLOR (cat ~/.config/fish/fzfcolors)
+set -gx VIMDOTDIR "$VIM_CONFIG"
+set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
+set -gx FZF_COLORS (cat $FISH_CONFIG/fzfcolors | sed "\$!s/\$/,/" | tr -d '\n')
 set -gx FZF_ALT_C_COMMAND "find -type d"
 set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
 set -gx FZF_CTRL_T_COMMAND "find -type f"
@@ -105,10 +109,10 @@ set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
 
-eval (dircolors -c ~/.config/fish/dircolors)
+eval (dircolors -c $FISH_CONFIG/dircolors)
 
-if test -e ~/.config/fish/profile.fish
-    source ~/.config/fish/profile.fish
+if test -e $FISH_CONFIG/profile.fish
+    source $FISH_CONFIG/profile.fish
 end
 
 #

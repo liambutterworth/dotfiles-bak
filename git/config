@@ -35,6 +35,6 @@
     templatedir = ~/.config/git/template
 [user]
     name = Liam Butterworth
-    email = liambutterworth@randallreilly.com
+    email = liambutterworth@protonmail.com
 [web]
     browser = chrome
