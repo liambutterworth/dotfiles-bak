@@ -26,15 +26,15 @@
     t = tag
     who = !git config user.name && git config user.email
 [core]
-    editor = nvim
+    editor = vim
 [credential]
     helper = cache --timeout=3600
 [diff]
-    tool = nvim -d
+    tool = vim -d
 [init]
     templatedir = ~/.config/git/template
-[user]
-    name = Liam Butterworth
-    email = liambutterworth@protonmail.com
 [web]
     browser = chrome
+[user]
+    name = Liam Butterworth
+	email = liambutterworth@protonmail.com

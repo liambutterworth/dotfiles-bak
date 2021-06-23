@@ -35,16 +35,16 @@ set noshowmode
 set noswapfile
 set number relativenumber
 set omnifunc=syntaxcomplete#Complete
-set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath^=$VIM_CONFIG,$VIM_CONFIG/ftplugin
 set signcolumn=yes
 set shortmess+=c
 set shell=/bin/sh
 set spelllang=en_us
 set splitbelow splitright
 set tags=./.git/tags;
-set undofile undodir=$XDG_CACHE_HOME/nvim/undo//
+set undofile undodir=$VIM_CACHE/undo//
 set updatetime=100
-set viminfofile=$XDG_CACHE_HOME/vim/viminfo
+set viminfofile=$VIM_CACHE/viminfo
 set wildmenu wildignorecase wildmode=full
 
 let &helpheight = &lines / 2
@@ -68,7 +68,7 @@ augroup settings
     autocmd FileType * setlocal formatoptions-=o
     autocmd BufLeave * let b:winview = winsaveview()
     autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
-    autocmd BufRead,BufNewFile ~/.dotfiles/git/config set filetype=gitconfig
+    autocmd BufRead,BufNewFile $GIT_CONFIG/config set filetype=gitconfig
 augroup end
 
 "
@@ -113,12 +113,15 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
 
+map <leader>* :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 "
 " Plugins
 "
 
-if filereadable(expand("$XDG_CONFIG_HOME/vim/autoload/plug.vim"))
-    call plug#begin("$XDG_CONFIG_HOME/vim/plugged")
+if filereadable(expand("$VIM_CONFIG/autoload/plug.vim"))
+    call plug#begin("$VIM_CONFIG/plugged")
 
     Plug 'airblade/vim-gitgutter'
     Plug 'cakebaker/scss-syntax.vim'
@@ -208,7 +211,7 @@ if exists('g:plugs') && has_key(g:plugs, 'php.vim')
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/nvim/ultisnips' ]
+    let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/vim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
