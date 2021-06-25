@@ -9,9 +9,7 @@
 " Settings
 "
 
-filetype plugin indent on
-syntax on
-
+set completeopt=menuone,noinsert,noselect
 set dictionary=/usr/share/dict/words
 set expandtab
 set foldenable
@@ -33,28 +31,25 @@ set noswapfile
 set number
 set omnifunc=syntaxcomplete#Complete
 set relativenumber
+set runtimepath+=$XDG_CONFIG_HOME/nvim/lua
 set signcolumn=yes
 set shiftwidth=4
+set shortmess+=c
 set smartcase
 set softtabstop=4
 set splitbelow
 set splitright
-set tags=./.git/tags;
 set undofile
 set wildignorecase wildmode=full
 
 let &helpheight = &lines / 2
 let &previewheight = &lines / 2
 let g:mapleader = "\<space>"
-let g:netrw_altfile = 1
-let g:netrw_altv = 1
-let g:netrw_dirhistmax = 0
-let g:netrw_fastbrowse = 0
-let g:netrw_winsize = 20
 let g:vim_indent_cont = &shiftwidth
 
 if exists('+termguicolors')
     set termguicolors
+
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
@@ -62,9 +57,6 @@ endif
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
-    autocmd BufLeave * let b:winview = winsaveview()
-    autocmd BufEnter * if (exists('b:winview')) | call winrestview(b:winview)
-    autocmd BufRead,BufNewFile $GIT_CONFIG/config set filetype=gitconfig
 augroup end
 
 "
@@ -109,6 +101,10 @@ nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
 
+map <leader>* :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 "
 " Plugins
 "
@@ -121,10 +117,11 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'georgewitteman/vim-fish'
     Plug 'gruvbox-community/gruvbox'
-    Plug 'junegunn/fzf', { 'do': './install --all --no-bash --no-zsh' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
     Plug 'jwalton512/vim-blade'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'pangloss/vim-javascript'
     Plug 'posva/vim-vue'
@@ -190,14 +187,15 @@ if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
     endif
 
     highlight CursorLineNr guibg=#282828
-    highlight GitGutterAdd guibg=#282828 guifg=#b8bb26
-    highlight GitGutterChange guibg=#282828 guifg=#fabd2f
-    highlight GitGutterDelete guibg=#282828 guifg=#fb4934
-    highlight GitGutterChangeDelete guibg=#282828 guifg=#fabd2f
     highlight Normal guibg=#282828
     highlight SignColumn guibg=#282828
     highlight VertSplit guibg=#3c3836
+    highlight Pmenu guibg=#3c3836
 endif
+
+if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
+    lua require 'lsp'
+end
 
 if exists('g:plugs') && has_key(g:plugs, 'php.vim')
     let php_var_selector_is_identifier = 1
@@ -270,6 +268,11 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     omap ac <plug>(GitGutterTextObjectOuterPending)
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
+
+    highlight GitGutterAdd guibg=#282828 guifg=#b8bb26
+    highlight GitGutterChange guibg=#282828 guifg=#fabd2f
+    highlight GitGutterDelete guibg=#282828 guifg=#fb4934
+    highlight GitGutterChangeDelete guibg=#282828 guifg=#fabd2f
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-javasript')

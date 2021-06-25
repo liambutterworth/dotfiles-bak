@@ -17,18 +17,15 @@ alias ls='ls --color=auto --group-directories-first'
 alias tree="tree -a -I '.git|.DS_Store|node_modules|vendor|functions|plugged'"
 
 alias a='php artisan'
-alias b='bash'
 alias c='composer'
 alias d='docker'
+alias e='nvim'
 alias dc='docker-compose'
 alias g='git'
 alias l='laravel'
-alias m='mysql'
-alias mc='mysql_config_editor'
 alias n='npm'
 alias r='source ~/.config/fish/config.fish'
 alias t='tmux'
-alias v='vim'
 
 #
 # Bindings
@@ -91,18 +88,12 @@ set -g fish_pager_color_secondary $bg3
 #
 
 set -gx TERM "xterm-256color"
-set -gx EDITOR "vim"
+set -gx EDITOR "nvim"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
-set -gx FISH_CONFIG "$XDG_CONFIG_HOME/fish"
-#set -gx VIM_CONFIG "$XDG_CONFIG_HOME/vim"
-#set -gx VIM_CACHE "$XDG_CACHE_HOME/vim"
-#set -gx MYVIMRC "$VIM_CONFIG/vimrc"
-#set -gx VIMINIT "source $MYVIMRC"
-#set -gx VIMDOTDIR "$VIM_CONFIG"
 set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
-set -gx FZF_COLORS (cat $FISH_CONFIG/fzfcolors | sed "\$!s/\$/,/" | tr -d '\n')
+set -gx FZF_COLORS (cat $XDG_CONFIG_HOME/fish/fzfcolors | sed "\$!s/\$/,/" | tr -d '\n')
 set -gx FZF_ALT_C_COMMAND "find -type d"
 set -gx FZF_ALT_C_OPTS "--preview 'ls -A {}'"
 set -gx FZF_CTRL_T_COMMAND "find -type f"
@@ -110,10 +101,10 @@ set -gx FZF_CTRL_T_OPTS "--preview 'cat {}'"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS"
 set -gx FZF_TMUX 1
 
-eval (dircolors -c $FISH_CONFIG/dircolors)
+eval (dircolors -c $XDG_CONFIG_HOME/fish/dircolors)
 
-if test -e $FISH_CONFIG/profile.fish
-    source $FISH_CONFIG/profile.fish
+if test -e $XDG_CONFIG_HOME/fish/profile.fish
+    source $XDG_CONFIG_HOME/fish/profile.fish
 end
 
 #

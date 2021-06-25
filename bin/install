@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir -p ~/.config ~/.cache/vim/undo
+mkdir ~/.config
 
 ln -sf ~/.dotfiles/{alacritty,awesome,docker,fish,git,tmux,vim} ~/.config
 
