@@ -4,5 +4,5 @@ docker/.token_seed*
 fish/fish_variables
 fish/functions
 fish/profile.fish
-vim/autoload/plug.vim
-vim/plugged
+nvim/autoload/plug.vim
+nvim/plugged
