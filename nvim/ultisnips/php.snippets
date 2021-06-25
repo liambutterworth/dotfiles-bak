@@ -1,0 +1,113 @@
+#
+# PHP Snippets
+#
+
+snippet ? "php tags" b
+<?php
+
+$0
+endsnippet
+
+snippet ?? "php tags with closing tag" b
+<?php
+    ${0:${VISUAL}}
+?>
+endsnippet
+
+snippet / "inline doc block" b
+/** $0 */
+endsnippet
+
+post_expand "vim.command('let b:PHP_InsideMultilineComment = 1')"
+snippet // "doc block" b
+/**
+ * $0
+ */
+endsnippet
+
+snippet d "dump" b
+dump($0);
+endsnippet
+
+snippet dd "die and dump" b
+dd($0);
+endsnippet
+
+snippet fun "function" b
+function ${1:name}($2) {
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pub "public method" b
+public function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pro "protected method" b
+protected function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pri "private method" b
+private function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pubs "public static method" b
+public static function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pros "protected static method" b
+protected static function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet pris "private static method" b
+private static function ${1:name}($2)
+{
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet name "description" b
+foreach ($status as $indexStatus) {
+
+}
+endsnippet
+
+snippet if "conditional" b
+if ($1) {
+    ${2:${VISUAL}}
+}
+endsnippet
+
+snippet for "for loop" b
+for (${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+snippet scope "laravel scope" b
+public function scope${1:Name}(Builder $query): Builder
+{
+    return $query->${2:CLAUSE};
+}
+endsnippet
+
+snippet (fun "closure function" i
+(function($1) {
+    ${0:${VISUAL}}
+});
+endsnippet

@@ -1,0 +1,43 @@
+#
+# Blade Snippets
+#
+
+extends html
+
+snippet !! "unescaped output" i
+{!! ${0:${VISUAL}} !!}
+endsnippet
+
+snippet @ "blade inline direction" b
+@${1:extends}('$2')
+endsnippet
+
+snippet @@ "blade block directive" b
+@${1:section}($2)
+    ${3:${VISUAL}}
+@end${1/^([a-zA-Z\-]*)\s*.*/$1/}
+endsnippet
+
+snippet for "@for" b
+@for (${1:$${2:i}=${3:1}; $$2<=${4:3}; $$2${5:++}})
+    ${0:${VISUAL}}
+@endfor
+endsnippet
+
+snippet foreach "@foreach" b
+@foreach ($1)
+    ${0:${VISUAL}}
+@endforeach
+endsnippet
+
+snippet if "@if" b
+@if ($1)
+    ${0:${VISUAL}}
+@endif
+endsnippet
+
+snippet error "@error" b
+@error ($1)
+    ${0:${VISUAL}}
+@enderror
+endsnippet

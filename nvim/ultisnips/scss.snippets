@@ -1,0 +1,15 @@
+#
+# SCSS Snippets
+#
+
+extends css
+
+snippet @ "inline sass directive" b
+@${1:include} ${2:name};
+endsnippet
+
+snippet @@ "sass block directive" b
+@${1:mixin} ${2:name} {
+    ${3:${VISUAL}}
+}
+endsnippet

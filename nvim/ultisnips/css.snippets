@@ -1,0 +1,230 @@
+#
+# CSS Snippets
+#
+# :: Comments
+# :: Selectors
+# :: Properties
+# :: Font Face
+# :: Media Queries
+
+#
+# Comments
+#
+
+snippet / "comment inline"
+/** ${0:${VISUAL}} */
+endsnippet
+
+snippet // "comment block"
+/**
+ * ${0:${VISUAL}}
+ */
+endsnippet
+
+#
+# Selectors
+#
+
+snippet :a ":after" i
+::after
+endsnippet
+
+snippet :b ":before" i
+::before
+endsnippet
+
+snippet :fc ":first-child" i
+:first-child
+endsnippet
+
+snippet :lc ":last-child" i
+:last-child
+endsnippet
+
+snippet :nc ":nth-child" i
+:nth-child(
+endsnippet
+
+snippet :nlc "nth-last-child" i
+:nth-last-child(
+endsnippet
+
+snippet :oc ":only-child" i
+:only-child
+endsnippet
+
+#
+# Properties
+#
+
+snippet : "property"
+${1:property}: ${2:value};
+endsnippet
+
+snippet ! "!important"
+!important
+endsnippet
+
+snippet b "border"
+border: $1;
+endsnippet
+
+snippet bt "border-top"
+border-top: ${1:none};
+endsnippet
+
+snippet br "border-right"
+border-right: ${1:none};
+endsnippet
+
+snippet bb "border-bottom"
+border-bottom: ${1:none};
+endsnippet
+
+snippet bl "border-left"
+border-left: ${1:none}
+endsnippet
+
+snippet bg "background"
+background: ${1:${2:#fff} ${3:url(${4:path})} ${5:top/left} ${6:no-repeat}};
+endsnippet
+
+snippet bgc "background-color"
+background-color: ${1:#fff};
+endsnippet
+
+snippet bgi "background-image"
+background-image: url(${1:path});
+endsnippet
+
+snippet bgr "background-repeat"
+background-repeat: ${1:no-repeat};
+endsnippet
+
+snippet bgp "background-position"
+background-position: ${1:top left};
+endsnippet
+
+snippet bsh "box-shadow: color-hex x y blur (text)"
+box-shadow: ${1:${2:offset-x} ${3:offset-y} ${4:blur} ${5:spread} ${6:color}};
+endsnippet
+
+snippet c "color"
+color: ${1:#000};
+endsnippet
+
+snippet d "display"
+display: ${1:none};
+endsnippet
+
+snippet f "float"
+float: ${1:left};
+endsnippet
+
+snippet ff "font-family"
+font-family: ${1:Helvetica, sans-serif};
+endsnippet
+
+snippet fs "font-size"
+font-style: ${1:100%};
+endsnippet
+
+snippet fw "font-weight"
+font-weight: ${1:bold};
+endsnippet
+
+snippet h "height"
+height: ${1:auto};
+endsnippet
+
+snippet m "margin"
+margin: ${1:0};
+endsnippet
+
+snippet mt "margin-top"
+margin-top: ${1:0};
+endsnippet
+
+snippet mr "margin-right"
+margin-right: ${1:0};
+endsnippet
+
+snippet mb "margin-bottom"
+margin-bottom: ${1:0};
+endsnippet
+
+snippet ml "margin-left"
+margin-left: ${1:0}
+endsnippet
+
+snippet p "padding"
+padding: $1;
+endsnippet
+
+snippet pr "padding-right"
+padding-right: ${1:0};
+endsnippet
+
+snippet pt "padding-top"
+padding-top: ${1:0};
+endsnippet
+
+snippet pr "padding-right"
+padding-right: ${1:0};
+endsnippet
+
+snippet pb "padding-bottom"
+padding-bottom: ${1:0};
+endsnippet
+
+snippet pl "padding-left"
+padding-left: ${1:0}
+endsnippet
+
+snippet pos "position"
+position: ${1:relative};
+endsnippet
+
+snippet ta "text-align"
+text-align: ${1:left};
+endsnippet
+
+snippet tt "text-transform"
+text-transform: ${1:none};
+endsnippet
+
+snippet tsh "text-shadow: color-hex x y blur (text)"
+text-shadow: ${1:${2:color} ${3:offset-x} ${4:offset-y} ${5:blur}};
+endsnippet
+
+snippet w "width"
+width: ${1:auto};
+endsnippet
+
+snippet z "z-index"
+z-index: ${1:99};
+endsnippet
+
+#
+# Font Face
+#
+
+snippet @ff "@font-face"
+@font-face {
+    font-family: ${1:'font'};
+    src: url('${2:file}.${3:woff2}') format('$3');
+         url('$2.${4:woff}') format('$4');
+    font-weight: ${5:normal};
+    font-style: ${6:normal};
+}
+endsnippet
+
+#
+# Media Queries
+#
+
+snippet @mq "@media-query"
+@media ${1:screen} and (${2:max-width}: ${3:600px}) {
+    ${4:${VISUAL}}
+}
+endsnippet

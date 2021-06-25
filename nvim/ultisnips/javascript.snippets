@@ -1,0 +1,83 @@
+#
+# JS Snippets
+#
+
+snippet / "inline doc block" b
+/** $0 */
+endsnippet
+
+snippet // "doc block" b
+/**
+ * $0
+ */
+endsnippet
+
+snippet log "console log" b
+console.log(${0:${VISUAL}});
+endsnippet
+
+snippet new "new instance" b
+const ${1:class} = new ${1/\w+\s*/\u$0/}($3);
+endsnippet
+
+snippet class "class" b
+class ${1:Class} {
+    $2
+}
+
+export default $1;
+endsnippet
+
+snippet con "constructor" b
+constructor($1) {
+    $2
+}
+endsnippet
+
+snippet imp "import" b
+import ${1:Name} from '${2:./}${1/\w+\s*/\u$0/}';
+endsnippet
+
+snippet fun "function" w
+function ${1:name}($2) {
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet (fun "function callback" i
+(function($1) {
+    ${2:${VISUAL}}
+}$0);
+endsnippet
+
+snippet (fun) "immediately invoked function" b
+(function(${1:window}) {
+    ${2:${VISUAL}}
+}($3));
+endsnippet
+
+snippet if "conditional" b
+if ($1) {
+    ${2:${VISUAL}}
+}
+endsnippet
+
+snippet for "for loop" b
+for (${1:${2:i}=${3:1}; $2<=${4:3}; $2${5:++}}) {
+    ${0:${VISUAL}}
+}
+endsnippet
+
+snippet sw "switch" b
+switch ($1) {
+    case $2:
+        ${3:${VISUAL}}
+        break;
+}
+endsnippet
+
+snippet ca "case" b
+case $1:
+    ${2:${VISUAL}}
+    break;
+endsnippet
