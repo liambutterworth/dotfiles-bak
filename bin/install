@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir ~/.config
+mkdir -p ~/.config
 
 ln -sf ~/.dotfiles/{alacritty,awesome,docker,fish,git,tmux,vim} ~/.config
 
