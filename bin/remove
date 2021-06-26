@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rm -rf ~/.config/{alacritty,docker,git,fish,nvim,tmux} ~/.cache/nvim
+rm ~/.config/{alacritty,awesome,docker,git,fish,nvim,tmux}
