@@ -87,10 +87,11 @@ set -g fish_pager_color_secondary $bg3
 # Exports
 #
 
-# set -gx TERM "xterm-256color"
 set -gx EDITOR "nvim"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
 set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
 set -gx FZF_COLORS (cat $XDG_CONFIG_HOME/fish/fzfcolors | sed "\$!s/\$/,/" | tr -d '\n')
