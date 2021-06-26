@@ -61,8 +61,8 @@ colors:
 #
 
 cursor:
-  style: Block
-  unfocused_hollow: true
+  style:
+    blinking: Never
 
 #
 # Debug
@@ -80,7 +80,7 @@ debug:
 #
 
 font:
-  size: 16
+  size: 14
   normal:
     family: Source Code Pro
     style: Light

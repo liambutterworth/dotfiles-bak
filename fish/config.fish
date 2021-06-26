@@ -87,7 +87,7 @@ set -g fish_pager_color_secondary $bg3
 # Exports
 #
 
-set -gx TERM "xterm-256color"
+# set -gx TERM "xterm-256color"
 set -gx EDITOR "nvim"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"

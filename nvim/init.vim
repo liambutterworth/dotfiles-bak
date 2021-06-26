@@ -45,6 +45,8 @@ set wildignorecase wildmode=full
 let &helpheight = &lines / 2
 let &previewheight = &lines / 2
 let g:mapleader = "\<space>"
+let g:netrw_dirhistmax = 0
+let g:python3_host_prog = $PYTHON3_HOST_PROG
 let g:vim_indent_cont = &shiftwidth
 
 if exists('+termguicolors')
@@ -180,7 +182,7 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-easy-align')
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
-    colorscheme gruvbox
+    silent! colorscheme gruvbox
 
     if exists('g:fzf_colors')
         unlet g:fzf_colors
@@ -202,7 +204,7 @@ if exists('g:plugs') && has_key(g:plugs, 'php.vim')
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [ $HOME . '/.config/vim/ultisnips' ]
+    let g:UltiSnipsSnippetDirectories = [ $XDG_CONFIG_HOME . '/nvim/ultisnips' ]
     let g:UltiSnipsExpandTrigger = '<tab>'
     let g:UltiSnipsJumpForwardTrigger = '<c-j>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
