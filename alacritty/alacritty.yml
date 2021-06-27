@@ -81,7 +81,7 @@ debug:
 #
 
 font:
-  size: 14
+  size: 15
   normal:
     family: Source Code Pro
     style: Light

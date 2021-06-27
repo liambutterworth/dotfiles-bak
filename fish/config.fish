@@ -120,20 +120,17 @@ function fish_vi_cursor; end
 
 function fish_prompt
     set_color $blue
-    echo -n (prompt_pwd)' '
+    printf '%-1s' (dirs)
     set_color $bg3
-    echo -n (git branch ^/dev/null | sed -n '/\* /s///p')
+    printf (git branch ^/dev/null | sed -n '/\* /s///p')
     set_color $purple
 
-    if [ $fish_bind_mode = 'insert' ]
-        echo \n'> '
-    else
-        echo \n'< '
-    end
+    printf '\n\033[1m%-2s\033[0m' (switch $fish_bind_mode
+        case default; echo \U276E
+        case insert;  echo \U276F
+    end)
 end
 
-function pad_prompt \
-    --on-event fish_preexec \
-    --on-event fish_postexec
+function pad_prompt -e fish_preexec -e fish_postexec
     echo
 end
