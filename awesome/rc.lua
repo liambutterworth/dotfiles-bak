@@ -9,7 +9,8 @@
 -- :: Key Bindings
 -- :: Rules
 -- :: Signals
--- :: Custom
+-- :: Theme
+-- :: Autostart
 
 pcall(require, "luarocks.loader")
 
@@ -62,7 +63,11 @@ end
 -- Variable Definitions
 --
 
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init('~/.config/awesome/themes/default/theme.lua')
+-- beautiful.init(os.getenv('XDG_CONFIG_HOME') .. '/awesome/themes/default/theme.lua')
+
+-- print(os.getenv('XDG_CONFIG_HOME'))
 
 terminal = "alacritty"
 editor = "nvim"
@@ -433,12 +438,18 @@ globalkeys = gears.table.join(
         group = "client"
     }),
 
-    -- TODO enable dmenu instead?
-    awful.key({ modkey }, "r", function ()
-        awful.screen.focused().mypromptbox:run()
+    awful.key({ modkey }, "space", function ()
+        awful.spawn.with_shell('rofi -show run')
     end, {
         description = "run prompt",
         group = "launcher"
+    }),
+
+    awful.key({ modkey }, "BackSpace", function ()
+        awful.spawn.with_shell('rofi -show window')
+    end, {
+        description = 'go-to window',
+        group = 'launcher'
     }),
 
     awful.key({ modkey }, "x", function ()
@@ -612,13 +623,6 @@ root.keys(globalkeys)
 --
 
 awful.rules.rules = {
-    -- {
-    --     rule = {
-    --         class = 'alacritty',
-    --         properties = { opacity = 1 }
-    --     },
-    -- },
-
     {
         properties = {
             border_width = beautiful.border_width,
@@ -630,9 +634,7 @@ awful.rules.rules = {
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen
         }
-    },
-
-    {
+    }, {
         rule_any = {
             instance = {
                 "DTA", -- Firefox addon DownThemAll.
@@ -667,9 +669,7 @@ awful.rules.rules = {
       properties = {
           floating = true
       }
-  },
-
-  {
+  }, {
       rule_any = {
           type = {
               "normal",
@@ -738,10 +738,9 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
--- TODO disable/remove sloppy focus
--- client.connect_signal("mouse::enter", function(c)
---     c:emit_signal("request::activate", "mouse_enter", {raise = false})
--- end)
+client.connect_signal("mouse::enter", function(c)
+    c:emit_signal("request::activate", "mouse_enter", { raise = false })
+end)
 
 client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
@@ -752,10 +751,15 @@ client.connect_signal("unfocus", function(c)
 end)
 
 --
--- Custom
+-- Theme
 --
 
 beautiful.useless_gap = 5
+-- beautiful.font = "Source Code Pro 15"
+
+--
+-- Autostart
+--
 
 awful.spawn.with_shell('picom')
-awful.spawn.with_shell('nitrogen --restore')
+awful.spawn.with_shell('nitrogen --restore ~/Pictures/wallpapers')

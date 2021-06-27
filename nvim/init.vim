@@ -12,11 +12,13 @@
 set completeopt=menuone,noinsert,noselect
 set dictionary=/usr/share/dict/words
 set expandtab
+set fillchars+=vert:\ 
 set foldenable
 set foldmethod=indent
 set foldlevelstart=10
 set hidden
 set ignorecase
+set laststatus=0
 set lazyredraw
 set list
 set listchars=tab:│\ ,trail:·
@@ -115,10 +117,11 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
 
     Plug 'airblade/vim-gitgutter'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'cakebaker/scss-syntax.vim'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'georgewitteman/vim-fish'
-    Plug 'gruvbox-community/gruvbox'
+    " Plug 'gruvbox-community/gruvbox'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
@@ -130,13 +133,14 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     Plug 'preservim/nerdtree'
     Plug 'sirver/ultisnips'
     Plug 'stanangeloff/php.vim'
-    Plug 'tomtom/tcomment_vim'
+    " Plug 'tomtom/tcomment_vim'
+    Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
-    Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline'
 
     call plug#end()
 end
@@ -176,41 +180,29 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <leader>G :BLines<cr>
 endif
 
-if exists('g:plugs') && has_key(g:plugs, 'vim-easy-align')
-    nmap ga <Plug>(EasyAlign)
-    xmap ga <Plug>(EasyAlign)
-endif
-
-if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
-    silent! colorscheme gruvbox
-
-    if exists('g:fzf_colors')
-        unlet g:fzf_colors
-    endif
+if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
+    silent! colorscheme nord
 
     highlight CursorLineNr guibg=none
     highlight Normal guibg=none
     highlight SignColumn guibg=none
-    highlight VertSplit guibg=none
+    highlight VertSplit guibg=#3c3836
     highlight Pmenu guibg=#3c3836
-endif
-
-if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
-    lua require 'lsp'
 end
 
-if exists('g:plugs') && has_key(g:plugs, 'php.vim')
-    let php_var_selector_is_identifier = 1
-endif
-
-if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
-    let g:UltiSnipsSnippetDirectories = [ $XDG_CONFIG_HOME . '/nvim/ultisnips' ]
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-
-    nnoremap <s-tab> :UltiSnipsEdit<cr>
-endif
+" if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
+"     silent! colorscheme gruvbox
+"
+"     if exists('g:fzf_colors')
+"         unlet g:fzf_colors
+"     endif
+"
+"     highlight CursorLineNr guibg=none
+"     highlight Normal guibg=none
+"     highlight SignColumn guibg=none
+"     highlight VertSplit guibg=#3c3836
+"     highlight Pmenu guibg=#3c3836
+" endif
 
 if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
     let g:NERDTreeWinSize = 35 
@@ -236,6 +228,23 @@ if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
         \ ) | q | endif
 endif
 
+if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
+    lua require 'lsp'
+end
+
+if exists('g:plugs') && has_key(g:plugs, 'php.vim')
+    let php_var_selector_is_identifier = 1
+endif
+
+if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
+    let g:UltiSnipsSnippetDirectories = [ $XDG_CONFIG_HOME . '/nvim/ultisnips' ]
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+
+    nnoremap <s-tab> :UltiSnipsEdit<cr>
+endif
+
 if exists('g:plugs') && has_key(g:plugs, 'vim-airline')
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
@@ -250,8 +259,13 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-airline')
     nnoremap <silent> <leader>r :so $MYVIMRC<cr>:AirlineToggle<cr>:AirlineToggle<cr>
 endif
 
+if exists('g:plugs') && has_key(g:plugs, 'vim-easy-align')
+    nmap ga <Plug>(EasyAlign)
+    xmap ga <Plug>(EasyAlign)
+endif
+
 if exists('g:plugs') && has_key(g:plugs, 'vim-fugitive')
-    nnoremap <silent> \\ :Gstatus<cr>
+    nnoremap <silent> \\ :Git<cr>
     nnoremap <silent> \b :Gblame<cr>
     nnoremap <silent> \c :Gcommit<cr>
     nnoremap <silent> \d :Ghdiffsplit<cr>

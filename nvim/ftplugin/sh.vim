@@ -1,3 +1,3 @@
-highlight link shVarAssign GruvboxOrange
+" highlight link shVarAssign GruvboxOrange
 " highlight link shVariable GruvboxAqua
-highlight link shQuote GruvboxGreen
+" highlight link shQuote GruvboxGreen

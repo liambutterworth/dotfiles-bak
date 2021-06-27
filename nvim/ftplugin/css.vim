@@ -1,12 +1,12 @@
-highlight link cssBorderProp GruvboxAqua
-highlight link cssBraces GruvboxOrange
-highlight link cssCascadeProp GruvboxFg1
-highlight link cssClassName GruvboxBlue
-highlight link cssClassNameDot GruvboxBlue
-highlight link cssColor GruvboxPurple
-highlight link cssIdentifier GruvboxBlue
-highlight link cssMediaProp GruvboxAqua
-highlight link cssPositioningProp GruvboxAqua
-highlight link cssSelectorOp GruvboxOrange
-highlight link cssUIProp GruvboxAqua
-highlight link cssVendor GruvboxGreen
+" highlight link cssBorderProp GruvboxAqua
+" highlight link cssBraces GruvboxOrange
+" highlight link cssCascadeProp GruvboxFg1
+" highlight link cssClassName GruvboxBlue
+" highlight link cssClassNameDot GruvboxBlue
+" highlight link cssColor GruvboxPurple
+" highlight link cssIdentifier GruvboxBlue
+" highlight link cssMediaProp GruvboxAqua
+" highlight link cssPositioningProp GruvboxAqua
+" highlight link cssSelectorOp GruvboxOrange
+" highlight link cssUIProp GruvboxAqua
+" highlight link cssVendor GruvboxGreen
