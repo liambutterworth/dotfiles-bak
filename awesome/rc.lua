@@ -65,24 +65,27 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
+editor = "nvim"
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4"
 
 awful.layout.layouts = {
-    awful.layout.suit.floating,
+    -- awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.se,
+    -- awful.layout.suit.corner.sw,
 }
 
 --
@@ -430,6 +433,7 @@ globalkeys = gears.table.join(
         group = "client"
     }),
 
+    -- TODO enable dmenu instead?
     awful.key({ modkey }, "r", function ()
         awful.screen.focused().mypromptbox:run()
     end, {
@@ -669,7 +673,7 @@ awful.rules.rules = {
       },
 
       properties = {
-          titlebars_enabled = true
+          -- titlebars_enabled = true
       }
   },
 }
@@ -729,9 +733,10 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+-- TODO disable/remove sloppy focus
+-- client.connect_signal("mouse::enter", function(c)
+--     c:emit_signal("request::activate", "mouse_enter", {raise = false})
+-- end)
 
 client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
@@ -745,4 +750,4 @@ end)
 -- Custom
 --
 
-beautiful.useless_gap = 5
+beautiful.useless_gap = 10
