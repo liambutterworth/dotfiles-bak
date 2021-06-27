@@ -612,9 +612,14 @@ root.keys(globalkeys)
 --
 
 awful.rules.rules = {
-    {
-        rule = {},
+    -- {
+    --     rule = {
+    --         class = 'alacritty',
+    --         properties = { opacity = 1 }
+    --     },
+    -- },
 
+    {
         properties = {
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
@@ -750,4 +755,7 @@ end)
 -- Custom
 --
 
-beautiful.useless_gap = 10
+beautiful.useless_gap = 5
+
+awful.spawn.with_shell('picom')
+awful.spawn.with_shell('nitrogen --restore')

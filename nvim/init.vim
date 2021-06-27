@@ -188,10 +188,10 @@ if exists('g:plugs') && has_key(g:plugs, 'gruvbox')
         unlet g:fzf_colors
     endif
 
-    highlight CursorLineNr guibg=#282828
-    highlight Normal guibg=#282828
-    highlight SignColumn guibg=#282828
-    highlight VertSplit guibg=#3c3836
+    highlight CursorLineNr guibg=none
+    highlight Normal guibg=none
+    highlight SignColumn guibg=none
+    highlight VertSplit guibg=none
     highlight Pmenu guibg=#3c3836
 endif
 
@@ -271,10 +271,10 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
 
-    highlight GitGutterAdd guibg=#282828 guifg=#b8bb26
-    highlight GitGutterChange guibg=#282828 guifg=#fabd2f
-    highlight GitGutterDelete guibg=#282828 guifg=#fb4934
-    highlight GitGutterChangeDelete guibg=#282828 guifg=#fabd2f
+    highlight GitGutterAdd guibg=none guifg=#b8bb26
+    highlight GitGutterChange guibg=none guifg=#fabd2f
+    highlight GitGutterDelete guibg=none guifg=#fb4934
+    highlight GitGutterChangeDelete guibg=none guifg=#fabd2f
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-javasript')

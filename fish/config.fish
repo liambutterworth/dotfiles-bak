@@ -120,7 +120,7 @@ function fish_vi_cursor; end
 
 function fish_prompt
     set_color $blue
-    printf '%-1s' (dirs)
+    printf '\033[1m%-1s\033[0m' (dirs)
     set_color $bg3
     printf (git branch ^/dev/null | sed -n '/\* /s///p')
     set_color $purple
