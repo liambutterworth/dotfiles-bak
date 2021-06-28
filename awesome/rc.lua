@@ -77,15 +77,15 @@ modkey = "Mod4"
 awful.layout.layouts = {
     -- awful.layout.suit.floating,
     awful.layout.suit.tile,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.left,
+    awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
-    -- awful.layout.suit.max.fullscreen,
+    awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.nw,
@@ -310,6 +310,8 @@ globalkeys = gears.table.join(
         group = "awesome"
     }),
 
+    awful.key({ modkey }, "o", awful.client.movetoscreen),
+
     awful.key({ modkey, "Shift" }, "j", function ()
         awful.client.swap.byidx(1)
     end, {
@@ -409,8 +411,8 @@ globalkeys = gears.table.join(
         group = "layout"
     }),
 
-    awful.key({ modkey }, "space", function ()
-        awful.layout.inc( 1)
+    awful.key({ modkey, "Shift" }, "l", function ()
+        awful.layout.inc(1)
     end, {
         description = "select next",
         group = "layout"
@@ -462,14 +464,14 @@ globalkeys = gears.table.join(
     end, {
         description = "lua execute prompt",
         group = "awesome"
-    }),
-
-    awful.key({ modkey }, "p", function()
-        menubar.show()
-    end, {
-        description = "show the menubar",
-        group = "launcher"
     })
+
+    -- awful.key({ modkey }, "p", function()
+    --     menubar.show()
+    -- end, {
+    --     description = "show the menubar",
+    --     group = "launcher"
+    -- })
 )
 
 clientkeys = gears.table.join(

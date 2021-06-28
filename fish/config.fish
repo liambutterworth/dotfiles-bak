@@ -3,7 +3,6 @@
 #
 # :: Aliases
 # :: Bindings
-# :: Colors
 # :: Exports
 # :: Prompt
 
@@ -35,33 +34,6 @@ bind -M insert \cn history-search-forward
 bind -M insert \cg fzf-cd-widget
 
 #
-# Colors
-#
-
-set -g fish_color_normal white
-set -g fish_color_command green
-set -g fish_color_quote yellow
-set -g fish_color_redirection yellow
-set -g fish_color_end yellow
-set -g fish_color_error red
-set -g fish_color_param white
-set -g fish_color_comment grey
-set -g fish_color_match yellow
-set -g fish_color_search_match black
-set -g fish_color_operator cyan
-set -g fish_color_escape cyan
-set -g fish_color_cwd grey
-set -g fish_color_autosuggestion grey
-set -g fish_color_user grey
-set -g fish_color_host grey
-set -g fish_color_cancel red
-set -g fish_pager_color_prefix white
-set -g fish_pager_color_completion white
-set -g fish_pager_color_description white
-set -g fish_pager_color_progress yellow
-set -g fish_pager_color_secondary grey
-
-#
 # Exports
 #
 
@@ -77,7 +49,7 @@ set FZF_COLORS (string join ',' \
     "hl+:green" \
     "marker:green" \
     "pointer:magenta" \
-    "prompt:magenta" \
+    "prompt:blue" \
     "spinner:cyan" \
 )
 
@@ -102,6 +74,11 @@ end
 
 fish_vi_key_bindings
 
+set -g fish_color_command green
+set -g fish_color_quote yellow
+set -g fish_color_escape cyan
+set -g fish_color_autosuggestion brblack
+
 function fish_greeting; end
 function fish_mode_prompt; end
 function fish_vi_cursor; end
@@ -111,7 +88,7 @@ function fish_prompt
 
     printf '\033[1m%s\033[0m' (dirs)
 
-    set_color 616e88
+    set_color brblack
 
     printf ' %s@%s %s' \
         (whoami) \

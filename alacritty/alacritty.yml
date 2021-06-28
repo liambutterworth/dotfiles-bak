@@ -44,7 +44,7 @@ colors:
     cyan: '#88c0d0'
     white: '#e5e9f0'
   bright:
-    black: '#4c566a'
+    black: '#616e88' #4c566a
     red: '#bf616a'
     green: '#a3be8c'
     yellow: '#ebcb8b'
@@ -52,6 +52,9 @@ colors:
     magenta: '#b48ead'
     cyan: '#8fbcbb'
     white: '#eceff4'
+  indexed_colors:
+    - { index: 16, color: '#242831' }
+    - { index: 17, color: '#616e88' }
 
 #
 # Cursor
@@ -79,16 +82,16 @@ debug:
 font:
   size: 15
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Light
   bold:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Regular
   italic:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Light Italic
   bold_italic:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Italic
   offset:
     x: 0
