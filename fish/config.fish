@@ -10,14 +10,9 @@
 # Aliases
 #
 
-alias grep='grep --color=auto --exclude-dir={.git,node_modules,vendor}'
-alias less='less --clear-screen --raw-control-chars'
-alias ls='ls --color=auto --group-directories-first'
-alias tree="tree -a -I '.git|.DS_Store|node_modules|vendor|functions|plugged'"
-
+alias c='docker-compose'
 alias d='docker'
 alias e='nvim'
-alias dc='docker-compose'
 alias g='git'
 alias n='npm'
 alias r='source ~/.config/fish/config.fish'
@@ -59,7 +54,7 @@ set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
 set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
-set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --preview-window noborder"
+set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --no-preview"
 set -gx FZF_TMUX 1
 
 eval (dircolors -c $XDG_CONFIG_HOME/fish/dircolors)

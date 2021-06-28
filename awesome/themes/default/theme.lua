@@ -9,7 +9,7 @@ local dpi = xresources.apply_dpi
 local themes_path = '~/.config/awesome/themes'
 
 local theme = {
-    font = "Source Code Pro 15"
+    font = "Source Sans 14"
 }
 
 theme.bg_normal     = "#222222"

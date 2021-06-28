@@ -46,16 +46,22 @@ set termguicolors
 set undofile
 set wildignorecase wildmode=full
 
-let g:netrw_dirhistmax = 0
-let g:netrw_fastbrowse = 0
+let &helpheight = &lines / 2
+let &previewheight = &lines / 2
+let g:loaded_netrw = 0
+let g:mapleader = "\<space>"
 let g:python3_host_prog = $PYTHON3_HOST_PROG
 let g:vim_indent_cont = &shiftwidth
+
+augroup settings
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=o
+augroup end
 
 "
 " Mappings
 "
 
-nnoremap <bs> <c-^>
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
@@ -66,8 +72,19 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 nnoremap gQ mmgggq`m
-nnoremap gs yiw:%s/<c-r>"//g<left><left>
-xnoremap gs y:%s/<c-r>"//g<left><left>
+nnoremap <bs> <c-^><c-g>
+nnoremap <silent> <leader>r :so $MYVIMRC<cr>
+nnoremap <silent> <leader>w :write<cr>
+nnoremap <silent> <leader>q :call close#smart()<cr>
+nnoremap <silent> <leader>Q :qa!<cr>
+nnoremap <silent> <leader>o :only<cr>
+nnoremap <silent> <leader>s :split<cr>
+nnoremap <silent> <leader>v :vsplit<cr>
+nnoremap <silent> <leader>h 20<c-w>>
+nnoremap <silent> <leader>j 5<c-w>-
+nnoremap <silent> <leader>k 5<c-w>+
+nnoremap <silent> <leader>l 20<c-w><
+nnoremap <silent> <leader>* :lua print(vim.inspect(vim.treesitter.highlighter.hl_map))<cr>
 
 "
 " Plugins
@@ -76,12 +93,19 @@ xnoremap gs y:%s/<c-r>"//g<left><left>
 if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
 
+    " TODO watch for nord-vim PR for mrswats changes
+    " and replace with the original nord-vim
+
     Plug 'airblade/vim-gitgutter'
-    Plug 'arcticicestudio/nord-vim'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
+    Plug 'mrswats/nord-vim'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'preservim/nerdtree'
+    Plug 'ryanoasis/vim-devicons'
     Plug 'sirver/ultisnips'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-eunuch'
@@ -89,16 +113,6 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
-    Plug 'tpope/vim-vinegar'
-
-    " try and replace with tree sitter
-    Plug 'michaeljsmith/vim-indent-object'
-    Plug 'cakebaker/scss-syntax.vim'
-    Plug 'jwalton512/vim-blade'
-    Plug 'stanangeloff/php.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'posva/vim-vue'
-    Plug 'georgewitteman/vim-fish'
 
     call plug#end()
 end
@@ -117,7 +131,7 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
         \ call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
 
     command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+        \ call fzf#vim#files(<q-args>, <bang>0)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
@@ -147,18 +161,32 @@ if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
     highlight CursorLineNr guibg=none
     highlight Normal guibg=none
     highlight SignColumn guibg=none
-    highlight VertSplit guibg=none
-    highlight Pmenu guibg=none
-    highlight StatusLine guibg=none guifg=#e5e9f0
-    highlight StatusLineNc guibg=none guifg=#e5e9f0
+    highlight VertSplit guibg=#3b4252
+    highlight Pmenu guibg=#3b4252
+    highlight StatusLine guibg=#3b4252 guifg=#e5e9f0
+    highlight StatusLineNc guibg=#3b4252 guifg=#e5e9f0
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
     lua require 'lsp'
 end
 
-if exists('g:plugs') && has_key(g:plugs, 'php.vim')
-    let php_var_selector_is_identifier = 1
+if exists('g:plugs') && has_key(g:plugs, 'nvim-treesitter')
+    lua require 'treesitter'
+end
+
+if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
+    nnoremap <silent> <cr><cr> :NERDTreeToggle<cr>
+    nnoremap <silent> <cr>c :NERDTreeClose<cr>
+    nnoremap <silent> <cr>r :NERDTreeRefreshRoot<cr>
+
+    nnoremap <expr> <cr>w exists('b:NERDTree')
+        \ ? '<c-w><c-p>'
+        \ : ':NERDTreeFocus'
+
+    nnoremap <expr> <cr>f exists('b:NERDTree')
+        \ ? '<c-w><c-p>:NERDTreeFind<cr>'
+        \ : ':NERDTreeFind<cr>'
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'ultisnips')
@@ -201,7 +229,3 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     highlight GitGutterDelete guibg=none guifg=#fb4934
     highlight GitGutterChangeDelete guibg=none guifg=#fabd2f
 endif
-
-if exists('g:plugs') && has_key(g:plugs, 'vim-javasript')
-    let g:javascript_plugin_doc = 1
-end

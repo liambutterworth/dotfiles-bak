@@ -80,7 +80,7 @@ debug:
 #
 
 font:
-  size: 15
+  size: 16
   normal:
     family: SauceCodePro Nerd Font
     style: Light
@@ -96,9 +96,6 @@ font:
   offset:
     x: 0
     y: 8
-  glyph_offset:
-    x: 0
-    y: 4
 
 #
 # Mouse
