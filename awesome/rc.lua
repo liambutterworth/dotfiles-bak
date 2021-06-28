@@ -483,7 +483,7 @@ clientkeys = gears.table.join(
         group = "client"
     }),
 
-    awful.key({ modkey, "Shift" }, "c", function (c)
+    awful.key({ modkey, "Shift" }, "q", function (c)
         c:kill()
     end, {
         description = "close",
