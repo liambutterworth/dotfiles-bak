@@ -1,1 +1,9 @@
-Get "https://desktop.docker.com/compose-canary.json": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+{
+  "compose-versions" : {
+    "2.0.0-beta.4": {
+      "active-percentage": 0.1,
+      "include-pro-users": false,
+      "default": 0.00
+    }
+  }
+}

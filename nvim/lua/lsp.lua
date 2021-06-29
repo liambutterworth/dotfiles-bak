@@ -1,4 +1,5 @@
 local haslspconfig, lspconfig = pcall(require, 'lspconfig')
+local hascompe, compe = pcall(require, 'compe')
 
 if haslspconfig then
     local on_attach = function(client, bufnr)
@@ -18,9 +19,36 @@ if haslspconfig then
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         buf_set_keymap('n', '<c-k>', '<Cmd>lua vim.lsp.buf.hover({ border = "single" })<CR>', opts)
         buf_set_keymap('n', '<c-]>', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'ge', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     end
 
     lspconfig.intelephense.setup{
         on_attach = on_attach
+    }
+
+    compe.setup {
+        enabled = true;
+        autocomplete = true;
+        debug = false;
+        min_length = 1;
+        preselect = 'enable';
+        throttle_time = 80;
+        source_timeout = 200;
+        resolve_timeout = 800;
+        incomplete_delay = 400;
+        max_abbr_width = 100;
+        max_kind_width = 100;
+        max_menu_width = 100;
+        documentation = true;
+
+        source = {
+            path = true;
+            buffer = true;
+            calc = true;
+            nvim_lsp = true;
+            nvim_lua = true;
+            vsnip = true;
+            ultisnips = true;
+        };
     }
 end

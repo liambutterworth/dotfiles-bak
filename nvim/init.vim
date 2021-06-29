@@ -9,7 +9,7 @@
 " Settings
 "
 
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect
 set dictionary=/usr/share/dict/words
 set expandtab
 set fillchars+=vert:\ 
@@ -72,7 +72,7 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 nnoremap gQ mmgggq`m
-nnoremap <bs> <c-^><c-g>
+nnoremap <bs> <c-^>
 nnoremap <silent> <leader>r :so $MYVIMRC<cr>
 nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :call close#smart()<cr>
@@ -98,8 +98,11 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
 
     Plug 'airblade/vim-gitgutter'
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
+    Plug 'michaeljsmith/vim-indent-object'
     Plug 'mrswats/nord-vim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-treesitter/nvim-treesitter'
@@ -165,6 +168,19 @@ if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
     highlight Pmenu guibg=#3b4252
     highlight StatusLine guibg=#3b4252 guifg=#e5e9f0
     highlight StatusLineNc guibg=#3b4252 guifg=#e5e9f0
+
+    highlight LspDiagnosticsDefaultError guifg=#bf616a
+    highlight LspVirtualFloatingError guifg=#bf616a
+    highlight LspVirtualSignError guifg=#bf616a
+    highlight LspVirtualTextError guifg=#bf616a
+    highlight LspDiagnosticsDefaultWarning guifg=#ebcb8b
+    highlight LspVirtualFloatingWarning guifg=#ebcb8b
+    highlight LspVirtualSignWarning guifg=#ebcb8b
+    highlight LspVirtualTextWarning guifg=#ebcb8b
+    highlight LspDiagnosticsDefaultInformation guifg=#a3be8c
+    highlight LspVirtualFloatingInformation guifg=#a3be8c
+    highlight LspVirtualSignInformation guifg=#a3be8c
+    highlight LspVirtualTextInformation guifg=#a3be8c
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
@@ -223,9 +239,4 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     omap ac <plug>(GitGutterTextObjectOuterPending)
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
-
-    highlight GitGutterAdd guibg=none guifg=#b8bb26
-    highlight GitGutterChange guibg=none guifg=#fabd2f
-    highlight GitGutterDelete guibg=none guifg=#fb4934
-    highlight GitGutterChangeDelete guibg=none guifg=#fabd2f
 endif
