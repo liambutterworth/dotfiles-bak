@@ -74,24 +74,24 @@ fish_vi_key_bindings
 set -g fish_color_normal 009900
 set -g fish_color_end 009900
 set -g fish_color_comment 009900
-set -g fish_color_match 009900
-set -g fish_color_search_match 009900
 set -g fish_color_cwd 009900
 set -g fish_color_user 009900
 set -g fish_color_host 009900
 set -g fish_color_cancel 009900
-set -g fish_pager_color_description 009900
 set -g fish_pager_color_secondary 009900
 
 set -g fish_color_autosuggestion brblack
 set -g fish_color_command green
 set -g fish_color_error red
 set -g fish_color_escape cyan
+set -g fish_color_match green
 set -g fish_color_operator yellow
 set -g fish_color_param white
 set -g fish_color_quote yellow
 set -g fish_color_redirection yellow
+set -g fish_color_search_match green
 set -g fish_pager_color_completion white
+set -g fish_pager_color_description yellow
 set -g fish_pager_color_prefix green
 set -g fish_pager_color_progress yellow
 
