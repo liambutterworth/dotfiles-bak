@@ -69,7 +69,7 @@ debug:
 #
 
 font:
-  size: 16
+  size: 15
   normal:
     family: SauceCodePro Nerd Font
     style: Light
@@ -84,7 +84,7 @@ font:
     style: Italic
   offset:
     x: 0
-    y: 8
+    y: 5
 
 #
 # Mouse
