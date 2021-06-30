@@ -42,6 +42,7 @@ set smartcase
 set softtabstop=4
 set splitbelow
 set splitright
+set tags=./git/tags
 set termguicolors
 set undofile
 set wildignorecase wildmode=full
@@ -84,7 +85,9 @@ nnoremap <silent> <leader>h 20<c-w>>
 nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
-nnoremap <silent> <leader>* :lua print(vim.inspect(vim.treesitter.highlighter.hl_map))<cr>
+nnoremap <silent> <leader>* :TSHighlightCapturesUnderCursor<cr>
+nnoremap <silent> <leader>H :lua print(vim.inspect(vim.treesitter.highlighter.hl_map))<cr>
+nnoremap <silent> <leader>P :TSPlaygroundToggle<cr>
 
 "
 " Plugins
@@ -93,9 +96,6 @@ nnoremap <silent> <leader>* :lua print(vim.inspect(vim.treesitter.highlighter.hl
 if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
 
-    " TODO watch for nord-vim PR for mrswats changes
-    " and replace with the original nord-vim
-
     Plug 'airblade/vim-gitgutter'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'hrsh7th/nvim-compe'
@@ -103,14 +103,13 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
     Plug 'michaeljsmith/vim-indent-object'
-    Plug 'mrswats/nord-vim'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'sheerun/vim-polyglot'
     Plug 'preservim/nerdtree'
     Plug 'ryanoasis/vim-devicons'
     Plug 'sirver/ultisnips'
-    Plug 'tpope/vim-commentary'
+    Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-eunuch'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-repeat'
@@ -185,10 +184,6 @@ end
 
 if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
     lua require 'lsp'
-end
-
-if exists('g:plugs') && has_key(g:plugs, 'nvim-treesitter')
-    lua require 'treesitter'
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
