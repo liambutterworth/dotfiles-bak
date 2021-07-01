@@ -85,9 +85,6 @@ nnoremap <silent> <leader>h 20<c-w>>
 nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
-nnoremap <silent> <leader>* :TSHighlightCapturesUnderCursor<cr>
-nnoremap <silent> <leader>H :lua print(vim.inspect(vim.treesitter.highlighter.hl_map))<cr>
-nnoremap <silent> <leader>P :TSPlaygroundToggle<cr>
 
 "
 " Plugins
@@ -97,13 +94,13 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
 
     Plug 'airblade/vim-gitgutter'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'christoomey/vim-tmux-navigator'
     Plug 'hrsh7th/nvim-compe'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
     Plug 'michaeljsmith/vim-indent-object'
-    Plug 'arcticicestudio/nord-vim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'sheerun/vim-polyglot'
     Plug 'preservim/nerdtree'
@@ -126,11 +123,14 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_layout = { 'down': '40%' }
     let g:fzf_prefer_tmux = exists('$TMUX')
 
+    command! -bang Buffers
+        \ call fzf#vim#buffers({ 'options': '--no-preview' }, <bang>0)
+
     command! -bang Commits
-        \ call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
+        \ call fzf#vim#commits({ 'options': '--no-preview' }, <bang>0)
 
     command! -bang BCommits
-        \ call fzf#vim#commits({'options': '--no-preview'}, <bang>0)
+        \ call fzf#vim#commits({ 'options': '--no-preview' }, <bang>0)
 
     command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, <bang>0)
@@ -167,7 +167,6 @@ if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
     highlight Pmenu guibg=#3b4252
     highlight StatusLine guibg=#3b4252 guifg=#e5e9f0
     highlight StatusLineNc guibg=#3b4252 guifg=#e5e9f0
-
     highlight LspDiagnosticsDefaultError guifg=#bf616a
     highlight LspVirtualFloatingError guifg=#bf616a
     highlight LspVirtualSignError guifg=#bf616a

@@ -19,14 +19,18 @@ if haslspconfig then
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         buf_set_keymap('n', '<c-k>', '<cmd>lua vim.lsp.buf.hover({ border = "single" })<cr>', opts)
         buf_set_keymap('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-        buf_set_keymap('n', 'ge', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', opts)
+        buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>', opts)
+        buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+        buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     end
 
     lspconfig.intelephense.setup{
         on_attach = on_attach
     }
 
-    lspconfig.vuels.setup{}
+    lspconfig.vuels.setup{
+        on_attach = on_attach
+    }
 
     compe.setup {
         enabled = true;
