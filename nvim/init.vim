@@ -85,6 +85,8 @@ nnoremap <silent> <leader>h 20<c-w>>
 nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
+nnoremap <silent> <leader>H ::so $VIMRUNTIME/syntax/hitest.vim<cr>
+
 
 "
 " Plugins

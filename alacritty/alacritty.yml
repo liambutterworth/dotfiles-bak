@@ -2,6 +2,7 @@
 # Alacritty
 #
 # :: Globals
+# :: Bindings
 # :: Colors
 # :: Cursor
 # :: Debug
@@ -14,6 +15,13 @@
 #
 
 background_opacity: 0.96
+
+#
+# Bindings
+#
+
+# key_bindings:
+#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
 
 #
 # Colors

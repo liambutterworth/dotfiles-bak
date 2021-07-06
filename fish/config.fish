@@ -56,6 +56,8 @@ set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_STATE_HOME "$HOME/.local/state"
 set -gx DOCKER_CONFIG "$XDG_CONFIG_HOME/docker"
 set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
+set -gx FZF_DEFAULT_COMMAND "rg --files --hidden"
+set -gx FZF_CTRL_T_COMMAND "rg --files --hidden"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --no-preview"
 set -gx FZF_TMUX 1
 
