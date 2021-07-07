@@ -11,37 +11,26 @@
 
 set completeopt=menuone,noselect
 set dictionary=/usr/share/dict/words
-set expandtab
+set expandtab shiftwidth=4 softtabstop=4
 set fillchars+=vert:\ 
-set foldenable
-set foldmethod=indent
-set foldlevelstart=10
+set foldenable foldmethod=indent foldlevelstart=10
 set hidden
-set ignorecase
-set laststatus=0
-set lazyredraw
-set list
-set listchars=tab:│\ ,trail:·
+set ignorecase smartcase
+set laststatus=0 showtabline=0
+set list listchars=tab:│\ ,trail:·
 set mouse=n
-set nobackup
+set nobackup noswapfile nowritebackup
 set nohlsearch
 set nojoinspaces
 set nowrap
-set nowritebackup
 set noshowmode
-set noswapfile
-set number
+set number relativenumber
 set omnifunc=syntaxcomplete#Complete
-set relativenumber
 set runtimepath+=$XDG_CONFIG_HOME/nvim/lua
 set signcolumn=yes:1
-set shiftwidth=4
 set shortmess+=c
-set showtabline=0
-set smartcase
-set softtabstop=4
-set splitbelow
-set splitright
+set smartindent
+set splitbelow splitright
 set tags=./git/tags
 set termguicolors
 set undofile
@@ -52,7 +41,6 @@ let &previewheight = &lines / 2
 let g:loaded_netrw = 0
 let g:mapleader = "\<space>"
 let g:python3_host_prog = $PYTHON3_HOST_PROG
-let g:vim_indent_cont = &shiftwidth
 
 augroup settings
     autocmd!
@@ -63,6 +51,11 @@ augroup end
 " Mappings
 "
 
+nnoremap <bs> <c-^>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
@@ -73,7 +66,6 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 nnoremap gQ mmgggq`m
-nnoremap <bs> <c-^>
 nnoremap <silent> <leader>r :so $MYVIMRC<cr>
 nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :call close#smart()<cr>
@@ -91,20 +83,17 @@ nnoremap <silent> <leader>H ::so $VIMRUNTIME/syntax/hitest.vim<cr>
 "
 " Plugins
 "
-
-if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
-    call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
+if filereadable(expand("$XDG_DATA_HOME/nvim/site/autoload/plug.vim"))
+    call plug#begin()
 
     Plug 'airblade/vim-gitgutter'
     Plug 'arcticicestudio/nord-vim'
-    Plug 'christoomey/vim-tmux-navigator'
     Plug 'hrsh7th/nvim-compe'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/vim-easy-align',
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'neovim/nvim-lspconfig'
-    Plug 'sheerun/vim-polyglot'
     Plug 'preservim/nerdtree'
     Plug 'ryanoasis/vim-devicons'
     Plug 'sirver/ultisnips'
@@ -115,6 +104,11 @@ if filereadable(expand("$XDG_CONFIG_HOME/nvim/autoload/plug.vim"))
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
 
+    Plug 'sheerun/vim-polyglot'
+    " Plug 'windwp/nvim-autopairs'
+    " Plug 'windwp/nvim-ts-autotag'
+    " Plug 'nvim-treesitter/nvim-treesitter'
+
     call plug#end()
 end
 
@@ -122,8 +116,7 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     let g:fzf_action = { 'ctrl-t': 'tab split', 'ctrl-s': 'split', 'ctrl-v': 'vsplit' }
     let g:fzf_commits_log_format = '--format="%C(red)%h %C(white)%s %C(green)%cr %C(blue)%an"'
     let g:fzf_commits_log_options = '--graph --color=always ' . g:fzf_commits_log_format
-    let g:fzf_layout = { 'down': '40%' }
-    let g:fzf_prefer_tmux = exists('$TMUX')
+    let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'border': 'sharp' } }
 
     command! -bang Buffers
         \ call fzf#vim#buffers({ 'options': '--no-preview' }, <bang>0)
@@ -164,6 +157,7 @@ if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
 
     highlight CursorLineNr guibg=none
     highlight Normal guibg=none
+    highlight NonText guibg=none
     highlight SignColumn guibg=none
     highlight VertSplit guibg=#3b4252
     highlight Pmenu guibg=#3b4252
@@ -181,10 +175,6 @@ if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
     highlight LspVirtualFloatingInformation guifg=#a3be8c
     highlight LspVirtualSignInformation guifg=#a3be8c
     highlight LspVirtualTextInformation guifg=#a3be8c
-end
-
-if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
-    lua require 'lsp'
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
@@ -236,3 +226,5 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
     xmap ic <plug>(GitGutterTextObjectInnerVisual)
     xmap ac <plug>(GitGutterTextObjectInnerVisual)
 endif
+
+lua require 'setup'

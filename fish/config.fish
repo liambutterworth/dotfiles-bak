@@ -73,20 +73,20 @@ end
 
 fish_vi_key_bindings
 
-set -g fish_color_normal 009900
-set -g fish_color_end 009900
 set -g fish_color_comment 009900
 set -g fish_color_cwd 009900
 set -g fish_color_user 009900
 set -g fish_color_host 009900
-set -g fish_color_cancel 009900
 set -g fish_pager_color_secondary 009900
 
 set -g fish_color_autosuggestion brblack
+set -g fish_color_cancel red
 set -g fish_color_command green
+set -g fish_color_end yellow
 set -g fish_color_error red
 set -g fish_color_escape cyan
 set -g fish_color_match green
+set -g fish_color_normal red
 set -g fish_color_operator yellow
 set -g fish_color_param white
 set -g fish_color_quote yellow
@@ -112,6 +112,7 @@ function fish_prompt
 
     set_color magenta
 
+    # printf '\033[1m%-2s\033[0m' (switch $fish_bind_mode
     printf '\n\033[1m%-2s\033[0m' (switch $fish_bind_mode
         case default; echo \U276E
         case insert;  echo \U276F
