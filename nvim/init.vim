@@ -45,6 +45,10 @@ let g:python3_host_prog = $PYTHON3_HOST_PROG
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
+    autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd TermOpen * startinsert
+    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    autocmd WinEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup end
 
 "
@@ -65,24 +69,35 @@ nnoremap c# #``cgN
 nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
-nnoremap gQ mmgggq`m
+nnoremap gQ mmgggq`
+
+nnoremap \\ :term<cr>
+nnoremap \s :split<cr>:term<cr>
+nnoremap \v :vsplit<cr>:term<cr>
+nnoremap <c-w>d :bwipe<cr>
+tnoremap <c-w>d <c-\><c-n>:bwipe!<cr>
+tnoremap <c-w>h <c-\><c-n><c-w>h
+tnoremap <c-w>j <c-\><c-n><c-w>j
+tnoremap <c-w>k <c-\><c-n><c-w>k
+tnoremap <c-w>l <c-\><c-n><c-w>l
+tnoremap <c-w>q <c-\><c-n><c-w>q
+tnoremap <c-w><c-[> <c-\><c-n>
+
 nnoremap <silent> <leader>r :so $MYVIMRC<cr>
 nnoremap <silent> <leader>w :write<cr>
 nnoremap <silent> <leader>q :call close#smart()<cr>
 nnoremap <silent> <leader>Q :qa!<cr>
 nnoremap <silent> <leader>o :only<cr>
-nnoremap <silent> <leader>s :split<cr>
-nnoremap <silent> <leader>v :vsplit<cr>
 nnoremap <silent> <leader>h 20<c-w>>
 nnoremap <silent> <leader>j 5<c-w>-
 nnoremap <silent> <leader>k 5<c-w>+
 nnoremap <silent> <leader>l 20<c-w><
 nnoremap <silent> <leader>H ::so $VIMRUNTIME/syntax/hitest.vim<cr>
 
-
 "
 " Plugins
 "
+
 if filereadable(expand("$XDG_DATA_HOME/nvim/site/autoload/plug.vim"))
     call plug#begin()
 
@@ -206,14 +221,8 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-easy-align')
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-fugitive')
-    nnoremap <silent> \\ :Git<cr>
-    nnoremap <silent> \b :Gblame<cr>
-    nnoremap <silent> \c :Gcommit<cr>
-    nnoremap <silent> \d :Ghdiffsplit<cr>
-    nnoremap <silent> \e :Gedit<cr>
-    nnoremap <silent> \l :0Glog<cr>
-    nnoremap <silent> \r :Gcd<cr>
-    nnoremap <silent> \w :Gwrite<cr>
+    nnoremap gs :Git<cr>
+    nnoremap gl :Gclog<cr>
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-gitgutter')
