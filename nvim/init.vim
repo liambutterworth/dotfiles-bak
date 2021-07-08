@@ -36,30 +36,20 @@ set termguicolors
 set undofile
 set wildignorecase wildmode=full
 
-let &helpheight = &lines / 2
-let &previewheight = &lines / 2
 let g:loaded_netrw = 0
-let g:mapleader = "\<space>"
 let g:python3_host_prog = $PYTHON3_HOST_PROG
 
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
     autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd TermOpen * startinsert
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    autocmd WinEnter * if &buftype == 'terminal' | :startinsert | endif
+    autocmd TermEnter * startinsert
 augroup end
 
 "
 " Mappings
 "
 
-nnoremap <bs> <c-^>
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 nnoremap Y y$
@@ -70,29 +60,21 @@ nnoremap d* *``dgn
 nnoremap d# #``dgN
 nnoremap g= mmgg=G`m
 nnoremap gQ mmgggq`
-
+nnoremap <bs> <c-^>
+nnoremap <up> 5<c-w>-
+nnoremap <down> 5<c-w>+
+nnoremap <left> 10<c-w><
+nnoremap <right> 10<c-w>>
+nnoremap <c-s> :write<cr>
+nnoremap <c-w>d :bwipe<cr>
+nnoremap <c-w>D :bwipe!<cr>
+nnoremap <c-w>Q :quit!<cr>
+nnoremap <c-w>C :close!<cr>
+tnoremap <c-w> <c-\><c-n><c-w>
+tnoremap <c-w><c-[> <c-\><c-n>
 nnoremap \\ :term<cr>
 nnoremap \s :split<cr>:term<cr>
 nnoremap \v :vsplit<cr>:term<cr>
-nnoremap <c-w>d :bwipe<cr>
-tnoremap <c-w>d <c-\><c-n>:bwipe!<cr>
-tnoremap <c-w>h <c-\><c-n><c-w>h
-tnoremap <c-w>j <c-\><c-n><c-w>j
-tnoremap <c-w>k <c-\><c-n><c-w>k
-tnoremap <c-w>l <c-\><c-n><c-w>l
-tnoremap <c-w>q <c-\><c-n><c-w>q
-tnoremap <c-w><c-[> <c-\><c-n>
-
-nnoremap <silent> <leader>r :so $MYVIMRC<cr>
-nnoremap <silent> <leader>w :write<cr>
-nnoremap <silent> <leader>q :call close#smart()<cr>
-nnoremap <silent> <leader>Q :qa!<cr>
-nnoremap <silent> <leader>o :only<cr>
-nnoremap <silent> <leader>h 20<c-w>>
-nnoremap <silent> <leader>j 5<c-w>-
-nnoremap <silent> <leader>k 5<c-w>+
-nnoremap <silent> <leader>l 20<c-w><
-nnoremap <silent> <leader>H ::so $VIMRUNTIME/syntax/hitest.vim<cr>
 
 "
 " Plugins
