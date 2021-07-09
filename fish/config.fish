@@ -10,15 +10,16 @@
 # Aliases
 #
 
-alias ls='ls --color=auto --group-directories-first'
-
 alias c='docker-compose'
 alias d='docker'
 alias e='nvim'
 alias g='git'
+alias l='lsd --group-dirs first'
+alias ll='l -al'
 alias n='npm'
-alias r='source ~/.config/fish/config.fish'
-alias t='tmux'
+alias r='rg --color=always'
+alias s='source ~/.config/fish/config.fish'
+alias t='l --tree'
 
 #
 # Bindings

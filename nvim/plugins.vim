@@ -50,7 +50,8 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
     nnoremap <space><tab> :Snippets<cr>
     nnoremap <space><bs> :Buffers<cr>
     nnoremap <space><cr> :Rg<cr>
-    nnoremap <space>; :History:<cr>
+    nnoremap <space>: :History:<cr>
+    nnoremap <space>? :Helptags<cr>
     nnoremap <space>g :Commits!<cr>
     nnoremap <space>l :Lines<cr>
 endif
