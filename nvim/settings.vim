@@ -28,6 +28,7 @@ set wildignorecase wildmode=full
 augroup settings
     autocmd!
     autocmd FileType * setlocal formatoptions-=o
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd TermEnter * startinsert
+    autocmd TermOpen * setlocal nonumber norelativenumber | startinsert
+    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup end
+

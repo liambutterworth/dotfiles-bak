@@ -20,8 +20,8 @@ background_opacity: 0.92
 # Bindings
 #
 
-# key_bindings:
-#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
+key_bindings:
+  - { key: F, mods: Command, action: ToggleSimpleFullScreen }
 
 #
 # Colors

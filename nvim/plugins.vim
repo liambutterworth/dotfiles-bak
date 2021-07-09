@@ -39,18 +39,18 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
 
     command! -bang -nargs=* Rg call fzf#vim#grep(
         \ 'rg --column --color=always --smart-case '
-        \ . shellescape(<q-args>),\ 1, <bang>0)
+        \ . shellescape(<q-args>), 1, <bang>0)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
     imap <c-x><c-p> <plug>(fzf-complete-path)
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
-    nnoremap <space><space> :Files<cr>
+    nnoremap <space><space> :Rg<cr>
     nnoremap <space><tab> :Snippets<cr>
     nnoremap <space><bs> :Buffers<cr>
-    nnoremap <space><cr> :Rg<cr>
-    nnoremap <space>; :History:<cr>
+    nnoremap <space><cr> :Files<cr>
+    nnoremap <space>: :History:<cr>
     nnoremap <space>g :Commits!<cr>
     nnoremap <space>l :Lines<cr>
 endif
