@@ -1,40 +1,7 @@
--- local has_autopairs, autopairs = pcall(require, 'nvim-autopairs')
--- local has_autotag, autotag = pcall(require, 'nvim-ts-autotag')
--- local has_treesitter, treesitter = pcall(require, 'nvim-treesitter.configs')
--- local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
--- local has_compe, compe = pcall(require, 'compe')
-
-local has_treesitter, treesitter = pcall(require, 'nvim-treesitter.configs')
 local has_lspconfig, lspconfig = pcall(require, 'lspconfig')
 
-if has_treesitter then
-    local autopairs = require('nvim-autopairs')
-    local autopairs_compe = require('nvim-autopairs.completion.compe')
-    local autotag = require('nvim-ts-autotag')
-
-    autopairs.setup({ check_ts = true })
-    autotag.setup()
-
-    autopairs_compe.setup({
-        map_cr = true,
-        map_complete = true
-    })
-
-    treesitter.setup {
-        ensure_installed = 'maintained',
-
-        incremental_selection = {
-            enable = true,
-        },
-
-        indent = { enable = true },
-        autopairs = { enable = true },
-        autotag = { enable = true }
-    }
-end
-
 if has_lspconfig then
-    local lsp_compe = require('compe')
+    local compe = require('compe')
 
     local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
@@ -66,7 +33,7 @@ if has_lspconfig then
         on_attach = on_attach
     }
 
-    lsp_compe.setup {
+    compe.setup {
         enabled = true;
         autocomplete = true;
         debug = false;

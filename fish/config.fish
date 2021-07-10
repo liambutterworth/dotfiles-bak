@@ -10,8 +10,9 @@
 # Aliases
 #
 
-alias c='docker-compose'
+alias c='composer'
 alias d='docker'
+alias dc='docker-compose'
 alias e='nvim'
 alias g='git'
 alias l='lsd --group-dirs first'
@@ -113,7 +114,6 @@ function fish_prompt
 
     set_color magenta
 
-    # printf '\033[1m%-2s\033[0m' (switch $fish_bind_mode
     printf '\n\033[1m%-2s\033[0m' (switch $fish_bind_mode
         case default; echo \U276E
         case insert;  echo \U276F

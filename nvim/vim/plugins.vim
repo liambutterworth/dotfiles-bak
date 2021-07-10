@@ -2,15 +2,17 @@ if filereadable(expand("$XDG_DATA_HOME/nvim/site/autoload/plug.vim"))
     call plug#begin()
 
     Plug 'airblade/vim-gitgutter'
-    Plug 'arcticicestudio/nord-vim'
     Plug 'hrsh7th/nvim-compe'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
     Plug 'junegunn/vim-easy-align',
     Plug 'michaeljsmith/vim-indent-object'
     Plug 'neovim/nvim-lspconfig'
     Plug 'preservim/nerdtree'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'sheerun/vim-polyglot'
     Plug 'sirver/ultisnips'
     Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-eunuch'
@@ -18,11 +20,6 @@ if filereadable(expand("$XDG_DATA_HOME/nvim/site/autoload/plug.vim"))
     Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-unimpaired'
-
-    Plug 'sheerun/vim-polyglot'
-    " Plug 'windwp/nvim-autopairs'
-    " Plug 'windwp/nvim-ts-autotag'
-    " Plug 'nvim-treesitter/nvim-treesitter'
 
     call plug#end()
 end
@@ -39,46 +36,34 @@ if exists('g:plugs') && has_key(g:plugs, 'fzf.vim') && executable('fzf')
 
     command! -bang -nargs=* Rg call fzf#vim#grep(
         \ 'rg --column --color=always --smart-case '
-        \ . shellescape(<q-args>),\ 1, <bang>0)
+        \ . shellescape(<q-args>), 1, <bang>0)
 
     imap <c-x><c-k> <plug>(fzf-complete-word)
     imap <c-x><c-j> <plug>(fzf-complete-file)
     imap <c-x><c-p> <plug>(fzf-complete-path)
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
-    nnoremap <space><space> :Files<cr>
+    nnoremap <space><space> :Rg<cr>
     nnoremap <space><tab> :Snippets<cr>
     nnoremap <space><bs> :Buffers<cr>
-    nnoremap <space><cr> :Rg<cr>
+    nnoremap <space><cr> :Files<cr>
     nnoremap <space>: :History:<cr>
     nnoremap <space>? :Helptags<cr>
     nnoremap <space>g :Commits!<cr>
     nnoremap <space>l :Lines<cr>
 endif
 
-if exists('g:plugs') && has_key(g:plugs, 'nord-vim')
-    silent! colorscheme nord
+if exists('g:plugs') && has_key(g:plugs, 'goyo.vim')
+    let g:limelight_conceal_ctermfg = 8
 
-    highlight CursorLineNr guibg=none
-    highlight Normal guibg=none
-    highlight NonText guibg=none
-    highlight SignColumn guibg=none
-    highlight VertSplit guibg=#3b4252
-    highlight Pmenu guibg=#3b4252
-    highlight StatusLine guibg=#3b4252 guifg=#e5e9f0
-    highlight StatusLineNc guibg=#3b4252 guifg=#e5e9f0
-    highlight LspDiagnosticsDefaultError guifg=#bf616a
-    highlight LspVirtualFloatingError guifg=#bf616a
-    highlight LspVirtualSignError guifg=#bf616a
-    highlight LspVirtualTextError guifg=#bf616a
-    highlight LspDiagnosticsDefaultWarning guifg=#ebcb8b
-    highlight LspVirtualFloatingWarning guifg=#ebcb8b
-    highlight LspVirtualSignWarning guifg=#ebcb8b
-    highlight LspVirtualTextWarning guifg=#ebcb8b
-    highlight LspDiagnosticsDefaultInformation guifg=#a3be8c
-    highlight LspVirtualFloatingInformation guifg=#a3be8c
-    highlight LspVirtualSignInformation guifg=#a3be8c
-    highlight LspVirtualTextInformation guifg=#a3be8c
+    nnoremap - :Goyo<cr>
+
+    autocmd User GoyoEnter Limelight
+    autocmd User GoyoLeave Limelight! nested colorscheme custom
+end
+
+if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
+    lua require 'lsp'
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nerdtree')

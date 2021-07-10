@@ -21,13 +21,5 @@ set shortmess+=c
 set smartindent
 set splitbelow splitright
 set tags=./git/tags
-set termguicolors
 set undofile
 set wildignorecase wildmode=full
-
-augroup settings
-    autocmd!
-    autocmd FileType * setlocal formatoptions-=o
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd TermEnter * startinsert
-augroup end
