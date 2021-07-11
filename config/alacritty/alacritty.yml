@@ -1,33 +1,4 @@
-#
-# Alacritty
-#
-# :: Globals
-# :: Bindings
-# :: Colors
-# :: Cursor
-# :: Debug
-# :: Font
-# :: Mouse
-# :: Window
-
-#
-# Globals
-#
-
 background_opacity: 0.92
-draw_bold_text_with_bright_colors: true
-
-#
-# Bindings
-#
-
-# key_bindings:
-#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
-
-#
-# Colors
-#
-
 colors:
   primary:
     background: '#242831'
@@ -53,30 +24,16 @@ colors:
   indexed_colors:
     - { index: 16, color: '#242831' }
     - { index: 17, color: '#616e88' }
-
-#
-# Cursor
-#
-
 cursor:
   style:
     blinking: Never
-
-#
-# Debug
-#
-
 debug:
   render_timer: false
   persistent_logging: false
   log_level: Warn
   print_events: false
   ref_test: false
-
-#
-# Font
-#
-
+draw_bold_text_with_bright_colors: true
 font:
   size: 15
   normal:
@@ -94,18 +51,10 @@ font:
   offset:
     x: 0
     y: 5
-
-#
-# Mouse
-#
-
+# key_bindings:
+#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
 mouse:
   hide_when_typing: true
-
-#
-# Window
-#
-
 window:
   dynamic_padding: true
   padding:
