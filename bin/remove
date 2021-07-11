@@ -1,3 +1,2 @@
 #!/bin/sh
-
-rm ~/.config/{alacritty,awesome,docker,git,fish,nvim,tmux}
+unlink ~/.config/{alacritty,docker,fish,git,i3,nvim,picom,rofi,tmux}

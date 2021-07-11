@@ -1,5 +1,0 @@
-#!/bin/sh
-
-mkdir -p ~/.config
-
-ln -fns ~/.dotfiles/{awesome,picom,rofi} ~/.config
