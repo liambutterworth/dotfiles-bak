@@ -59,7 +59,7 @@ if exists('g:plugs') && has_key(g:plugs, 'goyo.vim')
     nnoremap - :Goyo<cr>
 
     autocmd User GoyoEnter Limelight
-    autocmd User GoyoLeave Limelight! nested colorscheme custom
+    autocmd User GoyoLeave Limelight! | colorscheme custom
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')

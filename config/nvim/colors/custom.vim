@@ -3,12 +3,13 @@
 "
 
 set background=dark
-set statusline=\ %f\ %h%m%r%=%-14.(%l,%c%V%)\ %P%%\ 
+set statusline=\ %f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ 
 
 highlight clear
 
 highlight Constant ctermfg=green
 highlight Comment cterm=bold ctermfg=black
+highlight CursorLine cterm=none ctermbg=black
 highlight CursorLineNr ctermbg=none ctermfg=white
 highlight DiffAdd cterm=bold ctermbg=green ctermfg=black
 highlight DiffChange cterm=bold ctermbg=yellow ctermfg=black
@@ -17,7 +18,7 @@ highlight DiffText cterm=bold ctermbg=red ctermfg=black
 highlight Error cterm=bold ctermbg=none ctermfg=red
 highlight Folded ctermbg=black ctermfg=white
 highlight FoldColumn ctermbg=black ctermfg=white
-highlight Identifier cterm=bold ctermfg=cyan
+highlight Identifier cterm=bold ctermfg=blue
 highlight LineNr cterm=bold ctermfg=black
 highlight MatchParen cterm=bold ctermbg=none ctermfg=yellow
 highlight NonText cterm=bold ctermbg=none ctermfg=black
@@ -28,7 +29,7 @@ highlight Pmenu ctermbg=black ctermfg=white
 highlight PmenuSel cterm=bold ctermbg=black ctermfg=white
 highlight PmenuSbar ctermbg=black
 highlight PmenuThumb cterm=bold ctermbg=white ctermfg=black
-highlight PreProc ctermfg=blue
+highlight PreProc cterm=bold ctermfg=blue
 highlight Question ctermfg=yellow
 highlight SignColumn ctermbg=none ctermfg=white
 highlight Special ctermfg=blue
@@ -37,19 +38,23 @@ highlight SpellBad cterm=bold ctermbg=red ctermfg=black
 highlight SpellCap cterm=bold ctermbg=yellow ctermfg=black
 highlight SpellRare cterm=bold ctermbg=magenta ctermfg=black
 highlight SpellLocal cterm=bold ctermbg=cyan ctermfg=black
-highlight Statement cterm=bold ctermfg=blue
+highlight Statement ctermfg=blue
+highlight StatusLine cterm=none ctermbg=black ctermfg=white
+highlight StatusLineNc cterm=none ctermbg=black ctermfg=white
 highlight Title cterm=bold ctermfg=cyan
 highlight Todo ctermbg=none ctermfg=yellow
 highlight Type ctermfg=white
 highlight Underlined ctermfg=cyan
+highlight VertSplit ctermbg=none ctermfg=black
 highlight Visual ctermbg=black
 highlight WarningMsg ctermbg=none ctermfg=yellow
 
-highlight VertSplit ctermbg=none ctermfg=black
+"
+" Lua
+"
 
-" highlight VertSplit ctermbg=none
-highlight StatusLine cterm=none ctermbg=black ctermfg=white
-highlight StatusLineNc cterm=none ctermbg=black ctermfg=white
+highlight link luaLocal Operator
+highlight link luaFuncKeyword Operator
 
 "
 " Vim

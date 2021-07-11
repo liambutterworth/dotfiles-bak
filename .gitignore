@@ -1,8 +1,7 @@
 .DS_Store
-docker/.buildNodeID
-docker/.token_seed*
-fish/fish_variables
-fish/functions
-fish/profile.fish
-nvim/autoload/plug.vim
-nvim/plugged
+config/docker/.buildNodeID
+config/docker/.token_seed*
+config/fish/fish_variables
+config/fish/functions
+config/fish/profile.fish
+config/nvim/plugged
