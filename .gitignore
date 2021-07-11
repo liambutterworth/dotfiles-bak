@@ -1,6 +1,8 @@
 .DS_Store
 config/docker/.buildNodeID
 config/docker/.token_seed*
+config/fish/completions
+config/fish/conf.d
 config/fish/fish_variables
 config/fish/functions
 config/fish/profile.fish

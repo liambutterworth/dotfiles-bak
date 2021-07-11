@@ -1,13 +1,18 @@
+#
+# i3
+#
+
 set $mod Mod4
 
 font pango:Source Sans Pro 14
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
-exec feh --no-fehbg --bg-scale ~/Pictures/wallpapers/rocket-sunset.jpg
-exec picom
+exec --no-startup-id feh --no-fehbg --bg-scale $HOME/Pictures/wallpapers/rocket-sunset.jpg
+exec_always --no-startup-id picom --experimental-backends
+exec_always --no-startup-id $XDG_CONFIG_HOME/polybar/launch.sh
 
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec "alacritty -e $SHELL -C 'archey3'"
 
 bindsym $mod+q kill
 
