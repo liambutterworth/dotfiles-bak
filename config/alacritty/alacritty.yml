@@ -1,4 +1,32 @@
+#
+# Alacritty
+#
+# :: Globals
+# :: Bindings
+# :: Colors
+# :: Cursor
+# :: Debug
+# :: Font
+# :: Mouse
+# :: Window
+
+#
+# Globals
+
 background_opacity: 0.92
+draw_bold_text_with_bright_colors: true
+
+#
+# Bindings
+#
+
+# key_bindings:
+#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
+
+#
+# Colors
+#
+
 colors:
   primary:
     background: '#242831'
@@ -22,7 +50,7 @@ colors:
     cyan: '#8fbcbb'
     white: '#eceff4'
   dim:
-    black: '#242831'
+    black: '#373e4d'
     red: '#94545d'
     green: '#809575'
     yellow: '#b29e75'
@@ -30,16 +58,32 @@ colors:
     magenta: '#8c738c'
     cyan: '#6d96a5'
     white: '#aeb3bb'
+  indexed_colors:
+    - { index: 16, color: '#242831' }
+
+#
+# Cursor
+#
+
 cursor:
   style:
     blinking: Never
+
+#
+# Debug
+#
+
 debug:
   render_timer: false
   persistent_logging: false
   log_level: Warn
   print_events: false
   ref_test: false
-draw_bold_text_with_bright_colors: true
+
+#
+# Font
+#
+
 font:
   size: 15
   normal:
@@ -57,15 +101,18 @@ font:
   offset:
     x: 0
     y: 5
-# key_bindings:
-#   - { key: F, mods: Command, action: ToggleSimpleFullScreen }
+
+#
+# Mouse
+#
+
 mouse:
   hide_when_typing: true
-# shell:
-#   shell: fish
-#   args:
-#     - -c
-#     - archey3
+
+#
+# Window
+#
+
 window:
   dynamic_padding: true
   padding:

@@ -8,11 +8,12 @@ magenta = ${xrdb:color5}
 cyan = ${xrdb:color6}
 white = ${xrdb:color7}
 brightblack = ${xrdb:color8}
-dimblack = ${xrdb:color16}
+shade = ${xrdb:color16}
 background = ${colors.black}
 foreground = ${colors.white}
 
 [bar/main]
+modules-left = left i3 right
 modules-right = left network right sep left date right sep left time right
 width = 100%
 height = 50
@@ -32,17 +33,62 @@ content = " "
 
 [module/left]
 type = custom/text
-content-foreground = ${colors.dimblack}
+content-foreground = ${colors.shade}
 content-overline = ${colors.background}
 content-underline = ${colors.background}
 content = ""
 
 [module/right]
 type = custom/text
-content-foreground = ${colors.dimblack}
+content-foreground = ${colors.shade}
 content-overline = ${colors.background}
 content-underline = ${colors.background}
 content = ""
+
+[module/powermenu]
+type = custom/menu
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+[module/i3]
+type = internal/i3
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+index-sort = true
+wrapping-scroll = false
+format = <label-state>
+label-focused = %icon%
+label-focused-background = ${colors.shade}
+label-focused-foreground = ${colors.blue}
+label-focused-overline = ${colors.background}
+label-focused-underline = ${colors.background}
+label-unfocused = %icon%
+label-unfocused-background = ${colors.shade}
+label-unfocused-foreground = ${colors.background}
+label-unfocused-overline = ${colors.background}
+label-unfocused-underline = ${colors.background}
+label-visible = %icon%
+label-visible-background = ${colors.shade}
+label-visible-foregorund = ${colors.foreground}
+label-visible-overline = ${colors.background}
+label-visible-underline = ${colors.background}
+label-urgent = %icon%
+label-urgent-background = ${colors.shade}
+label-urgent-foreground = ${colors.red}
+label-urgent-overline = ${colors.background}
+label-urgent-underline = ${colors.background}
+label-separator = "   "
+label-separator-background = ${colors.shade}
+label-separator-overline = ${colors.background}
+label-separator-underline = ${colors.background}
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 7;
+ws-icon-3 = 4;
+ws-icon-4 = 3;
+ws-icon-5 = 10;
 
 [module/network]
 type = internal/network
@@ -54,7 +100,7 @@ format-connected = <ramp-signal>
 format-disconnected = <label-disconnected>
 label-connected-foreground = ${colors.magenta}
 label-disconnected-foreground = ${colors.background}
-format-connected-background = ${colors.dimblack}
+format-connected-background = ${colors.shade}
 format-disconnected-background = ${colors.background}
 format-connected-overline = ${colors.background}
 format-connected-underline = ${colors.background}
@@ -72,7 +118,7 @@ type = internal/date
 date = %a, %b %d
 interval = 5
 format-prefix = "  "
-format-background = ${colors.dimblack}
+format-background = ${colors.shade}
 format-foreground = ${colors.yellow}
 format-overline = ${colors.background}
 format-underline = ${colors.background}
@@ -82,7 +128,7 @@ type = internal/date
 date = %I:%M %p
 interval = 5
 format-prefix = "  "
-format-background = ${colors.dimblack}
+format-background = ${colors.shade}
 format-foreground = ${colors.green}
 format-overline = ${colors.background}
 format-underline = ${colors.background}

@@ -68,6 +68,8 @@ set -gx FZF_CTRL_T_COMMAND "rg --files --hidden"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --no-preview"
 set -gx FZF_TMUX 1
 
+eval (dircolors -c $XDG_CONFIG_HOME/dircolors)
+
 if test -e $XDG_CONFIG_HOME/fish/profile.fish
     source $XDG_CONFIG_HOME/fish/profile.fish
 end

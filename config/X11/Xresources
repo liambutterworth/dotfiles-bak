@@ -1,24 +1,35 @@
-*color0: #3b4252
-*color1: #bf616a
-*color2: #a3be8c
-*color3: #ebcb8b
-*color4: #81a1c1
-*color5: #b48ead
-*color6: #88c0d0
-*color7: #e5e9f0
-*color8: #4c566a
-*color9: #bf616a
-*color10: #a3be8c
-*color11: #ebcb8b
-*color12: #81a1c1
-*color13: #b48ead
-*color14: #8fbcbb
-*color15: #eceff4
-*color16: #242831
-*color17: #94545d
-*color18: #809575
-*color19: #b29e75
-*color20: #68809a
-*color21: #8c738c
-*color22: #6d96a5
-*color23: #aeb3bb
+#define black #3b4252
+#define red #bf616a
+#define green #a3be8c
+#define yellow #ebcb8b
+#define blue #81a1c1
+#define magenta #b48ead
+#define cyan #88c0d0
+#define white #e5e9f0
+#define brblack #4c566a
+#define brred #bf616a
+#define brgreen #a3be8c
+#define bryellow #ebcb8b
+#define brblue #81a1c1
+#define brmagenta #b48ead
+#define brcyan #8fbcbb
+#define brwhite #eceff4
+#define gray #242831
+
+*.color0: black
+*.color1: red
+*.color2: green
+*.color3: yellow
+*.color4: blue
+*.color5: magenta
+*.color6: cyan
+*.color7: white
+*.color8: brblack
+*.color9: brred
+*.color10: brgreen
+*.color11: bryellow
+*.color12: brblue
+*.color13: brmagenta
+*.color14: brcyan
+*.color15: brwhite
+*.color16: gray
