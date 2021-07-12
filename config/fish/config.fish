@@ -10,18 +10,15 @@
 # Aliases
 #
 
-alias c='composer'
+alias c='docker-compose'
 alias d='docker'
-alias dc='docker-compose'
 alias e='nvim'
 alias g='git'
-alias l='lsd --classify --group-dirs=first'
-alias la='l --almost-all'
-alias ll='l --almost-all --long'
-alias lt='l --tree'
+alias l='ls -Ahl --group-directories-first'
 alias n='npm'
 alias p='paru'
 alias r='source ~/.config/fish/config.fish'
+alias t='tree --dirsfirst -I "node_modules|plugged|vendor"'
 
 #
 # Bindings

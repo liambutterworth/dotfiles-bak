@@ -168,6 +168,8 @@ if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
 end
 
 if exists('g:plugs') && has_key(g:plugs, 'nerdtree')
+    let g:NERDTreeBookmarksFile = "$XDG_CACHE_HOME/nvim/NerdTreeBookmarks"
+
     nnoremap <silent> <cr><cr> :NERDTreeToggle<cr>
     nnoremap <silent> <cr>c :NERDTreeClose<cr>
     nnoremap <silent> <cr>r :NERDTreeRefreshRoot<cr>
