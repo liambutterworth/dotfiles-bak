@@ -76,6 +76,7 @@ end
 #
 
 fish_vi_key_bindings
+fzf_key_bindings
 
 set -g fish_color_autosuggestion brblack
 set -g fish_color_cancel red

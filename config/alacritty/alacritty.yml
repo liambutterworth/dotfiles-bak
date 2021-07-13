@@ -12,8 +12,9 @@
 
 #
 # Globals
+#
 
-background_opacity: 0.92
+background_opacity: 0.95
 draw_bold_text_with_bright_colors: true
 
 #
@@ -23,7 +24,7 @@ draw_bold_text_with_bright_colors: true
 key_bindings:
   - { key: L, mods: Control, chars: "\x0c" }
   - { key: L, mods: Control|Shift, action: ClearHistory }
-  # - { key: F, mods: Command, action: ToggleSimpleFullScreen }
+  - { key: F, mods: Command, action: ToggleSimpleFullScreen }
 
 #
 # Colors
@@ -31,7 +32,7 @@ key_bindings:
 
 colors:
   primary:
-    background: '#242831'
+    background: '#2e3440'
     foreground: '#d8dee9'
   normal:
     black: '#3b4252'
@@ -51,17 +52,6 @@ colors:
     magenta: '#b48ead'
     cyan: '#8fbcbb'
     white: '#eceff4'
-  dim:
-    black: '#373e4d'
-    red: '#94545d'
-    green: '#809575'
-    yellow: '#b29e75'
-    blue: '#68809a'
-    magenta: '#8c738c'
-    cyan: '#6d96a5'
-    white: '#aeb3bb'
-  indexed_colors:
-    - { index: 16, color: '#242831' }
 
 #
 # Cursor

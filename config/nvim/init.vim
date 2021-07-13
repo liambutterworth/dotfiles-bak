@@ -77,6 +77,7 @@ nnoremap \s :split<cr>:term<cr>
 nnoremap \v :vsplit<cr>:term<cr>
 tnoremap <c-\> <c-\><c-n>
 
+" TODO remove
 let mapleader = ' '
 nnoremap <leader>w :write<cr>
 nnoremap <leader>W :writeall<cr>
