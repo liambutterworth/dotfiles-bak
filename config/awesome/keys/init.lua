@@ -4,11 +4,7 @@ local awful = require('awful')
 modkey = 'Mod4'
 
 globalkeys = gears.table.join(
-    awful.key({ modkey }, 'q', function()
-        client.focus:kill()
-        awful.client.focus.history.previous()
-    end),
-
+    awful.key({ modkey }, 'q', function() client.focus:kill() end),
     awful.key({ modkey }, 'h', function() awful.client.focus.global_bydirection('left') end),
     awful.key({ modkey }, 'j', function() awful.client.focus.global_bydirection('down') end),
     awful.key({ modkey }, 'k', function() awful.client.focus.global_bydirection('up') end),
@@ -31,7 +27,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, 'BackSpace', function () awful.spawn.with_shell('rofi -show window') end)
 )
 
-for index = 1, 5 do
+for index = 1, 9 do
     globalkeys = gears.table.join(globalkeys,
         awful.key({ modkey }, '#' .. index + 9, function ()
             local screen = awful.screen.focused()

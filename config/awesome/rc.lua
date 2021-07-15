@@ -14,4 +14,6 @@ root.keys(require('keys'))
 require('errors')
 require('interface')
 
-awful.spawn.with_shell('~/.config/awesome/autorun.sh')
+awful.spawn.with_shell('~/.config/awesome/scripts/autorun.sh')
+
+require('awful.autofocus') -- TODO remove in v5
