@@ -3,8 +3,8 @@
 #
 # :: Aliases
 # :: Bindings
+# :: Colors
 # :: Exports
-# :: Prompt
 
 #
 # Aliases
@@ -29,6 +29,33 @@ bind -M insert \cx accept-autosuggestion execute
 bind -M insert \cp history-search-backward
 bind -M insert \cn history-search-forward
 bind -M insert \cg fzf-cd-widget
+
+#
+# Colors
+#
+
+set -g fish_color_autosuggestion brblack
+set -g fish_color_cancel red
+set -g fish_color_command green
+set -g fish_color_comment brblack
+set -g fish_color_cwd blue
+set -g fish_color_end yellow
+set -g fish_color_error red
+set -g fish_color_escape cyan
+set -g fish_color_host brblack
+set -g fish_color_match green
+set -g fish_color_normal red
+set -g fish_color_operator yellow
+set -g fish_color_param white
+set -g fish_color_quote yellow
+set -g fish_color_redirection yellow
+set -g fish_color_search_match green
+set -g fish_color_user brblack
+set -g fish_pager_color_completion white
+set -g fish_pager_color_description yellow
+set -g fish_pager_color_prefix green
+set -g fish_pager_color_progress yellow
+set -g fish_pager_color_secondary magenta
 
 #
 # Exports
@@ -69,59 +96,4 @@ eval (dircolors -c $XDG_CONFIG_HOME/dircolors)
 
 if test -e $XDG_CONFIG_HOME/fish/profile.fish
     source $XDG_CONFIG_HOME/fish/profile.fish
-end
-
-#
-# Prompt
-#
-
-fish_vi_key_bindings
-fzf_key_bindings
-
-set -g fish_color_autosuggestion brblack
-set -g fish_color_cancel red
-set -g fish_color_command green
-set -g fish_color_comment brblack
-set -g fish_color_cwd blue
-set -g fish_color_end yellow
-set -g fish_color_error red
-set -g fish_color_escape cyan
-set -g fish_color_host brblack
-set -g fish_color_match green
-set -g fish_color_normal red
-set -g fish_color_operator yellow
-set -g fish_color_param white
-set -g fish_color_quote yellow
-set -g fish_color_redirection yellow
-set -g fish_color_search_match green
-set -g fish_color_user brblack
-set -g fish_pager_color_completion white
-set -g fish_pager_color_description yellow
-set -g fish_pager_color_prefix green
-set -g fish_pager_color_progress yellow
-set -g fish_pager_color_secondary magenta
-
-function fish_greeting; end
-function fish_mode_prompt; end
-function fish_vi_cursor; end
-
-function pad_prompt -e fish_preexec -e fish_postexec
-    echo
-end
-
-function fish_prompt
-    set_color blue
-
-    printf '\033[1m%s\033[0m' (dirs)
-
-    set_color brblack
-
-    printf ' %s' (git branch 2>/dev/null | sed -n '/\* /s///p')
-
-    set_color magenta
-
-    printf '\n\033[1m%-2s\033[0m' (switch $fish_bind_mode
-        case default; echo \U276E
-        case insert;  echo \U276F
-    end)
 end
