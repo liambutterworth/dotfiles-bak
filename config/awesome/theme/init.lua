@@ -45,23 +45,4 @@ return {
     border_marked = colors.bright.red,
     menu_height = dpi(15),
     menu_width = dpi(100),
-    -- tasklist_plain_task_name = true,
-    -- tasklist_disable_task_name = true,
-    -- icon_only = true,
-
-    -- taglist_squares_sel = theme_assets.taglist_squares_sel(
-    --     taglist_square_size,
-    --     colors.normal.cyan
-    -- ),
-
-    -- taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    --     taglist_square_size,
-    --     colors.normal.cyan
-    -- ),
-
-    awesome_icon = theme_assets.awesome_icon(
-        dpi(15),
-        colors.bright.black,
-        colors.normal.white
-    )
 }

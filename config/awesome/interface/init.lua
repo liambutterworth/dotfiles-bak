@@ -2,7 +2,6 @@ local awful = require('awful')
 local beautiful = require('beautiful')
 local gears = require('gears')
 local wibox = require('wibox')
-local naughty = require('naughty')
 local bar = require('interface.bar')
 local tasklist = require('interface.tasklist')
 local taglist = require('interface.taglist')
@@ -13,7 +12,7 @@ awful.rules.rules = require('interface.rules')
 awful.screen.connect_for_each_screen(function(screen)
     gears.wallpaper.maximized('/home/liam/Pictures/wallpapers/pagota.jpg', screen)
 
-    awful.tag({ '1', '2', '3' }, screen, awful.layout.layouts[1])
+    awful.tag({ '1', '2', '3', '4', '5' }, screen, awful.layout.layouts[1])
 
     screen.bar = bar.create(screen)
 

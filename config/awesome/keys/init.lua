@@ -31,7 +31,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, 'BackSpace', function () awful.spawn.with_shell('rofi -show window') end)
 )
 
-for index = 1, 9 do
+for index = 1, 5 do
     globalkeys = gears.table.join(globalkeys,
         awful.key({ modkey }, '#' .. index + 9, function ()
             local screen = awful.screen.focused()

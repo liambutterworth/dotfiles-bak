@@ -14,4 +14,4 @@ root.keys(require('keys'))
 require('errors')
 require('interface')
 
-awful.spawn.with_shell('autorun.sh')
+awful.spawn.with_shell('~/.config/awesome/autorun.sh')
