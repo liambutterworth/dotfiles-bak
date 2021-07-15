@@ -10,7 +10,7 @@
 # Aliases
 #
 
-alias ls="ls --color=always --group-directories-first"
+alias ls="ls -F --color=always --group-directories-first"
 alias la="ls -A"
 alias ll="ls -Ahl"
 alias tree="tree --dirsfirst -I 'node_modules|plugged|vendor'"

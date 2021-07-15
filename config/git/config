@@ -1,3 +1,7 @@
+[alias]
+    top = rev-parse --show-toplevel
+    log = log --pretty=format:"%C(red)%h\\ %C(white)%s\\ %C(green)%ad\\ %C(blue)%an" --date=relative
+    who = !git config user.name && git config user.email
 [core]
     editor = nvim
 [credential]
