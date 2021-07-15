@@ -1,37 +1,11 @@
-#
-# Git Config
-#
-
-[alias]
-    a = add
-    b = branch
-    c = commit -m
-    ca = commit --amend
-    cl = clone
-    co = checkout
-    d = diff
-    dir = rev-parse --show-toplevel
-    f = fetch
-    g = grep
-    lg = ll --graph
-    ll = log --pretty=format:"%C(red)%h\\ %C(white)%s\\ %C(green)%ad\\ %C(blue)%an" --date=relative
-    m = merge
-    mn = merge --no-commit --no-ff
-    mb = merge-base
-    re = reset HEAD --
-    s = status
-    st = stash
-    sh = show
-    t = tag
-    who = !git config user.name && git config user.email
 [core]
-    editor = vim
+    editor = nvim
 [credential]
     helper = cache --timeout=3600
 [diff]
-    tool = vim -d
+    tool = nvim -d
 [web]
-    browser = chrome
+    browser = firefox
 [user]
     name = Liam Butterworth
     email = liambutterworth@protonmail.com

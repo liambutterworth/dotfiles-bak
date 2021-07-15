@@ -1,3 +1,7 @@
+function pad_prompt -e fish_preexec -e fish_postexec
+    echo
+end
+
 function fish_prompt
     set_color blue
 

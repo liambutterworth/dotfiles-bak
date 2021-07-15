@@ -10,15 +10,10 @@
 # Aliases
 #
 
-alias c='docker-compose'
-alias d='docker'
-alias e='nvim'
-alias g='git'
-alias l='ls -Ahl --group-directories-first'
-alias n='npm'
-alias p='paru'
-alias r='source ~/.config/fish/config.fish'
-alias t='tree --dirsfirst -I "node_modules|plugged|vendor"'
+alias ls="ls --color=always --group-directories-first"
+alias la="ls -A"
+alias ll="ls -Ahl"
+alias tree="tree --dirsfirst -I 'node_modules|plugged|vendor'"
 
 #
 # Bindings
@@ -61,7 +56,7 @@ set -g fish_pager_color_secondary magenta
 # Exports
 #
 
-set FZF_COLORS (string join ',' \
+set -gx FZF_COLORS (string join ',' \
     "bg:-1" \
     "bg+:-1" \
     "fg:white" \
@@ -86,7 +81,7 @@ set -gx LESSHISTFILE "$XDG_CACHE_HOME/less"
 set -gx NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -gx CARGO_HOME "$XDG_DATA_HOME/cargo"
 set -gx RUSTUP_HOME "$XDG_DATA_HOME/rustup"
-set -gx PYTHON3_HOST_PROG (which python3)
+set -gx PYENV_ROOT "$XDG_DATA_HOME/pyenv"
 set -gx FZF_DEFAULT_COMMAND "rg --files --hidden"
 set -gx FZF_CTRL_T_COMMAND "rg --files --hidden"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --no-preview"
