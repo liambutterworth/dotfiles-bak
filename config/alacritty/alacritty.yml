@@ -26,6 +26,7 @@ key_bindings:
   - { key: L, mods: Control|Shift, action: ClearHistory }
   - { key: F, mods: Command|Control, action: ToggleSimpleFullScreen }
 
+
 #
 # Colors
 #

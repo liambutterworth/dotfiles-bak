@@ -23,7 +23,6 @@ bind -M insert \cf accept-autosuggestion
 bind -M insert \cx accept-autosuggestion execute
 bind -M insert \cp history-search-backward
 bind -M insert \cn history-search-forward
-bind -M insert \cg fzf-cd-widget
 
 #
 # Colors
@@ -85,6 +84,7 @@ set -gx CARGO_HOME "$XDG_DATA_HOME/cargo"
 set -gx RUSTUP_HOME "$XDG_DATA_HOME/rustup"
 set -gx PYENV_ROOT "$XDG_DATA_HOME/pyenv"
 set -gx FZF_DEFAULT_COMMAND "rg --files --hidden"
+set -gx FZF_FIND_FILE_COMMAND $FZF_DEFAULT_COMMAND
 set -gx FZF_CTRL_T_COMMAND "rg --files --hidden"
 set -gx FZF_DEFAULT_OPTS "--color $FZF_COLORS --no-preview"
 set -gx FZF_TMUX 1
