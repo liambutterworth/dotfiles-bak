@@ -127,6 +127,7 @@ highlight link cssColor Number
 highlight link cssCommonAttr Number
 highlight link cssFontProp Keyword
 highlight link cssMediaProp Keyword
+highlight link cssMultiColumnProp Keyword
 highlight link cssPageProp Keyword
 highlight link cssPositioningAttr Number
 highlight link cssPositioningProp Keyword
@@ -137,12 +138,14 @@ highlight link cssTransitionProp Keyword
 highlight link cssUIProp Keyword
 highlight link cssUIAttr Number
 highlight link cssUnicodeEscape SpecialChar
+highlight link cssVisualProp Keyword
 
 "
 " SCSS
 "
 
 highlight link scssAmpersand scssSelectorName
+highlight link scssProperty Keyword
 highlight link scssSemicolon Type
 
 "
